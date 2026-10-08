@@ -4,6 +4,14 @@ project:
   render:
     - index.qmd
     - course_map.qmd
+    - modules.qmd
+    - practicals.qmd
+    - notes/b01_foundations.qmd
+    - notes/b02_design.qmd
+    - notes/b03_databases.qmd
+    - notes/b04_programming.qmd
+    - notes/b05_genomics.qmd
+    - notes/b06_transcriptomics.qmd
 
 website:
   title: "Genomics, Systems Biology & Bioinformatics"
@@ -15,6 +23,10 @@ website:
         href: index.html
       - text: "Course map"
         href: course_map.html
+      - text: "Modules"
+        href: modules.html
+      - text: "Practicals"
+        href: practicals.html
       - text: "Quantitative Genetics"
         href: https://psoerensen.github.io/quantitative-genetics/
       - text: "Population Genetics"

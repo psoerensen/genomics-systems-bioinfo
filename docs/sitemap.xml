@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/index.html</loc>
-    <lastmod>2026-10-08T19:49:45.731Z</lastmod>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b06_transcriptomics.html</loc>
+    <lastmod>2026-10-08T19:58:18.444Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b04_programming.html</loc>
+    <lastmod>2026-10-08T19:58:18.435Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b02_design.html</loc>
+    <lastmod>2026-10-08T19:58:18.426Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/practicals.html</loc>
+    <lastmod>2026-10-08T19:58:18.446Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/course_map.html</loc>
-    <lastmod>2026-10-08T19:49:45.728Z</lastmod>
+    <lastmod>2026-10-08T19:58:18.461Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/index.html</loc>
+    <lastmod>2026-10-08T19:58:18.463Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/modules.html</loc>
+    <lastmod>2026-10-08T19:58:18.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b01_foundations.html</loc>
+    <lastmod>2026-10-08T19:58:18.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b03_databases.html</loc>
+    <lastmod>2026-10-08T19:58:18.432Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b05_genomics.html</loc>
+    <lastmod>2026-10-08T19:58:18.440Z</lastmod>
   </url>
 </urlset>

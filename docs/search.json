@@ -1,80 +1,206 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Genomics, Systems Biology & Bioinformatics",
+    "objectID": "notes/b06_transcriptomics.html",
+    "href": "notes/b06_transcriptomics.html",
+    "title": "Transcriptomics and expression analysis",
     "section": "",
-    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.\nUse the unified course map to explore the reusable teaching blocks and the two pathways through them."
+    "text": "Connect RNA counts to biological samples and library exposure; distinguish normalization, visualization and differential-expression inference; interpret model contrasts and dispersion."
   },
   {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "Genomics, Systems Biology & Bioinformatics",
+    "objectID": "notes/b06_transcriptomics.html#learning-objectives",
+    "href": "notes/b06_transcriptomics.html#learning-objectives",
+    "title": "Transcriptomics and expression analysis",
     "section": "",
-    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.\nUse the unified course map to explore the reusable teaching blocks and the two pathways through them."
+    "text": "Connect RNA counts to biological samples and library exposure; distinguish normalization, visualization and differential-expression inference; interpret model contrasts and dispersion."
   },
   {
-    "objectID": "index.html#core-themes",
-    "href": "index.html#core-themes",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Core Themes",
-    "text": "Core Themes\nThe material is organized around five interconnected themes:\n\nMolecular Technologies\n\nDNA sequencing technologies\nGenotyping platforms\nRNA-seq and transcriptomics\nEpigenomic and multi-omics profiling\n\nGenomic Association and Mapping\n\nGWAS principles\nPopulation structure and confounding\nFine-mapping\nFunctional annotation\n\nMulti-Omics Integration\n\nTranscriptome-wide association\neQTL and regulatory variation\nIntegrative modeling across data layers\n\nSystems-Level Modeling\n\nGene regulatory networks\nPathway analysis\nNetwork-based interpretation\nCausal modeling concepts\n\nComputational and Statistical Methods\n\nHigh-dimensional regression\nRegularization and shrinkage\nMachine learning approaches\nReproducible workflows in R"
+    "objectID": "notes/b06_transcriptomics.html#biological-question-and-measurements",
+    "href": "notes/b06_transcriptomics.html#biological-question-and-measurements",
+    "title": "Transcriptomics and expression analysis",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nBulk RNA-seq measures RNA from a mixture of cells in a sampled tissue. Read counts depend on abundance, sequencing depth, transcript properties and processing. A difference can arise from expression within a cell type, a change in cell composition, technical effects or combinations of these. Biological replicates are independent experimental units, not reads or genes.\nPrepare count matrices and sample metadata with matching IDs. Inspect library sizes and count distributions, define low-information filters independently of a desired direction, and specify the biological contrast and adjustment factors before testing. Expression transformations for visualization are not substitutes for an inferential count model."
   },
   {
-    "objectID": "index.html#learning-objectives",
-    "href": "index.html#learning-objectives",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nAfter completing the course, students should be able to:\n\nExplain how sequencing technologies generate molecular data\nEvaluate appropriate statistical models for genomic data\nAnalyze high-dimensional datasets using R\nInterpret GWAS and fine-mapping results\nIntegrate multi-omics datasets conceptually and computationally\nConnect molecular variation to complex phenotypes"
+    "objectID": "notes/b06_transcriptomics.html#model-and-assumptions",
+    "href": "notes/b06_transcriptomics.html#model-and-assumptions",
+    "title": "Transcriptomics and expression analysis",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nA negative-binomial model can write \\(K_{gj}\\sim NB(\\mu_{gj},\\alpha_g)\\) with \\(E[K]=\\mu\\) and \\(\\mathrm{Var}(K)=\\mu+\\alpha_g \\mu^2\\). A known exposure \\(s_j\\) enters through \\(\\mu_{gj}=s_j q_{gj}\\). Gene-level models describe \\(q\\) using treatment and other design terms. Dispersion describes extra variation beyond a Poisson model.\nThe worked calculation uses supplied exposure, not an estimated RNA-seq normalization method. On real data, composition-aware normalization, dispersion estimation, model design and multiplicity require an appropriate workflow."
   },
   {
-    "objectID": "index.html#course-materials",
-    "href": "index.html#course-materials",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Course Materials",
-    "text": "Course Materials\nThe course progresses from molecular data generation to systems-level interpretation.\nAs the course is developed, chapters and practicals will include:\n\nConceptual background\nStatistical framework\nApplied examples\nExecutable R code\nVisualizations and case studies\n\nThe overview and curriculum map are currently available. Slides, notes and practicals will be added in the folders described in the repository README. Students will be encouraged to reproduce worked examples and explore parameter choices as those materials become available."
+    "objectID": "notes/b06_transcriptomics.html#worked-example",
+    "href": "notes/b06_transcriptomics.html#worked-example",
+    "title": "Transcriptomics and expression analysis",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nmu &lt;- c(10,100,1000)\nalpha &lt;- .1\ndata.frame(mean=mu,Poisson_variance=mu,NB_variance=mu+alpha*mu^2)\n\n\n  mean Poisson_variance NB_variance\n1   10               10          20\n2  100              100        1100\n3 1000             1000      101000\n\n\nShow R code\ncounts &lt;- c(80,120,160)\nexposure &lt;- c(.8,1.2,1.6)\nnormalized &lt;- counts/exposure\nnormalized\n\n\n[1] 100 100 100\n\n\nShow R code\nstopifnot(all(normalized==100))\n\n\nEqual normalized counts can arise from different read depths. At high mean, the overdispersion term dominates Poisson variance; treating biological count data as Poisson can underestimate uncertainty."
   },
   {
-    "objectID": "index.html#prerequisites",
-    "href": "index.html#prerequisites",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nStudents are expected to have:\n\nBasic molecular biology knowledge\nIntroductory statistics\nFamiliarity with R\n\nPrior exposure to linear models and quantitative genetics is beneficial but not required."
+    "objectID": "notes/b06_transcriptomics.html#interpretation-and-scope",
+    "href": "notes/b06_transcriptomics.html#interpretation-and-scope",
+    "title": "Transcriptomics and expression analysis",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nCPM and log2(count+1) are useful teaching transformations but have composition and low-count limitations. The DESeq2 vignette describes a full gene-level count-model workflow. Our base-R practical explores supplied exposure and a restricted quasi-Poisson model; it is not a replacement for its dispersion and normalization framework."
   },
   {
-    "objectID": "index.html#recommended-use",
-    "href": "index.html#recommended-use",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Recommended Use",
-    "text": "Recommended Use\nThis material is designed to support:\n\nLecture-based instruction\nComputational lab sessions\nProject-based learning\nIndependent exploration of genomic datasets\n\nEmphasis is placed on connecting biological mechanisms with statistical modeling in a reproducible framework."
+    "objectID": "notes/b06_transcriptomics.html#exercises",
+    "href": "notes/b06_transcriptomics.html#exercises",
+    "title": "Transcriptomics and expression analysis",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nWhy are genes not independent biological replicates of a treatment?\nWhat happens to raw counts when exposure doubles but abundance is unchanged?\nCan a log-count plot prove differential expression?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nTreatment was assigned to animals or other experimental units, not separately to genes.\nTheir expected counts double.\nNo; inference needs a specified model, replication, uncertainty and appropriate multiple-testing treatment."
   },
   {
-    "objectID": "index.html#course-hub",
-    "href": "index.html#course-hub",
-    "title": "Genomics, Systems Biology & Bioinformatics",
-    "section": "Course Hub",
-    "text": "Course Hub\nReturn to the gteach teaching-materials hub."
+    "objectID": "notes/b06_transcriptomics.html#practicals-and-course-pathways",
+    "href": "notes/b06_transcriptomics.html#practicals-and-course-pathways",
+    "title": "Transcriptomics and expression analysis",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nRNA-seq practical (in development) is shared by both outlines. Multi-omics QC (in development) connects count data to other measurement scales.\nUse the unified map to locate B06 in both harmonized outlines. Return to the building-block index (in development)."
+  },
+  {
+    "objectID": "notes/b04_programming.html",
+    "href": "notes/b04_programming.html",
+    "title": "Programming and reproducible data handling",
+    "section": "",
+    "text": "Import and join tables by explicit keys; preserve feature/sample orientation; detect missing, duplicated and reordered records; distinguish source data from derived output."
+  },
+  {
+    "objectID": "notes/b04_programming.html#learning-objectives",
+    "href": "notes/b04_programming.html#learning-objectives",
+    "title": "Programming and reproducible data handling",
+    "section": "",
+    "text": "Import and join tables by explicit keys; preserve feature/sample orientation; detect missing, duplicated and reordered records; distinguish source data from derived output."
+  },
+  {
+    "objectID": "notes/b04_programming.html#biological-question-and-measurements",
+    "href": "notes/b04_programming.html#biological-question-and-measurements",
+    "title": "Programming and reproducible data handling",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nA reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.\nUse stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical."
+  },
+  {
+    "objectID": "notes/b04_programming.html#model-and-assumptions",
+    "href": "notes/b04_programming.html#model-and-assumptions",
+    "title": "Programming and reproducible data handling",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nSuppose an assay column is labelled \\(a_j\\) and metadata row i has animal ID \\(m_i\\). Alignment is the explicit index \\(j_i=\\mathrm{match}(m_i,a)\\), followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.\nA successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary."
+  },
+  {
+    "objectID": "notes/b04_programming.html#worked-example",
+    "href": "notes/b04_programming.html#worked-example",
+    "title": "Programming and reproducible data handling",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nmetadata &lt;- data.frame(animal=c(\"a1\",\"a2\",\"a3\"), diet=c(\"C\",\"T\",\"C\"))\nassay &lt;- matrix(1:6,2,3,dimnames=list(c(\"f1\",\"f2\"),c(\"a3\",\"a1\",\"a2\")))\nstopifnot(!anyDuplicated(metadata$animal), !anyDuplicated(colnames(assay)))\nindex &lt;- match(metadata$animal,colnames(assay))\nstopifnot(!anyNA(index))\naligned &lt;- assay[,index,drop=FALSE]\nstopifnot(identical(colnames(aligned),metadata$animal))\naligned\n\n\n   a1 a2 a3\nf1  3  5  1\nf2  4  6  2\n\n\nAnimal a1 now receives its labelled measurement, not the value in the original first column. Keeping drop=FALSE preserves matrix shape when selecting a single column."
+  },
+  {
+    "objectID": "notes/b04_programming.html#interpretation-and-scope",
+    "href": "notes/b04_programming.html#interpretation-and-scope",
+    "title": "Programming and reproducible data handling",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nChecking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen."
+  },
+  {
+    "objectID": "notes/b04_programming.html#exercises",
+    "href": "notes/b04_programming.html#exercises",
+    "title": "Programming and reproducible data handling",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nWhy is cbind(metadata, t(assay)) unsafe before alignment?\nWhat does match return for an absent animal?\nWhy should raw and transformed matrices have different names?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt binds by position and can attach measurements to the wrong animals.\nNA; require an explicit missing-sample policy before continuing.\nNames preserve which units and transformations each object represents, reducing accidental reuse of a processed value as raw data."
+  },
+  {
+    "objectID": "notes/b04_programming.html#practicals-and-course-pathways",
+    "href": "notes/b04_programming.html#practicals-and-course-pathways",
+    "title": "Programming and reproducible data handling",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nData handling (in development), command-line workflow (in development) and reporting (in development).\nUse the unified map to locate B04 in both harmonized outlines. Return to the building-block index (in development)."
+  },
+  {
+    "objectID": "notes/b02_design.html",
+    "href": "notes/b02_design.html",
+    "title": "Experimental design and biological sampling",
+    "section": "",
+    "text": "Define experimental units and independent replication; distinguish randomisation, blocking and batch adjustment; identify confounded designs and specify sample handling."
+  },
+  {
+    "objectID": "notes/b02_design.html#learning-objectives",
+    "href": "notes/b02_design.html#learning-objectives",
+    "title": "Experimental design and biological sampling",
+    "section": "",
+    "text": "Define experimental units and independent replication; distinguish randomisation, blocking and batch adjustment; identify confounded designs and specify sample handling."
+  },
+  {
+    "objectID": "notes/b02_design.html#biological-question-and-measurements",
+    "href": "notes/b02_design.html#biological-question-and-measurements",
+    "title": "Experimental design and biological sampling",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nFor an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.\nA multi-omics study should connect animal identity to tissue, collection time, storage, extraction, assay and batch. Collection and preservation requirements differ across molecules; a shared animal identifier does not imply that one preparation is appropriate for every assay. Predefine exclusion rules and the primary contrast. Where possible, randomise treatment allocation, blind handling and distribute biological groups across processing batches."
+  },
+  {
+    "objectID": "notes/b02_design.html#model-and-assumptions",
+    "href": "notes/b02_design.html#model-and-assumptions",
+    "title": "Experimental design and biological sampling",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nA simple fixed-effect model is \\(y_i=\\beta_0+\\beta_T T_i+\\beta_B B_i+e_i\\). Its design matrix X must have independent columns to separate treatment and batch. If every control is in batch A and every treatment in batch B, the two effects are not separately identifiable. Increasing the number of observations in the same confounded arrangement does not solve this.\nBlocking balances treatments within a known nuisance factor; batch adjustment models remaining variation. Neither creates the missing comparisons in a perfectly confounded design."
+  },
+  {
+    "objectID": "notes/b02_design.html#worked-example",
+    "href": "notes/b02_design.html#worked-example",
+    "title": "Experimental design and biological sampling",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nbalanced &lt;- data.frame(treatment=factor(rep(c(\"control\",\"treated\"),4)),\n batch=factor(rep(c(\"A\",\"A\",\"B\",\"B\"),2)))\nconfounded &lt;- transform(balanced, batch=treatment)\nrank_info &lt;- function(d) {\n X &lt;- model.matrix(~ treatment + batch, d)\n c(columns=ncol(X), rank=qr(X)$rank)\n}\nrbind(balanced=rank_info(balanced), confounded=rank_info(confounded))\n\n\n           columns rank\nbalanced         3    3\nconfounded       3    2\n\n\nShow R code\nstopifnot(qr(model.matrix(~treatment+batch, balanced))$rank==3,\n          qr(model.matrix(~treatment+batch, confounded))$rank==2)\n\n\nThe balanced design supplies independent treatment and batch columns. The confounded model has three columns but only rank two: software cannot recover the absent information."
+  },
+  {
+    "objectID": "notes/b02_design.html#interpretation-and-scope",
+    "href": "notes/b02_design.html#interpretation-and-scope",
+    "title": "Experimental design and biological sampling",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nRank is necessary, not sufficient, for a good experiment. Power, within-unit dependence, transport/storage effects, selection and missingness still matter. Plan biological replication using a relevant effect size and variance, not a universal sample-count rule. See the NC3Rs experimental-unit guidance for examples."
+  },
+  {
+    "objectID": "notes/b02_design.html#exercises",
+    "href": "notes/b02_design.html#exercises",
+    "title": "Experimental design and biological sampling",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nA diet is assigned to four pens, with ten animals per pen. What is the diet experimental unit?\nCan adjustment rescue a treatment–batch confounding problem?\nWhat must a matched multi-omics sample sheet record?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe pen; ten animals provide within-pen measurements rather than ten allocations.\nNot when treatment and batch are perfectly confounded.\nAnimal, specimen, tissue, time, treatment, handling, assay and batch, plus explicit mappings between assay and biological sample identifiers."
+  },
+  {
+    "objectID": "notes/b02_design.html#practicals-and-course-pathways",
+    "href": "notes/b02_design.html#practicals-and-course-pathways",
+    "title": "Experimental design and biological sampling",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nDesign practical (in development) and sample identity (in development) supply shared foundations for both pathways.\nUse the unified map to locate B02 in both harmonized outlines. Return to the building-block index (in development)."
+  },
+  {
+    "objectID": "practicals.html",
+    "href": "practicals.html",
+    "title": "Practicals and exercises",
+    "section": "",
+    "text": "Practicals use explicit assumptions, small hypothetical datasets and reproducible R examples. The two pathways reuse common practicals rather than copying them. All code examples run without biological downloads."
+  },
+  {
+    "objectID": "practicals.html#available-practicals",
+    "href": "practicals.html#available-practicals",
+    "title": "Practicals and exercises",
+    "section": "Available practicals",
+    "text": "Available practicals\nThe first practicals are in development.\nUse the curriculum crosswalk to locate each session in the two original outlines. Shared practicals can have different pathway extensions."
   },
   {
     "objectID": "course_map.html",
     "href": "course_map.html",
     "title": "Unified course map",
     "section": "",
-    "text": "Genomics, Systems Biology and Bioinformatics is the unified teaching framework spanning both harmonized MSc outlines: Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production. The two outlines define different pathways through the same library of material. The unified course can also select its own sequence from that library.\nEach block has one maintained explanation and worked example. A pathway chooses its depth, exercises and assessment. Shared content is revisited through a new question or a more demanding analysis when students take both courses.\nThis map is a curriculum design. Only the overview and this map are currently implemented; the lessons, practicals and assessments below are proposed. Original module numbering is retained in the crosswalks. Partner assignments, credit hours and assessment weights remain as specified in the supplied outlines; this map does not revise them or allocate teaching hours."
+    "text": "Genomics, Systems Biology and Bioinformatics is the unified teaching framework spanning both harmonized MSc outlines: Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production. The two outlines define different pathways through the same library of material. The unified course can also select its own sequence from that library.\nEach block has one maintained explanation and worked example. A pathway chooses its depth, exercises and assessment. Shared content is revisited through a new question or a more demanding analysis when students take both courses.\nThis map defines the unified curriculum. The module index and practical index identify the currently available material. Worked examples use hypothetical inputs; curriculum extensions and formal assessment changes below are identified as proposals. Original module numbering is retained in the crosswalks. Partner assignments, credit hours and assessment weights remain as specified in the supplied outlines; this map does not revise them or allocate teaching hours."
   },
   {
     "objectID": "course_map.html#one-framework-reusable-teaching-blocks",
     "href": "course_map.html#one-framework-reusable-teaching-blocks",
     "title": "Unified course map",
     "section": "",
-    "text": "Genomics, Systems Biology and Bioinformatics is the unified teaching framework spanning both harmonized MSc outlines: Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production. The two outlines define different pathways through the same library of material. The unified course can also select its own sequence from that library.\nEach block has one maintained explanation and worked example. A pathway chooses its depth, exercises and assessment. Shared content is revisited through a new question or a more demanding analysis when students take both courses.\nThis map is a curriculum design. Only the overview and this map are currently implemented; the lessons, practicals and assessments below are proposed. Original module numbering is retained in the crosswalks. Partner assignments, credit hours and assessment weights remain as specified in the supplied outlines; this map does not revise them or allocate teaching hours."
+    "text": "Genomics, Systems Biology and Bioinformatics is the unified teaching framework spanning both harmonized MSc outlines: Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production. The two outlines define different pathways through the same library of material. The unified course can also select its own sequence from that library.\nEach block has one maintained explanation and worked example. A pathway chooses its depth, exercises and assessment. Shared content is revisited through a new question or a more demanding analysis when students take both courses.\nThis map defines the unified curriculum. The module index and practical index identify the currently available material. Worked examples use hypothetical inputs; curriculum extensions and formal assessment changes below are identified as proposals. Original module numbering is retained in the crosswalks. Partner assignments, credit hours and assessment weights remain as specified in the supplied outlines; this map does not revise them or allocate teaching hours."
   },
   {
     "objectID": "course_map.html#building-blocks",
     "href": "course_map.html#building-blocks",
     "title": "Unified course map",
     "section": "Building blocks",
-    "text": "Building blocks\nThe block numbers are stable identifiers, rather than a compulsory teaching order. Technologies can be introduced alongside the data and design decisions that make their measurements interpretable.\n\n\n\n\n\n\n\n\n\nBlock\nScope\nStudents should be able to\nProposed worked example or practical\n\n\n\n\nB01 Foundations and biological questions\nGenomics, systems biology, bioinformatics; omics layers; genotype–phenotype relationships\nDefine a biological question and identify the measurements needed to address it\nMap a feed-efficiency question to genomic, expression, microbial and phenotype measurements\n\n\nB02 Experimental design and sampling\nExperimental units, biological replication, tissue and time, matched samples, collection and preservation, batch allocation\nSpecify a sampling design and distinguish biological effects from confounding\nCompare matched and unmatched multi-omics designs; diagnose a treatment–batch confounding problem\n\n\nB03 Databases and biological identifiers\nSequence, protein, structure, genome, comparative, annotation and pathway resources; identifier mapping\nRetrieve and document records while preserving identifier meaning and annotation provenance\nTrace a variant to a gene, transcript, protein and pathway using a small documented example\n\n\nB04 Programming and reproducible data handling\nR; optional command-line/Python extensions; file formats, joins, sequence manipulation and workflow organisation\nImport data, verify sample identity and produce a reproducible analysis\nJoin phenotype and assay tables; detect swapped samples, missing identifiers and duplicate records\n\n\nB05 Genomics and sequence analysis\nGenome organisation, sequencing, genotyping, variation, assembly and annotation concepts; sequence similarity, alignment and phylogeny\nExplain genomic measurements and evaluate basic sequence/genotype quality\nInspect sequence and genotype data; compare homologous sequences with explicit assumptions\n\n\nB06 Transcriptomics\nRNA-seq technologies, expression quantification, quality control, normalization, differential expression and functional interpretation\nExplain an expression analysis and its design, contrasts and uncertainty\nAnalyse a small count dataset with biological replicates and a stated experimental contrast\n\n\nB07 Epigenomics\nDNA methylation, chromatin measurements, nutritional/environmental influences and regulatory interpretation\nInterpret epigenomic measurements without equating association with causation\nCompare regulatory measurements across tissues or conditions and identify alternative explanations\n\n\nB08 Proteomics and structural information\nPlatforms, identification, quantification, protein structures and functional interpretation\nExplain protein measurements and assess identification and quantification limitations\nExplore a protein-abundance table with missing values and batch information\n\n\nB09 Metabolomics\nAnalytical platforms, identification confidence, quantification, preprocessing and biochemical interpretation\nEvaluate metabolite measurements and distinguish identified compounds from unresolved features\nExamine a small metabolite panel, measurement scales and feature-identification uncertainty\n\n\nB10 Microbiomics and host–microbiome relationships\nCommunity profiling, host effects, co-metabolism, compositionality and production applications\nInterpret community differences while accounting for sampling and measurement constraints\nCompare rumen-community profiles with diet and host metadata; discuss relative versus absolute abundance\n\n\nB11 Phenomics and precision production\nSensors, repeated measurements, high-throughput phenotyping and links to omics\nDefine meaningful phenotypes and account for measurement timing and repeated records\nAlign animal-level sensor summaries with biological sampling dates\n\n\nB12 Statistical analysis and validation\nRegression, multivariate analysis, multiple testing, clustering, dimension reduction, regularization and machine learning\nSelect an analysis and evaluate uncertainty, overfitting, confounding and leakage\nFit and compare predictive models with animal-level train/test separation and preprocessing fitted on training data\n\n\nB13 Association, prediction and regulatory variation\nGWAS, relatedness, population structure, fine-mapping, functional annotation, genomic prediction, eQTL and TWAS\nDistinguish association, prediction and causal claims and explain their assumptions\nInterpret an association region and expression evidence; assess prediction on an appropriate held-out group\n\n\nB14 Pathways, networks and systems inference\nEnrichment, gene regulation, protein interactions, metabolic/signalling networks and causal-model concepts\nEvaluate pathway/network evidence, background sets, uncertainty and limits of inference\nCompare enrichment backgrounds and assess whether a network supports a biological hypothesis\n\n\nB15 Multi-omics integration\nIntegration strategies, sample matching, scaling, missing layers, cross-layer association and genotype-to-phenotype integration\nJustify an integration strategy and interpret agreement and disagreement between layers\nIntegrate matched expression, protein and phenotype summaries with a documented design and validation plan\n\n\nB16 Advanced and emerging methods\nSingle-cell, spatial omics, advanced epigenomics, 3D genome organisation and emerging AI methods\nEvaluate what a new technology measures and whether it answers the study question\nCritique an advanced-omics paper, separating measurement, association and mechanistic evidence\n\n\nB17 Ethics, governance and research integrity\nPrivacy/security, sharing, open science, provenance, reproducibility and responsible AI\nSpecify responsible data handling and communicate analysis provenance and limitations\nWrite a data-management and reproducibility plan, including justified AI use\n\n\nB18 Animal-production synthesis and reporting\nGrowth, feed efficiency, meat/milk quality, reproduction, health, adaptation, methane and sustainability\nConnect a justified study design and analysis to an animal-production question\nDevelop an integrated case study, computational report or research proposal\n\n\n\nB02, B04 and B17 recur throughout the course. B12 supports analyses across technologies. B18 provides applications throughout the teaching sequence, as well as a final synthesis."
+    "text": "Building blocks\nThe block numbers are stable identifiers, rather than a compulsory teaching order. Technologies can be introduced alongside the data and design decisions that make their measurements interpretable.\n\n\n\nBlock\nScope\nStudents should be able to\nProposed worked example or practical\n\n\n\n\nB01 Foundations and biological questions\nGenomics, systems biology, bioinformatics; omics layers; genotype–phenotype relationships\nDefine a biological question and identify the measurements needed to address it\nMap a feed-efficiency question to genomic, expression, microbial and phenotype measurements\n\n\nB02 Experimental design and sampling\nExperimental units, biological replication, tissue and time, matched samples, collection and preservation, batch allocation\nSpecify a sampling design and distinguish biological effects from confounding\nCompare matched and unmatched multi-omics designs; diagnose a treatment–batch confounding problem\n\n\nB03 Databases and biological identifiers\nSequence, protein, structure, genome, comparative, annotation and pathway resources; identifier mapping\nRetrieve and document records while preserving identifier meaning and annotation provenance\nTrace a variant to a gene, transcript, protein and pathway using a small documented example\n\n\nB04 Programming and reproducible data handling\nR; optional command-line/Python extensions; file formats, joins, sequence manipulation and workflow organisation\nImport data, verify sample identity and produce a reproducible analysis\nJoin phenotype and assay tables; detect swapped samples, missing identifiers and duplicate records\n\n\nB05 Genomics and sequence analysis\nGenome organisation, sequencing, genotyping, variation, assembly and annotation concepts; sequence similarity, alignment and phylogeny\nExplain genomic measurements and evaluate basic sequence/genotype quality\nInspect sequence and genotype data; compare homologous sequences with explicit assumptions\n\n\nB06 Transcriptomics\nRNA-seq technologies, expression quantification, quality control, normalization, differential expression and functional interpretation\nExplain an expression analysis and its design, contrasts and uncertainty\nAnalyse a small count dataset with biological replicates and a stated experimental contrast\n\n\nB07 Epigenomics\nDNA methylation, chromatin measurements, nutritional/environmental influences and regulatory interpretation\nInterpret epigenomic measurements without equating association with causation\nCompare regulatory measurements across tissues or conditions and identify alternative explanations\n\n\nB08 Proteomics and structural information\nPlatforms, identification, quantification, protein structures and functional interpretation\nExplain protein measurements and assess identification and quantification limitations\nExplore a protein-abundance table with missing values and batch information\n\n\nB09 Metabolomics\nAnalytical platforms, identification confidence, quantification, preprocessing and biochemical interpretation\nEvaluate metabolite measurements and distinguish identified compounds from unresolved features\nExamine a small metabolite panel, measurement scales and feature-identification uncertainty\n\n\nB10 Microbiomics and host–microbiome relationships\nCommunity profiling, host effects, co-metabolism, compositionality and production applications\nInterpret community differences while accounting for sampling and measurement constraints\nCompare rumen-community profiles with diet and host metadata; discuss relative versus absolute abundance\n\n\nB11 Phenomics and precision production\nSensors, repeated measurements, high-throughput phenotyping and links to omics\nDefine meaningful phenotypes and account for measurement timing and repeated records\nAlign animal-level sensor summaries with biological sampling dates\n\n\nB12 Statistical analysis and validation\nRegression, multivariate analysis, multiple testing, clustering, dimension reduction, regularization and machine learning\nSelect an analysis and evaluate uncertainty, overfitting, confounding and leakage\nFit and compare predictive models with animal-level train/test separation and preprocessing fitted on training data\n\n\nB13 Association, prediction and regulatory variation\nGWAS, relatedness, population structure, fine-mapping, functional annotation, genomic prediction, eQTL and TWAS\nDistinguish association, prediction and causal claims and explain their assumptions\nInterpret an association region and expression evidence; assess prediction on an appropriate held-out group\n\n\nB14 Pathways, networks and systems inference\nEnrichment, gene regulation, protein interactions, metabolic/signalling networks and causal-model concepts\nEvaluate pathway/network evidence, background sets, uncertainty and limits of inference\nCompare enrichment backgrounds and assess whether a network supports a biological hypothesis\n\n\nB15 Multi-omics integration\nIntegration strategies, sample matching, scaling, missing layers, cross-layer association and genotype-to-phenotype integration\nJustify an integration strategy and interpret agreement and disagreement between layers\nIntegrate matched expression, protein and phenotype summaries with a documented design and validation plan\n\n\nB16 Advanced and emerging methods\nSingle-cell, spatial omics, advanced epigenomics, 3D genome organisation and emerging AI methods\nEvaluate what a new technology measures and whether it answers the study question\nCritique an advanced-omics paper, separating measurement, association and mechanistic evidence\n\n\nB17 Ethics, governance and research integrity\nPrivacy/security, sharing, open science, provenance, reproducibility and responsible AI\nSpecify responsible data handling and communicate analysis provenance and limitations\nWrite a data-management and reproducibility plan, including justified AI use\n\n\nB18 Animal-production synthesis and reporting\nGrowth, feed efficiency, meat/milk quality, reproduction, health, adaptation, methane and sustainability\nConnect a justified study design and analysis to an animal-production question\nDevelop an integrated case study, computational report or research proposal\n\n\n\nB02, B04 and B17 recur throughout the course. B12 supports analyses across technologies. B18 provides applications throughout the teaching sequence, as well as a final synthesis."
   },
   {
     "objectID": "course_map.html#how-the-blocks-connect",
@@ -131,5 +257,250 @@
     "title": "Unified course map",
     "section": "Development and reuse",
     "text": "Development and reuse\nKeep this repository as the shared home. Use existing slides/, notes/, tutorials/, exercises/, data/, images/, R/ and scripts/ folders, with each resource labelled by its block identifier and linked from this map as it becomes available. Avoid copying the same explanation into separate course versions. Both pathways can link to one resource and assign different extensions.\nDevelop one complete example first: B02/B04/B06, a small RNA-seq study with sample metadata, quality checks and a biological contrast. Follow it with B12/B14 interpretation and then a B15 integration example. This connects design, computation and biological interpretation without requiring all eighteen blocks to be written first.\nExisting Population Genetics, Quantitative Genetics and Bayesian Linear Regression lessons can supply prerequisites or optional background. Link to suitable lessons after checking their assumptions and level. Package integrations should use current public interfaces and should not be prerequisites until an example has been implemented and verified.\nReturn to the course overview or the gteach hub."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "",
+    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.\nUse the unified course map to explore the reusable teaching blocks and the two pathways through them."
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "",
+    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.\nUse the unified course map to explore the reusable teaching blocks and the two pathways through them."
+  },
+  {
+    "objectID": "index.html#core-themes",
+    "href": "index.html#core-themes",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Core Themes",
+    "text": "Core Themes\nThe material is organized around five interconnected themes:\n\nMolecular Technologies\n\nDNA sequencing technologies\nGenotyping platforms\nRNA-seq and transcriptomics\nEpigenomic and multi-omics profiling\n\nGenomic Association and Mapping\n\nGWAS principles\nPopulation structure and confounding\nFine-mapping\nFunctional annotation\n\nMulti-Omics Integration\n\nTranscriptome-wide association\neQTL and regulatory variation\nIntegrative modeling across data layers\n\nSystems-Level Modeling\n\nGene regulatory networks\nPathway analysis\nNetwork-based interpretation\nCausal modeling concepts\n\nComputational and Statistical Methods\n\nHigh-dimensional regression\nRegularization and shrinkage\nMachine learning approaches\nReproducible workflows in R"
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nAfter completing the course, students should be able to:\n\nExplain how sequencing technologies generate molecular data\nEvaluate appropriate statistical models for genomic data\nAnalyze high-dimensional datasets using R\nInterpret GWAS and fine-mapping results\nIntegrate multi-omics datasets conceptually and computationally\nConnect molecular variation to complex phenotypes"
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Course Materials",
+    "text": "Course Materials\nBrowse the teaching modules and practicals with exercises and solutions. The two harmonized outlines use different pathways through these shared resources.\nThe course progresses from molecular data generation to systems-level interpretation.\nAs the course is developed, chapters and practicals will include:\n\nConceptual background\nStatistical framework\nApplied examples\nExecutable R code\nVisualizations and case studies\n\nThe module and practical indexes show completed material as it is published. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers."
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nStudents are expected to have:\n\nBasic molecular biology knowledge\nIntroductory statistics\nFamiliarity with R\n\nPrior exposure to linear models and quantitative genetics is beneficial but not required."
+  },
+  {
+    "objectID": "index.html#recommended-use",
+    "href": "index.html#recommended-use",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Recommended Use",
+    "text": "Recommended Use\nThis material is designed to support:\n\nLecture-based instruction\nComputational lab sessions\nProject-based learning\nIndependent exploration of genomic datasets\n\nEmphasis is placed on connecting biological mechanisms with statistical modeling in a reproducible framework."
+  },
+  {
+    "objectID": "index.html#course-hub",
+    "href": "index.html#course-hub",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Course Hub",
+    "text": "Course Hub\nReturn to the gteach teaching-materials hub."
+  },
+  {
+    "objectID": "modules.html",
+    "href": "modules.html",
+    "title": "Reusable teaching modules",
+    "section": "",
+    "text": "Each module combines concepts, assumptions, a worked R example and exercises with suggested answers. Follow a course pathway in the unified map, or choose a block below."
+  },
+  {
+    "objectID": "modules.html#available-modules",
+    "href": "modules.html#available-modules",
+    "title": "Reusable teaching modules",
+    "section": "Available modules",
+    "text": "Available modules\n\nB01: Biological questions and omics measurements\nB02: Experimental design and biological sampling\nB03: Biological databases and identifier mapping\nB04: Programming and reproducible data handling\nB05: Genomic measurements and sequence analysis\nB06: Transcriptomics and expression analysis"
+  },
+  {
+    "objectID": "modules.html#development-status",
+    "href": "modules.html#development-status",
+    "title": "Reusable teaching modules",
+    "section": "Development status",
+    "text": "Development status\n6 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed."
+  },
+  {
+    "objectID": "notes/b01_foundations.html",
+    "href": "notes/b01_foundations.html",
+    "title": "Biological questions and omics measurements",
+    "section": "",
+    "text": "Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#learning-objectives",
+    "href": "notes/b01_foundations.html#learning-objectives",
+    "title": "Biological questions and omics measurements",
+    "section": "",
+    "text": "Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#biological-question-and-measurements",
+    "href": "notes/b01_foundations.html#biological-question-and-measurements",
+    "title": "Biological questions and omics measurements",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nA study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.\nGenomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.\nBegin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#model-and-assumptions",
+    "href": "notes/b01_foundations.html#model-and-assumptions",
+    "title": "Biological questions and omics measurements",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nLet \\(Y_i(1)\\) and \\(Y_i(0)\\) denote the performance that animal i would show under two diets. The average intervention effect is \\(E[Y(1)-Y(0)]\\). Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation \\(\\mathrm{cor}(X,Y)\\) generally cannot.\nFor prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#worked-example",
+    "href": "notes/b01_foundations.html#worked-example",
+    "title": "Biological questions and omics measurements",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nplan &lt;- data.frame(layer=c(\"genome\", \"transcriptome\", \"proteome\", \"phenome\"),\n measurement=c(\"genotype dosage\", \"RNA counts\", \"protein abundance\", \"feed-efficiency phenotype\"),\n timing=c(\"baseline\", \"day 14\", \"day 14\", \"days 1-28\"),\n purpose=c(\"inherited variation\", \"molecular response\", \"molecular response\", \"production response\"))\nplan\n\n\n          layer               measurement    timing             purpose\n1        genome           genotype dosage  baseline inherited variation\n2 transcriptome                RNA counts    day 14  molecular response\n3      proteome         protein abundance    day 14  molecular response\n4       phenome feed-efficiency phenotype days 1-28 production response\n\n\nThe table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#interpretation-and-scope",
+    "href": "notes/b01_foundations.html#interpretation-and-scope",
+    "title": "Biological questions and omics measurements",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nAn integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#exercises",
+    "href": "notes/b01_foundations.html#exercises",
+    "title": "Biological questions and omics measurements",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nDefine one diet-effect question and one prediction question.\nWhich measurements would be available before a breeding decision?\nWhy is agreement between RNA and protein not proof of mediation?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nCompare average responses under allocated diets; separately predict a future phenotype in new animals.\nOnly information observed at the stated decision time is eligible.\nBoth can respond to an unmeasured common cause or changes in cell composition."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#practicals-and-course-pathways",
+    "href": "notes/b01_foundations.html#practicals-and-course-pathways",
+    "title": "Biological questions and omics measurements",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nExperimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.\nUse the unified map to locate B01 in both harmonized outlines. Return to the building-block index (in development)."
+  },
+  {
+    "objectID": "notes/b03_databases.html",
+    "href": "notes/b03_databases.html",
+    "title": "Biological databases and identifier mapping",
+    "section": "",
+    "text": "Distinguish accession, feature and biological-entity identifiers; document reference versions; evaluate one-to-many annotation joins."
+  },
+  {
+    "objectID": "notes/b03_databases.html#learning-objectives",
+    "href": "notes/b03_databases.html#learning-objectives",
+    "title": "Biological databases and identifier mapping",
+    "section": "",
+    "text": "Distinguish accession, feature and biological-entity identifiers; document reference versions; evaluate one-to-many annotation joins."
+  },
+  {
+    "objectID": "notes/b03_databases.html#biological-question-and-measurements",
+    "href": "notes/b03_databases.html#biological-question-and-measurements",
+    "title": "Biological databases and identifier mapping",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nA database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.\nIn a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata."
+  },
+  {
+    "objectID": "notes/b03_databases.html#model-and-assumptions",
+    "href": "notes/b03_databases.html#model-and-assumptions",
+    "title": "Biological databases and identifier mapping",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nIf feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.\nCheck key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions."
+  },
+  {
+    "objectID": "notes/b03_databases.html#worked-example",
+    "href": "notes/b03_databases.html#worked-example",
+    "title": "Biological databases and identifier mapping",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nfeatures &lt;- data.frame(gene=c(\"geneA\",\"geneB\",\"geneC\"), effect=c(.5,-.2,.1))\nannotation &lt;- data.frame(gene=c(\"geneA\",\"geneA\",\"geneB\"),\n transcript=c(\"txA1\",\"txA2\",\"txB1\"))\njoined &lt;- merge(features, annotation, by=\"gene\", all.x=TRUE)\njoined\n\n\n   gene effect transcript\n1 geneA    0.5       txA1\n2 geneA    0.5       txA2\n3 geneB   -0.2       txB1\n4 geneC    0.1       &lt;NA&gt;\n\n\nShow R code\nc(input_rows=nrow(features), joined_rows=nrow(joined),\n unmatched=sum(is.na(joined$transcript)))\n\n\n input_rows joined_rows   unmatched \n          3           4           1 \n\n\nShow R code\nstopifnot(nrow(joined)==4, sum(is.na(joined$transcript))==1)\n\n\ngeneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge."
+  },
+  {
+    "objectID": "notes/b03_databases.html#interpretation-and-scope",
+    "href": "notes/b03_databases.html#interpretation-and-scope",
+    "title": "Biological databases and identifier mapping",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nThe fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the NCBI GEO documentation."
+  },
+  {
+    "objectID": "notes/b03_databases.html#exercises",
+    "href": "notes/b03_databases.html#exercises",
+    "title": "Biological databases and identifier mapping",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nWhy did the row count increase?\nWhat happens with an inner join?\nName four metadata fields needed for a genomic coordinate.\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\ngeneA has a one-to-many mapping.\ngeneC disappears; this is an exclusion that should be reported.\nSpecies, assembly, chromosome and coordinate convention; also record the annotation/version and feature identity."
+  },
+  {
+    "objectID": "notes/b03_databases.html#practicals-and-course-pathways",
+    "href": "notes/b03_databases.html#practicals-and-course-pathways",
+    "title": "Biological databases and identifier mapping",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nDatabase retrieval (in development), annotation and pathways (in development) and sample handling (in development).\nUse the unified map to locate B03 in both harmonized outlines. Return to the building-block index (in development)."
+  },
+  {
+    "objectID": "notes/b05_genomics.html",
+    "href": "notes/b05_genomics.html",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "",
+    "text": "Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#learning-objectives",
+    "href": "notes/b05_genomics.html#learning-objectives",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "",
+    "text": "Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#biological-question-and-measurements",
+    "href": "notes/b05_genomics.html#biological-question-and-measurements",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "1. Biological question and measurements",
+    "text": "1. Biological question and measurements\nSequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.\nA FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.\nIdentity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#model-and-assumptions",
+    "href": "notes/b05_genomics.html#model-and-assumptions",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "2. Model and assumptions",
+    "text": "2. Model and assumptions\nFor an aligned comparison with n comparable sites and k differences, \\(p=k/n\\) is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, \\(d=-3/4\\log(1-4p/3)\\) estimates substitutions per site for \\(p&lt;3/4\\). Alignment uncertainty and saturation limit this model.\nFor a Phred quality Q, the encoded error probability is \\(10^{-Q/10}\\). Summing these probabilities gives an expected number of errors, without assuming the errors are independent."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#worked-example",
+    "href": "notes/b05_genomics.html#worked-example",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "3. Worked example",
+    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nQ &lt;- c(10,20,30,40)\ndata.frame(Q=Q,error_probability=10^(-Q/10))\n\n\n   Q error_probability\n1 10             1e-01\n2 20             1e-02\n3 30             1e-03\n4 40             1e-04\n\n\nShow R code\na &lt;- strsplit(\"ACGTACGTACGT\",\"\")[[1]]\nb &lt;- strsplit(\"ACGTTCGTTCGT\",\"\")[[1]]\np &lt;- mean(a!=b)\nd &lt;- -.75*log(1-4*p/3)\nc(observed_fraction=p, JC_distance=d)\n\n\nobserved_fraction       JC_distance \n        0.1666667         0.1884858 \n\n\nShow R code\nstopifnot(abs(p-2/12)&lt;1e-12, d&gt;p)\n\n\nThe correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#interpretation-and-scope",
+    "href": "notes/b05_genomics.html#interpretation-and-scope",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "4. Interpretation and scope",
+    "text": "4. Interpretation and scope\nWhole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review NCBI’s BLAST glossary for the distinction between identity and homology."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#exercises",
+    "href": "notes/b05_genomics.html#exercises",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "5. Exercises",
+    "text": "5. Exercises\n\nWhy is the denominator comparable sites rather than all supplied characters?\nWhy can a dosage of 2 not be interpreted before specifying the counted allele?\nCan a high-identity short alignment establish function?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nGaps and unknown bases do not supply called nucleotide comparisons.\nTwo counts refer to a particular allele, not a universally favourable genotype.\nNo; coverage, complexity, evolutionary relationship and functional evidence matter."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#practicals-and-course-pathways",
+    "href": "notes/b05_genomics.html#practicals-and-course-pathways",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Practicals and course pathways",
+    "text": "Practicals and course pathways\nSequence handling (in development), similarity (in development), alignment (in development), phylogeny (in development) and sequencing QC (in development).\nUse the unified map to locate B05 in both harmonized outlines. Return to the building-block index (in development)."
   }
 ]

@@ -1,0 +1,69 @@
+---
+title: "Biological databases and identifier mapping"
+subtitle: "B03: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish accession, feature and biological-entity identifiers; document reference versions; evaluate one-to-many annotation joins.
+
+## 1. Biological question and measurements
+
+A database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.
+
+In a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata.
+
+## 2. Model and assumptions
+
+If feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.
+
+Check key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+features <- data.frame(gene=c("geneA","geneB","geneC"), effect=c(.5,-.2,.1))
+annotation <- data.frame(gene=c("geneA","geneA","geneB"),
+ transcript=c("txA1","txA2","txB1"))
+joined <- merge(features, annotation, by="gene", all.x=TRUE)
+joined
+c(input_rows=nrow(features), joined_rows=nrow(joined),
+ unmatched=sum(is.na(joined$transcript)))
+stopifnot(nrow(joined)==4, sum(is.na(joined$transcript))==1)
+```
+
+geneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge.
+
+## 4. Interpretation and scope
+
+The fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the [NCBI GEO documentation](https://www.ncbi.nlm.nih.gov/geo/info/datasets.html).
+
+## 5. Exercises
+
+1. Why did the row count increase?
+2. What happens with an inner join?
+3. Name four metadata fields needed for a genomic coordinate.
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. geneA has a one-to-many mapping.
+2. geneC disappears; this is an exclusion that should be reported.
+3. Species, assembly, chromosome and coordinate convention; also record the annotation/version and feature identity.
+:::
+
+## Practicals and course pathways
+
+Database retrieval (in development), annotation and pathways (in development) and sample handling (in development).
+
+Use the [unified map](../course_map.qmd) to locate B03 in both harmonized outlines. Return to the building-block index (in development).

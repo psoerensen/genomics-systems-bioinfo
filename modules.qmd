@@ -1,0 +1,19 @@
+---
+title: "Reusable teaching modules"
+toc: true
+---
+
+Each module combines concepts, assumptions, a worked R example and exercises with suggested answers. Follow a course pathway in the [unified map](course_map.qmd), or choose a block below.
+
+## Available modules
+
+- [B01: Biological questions and omics measurements](notes/b01_foundations.qmd)
+- [B02: Experimental design and biological sampling](notes/b02_design.qmd)
+- [B03: Biological databases and identifier mapping](notes/b03_databases.qmd)
+- [B04: Programming and reproducible data handling](notes/b04_programming.qmd)
+- [B05: Genomic measurements and sequence analysis](notes/b05_genomics.qmd)
+- [B06: Transcriptomics and expression analysis](notes/b06_transcriptomics.qmd)
+
+## Development status
+
+6 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed.

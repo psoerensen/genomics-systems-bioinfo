@@ -1,0 +1,68 @@
+---
+title: "Biological questions and omics measurements"
+subtitle: "B01: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.
+
+## 1. Biological question and measurements
+
+A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.
+
+Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.
+
+Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.
+
+## 2. Model and assumptions
+
+Let $Y_i(1)$ and $Y_i(0)$ denote the performance that animal i would show under two diets. The average intervention effect is $E[Y(1)-Y(0)]$. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation $\mathrm{cor}(X,Y)$ generally cannot.
+
+For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+plan <- data.frame(layer=c("genome", "transcriptome", "proteome", "phenome"),
+ measurement=c("genotype dosage", "RNA counts", "protein abundance", "feed-efficiency phenotype"),
+ timing=c("baseline", "day 14", "day 14", "days 1-28"),
+ purpose=c("inherited variation", "molecular response", "molecular response", "production response"))
+plan
+```
+
+The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.
+
+## 4. Interpretation and scope
+
+An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.
+
+## 5. Exercises
+
+1. Define one diet-effect question and one prediction question.
+2. Which measurements would be available before a breeding decision?
+3. Why is agreement between RNA and protein not proof of mediation?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Compare average responses under allocated diets; separately predict a future phenotype in new animals.
+2. Only information observed at the stated decision time is eligible.
+3. Both can respond to an unmeasured common cause or changes in cell composition.
+:::
+
+## Practicals and course pathways
+
+Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.
+
+Use the [unified map](../course_map.qmd) to locate B01 in both harmonized outlines. Return to the building-block index (in development).

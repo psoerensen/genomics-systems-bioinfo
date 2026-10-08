@@ -1,0 +1,69 @@
+---
+title: "Programming and reproducible data handling"
+subtitle: "B04: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Import and join tables by explicit keys; preserve feature/sample orientation; detect missing, duplicated and reordered records; distinguish source data from derived output.
+
+## 1. Biological question and measurements
+
+A reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.
+
+Use stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical.
+
+## 2. Model and assumptions
+
+Suppose an assay column is labelled $a_j$ and metadata row i has animal ID $m_i$. Alignment is the explicit index $j_i=\mathrm{match}(m_i,a)$, followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.
+
+A successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+metadata <- data.frame(animal=c("a1","a2","a3"), diet=c("C","T","C"))
+assay <- matrix(1:6,2,3,dimnames=list(c("f1","f2"),c("a3","a1","a2")))
+stopifnot(!anyDuplicated(metadata$animal), !anyDuplicated(colnames(assay)))
+index <- match(metadata$animal,colnames(assay))
+stopifnot(!anyNA(index))
+aligned <- assay[,index,drop=FALSE]
+stopifnot(identical(colnames(aligned),metadata$animal))
+aligned
+```
+
+Animal a1 now receives its labelled measurement, not the value in the original first column. Keeping `drop=FALSE` preserves matrix shape when selecting a single column.
+
+## 4. Interpretation and scope
+
+Checking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen.
+
+## 5. Exercises
+
+1. Why is `cbind(metadata, t(assay))` unsafe before alignment?
+2. What does `match` return for an absent animal?
+3. Why should raw and transformed matrices have different names?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It binds by position and can attach measurements to the wrong animals.
+2. NA; require an explicit missing-sample policy before continuing.
+3. Names preserve which units and transformations each object represents, reducing accidental reuse of a processed value as raw data.
+:::
+
+## Practicals and course pathways
+
+Data handling (in development), command-line workflow (in development) and reporting (in development).
+
+Use the [unified map](../course_map.qmd) to locate B04 in both harmonized outlines. Return to the building-block index (in development).

@@ -65,6 +65,8 @@ After completing the course, students should be able to:
 
 ## Course Materials
 
+Browse the [teaching modules](modules.qmd) and [practicals with exercises and solutions](practicals.qmd). The two harmonized outlines use different pathways through these shared resources.
+
 The course progresses from molecular data generation to systems-level interpretation.
 
 As the course is developed, chapters and practicals will include:
@@ -75,7 +77,7 @@ As the course is developed, chapters and practicals will include:
 - Executable R code
 - Visualizations and case studies
 
-The overview and curriculum map are currently available. Slides, notes and practicals will be added in the folders described in the repository README. Students will be encouraged to reproduce worked examples and explore parameter choices as those materials become available.
+The module and practical indexes show completed material as it is published. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers.
 
 ---
 

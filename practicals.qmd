@@ -1,0 +1,12 @@
+---
+title: "Practicals and exercises"
+toc: true
+---
+
+Practicals use explicit assumptions, small hypothetical datasets and reproducible R examples. The two pathways reuse common practicals rather than copying them. All code examples run without biological downloads.
+
+## Available practicals
+
+The first practicals are in development.
+
+Use the [curriculum crosswalk](course_map.qmd#practical-session-coverage) to locate each session in the two original outlines. Shared practicals can have different pathway extensions.

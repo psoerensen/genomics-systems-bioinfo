@@ -1,0 +1,71 @@
+---
+title: "Genomic measurements and sequence analysis"
+subtitle: "B05: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism.
+
+## 1. Biological question and measurements
+
+Sequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.
+
+A FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.
+
+Identity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context.
+
+## 2. Model and assumptions
+
+For an aligned comparison with n comparable sites and k differences, $p=k/n$ is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, $d=-3/4\log(1-4p/3)$ estimates substitutions per site for $p<3/4$. Alignment uncertainty and saturation limit this model.
+
+For a Phred quality Q, the encoded error probability is $10^{-Q/10}$. Summing these probabilities gives an expected number of errors, without assuming the errors are independent.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+Q <- c(10,20,30,40)
+data.frame(Q=Q,error_probability=10^(-Q/10))
+a <- strsplit("ACGTACGTACGT","")[[1]]
+b <- strsplit("ACGTTCGTTCGT","")[[1]]
+p <- mean(a!=b)
+d <- -.75*log(1-4*p/3)
+c(observed_fraction=p, JC_distance=d)
+stopifnot(abs(p-2/12)<1e-12, d>p)
+```
+
+The correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate.
+
+## 4. Interpretation and scope
+
+Whole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review [NCBI’s BLAST glossary](https://www.ncbi.nlm.nih.gov/books/NBK62051/) for the distinction between identity and homology.
+
+## 5. Exercises
+
+1. Why is the denominator comparable sites rather than all supplied characters?
+2. Why can a dosage of 2 not be interpreted before specifying the counted allele?
+3. Can a high-identity short alignment establish function?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Gaps and unknown bases do not supply called nucleotide comparisons.
+2. Two counts refer to a particular allele, not a universally favourable genotype.
+3. No; coverage, complexity, evolutionary relationship and functional evidence matter.
+:::
+
+## Practicals and course pathways
+
+Sequence handling (in development), similarity (in development), alignment (in development), phylogeny (in development) and sequencing QC (in development).
+
+Use the [unified map](../course_map.qmd) to locate B05 in both harmonized outlines. Return to the building-block index (in development).

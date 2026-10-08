@@ -1,0 +1,69 @@
+---
+title: "Transcriptomics and expression analysis"
+subtitle: "B06: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Connect RNA counts to biological samples and library exposure; distinguish normalization, visualization and differential-expression inference; interpret model contrasts and dispersion.
+
+## 1. Biological question and measurements
+
+Bulk RNA-seq measures RNA from a mixture of cells in a sampled tissue. Read counts depend on abundance, sequencing depth, transcript properties and processing. A difference can arise from expression within a cell type, a change in cell composition, technical effects or combinations of these. Biological replicates are independent experimental units, not reads or genes.
+
+Prepare count matrices and sample metadata with matching IDs. Inspect library sizes and count distributions, define low-information filters independently of a desired direction, and specify the biological contrast and adjustment factors before testing. Expression transformations for visualization are not substitutes for an inferential count model.
+
+## 2. Model and assumptions
+
+A negative-binomial model can write $K_{gj}\sim NB(\mu_{gj},\alpha_g)$ with $E[K]=\mu$ and $\mathrm{Var}(K)=\mu+\alpha_g \mu^2$. A known exposure $s_j$ enters through $\mu_{gj}=s_j q_{gj}$. Gene-level models describe $q$ using treatment and other design terms. Dispersion describes extra variation beyond a Poisson model.
+
+The worked calculation uses supplied exposure, not an estimated RNA-seq normalization method. On real data, composition-aware normalization, dispersion estimation, model design and multiplicity require an appropriate workflow.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+mu <- c(10,100,1000)
+alpha <- .1
+data.frame(mean=mu,Poisson_variance=mu,NB_variance=mu+alpha*mu^2)
+counts <- c(80,120,160)
+exposure <- c(.8,1.2,1.6)
+normalized <- counts/exposure
+normalized
+stopifnot(all(normalized==100))
+```
+
+Equal normalized counts can arise from different read depths. At high mean, the overdispersion term dominates Poisson variance; treating biological count data as Poisson can underestimate uncertainty.
+
+## 4. Interpretation and scope
+
+CPM and log2(count+1) are useful teaching transformations but have composition and low-count limitations. The [DESeq2 vignette](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) describes a full gene-level count-model workflow. Our base-R practical explores supplied exposure and a restricted quasi-Poisson model; it is not a replacement for its dispersion and normalization framework.
+
+## 5. Exercises
+
+1. Why are genes not independent biological replicates of a treatment?
+2. What happens to raw counts when exposure doubles but abundance is unchanged?
+3. Can a log-count plot prove differential expression?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Treatment was assigned to animals or other experimental units, not separately to genes.
+2. Their expected counts double.
+3. No; inference needs a specified model, replication, uncertainty and appropriate multiple-testing treatment.
+:::
+
+## Practicals and course pathways
+
+RNA-seq practical (in development) is shared by both outlines. Multi-omics QC (in development) connects count data to other measurement scales.
+
+Use the [unified map](../course_map.qmd) to locate B06 in both harmonized outlines. Return to the building-block index (in development).

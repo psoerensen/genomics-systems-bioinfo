@@ -1,0 +1,71 @@
+---
+title: "Experimental design and biological sampling"
+subtitle: "B02: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define experimental units and independent replication; distinguish randomisation, blocking and batch adjustment; identify confounded designs and specify sample handling.
+
+## 1. Biological question and measurements
+
+For an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.
+
+A multi-omics study should connect animal identity to tissue, collection time, storage, extraction, assay and batch. Collection and preservation requirements differ across molecules; a shared animal identifier does not imply that one preparation is appropriate for every assay. Predefine exclusion rules and the primary contrast. Where possible, randomise treatment allocation, blind handling and distribute biological groups across processing batches.
+
+## 2. Model and assumptions
+
+A simple fixed-effect model is $y_i=\beta_0+\beta_T T_i+\beta_B B_i+e_i$. Its design matrix X must have independent columns to separate treatment and batch. If every control is in batch A and every treatment in batch B, the two effects are not separately identifiable. Increasing the number of observations in the same confounded arrangement does not solve this.
+
+Blocking balances treatments within a known nuisance factor; batch adjustment models remaining variation. Neither creates the missing comparisons in a perfectly confounded design.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+balanced <- data.frame(treatment=factor(rep(c("control","treated"),4)),
+ batch=factor(rep(c("A","A","B","B"),2)))
+confounded <- transform(balanced, batch=treatment)
+rank_info <- function(d) {
+ X <- model.matrix(~ treatment + batch, d)
+ c(columns=ncol(X), rank=qr(X)$rank)
+}
+rbind(balanced=rank_info(balanced), confounded=rank_info(confounded))
+stopifnot(qr(model.matrix(~treatment+batch, balanced))$rank==3,
+          qr(model.matrix(~treatment+batch, confounded))$rank==2)
+```
+
+The balanced design supplies independent treatment and batch columns. The confounded model has three columns but only rank two: software cannot recover the absent information.
+
+## 4. Interpretation and scope
+
+Rank is necessary, not sufficient, for a good experiment. Power, within-unit dependence, transport/storage effects, selection and missingness still matter. Plan biological replication using a relevant effect size and variance, not a universal sample-count rule. See the [NC3Rs experimental-unit guidance](https://eda.nc3rs.org.uk/experimental-design-unit) for examples.
+
+## 5. Exercises
+
+1. A diet is assigned to four pens, with ten animals per pen. What is the diet experimental unit?
+2. Can adjustment rescue a treatment–batch confounding problem?
+3. What must a matched multi-omics sample sheet record?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The pen; ten animals provide within-pen measurements rather than ten allocations.
+2. Not when treatment and batch are perfectly confounded.
+3. Animal, specimen, tissue, time, treatment, handling, assay and batch, plus explicit mappings between assay and biological sample identifiers.
+:::
+
+## Practicals and course pathways
+
+Design practical (in development) and sample identity (in development) supply shared foundations for both pathways.
+
+Use the [unified map](../course_map.qmd) to locate B02 in both harmonized outlines. Return to the building-block index (in development).
