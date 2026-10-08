@@ -63,6 +63,6 @@ Overlapping gene sets and correlated gene statistics complicate enrichment infer
 
 ## Practicals and course pathways
 
-Annotation and pathways (in development), networks (in development) and network and biomarker validation (in development).
+[Annotation and pathways](../tutorials/p10_pathways.qmd), [networks](../tutorials/p11_networks.qmd) and network and biomarker validation (in development).
 
 Use the [unified map](../course_map.qmd) to locate B14 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

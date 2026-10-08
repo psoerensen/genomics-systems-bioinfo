@@ -60,7 +60,7 @@
     "href": "tutorials/p08_sequence_qc.html#continue-learning",
     "title": "Sequencing data quality assessment",
     "section": "Continue learning",
-    "text": "Continue learning\nB05 Genomics and B06 Transcriptomics.\nContinue with RNA-seq (in development). Return to the practical index or the unified map."
+    "text": "Continue learning\nB05 Genomics and B06 Transcriptomics.\nContinue with RNA-seq. Return to the practical index or the unified map."
   },
   {
     "objectID": "tutorials/p06_phylogeny.html",
@@ -305,7 +305,7 @@
     "href": "notes/b18_synthesis.html#practicals-and-course-pathways",
     "title": "Animal-production questions and integrated reporting",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nTrait association (in development), integrated interpretation (in development), scientific reporting (in development) and research proposal (in development).\nUse the unified map to locate B18 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nTrait association (in development), integrated interpretation (in development), scientific reporting and research proposal (in development).\nUse the unified map to locate B18 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b16_advanced.html",
@@ -361,7 +361,7 @@
     "href": "notes/b16_advanced.html#practicals-and-course-pathways",
     "title": "Single-cell, spatial and emerging methods",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nStudy design (in development), network interpretation (in development) and reporting (in development) supply the prerequisites for a critical paper-review exercise.\nUse the unified map to locate B16 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nStudy design, network interpretation (in development) and reporting supply the prerequisites for a critical paper-review exercise.\nUse the unified map to locate B16 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b14_networks.html",
@@ -417,7 +417,7 @@
     "href": "notes/b14_networks.html#practicals-and-course-pathways",
     "title": "Pathway enrichment and biological networks",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nAnnotation and pathways (in development), networks (in development) and network and biomarker validation (in development).\nUse the unified map to locate B14 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nAnnotation and pathways, networks and network and biomarker validation (in development).\nUse the unified map to locate B14 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b12_statistics.html",
@@ -473,7 +473,7 @@
     "href": "notes/b12_statistics.html#practicals-and-course-pathways",
     "title": "Statistical models and honest validation",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nExploratory analysis (in development), regularized prediction (in development) and trait association (in development).\nUse the unified map to locate B12 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nExploratory analysis, regularized prediction and trait association (in development).\nUse the unified map to locate B12 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b10_microbiomics.html",
@@ -585,7 +585,7 @@
     "href": "notes/b08_proteomics.html#practicals-and-course-pathways",
     "title": "Protein identification, abundance and structure",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nProtein structure and proteomics analysis (in development) address different measurements.\nUse the unified map to locate B08 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nProtein structure and proteomics analysis address different measurements.\nUse the unified map to locate B08 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b06_transcriptomics.html",
@@ -641,7 +641,7 @@
     "href": "notes/b06_transcriptomics.html#practicals-and-course-pathways",
     "title": "Transcriptomics and expression analysis",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nRNA-seq practical (in development) is shared by both outlines. Multi-omics QC (in development) connects count data to other measurement scales.\nUse the unified map to locate B06 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nRNA-seq practical is shared by both outlines. Multi-omics QC connects count data to other measurement scales.\nUse the unified map to locate B06 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b04_programming.html",
@@ -697,7 +697,7 @@
     "href": "notes/b04_programming.html#practicals-and-course-pathways",
     "title": "Programming and reproducible data handling",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nData handling (in development), command-line workflow and reporting (in development).\nUse the unified map to locate B04 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nData handling, command-line workflow and reporting.\nUse the unified map to locate B04 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b02_design.html",
@@ -753,7 +753,7 @@
     "href": "notes/b02_design.html#practicals-and-course-pathways",
     "title": "Experimental design and biological sampling",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nDesign practical (in development) and sample identity (in development) supply shared foundations for both pathways.\nUse the unified map to locate B02 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nDesign practical and sample identity supply shared foundations for both pathways.\nUse the unified map to locate B02 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "practicals.html",
@@ -767,7 +767,7 @@
     "href": "practicals.html#available-practicals",
     "title": "Practicals and exercises",
     "section": "Available practicals",
-    "text": "Available practicals\n\nBiological databases and sequence retrieval\nBasic sequence analysis and manipulation\nCommand-line bioinformatics and reproducible execution\nSequence similarity and evidence for homology\nAlignment and conserved-region analysis\nDistances, clustering and phylogenetic interpretation\nProtein structure and structural bioinformatics\nSequencing data quality assessment\n\nUse the curriculum crosswalk to locate each session in the two original outlines. Shared practicals can have different pathway extensions."
+    "text": "Available practicals\n\nBiological databases and sequence retrieval\nBasic sequence analysis and manipulation\nCommand-line bioinformatics and reproducible execution\nSequence similarity and evidence for homology\nAlignment and conserved-region analysis\nDistances, clustering and phylogenetic interpretation\nProtein structure and structural bioinformatics\nSequencing data quality assessment\nRNA-seq counts, contrasts and uncertainty\nFunctional annotation and pathway enrichment\nBiological network construction and interpretation\nBiological data visualization with explicit units\nScientific reporting and reproducible analysis records\nSample identity, table joins and missing assays\nMulti-omics experimental design in animal production\nQuality assessment and preprocessing across omics layers\nMetabolomics processing, standards and feature interpretation\nProteomics analysis and missing-value sensitivity\nExploratory multi-omics analysis and principal components\nRegularized regression and held-out prediction\n\nUse the curriculum crosswalk to locate each session in the two original outlines. Shared practicals can have different pathway extensions."
   },
   {
     "objectID": "course_map.html",
@@ -977,7 +977,7 @@
     "href": "notes/b01_foundations.html#practicals-and-course-pathways",
     "title": "Biological questions and omics measurements",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nExperimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.\nUse the unified map to locate B01 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nExperimental design turns a question into a sampling plan; research proposal (in development) combines the decisions.\nUse the unified map to locate B01 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b03_databases.html",
@@ -1033,7 +1033,7 @@
     "href": "notes/b03_databases.html#practicals-and-course-pathways",
     "title": "Biological databases and identifier mapping",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nDatabase retrieval, annotation and pathways (in development) and sample handling (in development).\nUse the unified map to locate B03 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nDatabase retrieval, annotation and pathways and sample handling.\nUse the unified map to locate B03 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b05_genomics.html",
@@ -1145,7 +1145,7 @@
     "href": "notes/b07_epigenomics.html#practicals-and-course-pathways",
     "title": "Epigenomic measurements and regulatory interpretation",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nExperimental design (in development), multi-omics QC (in development) and integrated interpretation (in development).\nUse the unified map to locate B07 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nExperimental design, multi-omics QC and integrated interpretation (in development).\nUse the unified map to locate B07 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b09_metabolomics.html",
@@ -1201,7 +1201,7 @@
     "href": "notes/b09_metabolomics.html#practicals-and-course-pathways",
     "title": "Metabolite features, identification and quantification",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nMetabolomics processing (in development), exploratory analysis (in development) and integration (in development).\nUse the unified map to locate B09 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nMetabolomics processing, exploratory analysis and integration (in development).\nUse the unified map to locate B09 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b11_phenomics.html",
@@ -1257,7 +1257,7 @@
     "href": "notes/b11_phenomics.html#practicals-and-course-pathways",
     "title": "Phenomics, sensors and measurement timing",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nPhenomics and timing (in development), study design (in development) and trait association (in development).\nUse the unified map to locate B11 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nPhenomics and timing (in development), study design and trait association (in development).\nUse the unified map to locate B11 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b13_association.html",
@@ -1313,7 +1313,7 @@
     "href": "notes/b13_association.html#practicals-and-course-pathways",
     "title": "Association, prediction and regulatory evidence",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nAssociation and regulatory variation (in development), trait association (in development) and prediction (in development).\nUse the unified map to locate B13 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nAssociation and regulatory variation (in development), trait association (in development) and prediction.\nUse the unified map to locate B13 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b15_integration.html",
@@ -1425,7 +1425,7 @@
     "href": "notes/b17_integrity.html#practicals-and-course-pathways",
     "title": "Reproducibility, data governance and responsible research",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nScientific reporting (in development) and research proposal (in development) put provenance and governance into the deliverable.\nUse the unified map to locate B17 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nScientific reporting and research proposal (in development) put provenance and governance into the deliverable.\nUse the unified map to locate B17 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "tutorials/p01_databases.html",
@@ -1551,7 +1551,7 @@
     "href": "tutorials/p03_command_line.html#continue-learning",
     "title": "Command-line bioinformatics and reproducible execution",
     "section": "Continue learning",
-    "text": "Continue learning\nB04 Programming and B17 Integrity.\nContinue with data handling (in development). Return to the practical index or the unified map."
+    "text": "Continue learning\nB04 Programming and B17 Integrity.\nContinue with data handling. Return to the practical index or the unified map."
   },
   {
     "objectID": "tutorials/p05_alignment.html",
@@ -1677,6 +1677,762 @@
     "href": "tutorials/p07_structure.html#continue-learning",
     "title": "Protein structure and structural bioinformatics",
     "section": "Continue learning",
-    "text": "Continue learning\nB08 Proteomics and structure.\nContinue with protein abundance (in development). Return to the practical index or the unified map."
+    "text": "Continue learning\nB08 Proteomics and structure.\nContinue with protein abundance. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html",
+    "href": "tutorials/p09_rnaseq.html",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "",
+    "text": "Align counts and metadata; distinguish known exposure from estimated normalization; fit a restricted count model and interpret log2 effects, dispersion and multiplicity."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#learning-objectives",
+    "href": "tutorials/p09_rnaseq.html#learning-objectives",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "",
+    "text": "Align counts and metadata; distinguish known exposure from estimated normalization; fit a restricted count model and interpret log2 effects, dispersion and multiplicity."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#biological-question-and-data",
+    "href": "tutorials/p09_rnaseq.html#biological-question-and-data",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nDoes expression differ between the two diets in a hypothetical 48-animal experiment?\nThe fixture simulates negative-binomial counts for 24 genes, with independent animals, crossed diet/batch and known multiplicative exposure. The first four genes have a supplied diet effect. Gene01 also has a genotype effect. A quasi-Poisson fit below is an intentionally restricted mean-model illustration; its single variance multiplier per gene is not the generating negative-binomial variance function.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#load-and-align-the-count-panel",
+    "href": "tutorials/p09_rnaseq.html#load-and-align-the-count-panel",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "1. Load and align the count panel",
+    "text": "1. Load and align the count panel\nCount rows are genes and columns are animals. Metadata order is verified before modelling.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nmeta &lt;- d$metadata; counts &lt;- d$counts\nstopifnot(identical(colnames(counts),meta$animal),!anyDuplicated(meta$animal))\nmeta$exposure &lt;- unname(d$exposure[meta$animal])\nstopifnot(all(meta$exposure&gt;0))\ncounts[1:6,1:8]\n\n\n       animal01 animal02 animal03 animal04 animal05 animal06 animal07 animal08\ngene01       28      103       53      137       35      101       68      183\ngene02       27       71       75      114       28       72       73      131\ngene03       42       50       94      128       43       86       64      223\ngene04       43      129       75      215       50      110       61      157\ngene05       43       85       97       81       34       28       54      171\ngene06       43       62       75       94       58       71       73      120\n\n\nShow R code\nxtabs(~diet+batch,meta)\n\n\n            batch\ndiet          A  B\n  control    12 12\n  supplement 12 12\n\n\nCrossed treatment and batch supply separate comparisons. These 24-feature totals are an illustrative panel, not a whole-transcriptome library."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#inspect-exposure-adjusted-values",
+    "href": "tutorials/p09_rnaseq.html#inspect-exposure-adjusted-values",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "2. Inspect exposure-adjusted values",
+    "text": "2. Inspect exposure-adjusted values\nDivide by the supplied exposure, not by a normalization factor estimated from this panel. Plot on a descriptive log2 scale.\n\n\nShow R code\nnormalized &lt;- sweep(counts,2,meta$exposure,\"/\")\nstopifnot(max(abs(sweep(normalized,2,meta$exposure,\"*\")-counts))&lt;1e-10)\nboxplot(log2(normalized[1,]+1)~meta$diet,col=c(\"#86B7A3\",\"#E5A66B\"),\n xlab=\"Diet\",ylab=\"log2(exposure-adjusted gene01 count + 1)\")\n\n\n\n\n\n\n\n\n\nShow R code\nc(raw_panel_total_range=range(colSums(counts)))\n\n\nraw_panel_total_range1 raw_panel_total_range2 \n                  2969                   8050 \n\n\nThe +1 transformation supports a plot; it is not the response used in the count model. Real RNA-seq normalization must consider composition and cannot assume this known exposure."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#fit-the-mean-model-and-report-uncertainty",
+    "href": "tutorials/p09_rnaseq.html#fit-the-mean-model-and-report-uncertainty",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "3. Fit the mean model and report uncertainty",
+    "text": "3. Fit the mean model and report uncertainty\nFit each gene with diet, batch and a log-exposure offset. The diet coefficient uses the natural-log link; divide it and its standard error by log(2) to obtain log2 units.\n\n\nShow R code\nfit_gene &lt;- function(y) {\n fit &lt;- glm(y~diet+batch+offset(log(exposure)),data=meta,family=quasipoisson())\n tab &lt;- coef(summary(fit))\n c(log2_effect=tab[\"dietsupplement\",\"Estimate\"]/log(2),\n SE_log2=tab[\"dietsupplement\",\"Std. Error\"]/log(2),\n p_value=tab[\"dietsupplement\",\"Pr(&gt;|t|)\"],\n variance_multiplier=summary(fit)$dispersion)\n}\nresult &lt;- as.data.frame(t(apply(counts,1,fit_gene)))\nresult$BH &lt;- p.adjust(result$p_value,\"BH\")\nresult$lower &lt;- result$log2_effect-qt(.975,nrow(meta)-3)*result$SE_log2\nresult$upper &lt;- result$log2_effect+qt(.975,nrow(meta)-3)*result$SE_log2\nresult[1:8,]\n\n\n       log2_effect   SE_log2      p_value variance_multiplier           BH\ngene01   1.1008838 0.1655865 3.391387e-08           11.142527 2.713110e-07\ngene02   0.8792531 0.1188264 2.614585e-09            5.482723 5.587733e-08\ngene03   0.8724419 0.1758801 1.049325e-05           13.658347 6.295950e-05\ngene04   0.9903506 0.1369837 4.656444e-09            9.216960 5.587733e-08\ngene05   0.1887814 0.1382823 1.789803e-01            8.275257 4.757671e-01\ngene06   0.0425007 0.1139077 7.108144e-01            5.580502 7.754339e-01\ngene07   0.3140806 0.1316254 2.129221e-02            8.749349 8.516884e-02\ngene08  -0.1398069 0.1168759 2.378835e-01            7.893473 4.757671e-01\n             lower      upper\ngene01  0.76737547 1.43439220\ngene02  0.63992439 1.11858172\ngene03  0.51820113 1.22668257\ngene04  0.71445139 1.26624989\ngene05 -0.08973341 0.46729619\ngene06 -0.18692109 0.27192248\ngene07  0.04897350 0.57918777\ngene08 -0.37520712 0.09559325\n\n\nShow R code\nstopifnot(all(is.finite(as.matrix(result))),all(result$BH&gt;=result$p_value-1e-12))\n\n\nThe intervals and p-values are conditional on this restricted working model. Genotype variation for gene01 remains unmodelled here. A fitted association and an approximate p-value are not a causal-mechanism claim."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#interpretation-and-limits",
+    "href": "tutorials/p09_rnaseq.html#interpretation-and-limits",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nThis practical teaches design, exposure, contrasts and uncertainty; it is not a production differential-expression pipeline. The DESeq2 workflow adds composition-aware normalization and a gene-level negative-binomial dispersion framework. Gene filtering, relatedness, batch design and larger-scale validation need explicit decisions for real data."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#exercises",
+    "href": "tutorials/p09_rnaseq.html#exercises",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhat supplied log2 effect corresponds to .65 on the natural-log scale?\nWhy is Poisson variance too restrictive for these generated counts?\nChange the seed and explain why estimates and adjusted p-values change.\nWhat would a complete treatment–batch confounding problem prevent?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\n.65/log(2), about .94; a finite-sample estimate need not equal it.\nThe generating variance is mu + mu squared/12, greater than mu.\nSampling realization changes, while the generating parameters remain the same.\nSeparate estimation of diet and batch effects."
+  },
+  {
+    "objectID": "tutorials/p09_rnaseq.html#continue-learning",
+    "href": "tutorials/p09_rnaseq.html#continue-learning",
+    "title": "RNA-seq counts, contrasts and uncertainty",
+    "section": "Continue learning",
+    "text": "Continue learning\nB02 Design, B06 Transcriptomics and B12 Statistics.\nContinue with pathway interpretation, or use the Multi-Omics extension on assay QC. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html",
+    "href": "tutorials/p10_pathways.html",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "",
+    "text": "Preserve feature-to-gene mappings; define an eligible background; calculate a hypergeometric tail and verify its equivalent Fisher test; assess background sensitivity."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#learning-objectives",
+    "href": "tutorials/p10_pathways.html#learning-objectives",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "",
+    "text": "Preserve feature-to-gene mappings; define an eligible background; calculate a hypergeometric tail and verify its equivalent Fisher test; assess background sensitivity."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#biological-question-and-data",
+    "href": "tutorials/p10_pathways.html#biological-question-and-data",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nIs a selected gene list enriched for a supplied pathway under an explicitly defined selection null?\nThe gene/pathway table is fictional. Every background gene is eligible, and the null treats a fixed-size selected set as uniformly drawn from that background. Selected genes are supplied for teaching, not discovered by a calibrated genome-wide analysis.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#define-the-eligible-universe",
+    "href": "tutorials/p10_pathways.html#define-the-eligible-universe",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "1. Define the eligible universe",
+    "text": "1. Define the eligible universe\nUse the 24 assayed gene IDs and a prespecified six-gene list.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nbackground &lt;- rownames(d$counts)\nselected &lt;- sprintf(\"gene%02d\",1:6)\nstopifnot(!anyDuplicated(background),all(selected%in%background))\nannotation &lt;- d$annotation\nstopifnot(!anyDuplicated(annotation$gene),setequal(annotation$gene,background))\ntable(annotation$pathway)\n\n\n\npathwayA pathwayB pathwayC \n       8        8        8 \n\n\nThe measured universe is known. Counting annotations outside it would change the null population."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#calculate-enrichment",
+    "href": "tutorials/p10_pathways.html#calculate-enrichment",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "2. Calculate enrichment",
+    "text": "2. Calculate enrichment\nFor each set, compute overlap, null expectation and an upper-tail hypergeometric p-value. Confirm the first result with a 2-by-2 Fisher test.\n\n\nShow R code\none_set &lt;- function(pathway) {\n member &lt;- annotation$gene[annotation$pathway==pathway]\n N &lt;- length(background); K &lt;- length(member); n &lt;- length(selected)\n x &lt;- sum(selected%in%member)\n c(N=N,K=K,n=n,x=x,expected=n*K/N,p=phyper(x-1,K,N-K,n,lower.tail=FALSE))\n}\nresult &lt;- as.data.frame(t(vapply(unique(annotation$pathway),one_set,numeric(6))))\nresult$BH &lt;- p.adjust(result$p,\"BH\")\nresult\n\n\n          N K n x expected          p           BH\npathwayA 24 8 6 6        2 0.00020803 0.0006240899\npathwayB 24 8 6 0        2 1.00000000 1.0000000000\npathwayC 24 8 6 0        2 1.00000000 1.0000000000\n\n\nShow R code\nz &lt;- result[1,]\ntab &lt;- matrix(c(z$x,z$n-z$x,z$K-z$x,z$N-z$K-z$n+z$x),2,byrow=TRUE)\nstopifnot(abs(fisher.test(tab,alternative=\"greater\")$p.value-z$p)&lt;1e-12)\n\n\nPathwayA has six selected members in a background of eight pathway members. The enrichment model concerns gene-set representation, not measured pathway activity."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#change-the-background-and-explain-the-effect",
+    "href": "tutorials/p10_pathways.html#change-the-background-and-explain-the-effect",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "3. Change the background and explain the effect",
+    "text": "3. Change the background and explain the effect\nKeep the pathway count fixed while adding unmeasured nonmembers to the universe. This is deliberately an inappropriate comparison for the same assay.\n\n\nShow R code\ndata.frame(background=c(\"eligible panel\",\"inflated universe\"),\n N=c(24,100),p=c(phyper(5,8,16,6,lower.tail=FALSE),\n phyper(5,8,92,6,lower.tail=FALSE)))\n\n\n         background   N           p\n1    eligible panel  24 2.08030e-04\n2 inflated universe 100 2.34889e-08\n\n\nAdding many nonmembers makes the same overlap appear more surprising. That is a change in assumptions, not more biological evidence."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#interpretation-and-limits",
+    "href": "tutorials/p10_pathways.html#interpretation-and-limits",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nHypergeometric enrichment assumes an appropriate equal-selection null. Expression level, feature length, detectability, correlation and annotation overlap can require a more suitable method. Document mapping, set version, selection rule, background and multiplicity."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#exercises",
+    "href": "tutorials/p10_pathways.html#exercises",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy exclude unmeasured genes from this universe?\nDoes a small p-value establish pathway activation?\nWhat if one measured gene maps to three proteins?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThey could not have entered the selected list under this assay.\nNo; it is evidence about representation under the supplied null.\nDefine the gene/protein analysis unit and avoid counting repeated gene evidence as independent entries."
+  },
+  {
+    "objectID": "tutorials/p10_pathways.html#continue-learning",
+    "href": "tutorials/p10_pathways.html#continue-learning",
+    "title": "Functional annotation and pathway enrichment",
+    "section": "Continue learning",
+    "text": "Continue learning\nB03 Databases and B14 Pathways and networks.\nContinue with networks. The Multi-Omics pathway reuses this practical rather than creating a duplicate enrichment analysis. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html",
+    "href": "tutorials/p11_networks.html",
+    "title": "Biological network construction and interpretation",
+    "section": "",
+    "text": "Define a correlation edge; construct a symmetric adjacency matrix; calculate degree and inspect threshold sensitivity; separate association from regulation."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#learning-objectives",
+    "href": "tutorials/p11_networks.html#learning-objectives",
+    "title": "Biological network construction and interpretation",
+    "section": "",
+    "text": "Define a correlation edge; construct a symmetric adjacency matrix; calculate degree and inspect threshold sensitivity; separate association from regulation."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#biological-question-and-data",
+    "href": "tutorials/p11_networks.html#biological-question-and-data",
+    "title": "Biological network construction and interpretation",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhich hypothetical proteins show correlated abundance across the same animals?\nThe complete log2 protein table contains a supplied shared latent factor and independent noise. A correlation network is descriptive. Animal observations are paired across proteins, and edges are not directional or causal.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#align-and-calculate-associations",
+    "href": "tutorials/p11_networks.html#align-and-calculate-associations",
+    "title": "Biological network construction and interpretation",
+    "section": "1. Align and calculate associations",
+    "text": "1. Align and calculate associations\nUse animals as the observations and protein features as variables.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nX &lt;- t(d$protein)\nstopifnot(identical(rownames(X),d$metadata$animal),!anyNA(X))\nC &lt;- cor(X)\nround(C,2)\n\n\n          protein01 protein02 protein03 protein04 protein05 protein06 protein07\nprotein01      1.00      0.09      0.23      0.24      0.07      0.08      0.25\nprotein02      0.09      1.00      0.49      0.42      0.42      0.48      0.61\nprotein03      0.23      0.49      1.00      0.66      0.60      0.73      0.71\nprotein04      0.24      0.42      0.66      1.00      0.57      0.61      0.73\nprotein05      0.07      0.42      0.60      0.57      1.00      0.52      0.59\nprotein06      0.08      0.48      0.73      0.61      0.52      1.00      0.77\nprotein07      0.25      0.61      0.71      0.73      0.59      0.77      1.00\nprotein08      0.24      0.59      0.74      0.68      0.70      0.78      0.85\n          protein08\nprotein01      0.24\nprotein02      0.59\nprotein03      0.74\nprotein04      0.68\nprotein05      0.70\nprotein06      0.78\nprotein07      0.85\nprotein08      1.00\n\n\nShow R code\nstopifnot(isSymmetric(C),all(abs(diag(C)-1)&lt;1e-12))\n\n\nPositive correlations are expected from the shared generating factor. The same pattern could arise from a shared technical factor in another dataset."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#define-edges-and-calculate-degree",
+    "href": "tutorials/p11_networks.html#define-edges-and-calculate-degree",
+    "title": "Biological network construction and interpretation",
+    "section": "2. Define edges and calculate degree",
+    "text": "2. Define edges and calculate degree\nUse a supplied absolute-correlation cutoff of .55. Remove self-edges and count each undirected edge once.\n\n\nShow R code\ncutoff &lt;- .55\nA &lt;- abs(C)&gt;=cutoff; diag(A) &lt;- FALSE\nedges &lt;- which(A & upper.tri(A),arr.ind=TRUE)\ndegree &lt;- rowSums(A)\ndata.frame(protein=colnames(X),degree)\n\n\n            protein degree\nprotein01 protein01      0\nprotein02 protein02      2\nprotein03 protein03      5\nprotein04 protein04      5\nprotein05 protein05      4\nprotein06 protein06      4\nprotein07 protein07      6\nprotein08 protein08      6\n\n\nShow R code\nstopifnot(isSymmetric(A),sum(degree)==2*nrow(edges))\nangle &lt;- seq(0,2*pi,length.out=ncol(X)+1)[-(ncol(X)+1)]\npos &lt;- cbind(cos(angle),sin(angle))\nplot(pos,type=\"n\",axes=FALSE,xlab=\"\",ylab=\"\",asp=1,\n xlim=c(-1.35,1.35),ylim=c(-1.35,1.35),main=\"Correlation network\")\nif(nrow(edges)&gt;0) for(i in seq_len(nrow(edges))) {\n e &lt;- edges[i,];segments(pos[e[1],1],pos[e[1],2],pos[e[2],1],pos[e[2],2],col=\"grey60\")\n}\npoints(pos,pch=19,col=\"#1b9e77\",cex=1.5)\ntext(pos,labels=colnames(X),pos=3,cex=.7)\n\n\n\n\n\n\n\n\n\nThe picture is a layout of a defined graph, not a spatial map of interacting proteins."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#examine-threshold-dependence",
+    "href": "tutorials/p11_networks.html#examine-threshold-dependence",
+    "title": "Biological network construction and interpretation",
+    "section": "3. Examine threshold dependence",
+    "text": "3. Examine threshold dependence\nUse the same variables and animals for each threshold.\n\n\nShow R code\nthreshold &lt;- c(.3,.55,.75)\ndata.frame(threshold,edges=vapply(threshold,function(t)\n sum((abs(C)&gt;=t)[upper.tri(C)]),integer(1)))\n\n\n  threshold edges\n1      0.30    21\n2      0.55    16\n3      0.75     3\n\n\nConnectivity changes with the chosen threshold; a hub designation should state that dependence."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#interpretation-and-limits",
+    "href": "tutorials/p11_networks.html#interpretation-and-limits",
+    "title": "Biological network construction and interpretation",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nCorrelation can reflect diet, genotype, tissue mixture, batch or other common drivers. A network inferred from abundance is not equivalent to a curated interaction database. The threshold is supplied rather than selected to optimize a biological story; stability is assessed in the biomarker practical."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#exercises",
+    "href": "tutorials/p11_networks.html#exercises",
+    "title": "Biological network construction and interpretation",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is the diagonal removed?\nCould a batch shift create an apparent module?\nWhy is the sum of degrees twice the edge count?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA feature’s self-correlation is not an inter-feature relationship.\nYes; shared technical variation can correlate many measurements.\nEach undirected edge contributes one degree to each endpoint."
+  },
+  {
+    "objectID": "tutorials/p11_networks.html#continue-learning",
+    "href": "tutorials/p11_networks.html#continue-learning",
+    "title": "Biological network construction and interpretation",
+    "section": "Continue learning",
+    "text": "Continue learning\nB14 Pathways and networks.\nContinue with network and biomarker validation (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html",
+    "href": "tutorials/p12_visualization.html",
+    "title": "Biological data visualization with explicit units",
+    "section": "",
+    "text": "Choose graphics for a defined question; distinguish raw counts, transformed abundance and outcome units; display distributions and design structure."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#learning-objectives",
+    "href": "tutorials/p12_visualization.html#learning-objectives",
+    "title": "Biological data visualization with explicit units",
+    "section": "",
+    "text": "Choose graphics for a defined question; distinguish raw counts, transformed abundance and outcome units; display distributions and design structure."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#biological-question-and-data",
+    "href": "tutorials/p12_visualization.html#biological-question-and-data",
+    "title": "Biological data visualization with explicit units",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhich plots reveal library-panel size, sample variation and possible confounding in a hypothetical experiment?\nThe shared fixture contains counts, log2 abundances and a response in arbitrary units. The plotted count-panel total includes only the 24 supplied features and is not a whole-library sequencing-depth estimate.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#inspect-the-design-before-the-measurements",
+    "href": "tutorials/p12_visualization.html#inspect-the-design-before-the-measurements",
+    "title": "Biological data visualization with explicit units",
+    "section": "1. Inspect the design before the measurements",
+    "text": "1. Inspect the design before the measurements\nCount independent animals within the crossed diet/batch design.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nmeta &lt;- d$metadata\nxtabs(~diet+batch,meta)\n\n\n            batch\ndiet          A  B\n  control    12 12\n  supplement 12 12\n\n\nShow R code\nbarplot(xtabs(~diet+batch,meta),beside=TRUE,legend.text=TRUE,\n col=c(\"#86B7A3\",\"#E5A66B\"),ylab=\"Number of animals\",xlab=\"Batch\")\n\n\n\n\n\n\n\n\n\nA balanced cross-tabulation addresses one aspect of design. It does not eliminate every source of confounding."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#compare-count-and-abundance-views",
+    "href": "tutorials/p12_visualization.html#compare-count-and-abundance-views",
+    "title": "Biological data visualization with explicit units",
+    "section": "2. Compare count and abundance views",
+    "text": "2. Compare count and abundance views\nUse exposure-adjusted counts on a descriptive log2 scale for one gene, and already-log2 measurements for a protein.\n\n\nShow R code\nnormalized &lt;- sweep(d$counts,2,d$exposure,\"/\")\npar(mfrow=c(1,2))\nboxplot(log2(normalized[1,]+1)~meta$diet,xlab=\"Diet\",ylab=\"log2 adjusted count + 1\",\n main=\"gene01\",col=\"#86B7A3\")\nboxplot(d$protein[1,]~meta$diet,xlab=\"Diet\",ylab=\"Supplied log2 abundance\",\n main=\"protein01\",col=\"#E5A66B\")\n\n\n\n\n\n\n\n\n\nShow R code\npar(mfrow=c(1,1))\n\n\nThe axes describe different measurement scales. The gene and protein labels are fictional and their plots do not establish a linked biological mechanism."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#show-outcome-distributions-and-paired-measurements",
+    "href": "tutorials/p12_visualization.html#show-outcome-distributions-and-paired-measurements",
+    "title": "Biological data visualization with explicit units",
+    "section": "3. Show outcome distributions and paired measurements",
+    "text": "3. Show outcome distributions and paired measurements\nKeep animal alignment explicit and label the outcome units.\n\n\nShow R code\nstopifnot(identical(colnames(d$protein),meta$animal))\nplot(d$protein[1,],meta$response,col=as.integer(meta$diet),pch=19,\n xlab=\"protein01 log2 abundance\",ylab=\"Response (arbitrary units)\")\nlegend(\"topleft\",levels(meta$diet),col=1:2,pch=19,bty=\"n\")\n\n\n\n\n\n\n\n\n\nColour reveals whether pooled association might combine group shifts and within-group variation."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#interpretation-and-limits",
+    "href": "tutorials/p12_visualization.html#interpretation-and-limits",
+    "title": "Biological data visualization with explicit units",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nPlots diagnose patterns; they do not replace a model or prove an effect. Avoid using different transformations without labelling them, selectively hiding outliers or interpreting one unusual point before checking its identity and processing."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#exercises",
+    "href": "tutorials/p12_visualization.html#exercises",
+    "title": "Biological data visualization with explicit units",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy label the response as arbitrary units?\nWhat could a pooled scatterplot hide?\nWhy is a plot of log2 counts not a differential-expression test?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe fixture defines no physical calibration for the phenotype.\nDifferent relationships within groups, batch shifts or unequal sampling.\nIt supplies neither the required model-based uncertainty nor multiplicity treatment."
+  },
+  {
+    "objectID": "tutorials/p12_visualization.html#continue-learning",
+    "href": "tutorials/p12_visualization.html#continue-learning",
+    "title": "Biological data visualization with explicit units",
+    "section": "Continue learning",
+    "text": "Continue learning\nB04 Programming, B06 Transcriptomics and B12 Statistics.\nContinue with exploratory multi-omics analysis. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html",
+    "href": "tutorials/p13_reporting.html",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "",
+    "text": "Connect a question, sample definition, analysis and result; document provenance and exclusions; distinguish a numerical association from a biological conclusion."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#learning-objectives",
+    "href": "tutorials/p13_reporting.html#learning-objectives",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "",
+    "text": "Connect a question, sample definition, analysis and result; document provenance and exclusions; distinguish a numerical association from a biological conclusion."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#biological-question-and-data",
+    "href": "tutorials/p13_reporting.html#biological-question-and-data",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhat evidence and processing record should accompany a computational result?\nThe example fits a simple animal-level response model to fictional data. Diet allocation, independence and the chosen covariates are assumptions of this teaching design. The report records a conditional estimate, not a livestock recommendation.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#define-and-fit-the-analysis",
+    "href": "tutorials/p13_reporting.html#define-and-fit-the-analysis",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "1. Define and fit the analysis",
+    "text": "1. Define and fit the analysis\nWrite down the target contrast before fitting. Include batch and genotype1 because the supplied model contains these patterns or sources of variation.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nmeta &lt;- d$metadata;meta$dosage &lt;- d$genotypes[meta$animal,\"marker1\"]\nfit &lt;- lm(response~diet+batch+dosage,data=meta)\nsummary(fit)$coefficients\n\n\n                Estimate Std. Error   t value     Pr(&gt;|t|)\n(Intercept)    9.9696276  0.2828976 35.241119 6.888144e-34\ndietsupplement 1.9156332  0.3042130  6.297013 1.234114e-07\nbatchB         0.3960978  0.3011504  1.315282 1.952283e-01\ndosage         0.9720046  0.2109408  4.607950 3.477886e-05\n\n\nShow R code\ninterval &lt;- confint(fit)[\"dietsupplement\",]\nstopifnot(nobs(fit)==48,all(is.finite(interval)))\n\n\nThe diet coefficient adjusts for the supplied batch and genotype columns. The model still summarizes a particular hypothetical sample under its assumptions."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#create-a-compact-evidence-record",
+    "href": "tutorials/p13_reporting.html#create-a-compact-evidence-record",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "2. Create a compact evidence record",
+    "text": "2. Create a compact evidence record\nPreserve the contrast, analysis population, estimate, interval and exclusions beside the input-generation record.\n\n\nShow R code\nrecord &lt;- data.frame(question=\"Diet contrast in fictional animals\",unit=\"animal\",\n n=nobs(fit),exclusions=0,estimate=unname(coef(fit)[\"dietsupplement\"]),\n lower=interval[1],upper=interval[2],units=\"arbitrary response units\",\n input_code_checksum=unname(tools::md5sum(\"../R/teaching_data.R\")))\nrecord\n\n\n                                question   unit  n exclusions estimate    lower\n2.5 % Diet contrast in fictional animals animal 48          0 1.915633 1.302532\n         upper                    units              input_code_checksum\n2.5 % 2.528734 arbitrary response units b721054312060f42bed87443b20e6931\n\n\nThe checksum identifies the local input-generating source. It is not a biological validity check."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#write-the-interpretation-at-the-level-supported",
+    "href": "tutorials/p13_reporting.html#write-the-interpretation-at-the-level-supported",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "3. Write the interpretation at the level supported",
+    "text": "3. Write the interpretation at the level supported\nSeparate result, limitation and follow-up. The generated sentence deliberately avoids a causal-mechanism claim.\n\n\nShow R code\ncat(sprintf(\"Among %d fictional animals, the adjusted diet contrast is %.2f arbitrary units (95%% model interval %.2f to %.2f).\\n\",\n nobs(fit),coef(fit)[\"dietsupplement\"],interval[1],interval[2]))\n\n\nAmong 48 fictional animals, the adjusted diet contrast is 1.92 arbitrary units (95% model interval 1.30 to 2.53).\n\n\nAdd the allocation, covariates, model assumptions and absence of external validation. An interval alone is not a complete report."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#interpretation-and-limits",
+    "href": "tutorials/p13_reporting.html#interpretation-and-limits",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nA real report needs species/population, measurement units, design, permissions, assay processing, software, missingness, diagnostics, validation and uncertainty. Tables and plots should allow readers to assess the conclusion without relying on an unexplained significant/not-significant label."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#exercises",
+    "href": "tutorials/p13_reporting.html#exercises",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "Exercises",
+    "text": "Exercises\n\nName one claim the result cannot support.\nWhat changes if ten animals are excluded after looking at their outcomes?\nWhich parts of a report remain useful when data cannot be public?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA specific molecular mechanism or a dependable effect in another farm/population.\nSelection may bias the estimate; document and justify exclusions and assess sensitivity.\nMethods, variable definitions, provenance, permissions/access process and a non-sensitive reproducible demonstration."
+  },
+  {
+    "objectID": "tutorials/p13_reporting.html#continue-learning",
+    "href": "tutorials/p13_reporting.html#continue-learning",
+    "title": "Scientific reporting and reproducible analysis records",
+    "section": "Continue learning",
+    "text": "Continue learning\nB17 Integrity and B18 Synthesis.\nContinue with research proposal (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html",
+    "href": "tutorials/p14_data_handling.html",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "",
+    "text": "Align assay columns to biological IDs; reject duplicate keys; distinguish absent assays from missing feature measurements; evaluate row-order errors."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#learning-objectives",
+    "href": "tutorials/p14_data_handling.html#learning-objectives",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "",
+    "text": "Align assay columns to biological IDs; reject duplicate keys; distinguish absent assays from missing feature measurements; evaluate row-order errors."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#biological-question-and-data",
+    "href": "tutorials/p14_data_handling.html#biological-question-and-data",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhat happens when protein columns arrive in a different order from phenotype metadata?\nEvery fixture animal has an assay identifier. The shuffled column order is deliberate; the underlying biological labels remain correct. This checks metadata alignment, not physical sample identity.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#create-a-plausible-order-mismatch",
+    "href": "tutorials/p14_data_handling.html#create-a-plausible-order-mismatch",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "1. Create a plausible order mismatch",
+    "text": "1. Create a plausible order mismatch\nReverse the assay order while leaving labels attached. Dimensions still match.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nmeta &lt;- d$metadata\nshuffled &lt;- d$protein[,rev(seq_len(ncol(d$protein))),drop=FALSE]\nstopifnot(ncol(shuffled)==nrow(meta),!identical(colnames(shuffled),meta$animal))\nhead(data.frame(metadata_animal=meta$animal,assay_column=colnames(shuffled)))\n\n\n  metadata_animal assay_column\n1        animal01     animal48\n2        animal02     animal47\n3        animal03     animal46\n4        animal04     animal45\n5        animal05     animal44\n6        animal06     animal43\n\n\nA dimension check alone cannot identify this mistake."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#align-explicitly-and-verify-identity",
+    "href": "tutorials/p14_data_handling.html#align-explicitly-and-verify-identity",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "2. Align explicitly and verify identity",
+    "text": "2. Align explicitly and verify identity\nRequire unique IDs and complete matches before reordering.\n\n\nShow R code\nstopifnot(!anyDuplicated(meta$animal),!anyDuplicated(colnames(shuffled)))\nidx &lt;- match(meta$animal,colnames(shuffled))\nstopifnot(!anyNA(idx))\naligned &lt;- shuffled[,idx,drop=FALSE]\nstopifnot(identical(colnames(aligned),meta$animal),\n max(abs(aligned-d$protein))&lt;1e-12)\nc(correct_cor=cor(aligned[1,],meta$response),\n wrong_order_cor=cor(shuffled[1,],meta$response))\n\n\n    correct_cor wrong_order_cor \n      0.1567479      -0.1811823 \n\n\nThe correctly aligned table reproduces the original measurements exactly. A wrong-order association can disappear or change direction."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#separate-missing-animals-from-missing-features",
+    "href": "tutorials/p14_data_handling.html#separate-missing-animals-from-missing-features",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "3. Separate missing animals from missing features",
+    "text": "3. Separate missing animals from missing features\nRemove one entire assay column and compare this to NAs within otherwise present assays.\n\n\nShow R code\npartial &lt;- aligned[,-1,drop=FALSE]\nindex &lt;- match(meta$animal,colnames(partial))\nc(animals_without_assay=sum(is.na(index)),\n missing_feature_values=sum(is.na(d$protein_missing)))\n\n\n animals_without_assay missing_feature_values \n                     1                     11 \n\n\nShow R code\nstopifnot(sum(is.na(index))==1,sum(is.na(d$protein_missing))==11)\n\n\nAn absent assay and an unobserved protein value need different handling and reporting. Neither is a measured zero."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#interpretation-and-limits",
+    "href": "tutorials/p14_data_handling.html#interpretation-and-limits",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nID matching preserves supplied labels but cannot detect a mislabeled specimen collected in the field. Use collection records and appropriate sample-identity checks for real data. Avoid silent complete-case deletion when missing assays relate to treatment or health."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#exercises",
+    "href": "tutorials/p14_data_handling.html#exercises",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy does a sorted join still need an identity check?\nWhat if one metadata animal has two assay columns?\nWhy is a missing protein value not log2 zero?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nSorting conventions and keys can differ between tables.\nDefine technical replicates or repeated specimens explicitly; do not choose a duplicate silently.\nMissing means unobserved; log2 zero corresponds to an original-scale value of one."
+  },
+  {
+    "objectID": "tutorials/p14_data_handling.html#continue-learning",
+    "href": "tutorials/p14_data_handling.html#continue-learning",
+    "title": "Sample identity, table joins and missing assays",
+    "section": "Continue learning",
+    "text": "Continue learning\nB03 Databases, B04 Programming and B15 Integration.\nContinue with multi-omics QC. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html",
+    "href": "tutorials/p15_experimental_design.html",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "",
+    "text": "Define the biological question and experimental unit; plan matched assays and balanced processing; diagnose a rank-deficient design."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#learning-objectives",
+    "href": "tutorials/p15_experimental_design.html#learning-objectives",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "",
+    "text": "Define the biological question and experimental unit; plan matched assays and balanced processing; diagnose a rank-deficient design."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#biological-question-and-data",
+    "href": "tutorials/p15_experimental_design.html#biological-question-and-data",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow should an individually allocated diet study collect molecular profiles and later performance measurements?\nThe hypothetical design allocates diet to individual animals. Pen-allocated diets would require a different unit and replication plan. The practical specifies metadata and tests design identifiability; it does not establish sample size or a collection protocol for a real assay.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#build-a-matched-sample-sheet",
+    "href": "tutorials/p15_experimental_design.html#build-a-matched-sample-sheet",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "1. Build a matched sample sheet",
+    "text": "1. Build a matched sample sheet\nKeep animal, diet and batch separate from the assay-specific specimen identifiers.\n\n\nShow R code\nplan &lt;- data.frame(animal=paste0(\"a\",1:12),\n diet=factor(rep(c(\"control\",\"supplement\"),6)),\n batch=factor(rep(c(\"A\",\"A\",\"B\",\"B\"),3)),\n tissue=\"liver\",collection_day=14)\nplan$rna_id &lt;- paste0(plan$animal,\"_RNA_d14\")\nplan$protein_id &lt;- paste0(plan$animal,\"_protein_d14\")\nstopifnot(!anyDuplicated(plan$animal),!anyDuplicated(plan$rna_id))\nplan\n\n\n   animal       diet batch tissue collection_day      rna_id      protein_id\n1      a1    control     A  liver             14  a1_RNA_d14  a1_protein_d14\n2      a2 supplement     A  liver             14  a2_RNA_d14  a2_protein_d14\n3      a3    control     B  liver             14  a3_RNA_d14  a3_protein_d14\n4      a4 supplement     B  liver             14  a4_RNA_d14  a4_protein_d14\n5      a5    control     A  liver             14  a5_RNA_d14  a5_protein_d14\n6      a6 supplement     A  liver             14  a6_RNA_d14  a6_protein_d14\n7      a7    control     B  liver             14  a7_RNA_d14  a7_protein_d14\n8      a8 supplement     B  liver             14  a8_RNA_d14  a8_protein_d14\n9      a9    control     A  liver             14  a9_RNA_d14  a9_protein_d14\n10    a10 supplement     A  liver             14 a10_RNA_d14 a10_protein_d14\n11    a11    control     B  liver             14 a11_RNA_d14 a11_protein_d14\n12    a12 supplement     B  liver             14 a12_RNA_d14 a12_protein_d14\n\n\nShow R code\nxtabs(~diet+batch,plan)\n\n\n            batch\ndiet         A B\n  control    3 3\n  supplement 3 3\n\n\nEach animal has two linked assays from a specified tissue and day. The sample sheet still needs documented collection/preservation and assay-specific handling."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#check-estimability",
+    "href": "tutorials/p15_experimental_design.html#check-estimability",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "2. Check estimability",
+    "text": "2. Check estimability\nContrast a crossed design with perfect treatment–batch confounding.\n\n\nShow R code\nX &lt;- model.matrix(~diet+batch,plan)\nbad &lt;- plan;bad$batch &lt;- bad$diet\nXbad &lt;- model.matrix(~diet+batch,bad)\nrbind(crossed=c(columns=ncol(X),rank=qr(X)$rank),\n confounded=c(columns=ncol(Xbad),rank=qr(Xbad)$rank))\n\n\n           columns rank\ncrossed          3    3\nconfounded       3    2\n\n\nShow R code\nstopifnot(qr(X)$rank==3,qr(Xbad)$rank==2)\n\n\nFull rank permits separate estimation of these fixed-effect columns. It does not certify power or remove unmeasured confounding."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#plan-decision-timing-and-missingness",
+    "href": "tutorials/p15_experimental_design.html#plan-decision-timing-and-missingness",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "3. Plan decision timing and missingness",
+    "text": "3. Plan decision timing and missingness\nSpecify the predictor window and outcome window before inspecting results.\n\n\nShow R code\ndecisions &lt;- data.frame(item=c(\"genotype\",\"day14 assays\",\"future performance\"),\n available_day=c(0,14,28),role=c(\"baseline covariate\",\"candidate day14 predictor\",\"outcome\"))\ndecisions\n\n\n                item available_day                      role\n1           genotype             0        baseline covariate\n2       day14 assays            14 candidate day14 predictor\n3 future performance            28                   outcome\n\n\nShow R code\nstopifnot(all(decisions$available_day[decisions$role==\"candidate day14 predictor\"]&lt;=14))\n\n\nThe future outcome can evaluate a day14 prediction; it cannot be included as input to that prediction. Predefine how absent assays and failed QC affect the analysis population."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#interpretation-and-limits",
+    "href": "tutorials/p15_experimental_design.html#interpretation-and-limits",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nRandomization and blocking, tissue/time, sex, farm, batch, handling and exclusion rules need a justified study-specific plan. Technical aliquots are not independent animals. Use NC3Rs design guidance for the design principles; the invented sheet is not a laboratory sampling instruction."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#exercises",
+    "href": "tutorials/p15_experimental_design.html#exercises",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "Exercises",
+    "text": "Exercises\n\nIf diet is assigned to pens, what changes?\nWhy can adding animals within the same confounded batches fail to solve the problem?\nWhat must be decided before selecting an integration method?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nPen-level allocation and dependence become central; sufficient independent pens are needed.\nThe treatment and batch columns remain dependent.\nQuestion, samples, matching, time, measurement scales, missingness, covariates and validation target."
+  },
+  {
+    "objectID": "tutorials/p15_experimental_design.html#continue-learning",
+    "href": "tutorials/p15_experimental_design.html#continue-learning",
+    "title": "Multi-omics experimental design in animal production",
+    "section": "Continue learning",
+    "text": "Continue learning\nB01 Foundations, B02 Design and B18 Synthesis.\nContinue with multi-omics quality assessment. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html",
+    "href": "tutorials/p16_multiomics_qc.html",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "",
+    "text": "Compare assay-specific scales; audit sample and feature missingness; define transparent exclusions and preprocessing choices."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#learning-objectives",
+    "href": "tutorials/p16_multiomics_qc.html#learning-objectives",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "",
+    "text": "Compare assay-specific scales; audit sample and feature missingness; define transparent exclusions and preprocessing choices."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#biological-question-and-data",
+    "href": "tutorials/p16_multiomics_qc.html#biological-question-and-data",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nCan the same quality rule and transformation be applied indiscriminately to counts, protein abundances and metabolites?\nCounts are nonnegative integer measurements; protein and metabolite matrices are supplied log2 abundances. Missing proteins are deliberately inserted. All samples are fictional animals with explicit metadata.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#audit-each-assay-separately",
+    "href": "tutorials/p16_multiomics_qc.html#audit-each-assay-separately",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "1. Audit each assay separately",
+    "text": "1. Audit each assay separately\nCheck IDs, dimensions, missingness and the supplied measurement scale.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nassays &lt;- list(counts=d$counts,protein=d$protein_missing,metabolite=d$metabolite)\naudit &lt;- do.call(rbind,lapply(names(assays),function(name) {\n X &lt;- assays[[name]]\n stopifnot(identical(colnames(X),d$metadata$animal))\n data.frame(assay=name,features=nrow(X),animals=ncol(X),missing=sum(is.na(X)),\n observed_min=min(X,na.rm=TRUE),observed_max=max(X,na.rm=TRUE))\n}))\naudit\n\n\n       assay features animals missing observed_min observed_max\n1     counts       24      48       0    12.000000  1218.000000\n2    protein        8      48      11     6.248562    12.117980\n3 metabolite        6      48       0     2.356815     9.467836\n\n\nThe missingness total is not interchangeable with a count of missing animals. Different assays have different physical and statistical meanings."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#inspect-missingness-by-feature-and-group",
+    "href": "tutorials/p16_multiomics_qc.html#inspect-missingness-by-feature-and-group",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "2. Inspect missingness by feature and group",
+    "text": "2. Inspect missingness by feature and group\nQuantify before choosing a policy. Missingness may depend on the measurement process.\n\n\nShow R code\nP &lt;- d$protein_missing\nmissing_feature &lt;- rowMeans(is.na(P))\nmissing_animal &lt;- colSums(is.na(P))\ndata.frame(feature=rownames(P),fraction_missing=missing_feature)\n\n\n            feature fraction_missing\nprotein01 protein01        0.0625000\nprotein02 protein02        0.1666667\nprotein03 protein03        0.0000000\nprotein04 protein04        0.0000000\nprotein05 protein05        0.0000000\nprotein06 protein06        0.0000000\nprotein07 protein07        0.0000000\nprotein08 protein08        0.0000000\n\n\nShow R code\naggregate(missing_animal,list(diet=d$metadata$diet),mean)\n\n\n        diet         x\n1    control 0.2083333\n2 supplement 0.2500000\n\n\nShow R code\nstopifnot(sum(is.na(P))==11,sum(missing_animal&gt;0)==9)\n\n\nNine animals have at least one missing protein value, totaling eleven feature-level NAs. The mechanism is supplied insertion here; real missingness needs investigation."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#define-a-stated-feature-policy-and-transform-correctly",
+    "href": "tutorials/p16_multiomics_qc.html#define-a-stated-feature-policy-and-transform-correctly",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "3. Define a stated feature policy and transform correctly",
+    "text": "3. Define a stated feature policy and transform correctly\nThe example retains features with no missing measurements for descriptive PCA. The threshold is a teaching choice.\n\n\nShow R code\nkeep &lt;- missing_feature==0\ncomplete &lt;- P[keep,,drop=FALSE]\ncount_log &lt;- log2(sweep(d$counts,2,d$exposure,\"/\")+1)\nc(retained_proteins=nrow(complete),removed_proteins=sum(!keep))\n\n\nretained_proteins  removed_proteins \n                6                 2 \n\n\nShow R code\nstopifnot(nrow(complete)==6,!anyNA(complete),all(is.finite(count_log)))\n\n\nProtein values are already log2; logging them again would change their interpretation. The count transformation is descriptive, not a differential-expression model."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#interpretation-and-limits",
+    "href": "tutorials/p16_multiomics_qc.html#interpretation-and-limits",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nComplete-feature selection excludes signals with missingness and can change the biological question. Imputation and filtering should be justified and fitted within training splits for prediction. Panel counts are not true total sequencing depth, and an abundance profile cannot replace identification/platform QC."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#exercises",
+    "href": "tutorials/p16_multiomics_qc.html#exercises",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is a universal log transformation unsafe?\nIs deleting every animal with any NA unbiased?\nWhich preprocessing decisions must stay within training data?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nMeasurements may already be logged, include legitimate zeros, or have different scales.\nNot necessarily; excluded animals can differ systematically.\nData-derived filtering, scaling, imputation, feature selection and model tuning."
+  },
+  {
+    "objectID": "tutorials/p16_multiomics_qc.html#continue-learning",
+    "href": "tutorials/p16_multiomics_qc.html#continue-learning",
+    "title": "Quality assessment and preprocessing across omics layers",
+    "section": "Continue learning",
+    "text": "Continue learning\nB04 Programming, B06 Transcriptomics, B08 Proteomics and B15 Integration.\nContinue with proteomics, metabolomics or exploration. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html",
+    "href": "tutorials/p17_metabolomics.html",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "",
+    "text": "Evaluate a multiplicative-drift correction; preserve feature identity and measurement units; distinguish detected features from assigned metabolites."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#learning-objectives",
+    "href": "tutorials/p17_metabolomics.html#learning-objectives",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "",
+    "text": "Evaluate a multiplicative-drift correction; preserve feature identity and measurement units; distinguish detected features from assigned metabolites."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#biological-question-and-data",
+    "href": "tutorials/p17_metabolomics.html#biological-question-and-data",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow does an internal standard help distinguish instrument drift from a supplied concentration pattern?\nThe first calculation has an ideal shared drift factor affecting analyte and standard equally. The fixture metabolite table is already log2 arbitrary abundance; its feature labels do not identify actual compounds.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#test-an-ideal-measurement-correction",
+    "href": "tutorials/p17_metabolomics.html#test-an-ideal-measurement-correction",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "1. Test an ideal measurement correction",
+    "text": "1. Test an ideal measurement correction\nAn analyte and a standard are multiplied by the same hypothetical response factor.\n\n\nShow R code\nconcentration &lt;- c(2,3,5,4,3,6)\ndrift &lt;- c(.8,.9,1,1.1,1.2,1.3)\nraw &lt;- concentration*drift\nstandard &lt;- 10*drift\ncorrected &lt;- 10*raw/standard\ndata.frame(concentration,raw,standard,corrected)\n\n\n  concentration raw standard corrected\n1             2 1.6        8         2\n2             3 2.7        9         3\n3             5 5.0       10         5\n4             4 4.4       11         4\n5             3 3.6       12         3\n6             6 7.8       13         6\n\n\nShow R code\nstopifnot(max(abs(corrected-concentration))&lt;1e-12)\n\n\nCorrection is exact only because the generating process supplies a shared multiplier and a stable standard."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#break-the-standard-assumption",
+    "href": "tutorials/p17_metabolomics.html#break-the-standard-assumption",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "2. Break the standard assumption",
+    "text": "2. Break the standard assumption\nAllow analyte response to vary differently from the standard.\n\n\nShow R code\nanalyte_drift &lt;- drift*c(1,.95,1.1,.9,1.05,1)\nbiased &lt;- 10*(concentration*analyte_drift)/standard\ndata.frame(concentration,estimate=biased,error=biased-concentration)\n\n\n  concentration estimate error\n1             2     2.00  0.00\n2             3     2.85 -0.15\n3             5     5.50  0.50\n4             4     3.60 -0.40\n5             3     3.15  0.15\n6             6     6.00  0.00\n\n\nA standard cannot correct variation it does not track. Chemical properties and preparation can give different responses."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#explore-a-separate-log2-feature-panel",
+    "href": "tutorials/p17_metabolomics.html#explore-a-separate-log2-feature-panel",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "3. Explore a separate log2 feature panel",
+    "text": "3. Explore a separate log2 feature panel\nMaintain labels and scales before plotting. The annotation-confidence labels are fictional examples.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nM &lt;- d$metabolite\nidentity &lt;- data.frame(feature=rownames(M),assignment=c(\"hypothetical named candidate\",\"unresolved feature\",\n \"unresolved feature\",\"hypothetical named candidate\",\"unresolved feature\",\"unresolved feature\"))\nidentity\n\n\n    feature                   assignment\n1 feature01 hypothetical named candidate\n2 feature02           unresolved feature\n3 feature03           unresolved feature\n4 feature04 hypothetical named candidate\n5 feature05           unresolved feature\n6 feature06           unresolved feature\n\n\nShow R code\nboxplot(M[1,]~d$metadata$diet,xlab=\"Diet\",ylab=\"Supplied log2 abundance\",col=\"#86B7A3\")\n\n\n\n\n\n\n\n\n\nShow R code\nc(log2_mean_difference=mean(M[1,d$metadata$diet==\"supplement\"])-\n mean(M[1,d$metadata$diet==\"control\"]))\n\n\nlog2_mean_difference \n           0.3455385 \n\n\nThe difference describes the hypothetical panel. A mass-spectrometry feature cannot be assigned to a pathway merely because its group contrast is large."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#interpretation-and-limits",
+    "href": "tutorials/p17_metabolomics.html#interpretation-and-limits",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nReal workflows need blanks, technical QC, drift and batch assessment, detection/identification confidence and justified normalization. The EMBL-EBI metabolite-identification material explains why chemical assignment is separate from signal detection."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#exercises",
+    "href": "tutorials/p17_metabolomics.html#exercises",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy did the imperfect correction fail?\nWould another log transform be appropriate for M?\nCan an unresolved feature support a named pathway claim?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe standard did not share the same response factor as the analyte.\nNo; M already represents log2 abundance.\nNot without justified chemical identification or carefully qualified evidence."
+  },
+  {
+    "objectID": "tutorials/p17_metabolomics.html#continue-learning",
+    "href": "tutorials/p17_metabolomics.html#continue-learning",
+    "title": "Metabolomics processing, standards and feature interpretation",
+    "section": "Continue learning",
+    "text": "Continue learning\nB09 Metabolomics and B12 Statistics.\nContinue with exploration or integration (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html",
+    "href": "tutorials/p18_proteomics.html",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "",
+    "text": "Inspect protein missingness; calculate a log2 abundance contrast with stated denominators; compare complete observations with an unjustified imputation."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#learning-objectives",
+    "href": "tutorials/p18_proteomics.html#learning-objectives",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "",
+    "text": "Inspect protein missingness; calculate a log2 abundance contrast with stated denominators; compare complete observations with an unjustified imputation."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#biological-question-and-data",
+    "href": "tutorials/p18_proteomics.html#biological-question-and-data",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow does treating a missing protein measurement as zero change a group comparison?\nThe supplied values are fictional log2 protein abundances, not raw peptide spectra. Missingness was inserted into the fixture. The contrast is descriptive and does not implement peptide identification, protein inference or a calibrated differential-abundance pipeline.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#count-observed-measurements",
+    "href": "tutorials/p18_proteomics.html#count-observed-measurements",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "1. Count observed measurements",
+    "text": "1. Count observed measurements\nCalculate group-specific observation counts before group means.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nP &lt;- d$protein_missing; diet &lt;- d$metadata$diet\ny &lt;- P[1,]\nobserved &lt;- tapply(!is.na(y),diet,sum)\nmeans &lt;- tapply(y,diet,mean,na.rm=TRUE)\ndata.frame(group=names(means),observed=as.vector(observed),mean_log2=as.vector(means))\n\n\n       group observed mean_log2\n1    control       23  7.042704\n2 supplement       22  7.036245\n\n\nShow R code\nstopifnot(sum(observed)==45)\n\n\nThe first protein has three missing values. Reporting group means without observation counts hides the change in comparison population."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#translate-the-contrast-correctly",
+    "href": "tutorials/p18_proteomics.html#translate-the-contrast-correctly",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "2. Translate the contrast correctly",
+    "text": "2. Translate the contrast correctly\nThe difference in log2 means corresponds to a ratio of geometric means on the original scale.\n\n\nShow R code\ndelta &lt;- unname(means[\"supplement\"]-means[\"control\"])\nc(log2_difference=delta,geometric_mean_ratio=2^delta)\n\n\n     log2_difference geometric_mean_ratio \n         -0.00645844           0.99553336 \n\n\nShow R code\noriginal &lt;- 2^y\ngeo &lt;- tapply(original,diet,function(z) exp(mean(log(z),na.rm=TRUE)))\nstopifnot(abs(geo[\"supplement\"]/geo[\"control\"]-2^delta)&lt;1e-10)\n\n\nThis is not the ratio of arithmetic mean abundance. The calculation concerns the observed values only."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#demonstrate-an-unjustified-replacement",
+    "href": "tutorials/p18_proteomics.html#demonstrate-an-unjustified-replacement",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "3. Demonstrate an unjustified replacement",
+    "text": "3. Demonstrate an unjustified replacement\nReplace NA by zero solely to expose the consequence, then compare the group differences.\n\n\nShow R code\nbad &lt;- y;bad[is.na(bad)] &lt;- 0\nbad_means &lt;- tapply(bad,diet,mean)\nc(observed_value_difference=delta,\n zero_imputed_difference=unname(bad_means[\"supplement\"]-bad_means[\"control\"]))\n\n\nobserved_value_difference   zero_imputed_difference \n              -0.00645844               -0.29936623 \n\n\nShow R code\nboxplot(y~diet,xlab=\"Diet\",ylab=\"Observed log2 abundance\",col=\"#E5A66B\")\n\n\n\n\n\n\n\n\n\nZero on the log2 scale means original-scale abundance one. It does not represent a valid generic non-observation rule."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#interpretation-and-limits",
+    "href": "tutorials/p18_proteomics.html#interpretation-and-limits",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nDifferent missing mechanisms require different strategies and sensitivity analyses. Selected complete observations may be biased if detection depends on abundance. Batch adjustment, identification uncertainty, multiple testing and validation are needed for real protein analyses."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#exercises",
+    "href": "tutorials/p18_proteomics.html#exercises",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy does replacing NA by zero change the contrast?\nWhat if one group has no observed values?\nDoes a geometric-mean ratio imply a causal diet effect?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt introduces low observed values where the assay supplied none, potentially unequally across groups.\nThe observed comparison is not estimable; report this instead of inventing a mean.\nNo; design, confounding, model uncertainty and sampling determine causal interpretation."
+  },
+  {
+    "objectID": "tutorials/p18_proteomics.html#continue-learning",
+    "href": "tutorials/p18_proteomics.html#continue-learning",
+    "title": "Proteomics analysis and missing-value sensitivity",
+    "section": "Continue learning",
+    "text": "Continue learning\nB08 Proteomics and B02 Design.\nContinue with multi-omics QC and integration (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html",
+    "href": "tutorials/p19_exploration.html",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "",
+    "text": "Orient matrices correctly; compare covariance and standardized PCA; inspect variance explained and sample patterns; distinguish exploration from inference."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#learning-objectives",
+    "href": "tutorials/p19_exploration.html#learning-objectives",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "",
+    "text": "Orient matrices correctly; compare covariance and standardized PCA; inspect variance explained and sample patterns; distinguish exploration from inference."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#biological-question-and-data",
+    "href": "tutorials/p19_exploration.html#biological-question-and-data",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhich sample patterns appear in the hypothetical protein and metabolite panels?\nAnimals are rows in the PCA inputs; molecular features are columns. Both panels are supplied log2 values and contain shared latent variation by construction. Standardization is used for description, not prediction.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#prepare-matched-feature-matrices",
+    "href": "tutorials/p19_exploration.html#prepare-matched-feature-matrices",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "1. Prepare matched feature matrices",
+    "text": "1. Prepare matched feature matrices\nUse complete measurements and explicit animal alignment.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nP &lt;- t(d$protein);M &lt;- t(d$metabolite)\nstopifnot(identical(rownames(P),rownames(M)))\nX &lt;- cbind(P,M)\nfit &lt;- prcomp(X,center=TRUE,scale.=TRUE)\nvariance_fraction &lt;- fit$sdev^2/sum(fit$sdev^2)\nhead(variance_fraction)\n\n\n[1] 0.57849510 0.07719019 0.06658498 0.05267852 0.04811067 0.03908211\n\n\nShow R code\nstopifnot(abs(sum(variance_fraction)-1)&lt;1e-12)\n\n\nUnit-variance scaling makes different feature variances comparable for this representation. It also gives a noisy low-variance feature greater relative weight."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#plot-scores-with-design-labels",
+    "href": "tutorials/p19_exploration.html#plot-scores-with-design-labels",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "2. Plot scores with design labels",
+    "text": "2. Plot scores with design labels\nThe same PCA scores can be labelled by diet, batch or farm to investigate alternative explanations.\n\n\nShow R code\nplot(fit$x[,1],fit$x[,2],pch=19,col=as.integer(d$metadata$diet),\n xlab=\"PC1 score\",ylab=\"PC2 score\",main=\"Standardized descriptive PCA\")\nlegend(\"topleft\",levels(d$metadata$diet),pch=19,col=1:2,bty=\"n\")\n\n\n\n\n\n\n\n\n\nShow R code\nloadings &lt;- fit$rotation[,1]\nhead(sort(abs(loadings),decreasing=TRUE))\n\n\nprotein08 protein07 feature06 feature05 protein03 protein06 \n0.3224110 0.3203770 0.3060873 0.3017077 0.2920050 0.2894331 \n\n\nLoadings describe feature contributions to a mathematical direction. A sign can flip without changing the PCA representation."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#demonstrate-unit-sensitivity",
+    "href": "tutorials/p19_exploration.html#demonstrate-unit-sensitivity",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "3. Demonstrate unit sensitivity",
+    "text": "3. Demonstrate unit sensitivity\nMultiply one feature by 100 and compare covariance PCA to standardized PCA.\n\n\nShow R code\nchanged &lt;- X;changed[,1] &lt;- 100*changed[,1]\nraw_pca &lt;- prcomp(changed,center=TRUE,scale.=FALSE)\nscaled_pca &lt;- prcomp(changed,center=TRUE,scale.=TRUE)\nc(covariance_PC1_fraction=raw_pca$sdev[1]^2/sum(raw_pca$sdev^2),\n standardized_PC1_fraction=scaled_pca$sdev[1]^2/sum(scaled_pca$sdev^2))\n\n\n  covariance_PC1_fraction standardized_PC1_fraction \n                0.9961177                 0.5784951 \n\n\nShow R code\nstopifnot(max(abs(abs(cor(fit$x[,1],scaled_pca$x[,1]))-1))&lt;1e-10)\n\n\nPositive unit rescaling is cancelled by standardization, while covariance PCA can become dominated by the rescaled feature."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#interpretation-and-limits",
+    "href": "tutorials/p19_exploration.html#interpretation-and-limits",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nPCA is an exploratory linear representation, not an independent test of treatment or a causal network. For prediction, fit scaling and PCA on training animals and project test animals using those parameters. Select the interpretation after considering batch, biological covariates and sampling."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#exercises",
+    "href": "tutorials/p19_exploration.html#exercises",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy can a loading sign reverse?\nDoes a visible diet cluster prove the intervention mechanism?\nWhy is fitting PCA on train and test together inappropriate for an untouched prediction test?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nAn eigenvector and its negative represent the same axis.\nNo; design and other shared drivers must be examined.\nThe representation incorporates information from the evaluation population."
+  },
+  {
+    "objectID": "tutorials/p19_exploration.html#continue-learning",
+    "href": "tutorials/p19_exploration.html#continue-learning",
+    "title": "Exploratory multi-omics analysis and principal components",
+    "section": "Continue learning",
+    "text": "Continue learning\nB12 Statistics and B15 Integration.\nContinue with regularized prediction or integration (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html",
+    "href": "tutorials/p20_prediction.html",
+    "title": "Regularized regression and held-out prediction",
+    "section": "",
+    "text": "Implement training-only centering and scaling; compare a supplied ridge model with a baseline; explain tuning and deployment-population limitations."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#learning-objectives",
+    "href": "tutorials/p20_prediction.html#learning-objectives",
+    "title": "Regularized regression and held-out prediction",
+    "section": "",
+    "text": "Implement training-only centering and scaling; compare a supplied ridge model with a baseline; explain tuning and deployment-population limitations."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#biological-question-and-data",
+    "href": "tutorials/p20_prediction.html#biological-question-and-data",
+    "title": "Regularized regression and held-out prediction",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nDo the hypothetical molecular measurements improve prediction for a held-out group of animals?\nThe response uses arbitrary units and depends on a shared latent factor by construction. Animals 1–32 train the model and 33–48 form a supplied holdout. This split also changes farm composition; its representativeness should be discussed. Lambda is supplied, not chosen using test outcomes.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#define-the-split-and-preprocess-using-training-only",
+    "href": "tutorials/p20_prediction.html#define-the-split-and-preprocess-using-training-only",
+    "title": "Regularized regression and held-out prediction",
+    "section": "1. Define the split and preprocess using training only",
+    "text": "1. Define the split and preprocess using training only\nCombine available log2 protein and metabolite features, then estimate their means and scales in training.\n\n\nShow R code\nsource(\"../R/teaching_data.R\")\nd &lt;- teaching_data()\nX &lt;- cbind(t(d$protein),t(d$metabolite));y &lt;- d$metadata$response\ntrain &lt;- 1:32;test &lt;- 33:48\nstopifnot(length(intersect(train,test))==0,identical(rownames(X),d$metadata$animal))\ncenter &lt;- colMeans(X[train,,drop=FALSE]);spread &lt;- apply(X[train,,drop=FALSE],2,sd)\nstopifnot(all(spread&gt;0))\nZ &lt;- scale(X,center,spread)\nstopifnot(max(abs(colMeans(Z[train,,drop=FALSE])))&lt;1e-12)\ntable(d$metadata$farm[train]);table(d$metadata$farm[test])\n\n\n\nfarm1 farm2 farm3 \n   16    16     0 \n\n\n\nfarm1 farm2 farm3 \n    0     0    16 \n\n\nThe test animals do not influence the fitted transformation. The farm composition identifies the transfer task rather than being hidden."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#fit-ridge-with-a-separate-unpenalized-intercept",
+    "href": "tutorials/p20_prediction.html#fit-ridge-with-a-separate-unpenalized-intercept",
+    "title": "Regularized regression and held-out prediction",
+    "section": "2. Fit ridge with a separate unpenalized intercept",
+    "text": "2. Fit ridge with a separate unpenalized intercept\nUse the minimization convention sum of squared errors plus lambda times squared coefficient norm.\n\n\nShow R code\nlambda &lt;- 4\nybar &lt;- mean(y[train])\nbeta &lt;- solve(crossprod(Z[train,,drop=FALSE])+lambda*diag(ncol(Z)),\n crossprod(Z[train,,drop=FALSE],y[train]-ybar))\npred &lt;- as.vector(ybar+Z[test,,drop=FALSE]%*%beta)\nbaseline &lt;- rep(ybar,length(test))\nnormal_equation_error &lt;- max(abs((crossprod(Z[train,,drop=FALSE])+lambda*diag(ncol(Z)))%*%beta-\n crossprod(Z[train,,drop=FALSE],y[train]-ybar)))\nstopifnot(normal_equation_error&lt;1e-9)\n\n\nThe penalty shrinks standardized feature coefficients. Its magnitude depends on the stated objective scaling; software conventions can differ."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#evaluate-on-the-same-untouched-animals",
+    "href": "tutorials/p20_prediction.html#evaluate-on-the-same-untouched-animals",
+    "title": "Regularized regression and held-out prediction",
+    "section": "3. Evaluate on the same untouched animals",
+    "text": "3. Evaluate on the same untouched animals\nCompare error and inspect predictions without re-tuning on these scores.\n\n\nShow R code\nrmse &lt;- function(observed,predicted) sqrt(mean((observed-predicted)^2))\ndata.frame(model=c(\"training mean\",\"supplied ridge\"),\n test_RMSE=c(rmse(y[test],baseline),rmse(y[test],pred)))\n\n\n           model test_RMSE\n1  training mean  1.348718\n2 supplied ridge  1.359551\n\n\nShow R code\nplot(pred,y[test],pch=19,xlab=\"Held-out predicted response\",ylab=\"Observed response (arbitrary units)\")\nabline(0,1,col=\"#d95f02\")\n\n\n\n\n\n\n\n\n\nOne split shows the evaluation procedure. The generating model makes useful molecular association plausible, but the test score does not establish practical value in a real livestock population."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#interpretation-and-limits",
+    "href": "tutorials/p20_prediction.html#interpretation-and-limits",
+    "title": "Regularized regression and held-out prediction",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nFeature selection, scaling, imputation and lambda tuning must occur inside training-only validation. If lambda is optimized on these test animals, they become a tuning set. For real prediction, use a grouping/time split matching deployment and quantify uncertainty across independent units."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#exercises",
+    "href": "tutorials/p20_prediction.html#exercises",
+    "title": "Regularized regression and held-out prediction",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is the intercept not penalized here?\nWhat happens if test outcomes select lambda?\nCould an accurate predictor be a noncausal proxy?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe model centers the response separately, leaving the mean outside the coefficient penalty.\nThe reported score is no longer an untouched test evaluation.\nYes; predictive usefulness does not establish intervention or mediation."
+  },
+  {
+    "objectID": "tutorials/p20_prediction.html#continue-learning",
+    "href": "tutorials/p20_prediction.html#continue-learning",
+    "title": "Regularized regression and held-out prediction",
+    "section": "Continue learning",
+    "text": "Continue learning\nB12 Statistics, B15 Integration and B18 Synthesis.\nContinue with integrated analysis (in development). Return to the practical index or the unified map."
   }
 ]

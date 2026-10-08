@@ -1,0 +1,98 @@
+---
+title: "Functional annotation and pathway enrichment"
+subtitle: "Practical 10: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Preserve feature-to-gene mappings; define an eligible background; calculate a hypergeometric tail and verify its equivalent Fisher test; assess background sensitivity.
+
+## Biological question and data
+
+Is a selected gene list enriched for a supplied pathway under an explicitly defined selection null?
+
+The gene/pathway table is fictional. Every background gene is eligible, and the null treats a fixed-size selected set as uniformly drawn from that background. Selected genes are supplied for teaching, not discovered by a calibrated genome-wide analysis.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Define the eligible universe
+
+Use the 24 assayed gene IDs and a prespecified six-gene list.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+background <- rownames(d$counts)
+selected <- sprintf("gene%02d",1:6)
+stopifnot(!anyDuplicated(background),all(selected%in%background))
+annotation <- d$annotation
+stopifnot(!anyDuplicated(annotation$gene),setequal(annotation$gene,background))
+table(annotation$pathway)
+```
+
+The measured universe is known. Counting annotations outside it would change the null population.
+
+## 2. Calculate enrichment
+
+For each set, compute overlap, null expectation and an upper-tail hypergeometric p-value. Confirm the first result with a 2-by-2 Fisher test.
+
+```{r}
+one_set <- function(pathway) {
+ member <- annotation$gene[annotation$pathway==pathway]
+ N <- length(background); K <- length(member); n <- length(selected)
+ x <- sum(selected%in%member)
+ c(N=N,K=K,n=n,x=x,expected=n*K/N,p=phyper(x-1,K,N-K,n,lower.tail=FALSE))
+}
+result <- as.data.frame(t(vapply(unique(annotation$pathway),one_set,numeric(6))))
+result$BH <- p.adjust(result$p,"BH")
+result
+z <- result[1,]
+tab <- matrix(c(z$x,z$n-z$x,z$K-z$x,z$N-z$K-z$n+z$x),2,byrow=TRUE)
+stopifnot(abs(fisher.test(tab,alternative="greater")$p.value-z$p)<1e-12)
+```
+
+PathwayA has six selected members in a background of eight pathway members. The enrichment model concerns gene-set representation, not measured pathway activity.
+
+## 3. Change the background and explain the effect
+
+Keep the pathway count fixed while adding unmeasured nonmembers to the universe. This is deliberately an inappropriate comparison for the same assay.
+
+```{r}
+data.frame(background=c("eligible panel","inflated universe"),
+ N=c(24,100),p=c(phyper(5,8,16,6,lower.tail=FALSE),
+ phyper(5,8,92,6,lower.tail=FALSE)))
+```
+
+Adding many nonmembers makes the same overlap appear more surprising. That is a change in assumptions, not more biological evidence.
+
+## Interpretation and limits
+
+Hypergeometric enrichment assumes an appropriate equal-selection null. Expression level, feature length, detectability, correlation and annotation overlap can require a more suitable method. Document mapping, set version, selection rule, background and multiplicity.
+
+## Exercises
+
+1. Why exclude unmeasured genes from this universe?
+2. Does a small p-value establish pathway activation?
+3. What if one measured gene maps to three proteins?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. They could not have entered the selected list under this assay.
+2. No; it is evidence about representation under the supplied null.
+3. Define the gene/protein analysis unit and avoid counting repeated gene evidence as independent entries.
+:::
+
+## Continue learning
+
+[B03 Databases](../notes/b03_databases.qmd) and [B14 Pathways and networks](../notes/b14_networks.qmd).
+
+Continue with [networks](p11_networks.qmd). The Multi-Omics pathway reuses this practical rather than creating a duplicate enrichment analysis. Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -1,0 +1,89 @@
+---
+title: "Scientific reporting and reproducible analysis records"
+subtitle: "Practical 13: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Connect a question, sample definition, analysis and result; document provenance and exclusions; distinguish a numerical association from a biological conclusion.
+
+## Biological question and data
+
+What evidence and processing record should accompany a computational result?
+
+The example fits a simple animal-level response model to fictional data. Diet allocation, independence and the chosen covariates are assumptions of this teaching design. The report records a conditional estimate, not a livestock recommendation.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Define and fit the analysis
+
+Write down the target contrast before fitting. Include batch and genotype1 because the supplied model contains these patterns or sources of variation.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+meta <- d$metadata;meta$dosage <- d$genotypes[meta$animal,"marker1"]
+fit <- lm(response~diet+batch+dosage,data=meta)
+summary(fit)$coefficients
+interval <- confint(fit)["dietsupplement",]
+stopifnot(nobs(fit)==48,all(is.finite(interval)))
+```
+
+The diet coefficient adjusts for the supplied batch and genotype columns. The model still summarizes a particular hypothetical sample under its assumptions.
+
+## 2. Create a compact evidence record
+
+Preserve the contrast, analysis population, estimate, interval and exclusions beside the input-generation record.
+
+```{r}
+record <- data.frame(question="Diet contrast in fictional animals",unit="animal",
+ n=nobs(fit),exclusions=0,estimate=unname(coef(fit)["dietsupplement"]),
+ lower=interval[1],upper=interval[2],units="arbitrary response units",
+ input_code_checksum=unname(tools::md5sum("../R/teaching_data.R")))
+record
+```
+
+The checksum identifies the local input-generating source. It is not a biological validity check.
+
+## 3. Write the interpretation at the level supported
+
+Separate result, limitation and follow-up. The generated sentence deliberately avoids a causal-mechanism claim.
+
+```{r}
+cat(sprintf("Among %d fictional animals, the adjusted diet contrast is %.2f arbitrary units (95%% model interval %.2f to %.2f).\n",
+ nobs(fit),coef(fit)["dietsupplement"],interval[1],interval[2]))
+```
+
+Add the allocation, covariates, model assumptions and absence of external validation. An interval alone is not a complete report.
+
+## Interpretation and limits
+
+A real report needs species/population, measurement units, design, permissions, assay processing, software, missingness, diagnostics, validation and uncertainty. Tables and plots should allow readers to assess the conclusion without relying on an unexplained significant/not-significant label.
+
+## Exercises
+
+1. Name one claim the result cannot support.
+2. What changes if ten animals are excluded after looking at their outcomes?
+3. Which parts of a report remain useful when data cannot be public?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. A specific molecular mechanism or a dependable effect in another farm/population.
+2. Selection may bias the estimate; document and justify exclusions and assess sensitivity.
+3. Methods, variable definitions, provenance, permissions/access process and a non-sensitive reproducible demonstration.
+:::
+
+## Continue learning
+
+[B17 Integrity](../notes/b17_integrity.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with research proposal (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

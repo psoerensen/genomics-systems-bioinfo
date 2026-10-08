@@ -1,0 +1,100 @@
+---
+title: "Biological network construction and interpretation"
+subtitle: "Practical 11: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define a correlation edge; construct a symmetric adjacency matrix; calculate degree and inspect threshold sensitivity; separate association from regulation.
+
+## Biological question and data
+
+Which hypothetical proteins show correlated abundance across the same animals?
+
+The complete log2 protein table contains a supplied shared latent factor and independent noise. A correlation network is descriptive. Animal observations are paired across proteins, and edges are not directional or causal.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Align and calculate associations
+
+Use animals as the observations and protein features as variables.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+X <- t(d$protein)
+stopifnot(identical(rownames(X),d$metadata$animal),!anyNA(X))
+C <- cor(X)
+round(C,2)
+stopifnot(isSymmetric(C),all(abs(diag(C)-1)<1e-12))
+```
+
+Positive correlations are expected from the shared generating factor. The same pattern could arise from a shared technical factor in another dataset.
+
+## 2. Define edges and calculate degree
+
+Use a supplied absolute-correlation cutoff of .55. Remove self-edges and count each undirected edge once.
+
+```{r}
+cutoff <- .55
+A <- abs(C)>=cutoff; diag(A) <- FALSE
+edges <- which(A & upper.tri(A),arr.ind=TRUE)
+degree <- rowSums(A)
+data.frame(protein=colnames(X),degree)
+stopifnot(isSymmetric(A),sum(degree)==2*nrow(edges))
+angle <- seq(0,2*pi,length.out=ncol(X)+1)[-(ncol(X)+1)]
+pos <- cbind(cos(angle),sin(angle))
+plot(pos,type="n",axes=FALSE,xlab="",ylab="",asp=1,
+ xlim=c(-1.35,1.35),ylim=c(-1.35,1.35),main="Correlation network")
+if(nrow(edges)>0) for(i in seq_len(nrow(edges))) {
+ e <- edges[i,];segments(pos[e[1],1],pos[e[1],2],pos[e[2],1],pos[e[2],2],col="grey60")
+}
+points(pos,pch=19,col="#1b9e77",cex=1.5)
+text(pos,labels=colnames(X),pos=3,cex=.7)
+```
+
+The picture is a layout of a defined graph, not a spatial map of interacting proteins.
+
+## 3. Examine threshold dependence
+
+Use the same variables and animals for each threshold.
+
+```{r}
+threshold <- c(.3,.55,.75)
+data.frame(threshold,edges=vapply(threshold,function(t)
+ sum((abs(C)>=t)[upper.tri(C)]),integer(1)))
+```
+
+Connectivity changes with the chosen threshold; a hub designation should state that dependence.
+
+## Interpretation and limits
+
+Correlation can reflect diet, genotype, tissue mixture, batch or other common drivers. A network inferred from abundance is not equivalent to a curated interaction database. The threshold is supplied rather than selected to optimize a biological story; stability is assessed in the biomarker practical.
+
+## Exercises
+
+1. Why is the diagonal removed?
+2. Could a batch shift create an apparent module?
+3. Why is the sum of degrees twice the edge count?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. A feature’s self-correlation is not an inter-feature relationship.
+2. Yes; shared technical variation can correlate many measurements.
+3. Each undirected edge contributes one degree to each endpoint.
+:::
+
+## Continue learning
+
+[B14 Pathways and networks](../notes/b14_networks.qmd).
+
+Continue with network and biomarker validation (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

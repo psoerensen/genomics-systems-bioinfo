@@ -64,6 +64,6 @@ CPM and log2(count+1) are useful teaching transformations but have composition a
 
 ## Practicals and course pathways
 
-RNA-seq practical (in development) is shared by both outlines. Multi-omics QC (in development) connects count data to other measurement scales.
+[RNA-seq practical](../tutorials/p09_rnaseq.qmd) is shared by both outlines. [Multi-omics QC](../tutorials/p16_multiomics_qc.qmd) connects count data to other measurement scales.
 
 Use the [unified map](../course_map.qmd) to locate B06 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

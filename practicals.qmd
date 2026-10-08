@@ -15,5 +15,17 @@ Practicals use explicit assumptions, small hypothetical datasets and reproducibl
 - [Distances, clustering and phylogenetic interpretation](tutorials/p06_phylogeny.qmd)
 - [Protein structure and structural bioinformatics](tutorials/p07_structure.qmd)
 - [Sequencing data quality assessment](tutorials/p08_sequence_qc.qmd)
+- [RNA-seq counts, contrasts and uncertainty](tutorials/p09_rnaseq.qmd)
+- [Functional annotation and pathway enrichment](tutorials/p10_pathways.qmd)
+- [Biological network construction and interpretation](tutorials/p11_networks.qmd)
+- [Biological data visualization with explicit units](tutorials/p12_visualization.qmd)
+- [Scientific reporting and reproducible analysis records](tutorials/p13_reporting.qmd)
+- [Sample identity, table joins and missing assays](tutorials/p14_data_handling.qmd)
+- [Multi-omics experimental design in animal production](tutorials/p15_experimental_design.qmd)
+- [Quality assessment and preprocessing across omics layers](tutorials/p16_multiomics_qc.qmd)
+- [Metabolomics processing, standards and feature interpretation](tutorials/p17_metabolomics.qmd)
+- [Proteomics analysis and missing-value sensitivity](tutorials/p18_proteomics.qmd)
+- [Exploratory multi-omics analysis and principal components](tutorials/p19_exploration.qmd)
+- [Regularized regression and held-out prediction](tutorials/p20_prediction.qmd)
 
 Use the [curriculum crosswalk](course_map.qmd#practical-session-coverage) to locate each session in the two original outlines. Shared practicals can have different pathway extensions.

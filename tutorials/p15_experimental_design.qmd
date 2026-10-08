@@ -1,0 +1,94 @@
+---
+title: "Multi-omics experimental design in animal production"
+subtitle: "Practical 15: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define the biological question and experimental unit; plan matched assays and balanced processing; diagnose a rank-deficient design.
+
+## Biological question and data
+
+How should an individually allocated diet study collect molecular profiles and later performance measurements?
+
+The hypothetical design allocates diet to individual animals. Pen-allocated diets would require a different unit and replication plan. The practical specifies metadata and tests design identifiability; it does not establish sample size or a collection protocol for a real assay.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Build a matched sample sheet
+
+Keep animal, diet and batch separate from the assay-specific specimen identifiers.
+
+```{r}
+plan <- data.frame(animal=paste0("a",1:12),
+ diet=factor(rep(c("control","supplement"),6)),
+ batch=factor(rep(c("A","A","B","B"),3)),
+ tissue="liver",collection_day=14)
+plan$rna_id <- paste0(plan$animal,"_RNA_d14")
+plan$protein_id <- paste0(plan$animal,"_protein_d14")
+stopifnot(!anyDuplicated(plan$animal),!anyDuplicated(plan$rna_id))
+plan
+xtabs(~diet+batch,plan)
+```
+
+Each animal has two linked assays from a specified tissue and day. The sample sheet still needs documented collection/preservation and assay-specific handling.
+
+## 2. Check estimability
+
+Contrast a crossed design with perfect treatment–batch confounding.
+
+```{r}
+X <- model.matrix(~diet+batch,plan)
+bad <- plan;bad$batch <- bad$diet
+Xbad <- model.matrix(~diet+batch,bad)
+rbind(crossed=c(columns=ncol(X),rank=qr(X)$rank),
+ confounded=c(columns=ncol(Xbad),rank=qr(Xbad)$rank))
+stopifnot(qr(X)$rank==3,qr(Xbad)$rank==2)
+```
+
+Full rank permits separate estimation of these fixed-effect columns. It does not certify power or remove unmeasured confounding.
+
+## 3. Plan decision timing and missingness
+
+Specify the predictor window and outcome window before inspecting results.
+
+```{r}
+decisions <- data.frame(item=c("genotype","day14 assays","future performance"),
+ available_day=c(0,14,28),role=c("baseline covariate","candidate day14 predictor","outcome"))
+decisions
+stopifnot(all(decisions$available_day[decisions$role=="candidate day14 predictor"]<=14))
+```
+
+The future outcome can evaluate a day14 prediction; it cannot be included as input to that prediction. Predefine how absent assays and failed QC affect the analysis population.
+
+## Interpretation and limits
+
+Randomization and blocking, tissue/time, sex, farm, batch, handling and exclusion rules need a justified study-specific plan. Technical aliquots are not independent animals. Use [NC3Rs design guidance](https://nc3rs.org.uk/3rs-resources/key-elements-well-designed-experiment) for the design principles; the invented sheet is not a laboratory sampling instruction.
+
+## Exercises
+
+1. If diet is assigned to pens, what changes?
+2. Why can adding animals within the same confounded batches fail to solve the problem?
+3. What must be decided before selecting an integration method?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Pen-level allocation and dependence become central; sufficient independent pens are needed.
+2. The treatment and batch columns remain dependent.
+3. Question, samples, matching, time, measurement scales, missingness, covariates and validation target.
+:::
+
+## Continue learning
+
+[B01 Foundations](../notes/b01_foundations.qmd), [B02 Design](../notes/b02_design.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with [multi-omics quality assessment](p16_multiomics_qc.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

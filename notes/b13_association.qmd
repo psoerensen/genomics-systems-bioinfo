@@ -68,6 +68,6 @@ Adjustment can reduce specified confounding but cannot guarantee that all confou
 
 ## Practicals and course pathways
 
-Association and regulatory variation (in development), trait association (in development) and prediction (in development).
+Association and regulatory variation (in development), trait association (in development) and [prediction](../tutorials/p20_prediction.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B13 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

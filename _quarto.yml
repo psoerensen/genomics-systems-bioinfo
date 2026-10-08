@@ -32,6 +32,18 @@ project:
     - tutorials/p06_phylogeny.qmd
     - tutorials/p07_structure.qmd
     - tutorials/p08_sequence_qc.qmd
+    - tutorials/p09_rnaseq.qmd
+    - tutorials/p10_pathways.qmd
+    - tutorials/p11_networks.qmd
+    - tutorials/p12_visualization.qmd
+    - tutorials/p13_reporting.qmd
+    - tutorials/p14_data_handling.qmd
+    - tutorials/p15_experimental_design.qmd
+    - tutorials/p16_multiomics_qc.qmd
+    - tutorials/p17_metabolomics.qmd
+    - tutorials/p18_proteomics.qmd
+    - tutorials/p19_exploration.qmd
+    - tutorials/p20_prediction.qmd
 
 website:
   title: "Genomics, Systems Biology & Bioinformatics"

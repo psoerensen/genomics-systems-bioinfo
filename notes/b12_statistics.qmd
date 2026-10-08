@@ -69,6 +69,6 @@ Use appropriate loss and uncertainty, inspect residuals and state model-selectio
 
 ## Practicals and course pathways
 
-Exploratory analysis (in development), regularized prediction (in development) and trait association (in development).
+[Exploratory analysis](../tutorials/p19_exploration.qmd), [regularized prediction](../tutorials/p20_prediction.qmd) and trait association (in development).
 
 Use the [unified map](../course_map.qmd) to locate B12 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -64,6 +64,6 @@ Follow-up can include replication in a new farm, time, breed or management setti
 
 ## Practicals and course pathways
 
-Trait association (in development), integrated interpretation (in development), scientific reporting (in development) and research proposal (in development).
+Trait association (in development), integrated interpretation (in development), [scientific reporting](../tutorials/p13_reporting.qmd) and research proposal (in development).
 
 Use the [unified map](../course_map.qmd) to locate B18 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

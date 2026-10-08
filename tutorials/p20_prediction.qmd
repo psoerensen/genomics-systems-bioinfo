@@ -1,0 +1,99 @@
+---
+title: "Regularized regression and held-out prediction"
+subtitle: "Practical 20: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Implement training-only centering and scaling; compare a supplied ridge model with a baseline; explain tuning and deployment-population limitations.
+
+## Biological question and data
+
+Do the hypothetical molecular measurements improve prediction for a held-out group of animals?
+
+The response uses arbitrary units and depends on a shared latent factor by construction. Animals 1–32 train the model and 33–48 form a supplied holdout. This split also changes farm composition; its representativeness should be discussed. Lambda is supplied, not chosen using test outcomes.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Define the split and preprocess using training only
+
+Combine available log2 protein and metabolite features, then estimate their means and scales in training.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+X <- cbind(t(d$protein),t(d$metabolite));y <- d$metadata$response
+train <- 1:32;test <- 33:48
+stopifnot(length(intersect(train,test))==0,identical(rownames(X),d$metadata$animal))
+center <- colMeans(X[train,,drop=FALSE]);spread <- apply(X[train,,drop=FALSE],2,sd)
+stopifnot(all(spread>0))
+Z <- scale(X,center,spread)
+stopifnot(max(abs(colMeans(Z[train,,drop=FALSE])))<1e-12)
+table(d$metadata$farm[train]);table(d$metadata$farm[test])
+```
+
+The test animals do not influence the fitted transformation. The farm composition identifies the transfer task rather than being hidden.
+
+## 2. Fit ridge with a separate unpenalized intercept
+
+Use the minimization convention sum of squared errors plus lambda times squared coefficient norm.
+
+```{r}
+lambda <- 4
+ybar <- mean(y[train])
+beta <- solve(crossprod(Z[train,,drop=FALSE])+lambda*diag(ncol(Z)),
+ crossprod(Z[train,,drop=FALSE],y[train]-ybar))
+pred <- as.vector(ybar+Z[test,,drop=FALSE]%*%beta)
+baseline <- rep(ybar,length(test))
+normal_equation_error <- max(abs((crossprod(Z[train,,drop=FALSE])+lambda*diag(ncol(Z)))%*%beta-
+ crossprod(Z[train,,drop=FALSE],y[train]-ybar)))
+stopifnot(normal_equation_error<1e-9)
+```
+
+The penalty shrinks standardized feature coefficients. Its magnitude depends on the stated objective scaling; software conventions can differ.
+
+## 3. Evaluate on the same untouched animals
+
+Compare error and inspect predictions without re-tuning on these scores.
+
+```{r}
+rmse <- function(observed,predicted) sqrt(mean((observed-predicted)^2))
+data.frame(model=c("training mean","supplied ridge"),
+ test_RMSE=c(rmse(y[test],baseline),rmse(y[test],pred)))
+plot(pred,y[test],pch=19,xlab="Held-out predicted response",ylab="Observed response (arbitrary units)")
+abline(0,1,col="#d95f02")
+```
+
+One split shows the evaluation procedure. The generating model makes useful molecular association plausible, but the test score does not establish practical value in a real livestock population.
+
+## Interpretation and limits
+
+Feature selection, scaling, imputation and lambda tuning must occur inside training-only validation. If lambda is optimized on these test animals, they become a tuning set. For real prediction, use a grouping/time split matching deployment and quantify uncertainty across independent units.
+
+## Exercises
+
+1. Why is the intercept not penalized here?
+2. What happens if test outcomes select lambda?
+3. Could an accurate predictor be a noncausal proxy?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The model centers the response separately, leaving the mean outside the coefficient penalty.
+2. The reported score is no longer an untouched test evaluation.
+3. Yes; predictive usefulness does not establish intervention or mediation.
+:::
+
+## Continue learning
+
+[B12 Statistics](../notes/b12_statistics.qmd), [B15 Integration](../notes/b15_integration.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with integrated analysis (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

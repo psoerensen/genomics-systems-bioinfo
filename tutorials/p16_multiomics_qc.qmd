@@ -1,0 +1,96 @@
+---
+title: "Quality assessment and preprocessing across omics layers"
+subtitle: "Practical 16: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Compare assay-specific scales; audit sample and feature missingness; define transparent exclusions and preprocessing choices.
+
+## Biological question and data
+
+Can the same quality rule and transformation be applied indiscriminately to counts, protein abundances and metabolites?
+
+Counts are nonnegative integer measurements; protein and metabolite matrices are supplied log2 abundances. Missing proteins are deliberately inserted. All samples are fictional animals with explicit metadata.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Audit each assay separately
+
+Check IDs, dimensions, missingness and the supplied measurement scale.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+assays <- list(counts=d$counts,protein=d$protein_missing,metabolite=d$metabolite)
+audit <- do.call(rbind,lapply(names(assays),function(name) {
+ X <- assays[[name]]
+ stopifnot(identical(colnames(X),d$metadata$animal))
+ data.frame(assay=name,features=nrow(X),animals=ncol(X),missing=sum(is.na(X)),
+ observed_min=min(X,na.rm=TRUE),observed_max=max(X,na.rm=TRUE))
+}))
+audit
+```
+
+The missingness total is not interchangeable with a count of missing animals. Different assays have different physical and statistical meanings.
+
+## 2. Inspect missingness by feature and group
+
+Quantify before choosing a policy. Missingness may depend on the measurement process.
+
+```{r}
+P <- d$protein_missing
+missing_feature <- rowMeans(is.na(P))
+missing_animal <- colSums(is.na(P))
+data.frame(feature=rownames(P),fraction_missing=missing_feature)
+aggregate(missing_animal,list(diet=d$metadata$diet),mean)
+stopifnot(sum(is.na(P))==11,sum(missing_animal>0)==9)
+```
+
+Nine animals have at least one missing protein value, totaling eleven feature-level NAs. The mechanism is supplied insertion here; real missingness needs investigation.
+
+## 3. Define a stated feature policy and transform correctly
+
+The example retains features with no missing measurements for descriptive PCA. The threshold is a teaching choice.
+
+```{r}
+keep <- missing_feature==0
+complete <- P[keep,,drop=FALSE]
+count_log <- log2(sweep(d$counts,2,d$exposure,"/")+1)
+c(retained_proteins=nrow(complete),removed_proteins=sum(!keep))
+stopifnot(nrow(complete)==6,!anyNA(complete),all(is.finite(count_log)))
+```
+
+Protein values are already log2; logging them again would change their interpretation. The count transformation is descriptive, not a differential-expression model.
+
+## Interpretation and limits
+
+Complete-feature selection excludes signals with missingness and can change the biological question. Imputation and filtering should be justified and fitted within training splits for prediction. Panel counts are not true total sequencing depth, and an abundance profile cannot replace identification/platform QC.
+
+## Exercises
+
+1. Why is a universal log transformation unsafe?
+2. Is deleting every animal with any NA unbiased?
+3. Which preprocessing decisions must stay within training data?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Measurements may already be logged, include legitimate zeros, or have different scales.
+2. Not necessarily; excluded animals can differ systematically.
+3. Data-derived filtering, scaling, imputation, feature selection and model tuning.
+:::
+
+## Continue learning
+
+[B04 Programming](../notes/b04_programming.qmd), [B06 Transcriptomics](../notes/b06_transcriptomics.qmd), [B08 Proteomics](../notes/b08_proteomics.qmd) and [B15 Integration](../notes/b15_integration.qmd).
+
+Continue with [proteomics](p18_proteomics.qmd), [metabolomics](p17_metabolomics.qmd) or [exploration](p19_exploration.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -1,0 +1,94 @@
+---
+title: "Metabolomics processing, standards and feature interpretation"
+subtitle: "Practical 17: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Evaluate a multiplicative-drift correction; preserve feature identity and measurement units; distinguish detected features from assigned metabolites.
+
+## Biological question and data
+
+How does an internal standard help distinguish instrument drift from a supplied concentration pattern?
+
+The first calculation has an ideal shared drift factor affecting analyte and standard equally. The fixture metabolite table is already log2 arbitrary abundance; its feature labels do not identify actual compounds.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Test an ideal measurement correction
+
+An analyte and a standard are multiplied by the same hypothetical response factor.
+
+```{r}
+concentration <- c(2,3,5,4,3,6)
+drift <- c(.8,.9,1,1.1,1.2,1.3)
+raw <- concentration*drift
+standard <- 10*drift
+corrected <- 10*raw/standard
+data.frame(concentration,raw,standard,corrected)
+stopifnot(max(abs(corrected-concentration))<1e-12)
+```
+
+Correction is exact only because the generating process supplies a shared multiplier and a stable standard.
+
+## 2. Break the standard assumption
+
+Allow analyte response to vary differently from the standard.
+
+```{r}
+analyte_drift <- drift*c(1,.95,1.1,.9,1.05,1)
+biased <- 10*(concentration*analyte_drift)/standard
+data.frame(concentration,estimate=biased,error=biased-concentration)
+```
+
+A standard cannot correct variation it does not track. Chemical properties and preparation can give different responses.
+
+## 3. Explore a separate log2 feature panel
+
+Maintain labels and scales before plotting. The annotation-confidence labels are fictional examples.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+M <- d$metabolite
+identity <- data.frame(feature=rownames(M),assignment=c("hypothetical named candidate","unresolved feature",
+ "unresolved feature","hypothetical named candidate","unresolved feature","unresolved feature"))
+identity
+boxplot(M[1,]~d$metadata$diet,xlab="Diet",ylab="Supplied log2 abundance",col="#86B7A3")
+c(log2_mean_difference=mean(M[1,d$metadata$diet=="supplement"])-
+ mean(M[1,d$metadata$diet=="control"]))
+```
+
+The difference describes the hypothetical panel. A mass-spectrometry feature cannot be assigned to a pathway merely because its group contrast is large.
+
+## Interpretation and limits
+
+Real workflows need blanks, technical QC, drift and batch assessment, detection/identification confidence and justified normalization. The [EMBL-EBI metabolite-identification material](https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/) explains why chemical assignment is separate from signal detection.
+
+## Exercises
+
+1. Why did the imperfect correction fail?
+2. Would another log transform be appropriate for M?
+3. Can an unresolved feature support a named pathway claim?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The standard did not share the same response factor as the analyte.
+2. No; M already represents log2 abundance.
+3. Not without justified chemical identification or carefully qualified evidence.
+:::
+
+## Continue learning
+
+[B09 Metabolomics](../notes/b09_metabolomics.qmd) and [B12 Statistics](../notes/b12_statistics.qmd).
+
+Continue with [exploration](p19_exploration.qmd) or integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -1,0 +1,94 @@
+---
+title: "Sample identity, table joins and missing assays"
+subtitle: "Practical 14: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Align assay columns to biological IDs; reject duplicate keys; distinguish absent assays from missing feature measurements; evaluate row-order errors.
+
+## Biological question and data
+
+What happens when protein columns arrive in a different order from phenotype metadata?
+
+Every fixture animal has an assay identifier. The shuffled column order is deliberate; the underlying biological labels remain correct. This checks metadata alignment, not physical sample identity.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Create a plausible order mismatch
+
+Reverse the assay order while leaving labels attached. Dimensions still match.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+meta <- d$metadata
+shuffled <- d$protein[,rev(seq_len(ncol(d$protein))),drop=FALSE]
+stopifnot(ncol(shuffled)==nrow(meta),!identical(colnames(shuffled),meta$animal))
+head(data.frame(metadata_animal=meta$animal,assay_column=colnames(shuffled)))
+```
+
+A dimension check alone cannot identify this mistake.
+
+## 2. Align explicitly and verify identity
+
+Require unique IDs and complete matches before reordering.
+
+```{r}
+stopifnot(!anyDuplicated(meta$animal),!anyDuplicated(colnames(shuffled)))
+idx <- match(meta$animal,colnames(shuffled))
+stopifnot(!anyNA(idx))
+aligned <- shuffled[,idx,drop=FALSE]
+stopifnot(identical(colnames(aligned),meta$animal),
+ max(abs(aligned-d$protein))<1e-12)
+c(correct_cor=cor(aligned[1,],meta$response),
+ wrong_order_cor=cor(shuffled[1,],meta$response))
+```
+
+The correctly aligned table reproduces the original measurements exactly. A wrong-order association can disappear or change direction.
+
+## 3. Separate missing animals from missing features
+
+Remove one entire assay column and compare this to NAs within otherwise present assays.
+
+```{r}
+partial <- aligned[,-1,drop=FALSE]
+index <- match(meta$animal,colnames(partial))
+c(animals_without_assay=sum(is.na(index)),
+ missing_feature_values=sum(is.na(d$protein_missing)))
+stopifnot(sum(is.na(index))==1,sum(is.na(d$protein_missing))==11)
+```
+
+An absent assay and an unobserved protein value need different handling and reporting. Neither is a measured zero.
+
+## Interpretation and limits
+
+ID matching preserves supplied labels but cannot detect a mislabeled specimen collected in the field. Use collection records and appropriate sample-identity checks for real data. Avoid silent complete-case deletion when missing assays relate to treatment or health.
+
+## Exercises
+
+1. Why does a sorted join still need an identity check?
+2. What if one metadata animal has two assay columns?
+3. Why is a missing protein value not log2 zero?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Sorting conventions and keys can differ between tables.
+2. Define technical replicates or repeated specimens explicitly; do not choose a duplicate silently.
+3. Missing means unobserved; log2 zero corresponds to an original-scale value of one.
+:::
+
+## Continue learning
+
+[B03 Databases](../notes/b03_databases.qmd), [B04 Programming](../notes/b04_programming.qmd) and [B15 Integration](../notes/b15_integration.qmd).
+
+Continue with [multi-omics QC](p16_multiomics_qc.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

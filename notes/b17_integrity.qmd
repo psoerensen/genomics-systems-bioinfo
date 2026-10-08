@@ -66,6 +66,6 @@ Keep credentials, private observations and restricted metadata out of public tea
 
 ## Practicals and course pathways
 
-Scientific reporting (in development) and research proposal (in development) put provenance and governance into the deliverable.
+[Scientific reporting](../tutorials/p13_reporting.qmd) and research proposal (in development) put provenance and governance into the deliverable.
 
 Use the [unified map](../course_map.qmd) to locate B17 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

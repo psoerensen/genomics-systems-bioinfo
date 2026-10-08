@@ -1,0 +1,92 @@
+---
+title: "Biological data visualization with explicit units"
+subtitle: "Practical 12: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Choose graphics for a defined question; distinguish raw counts, transformed abundance and outcome units; display distributions and design structure.
+
+## Biological question and data
+
+Which plots reveal library-panel size, sample variation and possible confounding in a hypothetical experiment?
+
+The shared fixture contains counts, log2 abundances and a response in arbitrary units. The plotted count-panel total includes only the 24 supplied features and is not a whole-library sequencing-depth estimate.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Inspect the design before the measurements
+
+Count independent animals within the crossed diet/batch design.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+meta <- d$metadata
+xtabs(~diet+batch,meta)
+barplot(xtabs(~diet+batch,meta),beside=TRUE,legend.text=TRUE,
+ col=c("#86B7A3","#E5A66B"),ylab="Number of animals",xlab="Batch")
+```
+
+A balanced cross-tabulation addresses one aspect of design. It does not eliminate every source of confounding.
+
+## 2. Compare count and abundance views
+
+Use exposure-adjusted counts on a descriptive log2 scale for one gene, and already-log2 measurements for a protein.
+
+```{r}
+normalized <- sweep(d$counts,2,d$exposure,"/")
+par(mfrow=c(1,2))
+boxplot(log2(normalized[1,]+1)~meta$diet,xlab="Diet",ylab="log2 adjusted count + 1",
+ main="gene01",col="#86B7A3")
+boxplot(d$protein[1,]~meta$diet,xlab="Diet",ylab="Supplied log2 abundance",
+ main="protein01",col="#E5A66B")
+par(mfrow=c(1,1))
+```
+
+The axes describe different measurement scales. The gene and protein labels are fictional and their plots do not establish a linked biological mechanism.
+
+## 3. Show outcome distributions and paired measurements
+
+Keep animal alignment explicit and label the outcome units.
+
+```{r}
+stopifnot(identical(colnames(d$protein),meta$animal))
+plot(d$protein[1,],meta$response,col=as.integer(meta$diet),pch=19,
+ xlab="protein01 log2 abundance",ylab="Response (arbitrary units)")
+legend("topleft",levels(meta$diet),col=1:2,pch=19,bty="n")
+```
+
+Colour reveals whether pooled association might combine group shifts and within-group variation.
+
+## Interpretation and limits
+
+Plots diagnose patterns; they do not replace a model or prove an effect. Avoid using different transformations without labelling them, selectively hiding outliers or interpreting one unusual point before checking its identity and processing.
+
+## Exercises
+
+1. Why label the response as arbitrary units?
+2. What could a pooled scatterplot hide?
+3. Why is a plot of log2 counts not a differential-expression test?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The fixture defines no physical calibration for the phenotype.
+2. Different relationships within groups, batch shifts or unequal sampling.
+3. It supplies neither the required model-based uncertainty nor multiplicity treatment.
+:::
+
+## Continue learning
+
+[B04 Programming](../notes/b04_programming.qmd), [B06 Transcriptomics](../notes/b06_transcriptomics.qmd) and [B12 Statistics](../notes/b12_statistics.qmd).
+
+Continue with [exploratory multi-omics analysis](p19_exploration.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

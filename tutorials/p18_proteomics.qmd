@@ -1,0 +1,93 @@
+---
+title: "Proteomics analysis and missing-value sensitivity"
+subtitle: "Practical 18: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Inspect protein missingness; calculate a log2 abundance contrast with stated denominators; compare complete observations with an unjustified imputation.
+
+## Biological question and data
+
+How does treating a missing protein measurement as zero change a group comparison?
+
+The supplied values are fictional log2 protein abundances, not raw peptide spectra. Missingness was inserted into the fixture. The contrast is descriptive and does not implement peptide identification, protein inference or a calibrated differential-abundance pipeline.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Count observed measurements
+
+Calculate group-specific observation counts before group means.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+P <- d$protein_missing; diet <- d$metadata$diet
+y <- P[1,]
+observed <- tapply(!is.na(y),diet,sum)
+means <- tapply(y,diet,mean,na.rm=TRUE)
+data.frame(group=names(means),observed=as.vector(observed),mean_log2=as.vector(means))
+stopifnot(sum(observed)==45)
+```
+
+The first protein has three missing values. Reporting group means without observation counts hides the change in comparison population.
+
+## 2. Translate the contrast correctly
+
+The difference in log2 means corresponds to a ratio of geometric means on the original scale.
+
+```{r}
+delta <- unname(means["supplement"]-means["control"])
+c(log2_difference=delta,geometric_mean_ratio=2^delta)
+original <- 2^y
+geo <- tapply(original,diet,function(z) exp(mean(log(z),na.rm=TRUE)))
+stopifnot(abs(geo["supplement"]/geo["control"]-2^delta)<1e-10)
+```
+
+This is not the ratio of arithmetic mean abundance. The calculation concerns the observed values only.
+
+## 3. Demonstrate an unjustified replacement
+
+Replace NA by zero solely to expose the consequence, then compare the group differences.
+
+```{r}
+bad <- y;bad[is.na(bad)] <- 0
+bad_means <- tapply(bad,diet,mean)
+c(observed_value_difference=delta,
+ zero_imputed_difference=unname(bad_means["supplement"]-bad_means["control"]))
+boxplot(y~diet,xlab="Diet",ylab="Observed log2 abundance",col="#E5A66B")
+```
+
+Zero on the log2 scale means original-scale abundance one. It does not represent a valid generic non-observation rule.
+
+## Interpretation and limits
+
+Different missing mechanisms require different strategies and sensitivity analyses. Selected complete observations may be biased if detection depends on abundance. Batch adjustment, identification uncertainty, multiple testing and validation are needed for real protein analyses.
+
+## Exercises
+
+1. Why does replacing NA by zero change the contrast?
+2. What if one group has no observed values?
+3. Does a geometric-mean ratio imply a causal diet effect?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It introduces low observed values where the assay supplied none, potentially unequally across groups.
+2. The observed comparison is not estimable; report this instead of inventing a mean.
+3. No; design, confounding, model uncertainty and sampling determine causal interpretation.
+:::
+
+## Continue learning
+
+[B08 Proteomics](../notes/b08_proteomics.qmd) and [B02 Design](../notes/b02_design.qmd).
+
+Continue with [multi-omics QC](p16_multiomics_qc.qmd) and integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

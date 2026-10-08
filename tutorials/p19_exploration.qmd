@@ -1,0 +1,95 @@
+---
+title: "Exploratory multi-omics analysis and principal components"
+subtitle: "Practical 19: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Orient matrices correctly; compare covariance and standardized PCA; inspect variance explained and sample patterns; distinguish exploration from inference.
+
+## Biological question and data
+
+Which sample patterns appear in the hypothetical protein and metabolite panels?
+
+Animals are rows in the PCA inputs; molecular features are columns. Both panels are supplied log2 values and contain shared latent variation by construction. Standardization is used for description, not prediction.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Prepare matched feature matrices
+
+Use complete measurements and explicit animal alignment.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+P <- t(d$protein);M <- t(d$metabolite)
+stopifnot(identical(rownames(P),rownames(M)))
+X <- cbind(P,M)
+fit <- prcomp(X,center=TRUE,scale.=TRUE)
+variance_fraction <- fit$sdev^2/sum(fit$sdev^2)
+head(variance_fraction)
+stopifnot(abs(sum(variance_fraction)-1)<1e-12)
+```
+
+Unit-variance scaling makes different feature variances comparable for this representation. It also gives a noisy low-variance feature greater relative weight.
+
+## 2. Plot scores with design labels
+
+The same PCA scores can be labelled by diet, batch or farm to investigate alternative explanations.
+
+```{r}
+plot(fit$x[,1],fit$x[,2],pch=19,col=as.integer(d$metadata$diet),
+ xlab="PC1 score",ylab="PC2 score",main="Standardized descriptive PCA")
+legend("topleft",levels(d$metadata$diet),pch=19,col=1:2,bty="n")
+loadings <- fit$rotation[,1]
+head(sort(abs(loadings),decreasing=TRUE))
+```
+
+Loadings describe feature contributions to a mathematical direction. A sign can flip without changing the PCA representation.
+
+## 3. Demonstrate unit sensitivity
+
+Multiply one feature by 100 and compare covariance PCA to standardized PCA.
+
+```{r}
+changed <- X;changed[,1] <- 100*changed[,1]
+raw_pca <- prcomp(changed,center=TRUE,scale.=FALSE)
+scaled_pca <- prcomp(changed,center=TRUE,scale.=TRUE)
+c(covariance_PC1_fraction=raw_pca$sdev[1]^2/sum(raw_pca$sdev^2),
+ standardized_PC1_fraction=scaled_pca$sdev[1]^2/sum(scaled_pca$sdev^2))
+stopifnot(max(abs(abs(cor(fit$x[,1],scaled_pca$x[,1]))-1))<1e-10)
+```
+
+Positive unit rescaling is cancelled by standardization, while covariance PCA can become dominated by the rescaled feature.
+
+## Interpretation and limits
+
+PCA is an exploratory linear representation, not an independent test of treatment or a causal network. For prediction, fit scaling and PCA on training animals and project test animals using those parameters. Select the interpretation after considering batch, biological covariates and sampling.
+
+## Exercises
+
+1. Why can a loading sign reverse?
+2. Does a visible diet cluster prove the intervention mechanism?
+3. Why is fitting PCA on train and test together inappropriate for an untouched prediction test?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. An eigenvector and its negative represent the same axis.
+2. No; design and other shared drivers must be examined.
+3. The representation incorporates information from the evaluation population.
+:::
+
+## Continue learning
+
+[B12 Statistics](../notes/b12_statistics.qmd) and [B15 Integration](../notes/b15_integration.qmd).
+
+Continue with [regularized prediction](p20_prediction.qmd) or integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

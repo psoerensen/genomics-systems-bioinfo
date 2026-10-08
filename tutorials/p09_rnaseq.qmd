@@ -1,0 +1,104 @@
+---
+title: "RNA-seq counts, contrasts and uncertainty"
+subtitle: "Practical 9: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Align counts and metadata; distinguish known exposure from estimated normalization; fit a restricted count model and interpret log2 effects, dispersion and multiplicity.
+
+## Biological question and data
+
+Does expression differ between the two diets in a hypothetical 48-animal experiment?
+
+The fixture simulates negative-binomial counts for 24 genes, with independent animals, crossed diet/batch and known multiplicative exposure. The first four genes have a supplied diet effect. Gene01 also has a genotype effect. A quasi-Poisson fit below is an intentionally restricted mean-model illustration; its single variance multiplier per gene is not the generating negative-binomial variance function.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Load and align the count panel
+
+Count rows are genes and columns are animals. Metadata order is verified before modelling.
+
+```{r}
+source("../R/teaching_data.R")
+d <- teaching_data()
+meta <- d$metadata; counts <- d$counts
+stopifnot(identical(colnames(counts),meta$animal),!anyDuplicated(meta$animal))
+meta$exposure <- unname(d$exposure[meta$animal])
+stopifnot(all(meta$exposure>0))
+counts[1:6,1:8]
+xtabs(~diet+batch,meta)
+```
+
+Crossed treatment and batch supply separate comparisons. These 24-feature totals are an illustrative panel, not a whole-transcriptome library.
+
+## 2. Inspect exposure-adjusted values
+
+Divide by the supplied exposure, not by a normalization factor estimated from this panel. Plot on a descriptive log2 scale.
+
+```{r}
+normalized <- sweep(counts,2,meta$exposure,"/")
+stopifnot(max(abs(sweep(normalized,2,meta$exposure,"*")-counts))<1e-10)
+boxplot(log2(normalized[1,]+1)~meta$diet,col=c("#86B7A3","#E5A66B"),
+ xlab="Diet",ylab="log2(exposure-adjusted gene01 count + 1)")
+c(raw_panel_total_range=range(colSums(counts)))
+```
+
+The +1 transformation supports a plot; it is not the response used in the count model. Real RNA-seq normalization must consider composition and cannot assume this known exposure.
+
+## 3. Fit the mean model and report uncertainty
+
+Fit each gene with diet, batch and a log-exposure offset. The diet coefficient uses the natural-log link; divide it and its standard error by log(2) to obtain log2 units.
+
+```{r}
+fit_gene <- function(y) {
+ fit <- glm(y~diet+batch+offset(log(exposure)),data=meta,family=quasipoisson())
+ tab <- coef(summary(fit))
+ c(log2_effect=tab["dietsupplement","Estimate"]/log(2),
+ SE_log2=tab["dietsupplement","Std. Error"]/log(2),
+ p_value=tab["dietsupplement","Pr(>|t|)"],
+ variance_multiplier=summary(fit)$dispersion)
+}
+result <- as.data.frame(t(apply(counts,1,fit_gene)))
+result$BH <- p.adjust(result$p_value,"BH")
+result$lower <- result$log2_effect-qt(.975,nrow(meta)-3)*result$SE_log2
+result$upper <- result$log2_effect+qt(.975,nrow(meta)-3)*result$SE_log2
+result[1:8,]
+stopifnot(all(is.finite(as.matrix(result))),all(result$BH>=result$p_value-1e-12))
+```
+
+The intervals and p-values are conditional on this restricted working model. Genotype variation for gene01 remains unmodelled here. A fitted association and an approximate p-value are not a causal-mechanism claim.
+
+## Interpretation and limits
+
+This practical teaches design, exposure, contrasts and uncertainty; it is not a production differential-expression pipeline. The [DESeq2 workflow](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) adds composition-aware normalization and a gene-level negative-binomial dispersion framework. Gene filtering, relatedness, batch design and larger-scale validation need explicit decisions for real data.
+
+## Exercises
+
+1. What supplied log2 effect corresponds to .65 on the natural-log scale?
+2. Why is Poisson variance too restrictive for these generated counts?
+3. Change the seed and explain why estimates and adjusted p-values change.
+4. What would a complete treatment–batch confounding problem prevent?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. `.65/log(2)`, about .94; a finite-sample estimate need not equal it.
+2. The generating variance is mu + mu squared/12, greater than mu.
+3. Sampling realization changes, while the generating parameters remain the same.
+4. Separate estimation of diet and batch effects.
+:::
+
+## Continue learning
+
+[B02 Design](../notes/b02_design.qmd), [B06 Transcriptomics](../notes/b06_transcriptomics.qmd) and [B12 Statistics](../notes/b12_statistics.qmd).
+
+Continue with [pathway interpretation](p10_pathways.qmd), or use the Multi-Omics extension on [assay QC](p16_multiomics_qc.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

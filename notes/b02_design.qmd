@@ -66,6 +66,6 @@ Rank is necessary, not sufficient, for a good experiment. Power, within-unit dep
 
 ## Practicals and course pathways
 
-Design practical (in development) and sample identity (in development) supply shared foundations for both pathways.
+[Design practical](../tutorials/p15_experimental_design.qmd) and [sample identity](../tutorials/p14_data_handling.qmd) supply shared foundations for both pathways.
 
 Use the [unified map](../course_map.qmd) to locate B02 in both harmonized outlines. Return to the [building-block index](../modules.qmd).
