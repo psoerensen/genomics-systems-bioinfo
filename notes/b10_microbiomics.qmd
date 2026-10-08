@@ -63,6 +63,6 @@ Distinguish microbial load, relative composition, genetic potential and activity
 
 ## Practicals and course pathways
 
-Microbiome and host (in development) and integrated interpretation (in development).
+[Microbiome and host](../tutorials/p27_microbiome.qmd) and [integrated interpretation](../tutorials/p25_interpretation.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B10 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

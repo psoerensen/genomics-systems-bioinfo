@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Calculate group-specific observation counts before group means.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 P <- d$protein_missing; diet <- d$metadata$diet
 y <- P[1,]
@@ -90,4 +92,4 @@ Different missing mechanisms require different strategies and sensitivity analys
 
 [B08 Proteomics](../notes/b08_proteomics.qmd) and [B02 Design](../notes/b02_design.qmd).
 
-Continue with [multi-omics QC](p16_multiomics_qc.qmd) and integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [multi-omics QC](p16_multiomics_qc.qmd) and [integration](p21_integration.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

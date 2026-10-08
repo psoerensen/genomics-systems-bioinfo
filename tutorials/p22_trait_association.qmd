@@ -1,0 +1,100 @@
+---
+title: "Multi-omics associations with an animal-production trait"
+subtitle: "Practical 22: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Estimate conditional feature associations; compare marginal and adjusted patterns; report effect scale and multiple testing; distinguish prediction from mechanism.
+
+## Biological question and data
+
+Which hypothetical molecular features are associated with the supplied animal response after accounting for diet and batch?
+
+Animals are independent in this fixture. Response units are arbitrary; features are already log2 abundance. The shared latent factor generates association without specifying measured features as causes. Linear-model inference remains conditional on the selected covariates and residual assumptions.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Prepare matched measurements and the design
+
+Keep animal rows aligned and examine the crossed design.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+X <- cbind(t(d$protein),t(d$metabolite));meta <- d$metadata
+stopifnot(identical(rownames(X),meta$animal))
+xtabs(~diet+batch,meta)
+summary(meta$response)
+```
+
+The target is a feature association conditional on measured covariates, not a treatment effect or breeding-value estimate.
+
+## 2. Fit a prespecified conditional model per feature
+
+For each feature use response ~ feature + diet + batch. Report the association per one log2 unit of the feature.
+
+```{r}
+analyse <- function(feature) {
+ z <- meta;z$feature <- feature
+ fit <- lm(response~feature+diet+batch,z)
+ tab <- coef(summary(fit))
+ c(effect=tab["feature","Estimate"],SE=tab["feature","Std. Error"],
+ p=tab["feature","Pr(>|t|)"])
+}
+result <- as.data.frame(t(apply(X,2,analyse)))
+result$BH <- p.adjust(result$p,"BH")
+result[order(result$p),]
+stopifnot(all(is.finite(as.matrix(result))),all(result$BH>=result$p-1e-12))
+```
+
+The adjusted p-values concern the supplied set of tests under the model and applicable dependence conditions. They do not identify causal biomarkers.
+
+## 3. Compare an unadjusted and conditional relationship
+
+Use the same feature and animals for both fits.
+
+```{r}
+z <- meta;z$feature <- X[,1]
+a <- lm(response~feature,z)
+b <- lm(response~feature+diet+batch,z)
+c(marginal=coef(a)["feature"],conditional=coef(b)["feature"])
+plot(z$feature,z$response,pch=19,col=as.integer(z$diet),
+ xlab="Feature log2 abundance",ylab="Response (arbitrary units)")
+```
+
+Adjustment changes the estimand; it is not an automatic guarantee that every nuisance variable has been removed.
+
+## Interpretation and limits
+
+Marker relatedness, repeated animals, nonlinear associations, measurement error and selection require suitable analysis in real data. A feature selected on all outcomes cannot then be evaluated on those same animals as an independently validated predictor.
+
+## Exercises
+
+1. What units does the fitted feature coefficient have?
+2. Why can a feature predict without being a cause?
+3. Where should feature selection occur in a prediction workflow?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Arbitrary response units per one log2 unit of the supplied abundance.
+2. It may track a shared biological or technical driver.
+3. Within training-only validation; then evaluate the complete selected pipeline on held-out animals.
+:::
+
+## Continue learning
+
+[B12 Statistics](../notes/b12_statistics.qmd), [B13 Association](../notes/b13_association.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with [prediction](p20_prediction.qmd) or [biomarker validation](p24_biomarkers.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

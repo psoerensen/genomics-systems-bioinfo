@@ -1,0 +1,259 @@
+---
+title: "Genomics, Systems Biology and Bioinformatics"
+subtitle: "Unified framework for multi-omics teaching"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    show-notes: false
+    self-contained: false
+editor: source
+---
+
+## One framework, two pathways
+
+- Reuse concepts and worked examples across both harmonized MSc outlines.
+- Select depth and exercises to match each pathway's learning objectives.
+- Keep study design, computation and biological interpretation connected.
+
+## Use the teaching materials
+
+1. Read the module and identify the measurement and assumptions.
+2. Run the practical and predict the effect of one change.
+3. Attempt exercises before opening suggested answers.
+4. Explain what the result supports and what needs further evidence.
+
+[Course map](../course_map.html) · [Modules](../modules.html) · [Practicals](../practicals.html)
+
+## B01 Biological questions
+
+- Define the production trait, population and decision time.
+- Separate intervention, association and prediction.
+- Choose measurements that answer the question.
+
+**Discuss:** Does a day14 profile qualify as a baseline predictor?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B02 Design and sampling
+
+- Identify the independently allocated experimental unit.
+- Cross treatment groups with processing batches.
+- Record animal, specimen, tissue, time and handling.
+
+**Discuss:** Can adjustment separate perfectly confounded treatment and batch?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B03 Databases and identifiers
+
+- Distinguish study, sample, gene, transcript and protein records.
+- Preserve species, assembly and annotation versions.
+- Audit unmatched and one-to-many mappings.
+
+**Discuss:** Does a duplicated annotation row create a new measurement?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B04 Reproducible data handling
+
+- Define feature and sample dimensions.
+- Align by stable identifiers; check uniqueness and missing matches.
+- Preserve raw inputs and record transformations.
+
+**Discuss:** Would equal dimensions detect a sample-order error?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B05 Genomic measurements
+
+- Distinguish reads, assemblies, alignments and genotype calls.
+- Specify quality encoding and the called-base denominator.
+- Separate identity, homology and functional claims.
+
+**Discuss:** Why can a high-identity short sequence be weak evidence?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B06 Transcriptomics
+
+- Define biological replicates and the expression contrast.
+- Separate exposure normalization, visualization and inference.
+- Count-model variance and dispersion affect uncertainty.
+
+**Discuss:** Do many reads replace independent animals?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B07 Epigenomics
+
+- Record coverage, tissue and assay context.
+- Distinguish within-cell changes from composition shifts.
+- Regulatory association is not evidence of mediation by itself.
+
+**Discuss:** Can bulk methylation change while each cell type stays constant?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B08 Proteomics
+
+- Separate peptide identification, protein inference and abundance.
+- Preserve the measurement scale and observation counts.
+- Missing abundance is not a measured zero.
+
+**Discuss:** What does a one-unit log2 difference represent?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B09 Metabolomics
+
+- Distinguish analytical features from identified compounds.
+- Assess blanks, standards, drift and batch.
+- A standard corrects only the variation it tracks.
+
+**Discuss:** Can an unresolved feature establish a named pathway?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B10 Microbiomics
+
+- Define sampling site, time and profiling method.
+- Relative read fractions do not measure total microbial load.
+- Host associations can share diet, genotype and technical drivers.
+
+**Discuss:** Can a fraction decrease while absolute amount stays constant?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B11 Phenomics
+
+- Define phenotype units, time window and coverage.
+- Repeated sensor rows remain nested within animals.
+- Use only information available at the decision time.
+
+**Discuss:** How many independent allocations are in a million sensor rows?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B12 Statistics and validation
+
+- Distinguish conditional inference from prediction.
+- Fit preprocessing and tuning within training data.
+- Evaluate on independent units matching deployment.
+
+**Discuss:** When does a test set become a tuning set?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B13 Association and regulation
+
+- State counted alleles, covariates and relatedness assumptions.
+- LD can make several candidates tag the same signal.
+- GWAS, eQTL, TWAS and prediction answer different questions.
+
+**Discuss:** Does a correlated eQTL and trait signal prove mediation?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B14 Pathways and networks
+
+- Define the eligible background and selection null.
+- State what an edge measures and how it is selected.
+- Enrichment and correlation do not directly measure causal activity.
+
+**Discuss:** How would changing the background alter enrichment?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B15 Multi-omics integration
+
+- Match animal, tissue and time across layers.
+- Choose an integration strategy and justified block weights.
+- Evaluate missingness and shared biological/technical drivers.
+
+**Discuss:** Are two correlated layers independent replications?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B16 Advanced methods
+
+- Cell and spatial resolution do not create independent allocations.
+- Keep specimens/animals separated for new-animal prediction.
+- Evaluate measurement, model and mechanistic evidence separately.
+
+**Discuss:** Can spatial proximity establish a molecular interaction?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B17 Research integrity
+
+- Document provenance, exclusions and exploratory decisions.
+- Share only data allowed by the governing agreements.
+- Verify and disclose AI contributions appropriately.
+
+**Discuss:** Does a checksum certify biological validity?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## B18 Animal-production synthesis
+
+- Connect each assay to the defined production question.
+- Compare strategies on the same independent evaluation animals.
+- Report uncertainty, alternatives and justified follow-up.
+
+**Discuss:** Does a predictive improvement identify an intervention target?
+
+::: {.notes}
+Use the corresponding B-numbered module for equations, worked code and suggested answers. Ask students to identify the analysis unit and evidence needed before interpreting the example.
+:::
+
+## Worked thread through the course
+
+- Plan an animal-level diet study and matched assays.
+- Verify sample identity and assay-specific quality.
+- Analyse RNA counts and expression contrasts.
+- Examine pathways and cross-layer relationships.
+- Compare predictive strategies with training-only transformations.
+- Write an interpretation or proposal at the level the evidence supports.
+
+## Complete the pathway
+
+**GSB:** data resources → computation → association → networks → integration.
+
+**Multi-Omics:** technologies → sampling/design → processing → integration → production applications.
+
+Both use the same maintained module and practical sources. The [map](../course_map.html) preserves original module numbering and assessment weights.

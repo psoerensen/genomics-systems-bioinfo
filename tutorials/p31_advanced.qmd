@@ -1,0 +1,98 @@
+---
+title: "Single-cell and spatial evidence with biological replication"
+subtitle: "Practical 31: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish cell resolution from independent treatment allocation; compare naive and animal-level uncertainty; critique spatial and AI claims using stated evidence.
+
+## Biological question and data
+
+Does observing many cells from eight animals provide the same intervention information as observing that many independent animals?
+
+The worked measurements are fictional continuous cell-level values, not an RNA-seq analysis. Treatment is assigned to animals. A supplied animal-specific effect induces within-animal dependence. Animal-mean analysis is used to illustrate that unit; actual single-cell pipelines need count/assay-specific models and sample-level design.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Generate nested measurements
+
+Twenty cells belong to each animal. The animal-specific effects are supplied, not independently assigned to cells.
+
+```{r}
+set.seed(3101)
+animal <- rep(paste0("a",1:8),each=20)
+treatment_animal <- rep(c(0,1),each=4)
+animal_effect <- c(-1,.5,1,-.5,.8,-.2,1.2,-.8)
+dat <- data.frame(animal,treatment=rep(treatment_animal,each=20))
+dat$value <- 1+dat$treatment+rep(animal_effect,each=20)+rnorm(160,sd=.2)
+c(cells=nrow(dat),animals=length(unique(dat$animal)))
+```
+
+The dataset has 160 measurements but eight independently treated animals.
+
+## 2. Compare uncertainty at different units
+
+Fit the intentionally naive independent-cell model and a model of animal means. Label the naive fit as unsuitable for the allocation.
+
+```{r}
+naive <- lm(value~treatment,dat)
+means <- aggregate(value~animal+treatment,dat,mean)
+animal_fit <- lm(value~treatment,means)
+result <- data.frame(analysis=c("naive independent cells","animal means"),
+ estimate=c(coef(naive)["treatment"],coef(animal_fit)["treatment"]),
+ SE=c(coef(summary(naive))["treatment","Std. Error"],
+ coef(summary(animal_fit))["treatment","Std. Error"]),
+ residual_df=c(df.residual(naive),df.residual(animal_fit)))
+result
+stopifnot(nrow(means)==8,result$SE[1]<result$SE[2])
+```
+
+Equal cell counts make the mean contrasts agree, while the independent-cell assumption understates uncertainty. More measurement resolution did not create independent animals.
+
+## 3. Critique additional advanced claims
+
+For each claim identify the measurement, dependence and missing evidence.
+
+```{r}
+review <- data.frame(claim=c("adjacent spatial spots interact","AI cell split predicts new animals",
+ "chromatin contact proves regulatory direction"),
+ question=c("resolution, cell mixtures, spatial dependence and mechanistic evidence?",
+ "were animals separated and all preprocessing learned in training?",
+ "what perturbation/temporal evidence establishes the causal relationship?"))
+review
+```
+
+These are hypothetical critique prompts. Co-location, prediction and molecular contact describe different kinds of evidence.
+
+## Interpretation and limits
+
+The example is not a single-cell/spatial software pipeline. Pseudobulk or hierarchical methods must reflect the assay and animal/specimen design. Advanced technology and AI do not remove the need for independent replication, provenance and appropriate validation.
+
+## Exercises
+
+1. Why do the point estimates agree here?
+2. Would splitting cells from every animal produce a new-animal prediction test?
+3. What should a critical paper review report?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Every animal has equal cell counts, so the treatment contrast averages the same animal-level values.
+2. No; animal-specific information appears in both training and test.
+3. Question, measured unit/resolution, replication, processing, model assumptions, evidence strength, alternative explanations and a justified follow-up.
+:::
+
+## Continue learning
+
+[B16 Advanced methods](../notes/b16_advanced.qmd), [B11 Phenomics](../notes/b11_phenomics.qmd) and [B17 Integrity](../notes/b17_integrity.qmd).
+
+Continue with [research reporting](p13_reporting.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

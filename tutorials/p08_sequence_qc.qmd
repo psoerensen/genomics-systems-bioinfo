@@ -87,4 +87,4 @@ Quality encoding, adapter content, length distributions, contaminants, mapping, 
 
 [B05 Genomics](../notes/b05_genomics.qmd) and [B06 Transcriptomics](../notes/b06_transcriptomics.qmd).
 
-Continue with RNA-seq (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [RNA-seq](p09_rnaseq.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Use animals as the observations and protein features as variables.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 X <- t(d$protein)
 stopifnot(identical(rownames(X),d$metadata$animal),!anyNA(X))
@@ -97,4 +99,4 @@ Correlation can reflect diet, genotype, tissue mixture, batch or other common dr
 
 [B14 Pathways and networks](../notes/b14_networks.qmd).
 
-Continue with network and biomarker validation (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [network and biomarker validation](p24_biomarkers.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

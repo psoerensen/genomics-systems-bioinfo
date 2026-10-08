@@ -1,0 +1,92 @@
+---
+title: "Integrated multi-omics interpretation and alternative explanations"
+subtitle: "Practical 25: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Compare cross-layer evidence; examine measured common drivers; state which conclusions require independent or causal evidence.
+
+## Biological question and data
+
+When two molecular layers associate with the same production response, what can be concluded?
+
+Proteins, metabolites and response share a deliberately supplied latent factor. Diet and genotype also contribute. The measured features are not specified as direct causes of the response in the generator.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. State the evidence at its measurement level
+
+Align one protein, one metabolite and the response, all in the same animals.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+meta <- d$metadata
+z <- data.frame(protein=d$protein[1,],metabolite=d$metabolite[1,],response=meta$response,
+ diet=meta$diet,batch=meta$batch,dosage=d$genotypes[meta$animal,"marker1"])
+round(cor(z[,1:3]),2)
+```
+
+Cross-layer agreement is an observed covariance pattern. It is not independent replication because the same animals and common driver contribute.
+
+## 2. Account for supplied measured covariates
+
+Compare raw correlation with correlation of residuals after adjustment for diet, batch and genotype dosage.
+
+```{r}
+rp <- residuals(lm(protein~diet+batch+dosage,z))
+rm <- residuals(lm(metabolite~diet+batch+dosage,z))
+c(raw=cor(z$protein,z$metabolite),after_measured_adjustment=cor(rp,rm))
+stopifnot(length(rp)==48,length(rm)==48)
+```
+
+The unmeasured part of the latent factor remains shared. Adjustment can change the pattern without identifying a mechanistic direction.
+
+## 3. Connect claims to a suitable next study
+
+Distinguish prediction, response and mechanism before selecting follow-up.
+
+```{r}
+follow_up <- data.frame(claim=c("predict new animals","diet changes a molecular profile","protein mediates performance"),
+ next_step=c("validate full pipeline in eligible new animals",
+ "appropriate allocated contrast with assay/batch checks",
+ "temporal and perturbation evidence with explicit mediation assumptions"))
+follow_up
+```
+
+More omics layers may strengthen a description without resolving the key uncertainty. A targeted experiment can be more informative than another correlated panel.
+
+## Interpretation and limits
+
+Conditional correlations do not rule out unmeasured confounding, measurement error, reverse causation or selection. A mediation claim needs temporal ordering and justified assumptions, not simply a smaller diet coefficient after adding a molecular covariate.
+
+## Exercises
+
+1. Why is layer agreement not independent replication here?
+2. Does a residual correlation prove direct interaction?
+3. What should a null or inconsistent layer result contribute?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The same animals and deliberately common generating driver supply both measurements.
+2. No; an unmeasured common cause can remain.
+3. It constrains the explanation and should be reported, with assay sensitivity and context considered.
+:::
+
+## Continue learning
+
+[B13 Association](../notes/b13_association.qmd), [B14 Networks](../notes/b14_networks.qmd), [B15 Integration](../notes/b15_integration.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with [research proposal](p26_research_proposal.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

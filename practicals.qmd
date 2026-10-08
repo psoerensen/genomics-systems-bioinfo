@@ -3,29 +3,86 @@ title: "Practicals and exercises"
 toc: true
 ---
 
-Practicals use explicit assumptions, small hypothetical datasets and reproducible R examples. The two pathways reuse common practicals rather than copying them. All code examples run without biological downloads.
+The 31 practicals provide a complete initial teaching collection for both harmonized outlines. Each includes a biological question, assumptions, runnable examples, interpretation, exercises and suggested answers. All numerical inputs are hypothetical; no biological downloads or additional analysis packages are required. The examples teach the methods and their limits rather than claiming production-pipeline qualification.
 
-## Available practicals
+The 26 original sessions map to 24 shared practicals. Seven additional practicals strengthen sample identity, regularized prediction, microbiomics, phenomics, association, epigenomics and advanced-method reasoning.
 
-- [Biological databases and sequence retrieval](tutorials/p01_databases.qmd)
-- [Basic sequence analysis and manipulation](tutorials/p02_sequences.qmd)
-- [Command-line bioinformatics and reproducible execution](tutorials/p03_command_line.qmd)
-- [Sequence similarity and evidence for homology](tutorials/p04_similarity.qmd)
-- [Alignment and conserved-region analysis](tutorials/p05_alignment.qmd)
-- [Distances, clustering and phylogenetic interpretation](tutorials/p06_phylogeny.qmd)
-- [Protein structure and structural bioinformatics](tutorials/p07_structure.qmd)
-- [Sequencing data quality assessment](tutorials/p08_sequence_qc.qmd)
-- [RNA-seq counts, contrasts and uncertainty](tutorials/p09_rnaseq.qmd)
-- [Functional annotation and pathway enrichment](tutorials/p10_pathways.qmd)
-- [Biological network construction and interpretation](tutorials/p11_networks.qmd)
-- [Biological data visualization with explicit units](tutorials/p12_visualization.qmd)
-- [Scientific reporting and reproducible analysis records](tutorials/p13_reporting.qmd)
-- [Sample identity, table joins and missing assays](tutorials/p14_data_handling.qmd)
-- [Multi-omics experimental design in animal production](tutorials/p15_experimental_design.qmd)
-- [Quality assessment and preprocessing across omics layers](tutorials/p16_multiomics_qc.qmd)
-- [Metabolomics processing, standards and feature interpretation](tutorials/p17_metabolomics.qmd)
-- [Proteomics analysis and missing-value sensitivity](tutorials/p18_proteomics.qmd)
-- [Exploratory multi-omics analysis and principal components](tutorials/p19_exploration.qmd)
-- [Regularized regression and held-out prediction](tutorials/p20_prediction.qmd)
+## Run the practicals
 
-Use the [curriculum crosswalk](course_map.qmd#practical-session-coverage) to locate each session in the two original outlines. Shared practicals can have different pathway extensions.
+Download or clone the [course repository](https://github.com/psoerensen/genomics-systems-bioinfo) and open `genomics-systems-bioinfo.Rproj`. Quarto uses R with knitr/rmarkdown to render the practicals. In the RStudio Terminal, for example:
+
+```bash
+quarto render tutorials/p09_rnaseq.qmd
+```
+
+You can also run the displayed chunks in order in a clean R session, starting in either the repository root or its `tutorials/` folder. The code locates the local teaching helpers in `R/`. These helpers and their hypothetical data model are part of the repository; a copied code fragment still needs those files. No biological download is required. Use the code folds to inspect each calculation and attempt exercises before revealing suggested answers.
+
+## Genomics, Systems Biology and Bioinformatics pathway
+
+1. [Biological Databases and Sequence Retrieval](tutorials/p01_databases.qmd)
+2. [Basic Sequence Analysis and Manipulation](tutorials/p02_sequences.qmd)
+3. [Command-Line Bioinformatics](tutorials/p03_command_line.qmd)
+4. [Sequence Similarity and Homology Analysis](tutorials/p04_similarity.qmd)
+5. [Multiple Sequence Alignment and Conserved-Region Analysis](tutorials/p05_alignment.qmd)
+6. [Phylogenetic Analysis](tutorials/p06_phylogeny.qmd)
+7. [Protein Structure and Structural Bioinformatics](tutorials/p07_structure.qmd)
+8. [Sequencing Data Quality Assessment](tutorials/p08_sequence_qc.qmd)
+9. [RNA-Seq Data Analysis](tutorials/p09_rnaseq.qmd)
+10. [Functional Annotation and Pathway Analysis](tutorials/p10_pathways.qmd)
+11. [Biological Network Analysis](tutorials/p11_networks.qmd)
+12. [Biological Data Visualization](tutorials/p12_visualization.qmd)
+13. [Integrated Bioinformatics Data Analysis](tutorials/p23_integrated_analysis.qmd)
+14. [Scientific Reporting and Presentation](tutorials/p13_reporting.qmd)
+
+## Multi-Omics Technology in Animal Production pathway
+
+1. [Multi-Omics Experimental Design in Animal Production](tutorials/p15_experimental_design.qmd)
+2. [Quality Assessment and Preprocessing of Multi-Omics Data](tutorials/p16_multiomics_qc.qmd)
+3. [Transcriptome Data Analysis](tutorials/p09_rnaseq.qmd)
+4. [Metabolomics Data Processing and Analysis](tutorials/p17_metabolomics.qmd)
+5. [Proteomics Data Analysis](tutorials/p18_proteomics.qmd)
+6. [Exploratory Analysis of Multi-Omics Data](tutorials/p19_exploration.qmd)
+7. [Functional Enrichment and Pathway Analysis](tutorials/p10_pathways.qmd)
+8. [Multi-Omics Data Integration](tutorials/p21_integration.qmd)
+9. [Multi-Omics Association with Animal Production Traits](tutorials/p22_trait_association.qmd)
+10. [Multi-Omics Network and Biomarker Analysis](tutorials/p24_biomarkers.qmd)
+11. [Integrated Multi-Omics Interpretation](tutorials/p25_interpretation.qmd)
+12. [Multi-Omics Research Proposal and Scientific Reporting](tutorials/p26_research_proposal.qmd)
+
+Both pathways reuse Practical 9 for RNA-seq and Practical 10 for enrichment. Assign the relevant extensions rather than requiring the same exercise twice.
+
+## Complete practical library
+
+- [Practical 1: Biological databases and sequence retrieval](tutorials/p01_databases.qmd)
+- [Practical 2: Basic sequence analysis and manipulation](tutorials/p02_sequences.qmd)
+- [Practical 3: Command-line bioinformatics and reproducible execution](tutorials/p03_command_line.qmd)
+- [Practical 4: Sequence similarity and evidence for homology](tutorials/p04_similarity.qmd)
+- [Practical 5: Alignment and conserved-region analysis](tutorials/p05_alignment.qmd)
+- [Practical 6: Distances, clustering and phylogenetic interpretation](tutorials/p06_phylogeny.qmd)
+- [Practical 7: Protein structure and structural bioinformatics](tutorials/p07_structure.qmd)
+- [Practical 8: Sequencing data quality assessment](tutorials/p08_sequence_qc.qmd)
+- [Practical 9: RNA-seq counts, contrasts and uncertainty](tutorials/p09_rnaseq.qmd)
+- [Practical 10: Functional annotation and pathway enrichment](tutorials/p10_pathways.qmd)
+- [Practical 11: Biological network construction and interpretation](tutorials/p11_networks.qmd)
+- [Practical 12: Biological data visualization with explicit units](tutorials/p12_visualization.qmd)
+- [Practical 13: Scientific reporting and reproducible analysis records](tutorials/p13_reporting.qmd)
+- [Practical 14: Sample identity, table joins and missing assays](tutorials/p14_data_handling.qmd)
+- [Practical 15: Multi-omics experimental design in animal production](tutorials/p15_experimental_design.qmd)
+- [Practical 16: Quality assessment and preprocessing across omics layers](tutorials/p16_multiomics_qc.qmd)
+- [Practical 17: Metabolomics processing, standards and feature interpretation](tutorials/p17_metabolomics.qmd)
+- [Practical 18: Proteomics analysis and missing-value sensitivity](tutorials/p18_proteomics.qmd)
+- [Practical 19: Exploratory multi-omics analysis and principal components](tutorials/p19_exploration.qmd)
+- [Practical 20: Regularized regression and held-out prediction](tutorials/p20_prediction.qmd)
+- [Practical 21: Multi-omics integration with matched samples and balanced blocks](tutorials/p21_integration.qmd)
+- [Practical 22: Multi-omics associations with an animal-production trait](tutorials/p22_trait_association.qmd)
+- [Practical 23: Integrated analysis and comparison of prediction strategies](tutorials/p23_integrated_analysis.qmd)
+- [Practical 24: Network stability and biomarker evaluation](tutorials/p24_biomarkers.qmd)
+- [Practical 25: Integrated multi-omics interpretation and alternative explanations](tutorials/p25_interpretation.qmd)
+- [Practical 26: Multi-omics research proposal and scientific reporting](tutorials/p26_research_proposal.qmd)
+- [Practical 27: Microbiome composition and host–microbiome interpretation](tutorials/p27_microbiome.qmd)
+- [Practical 28: Phenomics, repeated records and decision-time alignment](tutorials/p28_phenomics.qmd)
+- [Practical 29: Genomic association and regulatory-variation analysis](tutorials/p29_association.qmd)
+- [Practical 30: Epigenomic coverage and cell-composition effects](tutorials/p30_epigenomics.qmd)
+- [Practical 31: Single-cell and spatial evidence with biological replication](tutorials/p31_advanced.qmd)
+
+Choose prerequisite blocks in the [module index](modules.qmd) and see formal module numbering and assessment weights in the [unified map](course_map.qmd).

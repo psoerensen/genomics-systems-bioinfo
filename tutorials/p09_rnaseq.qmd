@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Count rows are genes and columns are animals. Metadata order is verified before modelling.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 meta <- d$metadata; counts <- d$counts
 stopifnot(identical(colnames(counts),meta$animal),!anyDuplicated(meta$animal))

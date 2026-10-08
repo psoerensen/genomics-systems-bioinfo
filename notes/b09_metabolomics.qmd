@@ -63,6 +63,6 @@ Chemical identity should have documented supporting evidence; a feature ID is no
 
 ## Practicals and course pathways
 
-[Metabolomics processing](../tutorials/p17_metabolomics.qmd), [exploratory analysis](../tutorials/p19_exploration.qmd) and integration (in development).
+[Metabolomics processing](../tutorials/p17_metabolomics.qmd), [exploratory analysis](../tutorials/p19_exploration.qmd) and [integration](../tutorials/p21_integration.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B09 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

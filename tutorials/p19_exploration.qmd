@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Use complete measurements and explicit animal alignment.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 P <- t(d$protein);M <- t(d$metabolite)
 stopifnot(identical(rownames(P),rownames(M)))
@@ -92,4 +94,4 @@ PCA is an exploratory linear representation, not an independent test of treatmen
 
 [B12 Statistics](../notes/b12_statistics.qmd) and [B15 Integration](../notes/b15_integration.qmd).
 
-Continue with [regularized prediction](p20_prediction.qmd) or integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [regularized prediction](p20_prediction.qmd) or [integration](p21_integration.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

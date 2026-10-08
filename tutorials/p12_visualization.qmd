@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Count independent animals within the crossed diet/batch design.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 meta <- d$metadata
 xtabs(~diet+batch,meta)

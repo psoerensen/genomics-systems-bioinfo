@@ -1,0 +1,101 @@
+---
+title: "Integrated analysis and comparison of prediction strategies"
+subtitle: "Practical 23: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Compare early and late integration on identical held-out animals; keep transformations in training; interpret paired errors and operational limits.
+
+## Biological question and data
+
+Does integration add predictive information beyond either hypothetical molecular layer alone?
+
+The split, penalty and integration weights are supplied. No test outcome chooses a feature, penalty or mixture weight. The fixture is a small illustrative simulation; all responses use arbitrary units.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Specify the competing strategies
+
+Compare separate protein/metabolite ridge models, weighted early concatenation and a fixed average of separate predictions.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+source(file.path(helper_dir,"prediction_helpers.R"))
+P <- t(d$protein);M <- t(d$metabolite);X <- cbind(P,M)
+y <- d$metadata$response;train <- 1:32;test <- 33:48
+stopifnot(identical(rownames(P),rownames(M)))
+models <- list(protein=fit_teaching_ridge(P[train,],y[train]),
+ metabolite=fit_teaching_ridge(M[train,],y[train]),
+ early=fit_teaching_ridge(X[train,],y[train],weights=c(rep(1/sqrt(ncol(P)),ncol(P)),
+ rep(1/sqrt(ncol(M)),ncol(M)))))
+stopifnot(max(abs(models$protein$center-colMeans(P[train,])))<1e-12)
+```
+
+Weights are applied after training standardization in the helper. Re-standardizing the weighted columns would cancel these intended block weights.
+
+## 2. Predict without using test outcomes
+
+The late strategy uses a prespecified equal average. It is not a test-optimized ensemble.
+
+```{r}
+prediction <- cbind(protein=predict_teaching_ridge(models$protein,P[test,]),
+ metabolite=predict_teaching_ridge(models$metabolite,M[test,]),
+ early=predict_teaching_ridge(models$early,X[test,]))
+prediction <- cbind(prediction,late=rowMeans(prediction[,c("protein","metabolite")]),
+ baseline=mean(y[train]))
+error <- sweep(prediction,1,y[test],"-")
+data.frame(strategy=colnames(prediction),test_RMSE=sqrt(colMeans(error^2)))
+stopifnot(nrow(prediction)==length(test),all(is.finite(prediction)))
+```
+
+All strategies face the same animals and loss. The comparison can show whether the selected strategy helps in this realization, rather than assuming more layers must improve performance.
+
+## 3. Inspect a paired comparison
+
+Subtract squared errors animal by animal. Inspect variability, not just a ranking.
+
+```{r}
+improvement <- error[,"protein"]^2-error[,"early"]^2
+c(mean_paired_MSE_improvement=mean(improvement),
+ animals_improved=sum(improvement>0),animals_evaluated=length(improvement))
+plot(y[test],prediction[,"early"],pch=19,xlab="Observed response",ylab="Early-integration prediction")
+abline(0,1,col="#d95f02")
+```
+
+Positive improvement means smaller squared error for early integration than the protein model. The sign can differ across animals and seeds.
+
+## Interpretation and limits
+
+The source contains a restricted educational ridge helper, not a general modelling package. One farm-composition split cannot qualify an operational predictor. Nested tuning, independent cohorts, calibration, measurement availability and costs belong in a real comparison.
+
+## Exercises
+
+1. Why does the fixed late average avoid one kind of leakage?
+2. How would you choose mixture weights legitimately?
+3. Why might adding a layer worsen prediction?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Test outcomes do not choose the weight.
+2. Estimate/tune them in training-only validation, then freeze the pipeline before evaluation.
+3. Noise, small samples, redundant features, shift or unsuitable scaling/regularization can outweigh added information.
+:::
+
+## Continue learning
+
+[B12 Statistics](../notes/b12_statistics.qmd), [B15 Integration](../notes/b15_integration.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with [integrated interpretation](p25_interpretation.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

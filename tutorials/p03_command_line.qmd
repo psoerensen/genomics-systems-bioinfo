@@ -91,4 +91,4 @@ Use tool-specific documentation for real aligners or quantifiers; this example r
 
 [B04 Programming](../notes/b04_programming.qmd) and [B17 Integrity](../notes/b17_integrity.qmd).
 
-Continue with data handling (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [data handling](p14_data_handling.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

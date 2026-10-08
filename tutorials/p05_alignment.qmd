@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Global alignment compares the entire supplied sequences. Different scoring choices can change an optimal alignment.
 
 ```{r}
-source("../R/sequence_helpers.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"sequence_helpers.R")))
+source(file.path(helper_dir,"sequence_helpers.R"))
 a <- "ACGTACGT"; b <- "ACGACGT"
 fit <- global_alignment(a,b)
 fit

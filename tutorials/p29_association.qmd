@@ -1,0 +1,97 @@
+---
+title: "Genomic association and regulatory-variation analysis"
+subtitle: "Practical 29: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define a counted-allele dosage; fit a restricted eQTL-style mean model with covariates; compare correlated candidate evidence; distinguish association, prediction and mediation.
+
+## Biological question and data
+
+Does marker1 associate with the fictional gene01 expression profile after accounting for diet and batch?
+
+The generator supplies a marker1 effect on gene01 log expected expression, as well as diet and batch effects. Animals are unrelated/independent in the model. The supplied exposure is known. The quasi-Poisson working model is not a calibrated GWAS/eQTL pipeline for real related animals.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Align the counted allele and expression
+
+The 0/1/2 dosage counts a fictional designated allele. Keep sample IDs and the exposure offset explicit.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+meta <- d$metadata
+meta$dosage <- d$genotypes[meta$animal,"marker1"]
+meta$count <- as.vector(d$counts["gene01",meta$animal])
+meta$exposure <- unname(d$exposure[meta$animal])
+stopifnot(all(meta$dosage%in%0:2),qr(model.matrix(~diet+batch+dosage,meta))$rank==4)
+table(meta$dosage)
+```
+
+A dosage cannot be called favourable or causal from its numeric coding.
+
+## 2. Fit the supplied expression-association model
+
+Use diet, batch, dosage and exposure. Translate the dosage coefficient into expected expression ratio per counted allele.
+
+```{r}
+fit <- glm(count~diet+batch+dosage+offset(log(exposure)),data=meta,family=quasipoisson())
+tab <- coef(summary(fit))
+tab
+c(log_effect_per_allele=coef(fit)["dosage"],
+ mean_expression_ratio_per_allele=exp(coef(fit)["dosage"]),
+ supplied_generator_ratio=exp(.3))
+```
+
+The fitted estimate need not equal exp(.3) in one count realization. The uncertainty belongs to a restricted working variance model, not a qualified biological eQTL analysis.
+
+## 3. Create a correlated candidate and examine ambiguity
+
+A nearly identical marker can tag the same signal. Genotype correlation is not an independent confirmation.
+
+```{r}
+candidate <- meta$dosage
+candidate[1] <- (candidate[1]+1)%%3
+c(dosage_correlation=cor(meta$dosage,candidate))
+second <- glm(count~diet+batch+candidate+offset(log(exposure)),data=meta,family=quasipoisson())
+c(marker1_effect=coef(fit)["dosage"],tagged_candidate_effect=coef(second)["candidate"])
+stopifnot(length(candidate)==48)
+```
+
+A correlated candidate can inherit association. Two conditional models here do not calculate a fine-mapping posterior or identify a causal allele.
+
+## Interpretation and limits
+
+Real studies need allele/reference alignment, genotype and expression QC, relatedness/structure treatment, adequate replication, cis/trans definitions, multiple testing and model diagnostics. A TWAS association is not automatically evidence that expression mediates the variant–trait effect. Fine-mapping requires an explicit candidate/model/LD framework.
+
+## Exercises
+
+1. What is the expected ratio per allele in the generator?
+2. Does a correlated candidate represent another independent biological effect?
+3. What would an expression-mediation claim additionally require?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. exp(.3), about 1.35, conditional on the supplied model.
+2. No; association can be tagged through correlated dosage.
+3. Temporal/causal assumptions and evidence addressing shared genetic and environmental drivers, not merely paired association tests.
+:::
+
+## Continue learning
+
+[B13 Association](../notes/b13_association.qmd), [B06 Transcriptomics](../notes/b06_transcriptomics.qmd) and [B12 Statistics](../notes/b12_statistics.qmd).
+
+Continue with [integrated interpretation](p25_interpretation.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

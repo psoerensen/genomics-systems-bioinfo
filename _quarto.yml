@@ -1,11 +1,14 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - .nojekyll
   render:
     - index.qmd
     - course_map.qmd
     - modules.qmd
     - practicals.qmd
+    - slides/introduction_genomics_systems_bioinfo.qmd
     - notes/b01_foundations.qmd
     - notes/b02_design.qmd
     - notes/b03_databases.qmd
@@ -44,25 +47,41 @@ project:
     - tutorials/p18_proteomics.qmd
     - tutorials/p19_exploration.qmd
     - tutorials/p20_prediction.qmd
+    - tutorials/p21_integration.qmd
+    - tutorials/p22_trait_association.qmd
+    - tutorials/p23_integrated_analysis.qmd
+    - tutorials/p24_biomarkers.qmd
+    - tutorials/p25_interpretation.qmd
+    - tutorials/p26_research_proposal.qmd
+    - tutorials/p27_microbiome.qmd
+    - tutorials/p28_phenomics.qmd
+    - tutorials/p29_association.qmd
+    - tutorials/p30_epigenomics.qmd
+    - tutorials/p31_advanced.qmd
 
 website:
   title: "Genomics, Systems Biology & Bioinformatics"
   site-url: https://psoerensen.github.io/genomics-systems-bioinfo/
   repo-url: https://github.com/psoerensen/genomics-systems-bioinfo
   navbar:
+    title: "Genomics & Multi-Omics"
     left:
       - text: "Home"
         href: index.html
       - text: "Course map"
         href: course_map.html
+      - text: "Slides"
+        href: slides/introduction_genomics_systems_bioinfo.html
       - text: "Modules"
         href: modules.html
       - text: "Practicals"
         href: practicals.html
-      - text: "Quantitative Genetics"
-        href: https://psoerensen.github.io/quantitative-genetics/
-      - text: "Population Genetics"
-        href: https://psoerensen.github.io/population-genetics/
+      - text: "Related courses"
+        menu:
+          - text: "Quantitative Genetics"
+            href: https://psoerensen.github.io/quantitative-genetics/
+          - text: "Population Genetics"
+            href: https://psoerensen.github.io/population-genetics/
       - text: "gteach"
         href: https://psoerensen.github.io/gteach/
 

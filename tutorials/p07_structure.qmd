@@ -87,4 +87,4 @@ For an actual structure, record accession, model, chain, residue numbering, unit
 
 [B08 Proteomics and structure](../notes/b08_proteomics.qmd).
 
-Continue with protein abundance (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [protein abundance](p18_proteomics.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

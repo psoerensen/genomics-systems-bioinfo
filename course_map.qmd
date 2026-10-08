@@ -16,7 +16,7 @@ This map defines the unified curriculum. The [module index](modules.qmd) and [pr
 
 The block numbers are stable identifiers, rather than a compulsory teaching order. Technologies can be introduced alongside the data and design decisions that make their measurements interpretable.
 
-| Block | Scope | Students should be able to | Proposed worked example or practical |
+| Block | Scope | Students should be able to | Worked example or practical |
 | --- | --- | --- | --- |
 | [B01 Foundations and biological questions](notes/b01_foundations.qmd) | Genomics, systems biology, bioinformatics; omics layers; genotype–phenotype relationships | Define a biological question and identify the measurements needed to address it | Map a feed-efficiency question to genomic, expression, microbial and phenotype measurements |
 | [B02 Experimental design and sampling](notes/b02_design.qmd) | Experimental units, biological replication, tissue and time, matched samples, collection and preservation, batch allocation | Specify a sampling design and distinguish biological effects from confounding | Compare matched and unmatched multi-omics designs; diagnose a treatment–batch confounding problem |
@@ -116,45 +116,45 @@ An advanced extension should not quietly become a prerequisite for an introducto
 
 ## Practical-session coverage
 
-These are mappings of the practical lists supplied in the outlines, not a claim that executable practicals already exist.
+Every session in the supplied outlines now links to a practical. RNA-seq and pathway enrichment reuse the same source in both pathways. The examples are introductory teaching analyses with explicit assumptions and limits, not qualified operational workflows.
 
 ### Genomics, Systems Biology and Bioinformatics practicals
 
 | Original practical | Blocks |
 | --- | --- |
-| Biological Databases and Sequence Retrieval | B03, B04 |
-| Basic Sequence Analysis and Manipulation | B04, B05 |
-| Command-Line Bioinformatics | B04 |
-| Sequence Similarity and Homology Analysis | B05 |
-| Multiple Sequence Alignment and Conserved-Region Analysis | B05 |
-| Phylogenetic Analysis | B05 |
-| Protein Structure and Structural Bioinformatics | B03, B08 |
-| Sequencing Data Quality Assessment | B05, B06 |
-| RNA-Seq Data Analysis | B02, B06, B12 |
-| Functional Annotation and Pathway Analysis | B03, B14 |
-| Biological Network Analysis | B14 |
-| Biological Data Visualization | B04, B12 |
-| Integrated Bioinformatics Data Analysis | B12, B15 |
-| Scientific Reporting and Presentation | B17, B18 |
+| [Biological Databases and Sequence Retrieval](tutorials/p01_databases.qmd) | B03, B04 |
+| [Basic Sequence Analysis and Manipulation](tutorials/p02_sequences.qmd) | B04, B05 |
+| [Command-Line Bioinformatics](tutorials/p03_command_line.qmd) | B04 |
+| [Sequence Similarity and Homology Analysis](tutorials/p04_similarity.qmd) | B05 |
+| [Multiple Sequence Alignment and Conserved-Region Analysis](tutorials/p05_alignment.qmd) | B05 |
+| [Phylogenetic Analysis](tutorials/p06_phylogeny.qmd) | B05 |
+| [Protein Structure and Structural Bioinformatics](tutorials/p07_structure.qmd) | B03, B08 |
+| [Sequencing Data Quality Assessment](tutorials/p08_sequence_qc.qmd) | B05, B06 |
+| [RNA-Seq Data Analysis](tutorials/p09_rnaseq.qmd) | B02, B06, B12 |
+| [Functional Annotation and Pathway Analysis](tutorials/p10_pathways.qmd) | B03, B14 |
+| [Biological Network Analysis](tutorials/p11_networks.qmd) | B14 |
+| [Biological Data Visualization](tutorials/p12_visualization.qmd) | B04, B12 |
+| [Integrated Bioinformatics Data Analysis](tutorials/p23_integrated_analysis.qmd) | B12, B15 |
+| [Scientific Reporting and Presentation](tutorials/p13_reporting.qmd) | B17, B18 |
 
-A proposed addition is a focused association/regulatory-variation practical using B13. This would make the practical coverage of GSB4–5 more explicit without duplicating the introductory sequence-analysis exercises.
+The additional [association/regulatory-variation practical](tutorials/p29_association.qmd) makes the coverage of GSB4–5 explicit. [Regularized prediction](tutorials/p20_prediction.qmd) extends computational-method teaching without duplicating sequence exercises.
 
 ### Multi-Omics practicals
 
 | Original practical | Blocks |
 | --- | --- |
-| Multi-Omics Experimental Design in Animal Production | B01, B02, B18 |
-| Quality Assessment and Preprocessing of Multi-Omics Data | B04, B05–B11 as relevant |
-| Transcriptome Data Analysis | B06, B12 |
-| Metabolomics Data Processing and Analysis | B09, B12 |
-| Proteomics Data Analysis | B08, B12 |
-| Exploratory Analysis of Multi-Omics Data | B12, B15 |
-| Functional Enrichment and Pathway Analysis | B03, B14 |
-| Multi-Omics Data Integration | B15 |
-| Multi-Omics Association with Animal Production Traits | B12, B13, B15, B18 |
-| Multi-Omics Network and Biomarker Analysis | B12, B14, B15 |
-| Integrated Multi-Omics Interpretation | B15, B18 |
-| Multi-Omics Research Proposal and Scientific Reporting | B02, B17, B18 |
+| [Multi-Omics Experimental Design in Animal Production](tutorials/p15_experimental_design.qmd) | B01, B02, B18 |
+| [Quality Assessment and Preprocessing of Multi-Omics Data](tutorials/p16_multiomics_qc.qmd) | B04, B05–B11 as relevant |
+| [Transcriptome Data Analysis](tutorials/p09_rnaseq.qmd) | B06, B12 |
+| [Metabolomics Data Processing and Analysis](tutorials/p17_metabolomics.qmd) | B09, B12 |
+| [Proteomics Data Analysis](tutorials/p18_proteomics.qmd) | B08, B12 |
+| [Exploratory Analysis of Multi-Omics Data](tutorials/p19_exploration.qmd) | B12, B15 |
+| [Functional Enrichment and Pathway Analysis](tutorials/p10_pathways.qmd) | B03, B14 |
+| [Multi-Omics Data Integration](tutorials/p21_integration.qmd) | B15 |
+| [Multi-Omics Association with Animal Production Traits](tutorials/p22_trait_association.qmd) | B12, B13, B15, B18 |
+| [Multi-Omics Network and Biomarker Analysis](tutorials/p24_biomarkers.qmd) | B12, B14, B15 |
+| [Integrated Multi-Omics Interpretation](tutorials/p25_interpretation.qmd) | B15, B18 |
+| [Multi-Omics Research Proposal and Scientific Reporting](tutorials/p26_research_proposal.qmd) | B02, B17, B18 |
 
 ## Learning outcomes and assessment
 
@@ -193,7 +193,7 @@ R is the primary environment for shared computational examples, consistent with 
 
 Keep this repository as the shared home. Use existing `slides/`, `notes/`, `tutorials/`, `exercises/`, `data/`, `images/`, `R/` and `scripts/` folders, with each resource labelled by its block identifier and linked from this map as it becomes available. Avoid copying the same explanation into separate course versions. Both pathways can link to one resource and assign different extensions.
 
-Develop one complete example first: **B02/B04/B06, a small RNA-seq study with sample metadata, quality checks and a biological contrast**. Follow it with B12/B14 interpretation and then a B15 integration example. This connects design, computation and biological interpretation without requiring all eighteen blocks to be written first.
+A useful teaching thread begins with [experimental design](tutorials/p15_experimental_design.qmd) and [sample identity](tutorials/p14_data_handling.qmd), continues through [RNA-seq](tutorials/p09_rnaseq.qmd) and [pathways](tutorials/p10_pathways.qmd), then examines [integration](tutorials/p21_integration.qmd), [held-out prediction](tutorials/p23_integrated_analysis.qmd) and [interpretation](tutorials/p25_interpretation.qmd). All eighteen modules and the practical collection are now available as an initial complete teaching version.
 
 Existing Population Genetics, Quantitative Genetics and Bayesian Linear Regression lessons can supply prerequisites or optional background. Link to suitable lessons after checking their assumptions and level. Package integrations should use current public interfaces and should not be prerequisites until an example has been implemented and verified.
 

@@ -28,4 +28,4 @@ Each module combines concepts, assumptions, a worked R example and exercises wit
 
 ## Development status
 
-18 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed.
+All 18 modules are available. Each is linked to suitable practicals; advanced topics are identified as conceptual extensions where a specialized software pipeline is not implemented.

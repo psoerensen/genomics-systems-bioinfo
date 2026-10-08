@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -79,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Genomics, Systems Biology &amp; Bioinformatics</span>
+    <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -97,21 +132,32 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Course map</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./slides/introduction_genomics_systems_bioinfo.html"> 
+<span class="menu-text">Slides</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./practicals.html" aria-current="page"> 
+    <a class="nav-link active" aria-current="page" href="./practicals.html"> 
 <span class="menu-text">Practicals</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://psoerensen.github.io/quantitative-genetics/"> 
-<span class="menu-text">Quantitative Genetics</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-related-courses" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Related courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-related-courses">    
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/quantitative-genetics/">
+ <span class="dropdown-text">Quantitative Genetics</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://psoerensen.github.io/population-genetics/"> 
-<span class="menu-text">Population Genetics</span></a>
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/population-genetics/">
+ <span class="dropdown-text">Population Genetics</span></a>
   </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="https://psoerensen.github.io/gteach/"> 
 <span class="menu-text">gteach</span></a>
@@ -132,7 +178,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#available-practicals" id="toc-available-practicals" class="nav-link active" data-scroll-target="#available-practicals">Available practicals</a></li>
+  <li><a href="#run-the-practicals" id="toc-run-the-practicals" class="nav-link active" data-scroll-target="#run-the-practicals">Run the practicals</a></li>
+  <li><a href="#genomics-systems-biology-and-bioinformatics-pathway" id="toc-genomics-systems-biology-and-bioinformatics-pathway" class="nav-link" data-scroll-target="#genomics-systems-biology-and-bioinformatics-pathway">Genomics, Systems Biology and Bioinformatics pathway</a></li>
+  <li><a href="#multi-omics-technology-in-animal-production-pathway" id="toc-multi-omics-technology-in-animal-production-pathway" class="nav-link" data-scroll-target="#multi-omics-technology-in-animal-production-pathway">Multi-Omics Technology in Animal Production pathway</a></li>
+  <li><a href="#complete-practical-library" id="toc-complete-practical-library" class="nav-link" data-scroll-target="#complete-practical-library">Complete practical library</a></li>
   </ul>
 </nav>
     </div>
@@ -158,32 +207,87 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Practicals use explicit assumptions, small hypothetical datasets and reproducible R examples. The two pathways reuse common practicals rather than copying them. All code examples run without biological downloads.</p>
-<section id="available-practicals" class="level2">
-<h2 class="anchored" data-anchor-id="available-practicals">Available practicals</h2>
+<p>The 31 practicals provide a complete initial teaching collection for both harmonized outlines. Each includes a biological question, assumptions, runnable examples, interpretation, exercises and suggested answers. All numerical inputs are hypothetical; no biological downloads or additional analysis packages are required. The examples teach the methods and their limits rather than claiming production-pipeline qualification.</p>
+<p>The 26 original sessions map to 24 shared practicals. Seven additional practicals strengthen sample identity, regularized prediction, microbiomics, phenomics, association, epigenomics and advanced-method reasoning.</p>
+<section id="run-the-practicals" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-practicals">Run the practicals</h2>
+<p>Download or clone the <a href="https://github.com/psoerensen/genomics-systems-bioinfo">course repository</a> and open <code>genomics-systems-bioinfo.Rproj</code>. Quarto uses R with knitr/rmarkdown to render the practicals. In the RStudio Terminal, for example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render tutorials/p09_rnaseq.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also run the displayed chunks in order in a clean R session, starting in either the repository root or its <code>tutorials/</code> folder. The code locates the local teaching helpers in <code>R/</code>. These helpers and their hypothetical data model are part of the repository; a copied code fragment still needs those files. No biological download is required. Use the code folds to inspect each calculation and attempt exercises before revealing suggested answers.</p>
+</section>
+<section id="genomics-systems-biology-and-bioinformatics-pathway" class="level2">
+<h2 class="anchored" data-anchor-id="genomics-systems-biology-and-bioinformatics-pathway">Genomics, Systems Biology and Bioinformatics pathway</h2>
+<ol type="1">
+<li><a href="./tutorials/p01_databases.html">Biological Databases and Sequence Retrieval</a></li>
+<li><a href="./tutorials/p02_sequences.html">Basic Sequence Analysis and Manipulation</a></li>
+<li><a href="./tutorials/p03_command_line.html">Command-Line Bioinformatics</a></li>
+<li><a href="./tutorials/p04_similarity.html">Sequence Similarity and Homology Analysis</a></li>
+<li><a href="./tutorials/p05_alignment.html">Multiple Sequence Alignment and Conserved-Region Analysis</a></li>
+<li><a href="./tutorials/p06_phylogeny.html">Phylogenetic Analysis</a></li>
+<li><a href="./tutorials/p07_structure.html">Protein Structure and Structural Bioinformatics</a></li>
+<li><a href="./tutorials/p08_sequence_qc.html">Sequencing Data Quality Assessment</a></li>
+<li><a href="./tutorials/p09_rnaseq.html">RNA-Seq Data Analysis</a></li>
+<li><a href="./tutorials/p10_pathways.html">Functional Annotation and Pathway Analysis</a></li>
+<li><a href="./tutorials/p11_networks.html">Biological Network Analysis</a></li>
+<li><a href="./tutorials/p12_visualization.html">Biological Data Visualization</a></li>
+<li><a href="./tutorials/p23_integrated_analysis.html">Integrated Bioinformatics Data Analysis</a></li>
+<li><a href="./tutorials/p13_reporting.html">Scientific Reporting and Presentation</a></li>
+</ol>
+</section>
+<section id="multi-omics-technology-in-animal-production-pathway" class="level2">
+<h2 class="anchored" data-anchor-id="multi-omics-technology-in-animal-production-pathway">Multi-Omics Technology in Animal Production pathway</h2>
+<ol type="1">
+<li><a href="./tutorials/p15_experimental_design.html">Multi-Omics Experimental Design in Animal Production</a></li>
+<li><a href="./tutorials/p16_multiomics_qc.html">Quality Assessment and Preprocessing of Multi-Omics Data</a></li>
+<li><a href="./tutorials/p09_rnaseq.html">Transcriptome Data Analysis</a></li>
+<li><a href="./tutorials/p17_metabolomics.html">Metabolomics Data Processing and Analysis</a></li>
+<li><a href="./tutorials/p18_proteomics.html">Proteomics Data Analysis</a></li>
+<li><a href="./tutorials/p19_exploration.html">Exploratory Analysis of Multi-Omics Data</a></li>
+<li><a href="./tutorials/p10_pathways.html">Functional Enrichment and Pathway Analysis</a></li>
+<li><a href="./tutorials/p21_integration.html">Multi-Omics Data Integration</a></li>
+<li><a href="./tutorials/p22_trait_association.html">Multi-Omics Association with Animal Production Traits</a></li>
+<li><a href="./tutorials/p24_biomarkers.html">Multi-Omics Network and Biomarker Analysis</a></li>
+<li><a href="./tutorials/p25_interpretation.html">Integrated Multi-Omics Interpretation</a></li>
+<li><a href="./tutorials/p26_research_proposal.html">Multi-Omics Research Proposal and Scientific Reporting</a></li>
+</ol>
+<p>Both pathways reuse Practical 9 for RNA-seq and Practical 10 for enrichment. Assign the relevant extensions rather than requiring the same exercise twice.</p>
+</section>
+<section id="complete-practical-library" class="level2">
+<h2 class="anchored" data-anchor-id="complete-practical-library">Complete practical library</h2>
 <ul>
-<li><a href="./tutorials/p01_databases.html">Biological databases and sequence retrieval</a></li>
-<li><a href="./tutorials/p02_sequences.html">Basic sequence analysis and manipulation</a></li>
-<li><a href="./tutorials/p03_command_line.html">Command-line bioinformatics and reproducible execution</a></li>
-<li><a href="./tutorials/p04_similarity.html">Sequence similarity and evidence for homology</a></li>
-<li><a href="./tutorials/p05_alignment.html">Alignment and conserved-region analysis</a></li>
-<li><a href="./tutorials/p06_phylogeny.html">Distances, clustering and phylogenetic interpretation</a></li>
-<li><a href="./tutorials/p07_structure.html">Protein structure and structural bioinformatics</a></li>
-<li><a href="./tutorials/p08_sequence_qc.html">Sequencing data quality assessment</a></li>
-<li><a href="./tutorials/p09_rnaseq.html">RNA-seq counts, contrasts and uncertainty</a></li>
-<li><a href="./tutorials/p10_pathways.html">Functional annotation and pathway enrichment</a></li>
-<li><a href="./tutorials/p11_networks.html">Biological network construction and interpretation</a></li>
-<li><a href="./tutorials/p12_visualization.html">Biological data visualization with explicit units</a></li>
-<li><a href="./tutorials/p13_reporting.html">Scientific reporting and reproducible analysis records</a></li>
-<li><a href="./tutorials/p14_data_handling.html">Sample identity, table joins and missing assays</a></li>
-<li><a href="./tutorials/p15_experimental_design.html">Multi-omics experimental design in animal production</a></li>
-<li><a href="./tutorials/p16_multiomics_qc.html">Quality assessment and preprocessing across omics layers</a></li>
-<li><a href="./tutorials/p17_metabolomics.html">Metabolomics processing, standards and feature interpretation</a></li>
-<li><a href="./tutorials/p18_proteomics.html">Proteomics analysis and missing-value sensitivity</a></li>
-<li><a href="./tutorials/p19_exploration.html">Exploratory multi-omics analysis and principal components</a></li>
-<li><a href="./tutorials/p20_prediction.html">Regularized regression and held-out prediction</a></li>
+<li><a href="./tutorials/p01_databases.html">Practical 1: Biological databases and sequence retrieval</a></li>
+<li><a href="./tutorials/p02_sequences.html">Practical 2: Basic sequence analysis and manipulation</a></li>
+<li><a href="./tutorials/p03_command_line.html">Practical 3: Command-line bioinformatics and reproducible execution</a></li>
+<li><a href="./tutorials/p04_similarity.html">Practical 4: Sequence similarity and evidence for homology</a></li>
+<li><a href="./tutorials/p05_alignment.html">Practical 5: Alignment and conserved-region analysis</a></li>
+<li><a href="./tutorials/p06_phylogeny.html">Practical 6: Distances, clustering and phylogenetic interpretation</a></li>
+<li><a href="./tutorials/p07_structure.html">Practical 7: Protein structure and structural bioinformatics</a></li>
+<li><a href="./tutorials/p08_sequence_qc.html">Practical 8: Sequencing data quality assessment</a></li>
+<li><a href="./tutorials/p09_rnaseq.html">Practical 9: RNA-seq counts, contrasts and uncertainty</a></li>
+<li><a href="./tutorials/p10_pathways.html">Practical 10: Functional annotation and pathway enrichment</a></li>
+<li><a href="./tutorials/p11_networks.html">Practical 11: Biological network construction and interpretation</a></li>
+<li><a href="./tutorials/p12_visualization.html">Practical 12: Biological data visualization with explicit units</a></li>
+<li><a href="./tutorials/p13_reporting.html">Practical 13: Scientific reporting and reproducible analysis records</a></li>
+<li><a href="./tutorials/p14_data_handling.html">Practical 14: Sample identity, table joins and missing assays</a></li>
+<li><a href="./tutorials/p15_experimental_design.html">Practical 15: Multi-omics experimental design in animal production</a></li>
+<li><a href="./tutorials/p16_multiomics_qc.html">Practical 16: Quality assessment and preprocessing across omics layers</a></li>
+<li><a href="./tutorials/p17_metabolomics.html">Practical 17: Metabolomics processing, standards and feature interpretation</a></li>
+<li><a href="./tutorials/p18_proteomics.html">Practical 18: Proteomics analysis and missing-value sensitivity</a></li>
+<li><a href="./tutorials/p19_exploration.html">Practical 19: Exploratory multi-omics analysis and principal components</a></li>
+<li><a href="./tutorials/p20_prediction.html">Practical 20: Regularized regression and held-out prediction</a></li>
+<li><a href="./tutorials/p21_integration.html">Practical 21: Multi-omics integration with matched samples and balanced blocks</a></li>
+<li><a href="./tutorials/p22_trait_association.html">Practical 22: Multi-omics associations with an animal-production trait</a></li>
+<li><a href="./tutorials/p23_integrated_analysis.html">Practical 23: Integrated analysis and comparison of prediction strategies</a></li>
+<li><a href="./tutorials/p24_biomarkers.html">Practical 24: Network stability and biomarker evaluation</a></li>
+<li><a href="./tutorials/p25_interpretation.html">Practical 25: Integrated multi-omics interpretation and alternative explanations</a></li>
+<li><a href="./tutorials/p26_research_proposal.html">Practical 26: Multi-omics research proposal and scientific reporting</a></li>
+<li><a href="./tutorials/p27_microbiome.html">Practical 27: Microbiome composition and host–microbiome interpretation</a></li>
+<li><a href="./tutorials/p28_phenomics.html">Practical 28: Phenomics, repeated records and decision-time alignment</a></li>
+<li><a href="./tutorials/p29_association.html">Practical 29: Genomic association and regulatory-variation analysis</a></li>
+<li><a href="./tutorials/p30_epigenomics.html">Practical 30: Epigenomic coverage and cell-composition effects</a></li>
+<li><a href="./tutorials/p31_advanced.html">Practical 31: Single-cell and spatial evidence with biological replication</a></li>
 </ul>
-<p>Use the <a href="./course_map.html#practical-session-coverage">curriculum crosswalk</a> to locate each session in the two original outlines. Shared practicals can have different pathway extensions.</p>
+<p>Choose prerequisite blocks in the <a href="./modules.html">module index</a> and see formal module numbering and assessment weights in the <a href="./course_map.html">unified map</a>.</p>
 
 
 </section>

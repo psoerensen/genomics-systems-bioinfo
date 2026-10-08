@@ -1,0 +1,100 @@
+---
+title: "Network stability and biomarker evaluation"
+subtitle: "Practical 24: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Assess resampling stability of a descriptive network; separate selection stability from causal or predictive validation; define a biomarker’s intended use.
+
+## Biological question and data
+
+How stable is a correlation edge when a small set of fictional animals is resampled?
+
+Animals are resampled as paired observations across proteins. The complete protein panel has a supplied common latent driver. The correlation threshold is fixed at .55. Bootstrap inclusion frequencies describe this estimator on this dataset, not posterior probabilities of true interactions.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Construct the reference network
+
+Use an explicit symmetric correlation rule and exclude self-edges.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+X <- t(d$protein);threshold <- .55
+reference <- abs(cor(X))>=threshold;diag(reference) <- FALSE
+stopifnot(isSymmetric(reference))
+which(reference & upper.tri(reference),arr.ind=TRUE)
+```
+
+Edges reflect pooled abundance correlation. Diet or other common causes can contribute to this pattern.
+
+## 2. Resample animals and estimate inclusion frequency
+
+Keep all features of a sampled animal together. One hundred resamples demonstrate the mechanism with modest computation.
+
+```{r}
+set.seed(2401)
+frequency <- matrix(0,ncol(X),ncol(X),dimnames=list(colnames(X),colnames(X)))
+for(b in 1:100) {
+ index <- sample(seq_len(nrow(X)),replace=TRUE)
+ A <- abs(cor(X[index,,drop=FALSE]))>=threshold
+ diag(A) <- FALSE
+ frequency <- frequency+A/100
+}
+stopifnot(isSymmetric(frequency),all(frequency>=0),all(frequency<=1+1e-12))
+pairs <- which(upper.tri(frequency),arr.ind=TRUE)
+out <- data.frame(a=colnames(X)[pairs[,1]],b=colnames(X)[pairs[,2]],
+ inclusion=frequency[pairs])
+head(out[order(out$inclusion,decreasing=TRUE),],10)
+```
+
+An edge can be frequent because a shared technical or biological driver is stable. Frequency alone does not establish a direct interaction.
+
+## 3. Define the biomarker use before selection
+
+Specify the decision, population and validation required for an abundance feature.
+
+```{r}
+use <- data.frame(task=c("predict later performance","monitor current status","causal intervention target"),
+ evidence=c("held-out animals and decision-time availability","calibrated assay and clinical/production relevance",
+ "causal design and targeted perturbation evidence"))
+use
+```
+
+These tasks have different evidentiary requirements. A feature discovered using all outcomes has not received an independent prediction test.
+
+## Interpretation and limits
+
+Bootstrap stability is conditional on the current sample and analysis rule. It does not address all external shifts or verify identification. Predictive markers need complete training-only selection and independent evaluation; causal targets require stronger evidence.
+
+## Exercises
+
+1. Why resample animals rather than each protein independently?
+2. Is an inclusion frequency of .9 a .9 probability of a real interaction?
+3. What if threshold is tuned to create a desired module?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Paired feature relationships must be retained within the sampling unit.
+2. No; it is the observed bootstrap inclusion frequency under the procedure.
+3. The choice is exploratory and needs honest reporting and separate validation.
+:::
+
+## Continue learning
+
+[B14 Networks](../notes/b14_networks.qmd), [B12 Statistics](../notes/b12_statistics.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Continue with [reporting](p13_reporting.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -1,0 +1,95 @@
+---
+title: "Multi-omics research proposal and scientific reporting"
+subtitle: "Practical 26: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Design a coherent study from question to reporting; specify primary outcomes, unit, sampling and analysis; justify each assay and validation step.
+
+## Biological question and data
+
+How would you propose a study of dietary supplementation and later feed efficiency while distinguishing response, prediction and mechanism?
+
+This is a design practical, not an animal-use protocol or a power calculation. The illustrative budget uses arbitrary cost units. Replace these with justified estimates and appropriate approvals in a real project.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Specify the estimand and sampling plan
+
+Write a primary question and separate secondary objectives. Avoid promising all three with one unqualified association analysis.
+
+```{r}
+proposal <- data.frame(field=c("primary question","experimental unit","sampling","primary outcome","secondary analysis"),
+ decision=c("diet contrast in later efficiency","individually allocated animal",
+ "matched day14 RNA/protein; documented handling",
+ "predefined days15–28 efficiency with calibrated units",
+ "exploratory profile association; independent prediction evaluation"))
+proposal
+```
+
+The primary contrast, sampling time and outcome window are explicit. Tissue, farm/pen structure, allocation, sample size and feasibility still need specification.
+
+## 2. Make resource trade-offs visible
+
+Calculate a transparent illustrative assay budget without treating it as a sample-size justification.
+
+```{r}
+cost <- c(RNA=3,protein=4,metabolite=2)
+animals <- 24
+options <- data.frame(design=c("RNA only","RNA plus protein","three layers"),
+ assay_cost=animals*c(cost["RNA"],sum(cost[c("RNA","protein")]),sum(cost)))
+options
+stopifnot(options$assay_cost[3]==216)
+```
+
+A cheaper design can support more biological replication or better validation. Cost arithmetic alone cannot identify the statistically or biologically best design.
+
+## 3. Define the analysis and reporting deliverable
+
+Require each step to connect to the question and assumptions.
+
+```{r}
+deliverable <- data.frame(section=c("design","data/QC","analysis","validation","interpretation","governance"),
+ requirement=c("unit, allocation, covariates and sampling",
+ "IDs, handling, assay scale, missingness and exclusions",
+ "prespecified contrasts and justified integration",
+ "independent groups and training-only choices",
+ "effect/uncertainty, alternatives and follow-up",
+ "access, provenance, sharing and responsible AI"))
+deliverable
+```
+
+Assess a proposal for coherence: the methods should answer the stated question with measurements available at the right time.
+
+## Interpretation and limits
+
+Formal sample size, actual assay protocols, permits, data agreements, model qualification and collaboration-specific assessment rubrics are outside this invented proposal. The original course assessment weights remain in the curriculum map.
+
+## Exercises
+
+1. Why should a primary outcome be specified?
+2. What is sacrificed when every possible omics layer is added with a fixed budget?
+3. How would a computational-report extension differ from this proposal?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It anchors design, sample-size reasoning and interpretation instead of selecting the most favourable result.
+2. Potentially replication, assay quality, follow-up or independent validation.
+3. It would implement and evaluate the prespecified pipeline, report exclusions/results/uncertainty and demonstrate reproducibility rather than only promise them.
+:::
+
+## Continue learning
+
+[B02 Design](../notes/b02_design.qmd), [B17 Integrity](../notes/b17_integrity.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
+
+Review the [reporting practical](p13_reporting.qmd) and choose a pathway in the [course map](../course_map.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

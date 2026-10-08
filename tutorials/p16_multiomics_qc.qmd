@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Check IDs, dimensions, missingness and the supplied measurement scale.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 assays <- list(counts=d$counts,protein=d$protein_missing,metabolite=d$metabolite)
 audit <- do.call(rbind,lapply(names(assays),function(name) {

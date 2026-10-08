@@ -63,6 +63,6 @@ An integrated explanation remains a hypothesis unless the design and analysis su
 
 ## Practicals and course pathways
 
-[Experimental design](../tutorials/p15_experimental_design.qmd) turns a question into a sampling plan; research proposal (in development) combines the decisions.
+[Experimental design](../tutorials/p15_experimental_design.qmd) turns a question into a sampling plan; [research proposal](../tutorials/p26_research_proposal.qmd) combines the decisions.
 
 Use the [unified map](../course_map.qmd) to locate B01 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Combine available log2 protein and metabolite features, then estimate their means and scales in training.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 X <- cbind(t(d$protein),t(d$metabolite));y <- d$metadata$response
 train <- 1:32;test <- 33:48
@@ -96,4 +98,4 @@ Feature selection, scaling, imputation and lambda tuning must occur inside train
 
 [B12 Statistics](../notes/b12_statistics.qmd), [B15 Integration](../notes/b15_integration.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
 
-Continue with integrated analysis (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [integrated analysis](p23_integrated_analysis.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

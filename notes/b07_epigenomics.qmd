@@ -63,6 +63,6 @@ Conversion efficiency, assay specificity, mapping, coverage and cell composition
 
 ## Practicals and course pathways
 
-[Experimental design](../tutorials/p15_experimental_design.qmd), [multi-omics QC](../tutorials/p16_multiomics_qc.qmd) and integrated interpretation (in development).
+[Experimental design](../tutorials/p15_experimental_design.qmd), [multi-omics QC](../tutorials/p16_multiomics_qc.qmd) and [integrated interpretation](../tutorials/p25_interpretation.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B07 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

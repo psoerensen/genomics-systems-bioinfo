@@ -1,0 +1,94 @@
+---
+title: "Microbiome composition and host–microbiome interpretation"
+subtitle: "Practical 27: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish absolute abundance, read counts and relative composition; calculate a positive-component log ratio; interpret host association without implying mechanism.
+
+## Biological question and data
+
+Can a taxon’s relative decrease occur without any absolute decrease, and how should a microbial association with performance be interpreted?
+
+The first table supplies invented absolute quantities. The shared fixture then supplies fictional read counts; these do not identify absolute microbial load or activity. A .5 pseudocount is used only for a sensitivity demonstration, not as a universally valid zero solution.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Compare absolute and relative changes
+
+Increase one component while keeping the others fixed.
+
+```{r}
+absolute <- rbind(before=c(A=10,B=10,C=10),after=c(A=20,B=10,C=10))
+relative <- absolute/rowSums(absolute)
+relative
+stopifnot(absolute[1,"B"]==absolute[2,"B"],relative[2,"B"]<relative[1,"B"])
+```
+
+B decreases in proportion because A increased. The fraction alone cannot diagnose absolute depletion.
+
+## 2. Inspect a hypothetical read panel
+
+Normalize within each sample and verify that fractions sum to one.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
+d <- teaching_data()
+counts <- d$microbial
+fraction <- sweep(counts,2,colSums(counts),"/")
+stopifnot(max(abs(colSums(fraction)-1))<1e-12,
+ identical(colnames(fraction),d$metadata$animal))
+barplot(fraction[,1:8],col=rainbow(nrow(fraction)),ylab="Relative read fraction",
+ xlab="Fictional animals",legend.text=rownames(fraction))
+```
+
+Relative read representation combines biology and measurement. Extraction and assay properties affect what is observed.
+
+## 3. Examine a log ratio and zero sensitivity
+
+Use taxon01/taxon02 with explicit pseudocount values. A ratio removes a common multiplicative sample factor for positive components.
+
+```{r}
+ratio <- log((counts[1,]+.5)/(counts[2,]+.5))
+c(response_correlation=cor(ratio,d$metadata$response))
+zero_case <- c(A=0,B=10)
+pseudocount <- c(.1,.5,1)
+data.frame(pseudocount,log_ratio=log((zero_case["A"]+pseudocount)/(zero_case["B"]+pseudocount)))
+```
+
+The zero-case ratio depends materially on the pseudocount. A host correlation in this panel is a descriptive association, not a microbial intervention result.
+
+## Interpretation and limits
+
+Distinguish amplicon/shotgun methods, site, time, diet, contaminants, compositionality and load. The fixture does not model a real rumen community. Cross-layer network or methane claims require identified measurements and suitable designs.
+
+## Exercises
+
+1. Why cannot fractions recover total microbial load?
+2. What assumption is hidden in a pseudocount?
+3. What could confound a taxon–production association?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Multiplying all absolute quantities by the same factor preserves fractions.
+2. It supplies an artificial positive value for an unobserved/zero component, whose effect depends on scale and detection process.
+3. Diet, management, host genotype, sampling site/time and technical processing.
+:::
+
+## Continue learning
+
+[B10 Microbiomics](../notes/b10_microbiomics.qmd), [B14 Networks](../notes/b14_networks.qmd) and [B15 Integration](../notes/b15_integration.qmd).
+
+Continue with [integrated interpretation](p25_interpretation.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

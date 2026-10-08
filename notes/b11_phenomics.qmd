@@ -64,6 +64,6 @@ The equal-correlation model is a teaching simplification; actual serial correlat
 
 ## Practicals and course pathways
 
-Phenomics and timing (in development), [study design](../tutorials/p15_experimental_design.qmd) and trait association (in development).
+[Phenomics and timing](../tutorials/p28_phenomics.qmd), [study design](../tutorials/p15_experimental_design.qmd) and [trait association](../tutorials/p22_trait_association.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B11 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

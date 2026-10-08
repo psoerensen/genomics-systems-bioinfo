@@ -58,7 +58,9 @@ A standard cannot correct variation it does not track. Chemical properties and p
 Maintain labels and scales before plotting. The annotation-confidence labels are fictional examples.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 M <- d$metabolite
 identity <- data.frame(feature=rownames(M),assignment=c("hypothetical named candidate","unresolved feature",
@@ -91,4 +93,4 @@ Real workflows need blanks, technical QC, drift and batch assessment, detection/
 
 [B09 Metabolomics](../notes/b09_metabolomics.qmd) and [B12 Statistics](../notes/b12_statistics.qmd).
 
-Continue with [exploration](p19_exploration.qmd) or integration (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [exploration](p19_exploration.qmd) or [integration](p21_integration.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

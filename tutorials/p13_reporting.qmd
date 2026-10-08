@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Write down the target contrast before fitting. Include batch and genotype1 because the supplied model contains these patterns or sources of variation.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 meta <- d$metadata;meta$dosage <- d$genotypes[meta$animal,"marker1"]
 fit <- lm(response~diet+batch+dosage,data=meta)
@@ -49,7 +51,7 @@ Preserve the contrast, analysis population, estimate, interval and exclusions be
 record <- data.frame(question="Diet contrast in fictional animals",unit="animal",
  n=nobs(fit),exclusions=0,estimate=unname(coef(fit)["dietsupplement"]),
  lower=interval[1],upper=interval[2],units="arbitrary response units",
- input_code_checksum=unname(tools::md5sum("../R/teaching_data.R")))
+ input_code_checksum=unname(tools::md5sum(file.path(helper_dir,"teaching_data.R"))))
 record
 ```
 
@@ -86,4 +88,4 @@ A real report needs species/population, measurement units, design, permissions, 
 
 [B17 Integrity](../notes/b17_integrity.qmd) and [B18 Synthesis](../notes/b18_synthesis.qmd).
 
-Continue with research proposal (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
+Continue with [research proposal](p26_research_proposal.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

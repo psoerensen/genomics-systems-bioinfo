@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Reverse the assay order while leaving labels attached. Dimensions still match.
 
 ```{r}
-source("../R/teaching_data.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"teaching_data.R")))
+source(file.path(helper_dir,"teaching_data.R"))
 d <- teaching_data()
 meta <- d$metadata
 shuffled <- d$protein[,rev(seq_len(ncol(d$protein))),drop=FALSE]

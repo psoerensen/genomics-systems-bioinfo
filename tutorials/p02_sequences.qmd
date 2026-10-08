@@ -30,7 +30,9 @@ No biological download is required. Numerical inputs are hypothetical, not obser
 Use the local teaching parser, which rejects missing headers, duplicate IDs and invalid bases.
 
 ```{r}
-source("../R/sequence_helpers.R")
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+stopifnot(file.exists(file.path(helper_dir,"sequence_helpers.R")))
+source(file.path(helper_dir,"sequence_helpers.R"))
 sequences <- read_teaching_fasta(c(">demo1","ACGTNN","GCGC",">demo2","TTTACG"))
 sequences
 stopifnot(nchar(sequences["demo1"])==10)

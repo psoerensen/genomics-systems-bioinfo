@@ -67,6 +67,6 @@ An integration example must specify the unit, timing, transformation, missingnes
 
 ## Practicals and course pathways
 
-Integrated analysis (in development), multi-omics integration (in development) and interpretation (in development).
+[Integrated analysis](../tutorials/p23_integrated_analysis.qmd), [multi-omics integration](../tutorials/p21_integration.qmd) and [interpretation](../tutorials/p25_interpretation.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B15 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

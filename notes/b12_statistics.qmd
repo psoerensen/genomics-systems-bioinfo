@@ -53,7 +53,7 @@ The test rows affect neither scaling nor coefficients. One split illustrates the
 
 ## 4. Interpretation and scope
 
-Use appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The association practical (in development) distinguishes marker evidence from validated prediction.
+Use appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The [association practical](../tutorials/p29_association.qmd) distinguishes marker evidence from validated prediction.
 
 ## 5. Exercises
 
@@ -69,6 +69,6 @@ Use appropriate loss and uncertainty, inspect residuals and state model-selectio
 
 ## Practicals and course pathways
 
-[Exploratory analysis](../tutorials/p19_exploration.qmd), [regularized prediction](../tutorials/p20_prediction.qmd) and trait association (in development).
+[Exploratory analysis](../tutorials/p19_exploration.qmd), [regularized prediction](../tutorials/p20_prediction.qmd) and [trait association](../tutorials/p22_trait_association.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B12 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

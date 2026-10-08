@@ -1,0 +1,97 @@
+---
+title: "Epigenomic coverage and cell-composition effects"
+subtitle: "Practical 30: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Calculate methylation proportions with explicit read denominators; distinguish measurement precision from biological replication; inspect a composition-driven group difference.
+
+## Biological question and data
+
+Can a bulk-tissue methylation difference arise with no within-cell-type regulatory change?
+
+Two fictional cell types have constant methylation probabilities .2 and .8. Group-specific cell mixture determines the pooled probability. Reads are binomial conditional on that probability; this simplified model does not represent all assay or biological variation.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Construct the mixture model
+
+Change cell proportions without changing either cell type’s methylation.
+
+```{r}
+cell_methylation <- c(typeA=.2,typeB=.8)
+mixture <- rbind(control=c(.8,.2),supplement=c(.3,.7))
+probability <- as.vector(mixture%*%cell_methylation)
+names(probability) <- rownames(mixture)
+probability
+stopifnot(abs(probability[1]-.32)<1e-12,abs(probability[2]-.62)<1e-12)
+```
+
+The expected bulk difference is .30, caused entirely by composition in this hypothetical model.
+
+## 2. Sample reads from independent animals
+
+Read depth changes conditional measurement precision but not the number of animals.
+
+```{r}
+set.seed(3001)
+group <- rep(c("control","supplement"),each=6)
+depth <- rep(c(10,20,40,80,10,20),2)
+truth <- probability[group]
+methylated <- rbinom(12,depth,truth)
+unmethylated <- depth-methylated
+observed <- methylated/depth
+out <- data.frame(animal=paste0("a",1:12),group,depth,methylated,unmethylated,observed,
+ conditional_SE=sqrt(truth*(1-truth)/depth))
+out
+stopifnot(all(methylated+unmethylated==depth),all(observed>=0),all(observed<=1))
+```
+
+Twelve animals remain twelve animals even if their read counts are large. The supplied conditional SE assumes the true mixture probability is known.
+
+## 3. Compare animal and read-weighted summaries
+
+A mean of animal proportions and a pooled read fraction use different weighting.
+
+```{r}
+animal_mean <- tapply(observed,group,mean)
+read_weighted <- tapply(methylated,group,sum)/tapply(depth,group,sum)
+data.frame(group=names(animal_mean),animal_mean=as.vector(animal_mean),
+ read_weighted=as.vector(read_weighted))
+boxplot(observed~group,xlab="Group",ylab="Observed methylated-read fraction",col="#86B7A3")
+```
+
+Pooling reads gives deeper samples more weight. It is not automatically the correct estimator of an average-animal contrast.
+
+## Interpretation and limits
+
+Coverage, conversion efficiency, mapping, tissue/cell composition and assay specificity must be evaluated in actual studies. A group contrast in bulk methylation does not establish a within-cell regulatory mechanism or phenotypic mediation.
+
+## Exercises
+
+1. Did the cell-type probabilities change?
+2. What does doubling depth improve under this model?
+3. Why is a pooled-read contrast not a new treatment replication?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. No; only their proportions changed.
+2. Conditional sampling precision for each animal’s fraction, not biological replication or control of confounding.
+3. Reads are nested measurements of existing animals; independent allocations determine treatment replication.
+:::
+
+## Continue learning
+
+[B07 Epigenomics](../notes/b07_epigenomics.qmd), [B02 Design](../notes/b02_design.qmd) and [B15 Integration](../notes/b15_integration.qmd).
+
+Continue with [advanced measurement units](p31_advanced.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

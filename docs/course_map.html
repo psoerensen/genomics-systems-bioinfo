@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Genomics, Systems Biology &amp; Bioinformatics</span>
+    <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -96,8 +96,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./course_map.html" aria-current="page"> 
+    <a class="nav-link active" aria-current="page" href="./course_map.html"> 
 <span class="menu-text">Course map</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./slides/introduction_genomics_systems_bioinfo.html"> 
+<span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./modules.html"> 
@@ -107,14 +111,21 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./practicals.html"> 
 <span class="menu-text">Practicals</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://psoerensen.github.io/quantitative-genetics/"> 
-<span class="menu-text">Quantitative Genetics</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-related-courses" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Related courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-related-courses">    
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/quantitative-genetics/">
+ <span class="dropdown-text">Quantitative Genetics</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://psoerensen.github.io/population-genetics/"> 
-<span class="menu-text">Population Genetics</span></a>
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/population-genetics/">
+ <span class="dropdown-text">Population Genetics</span></a>
   </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="https://psoerensen.github.io/gteach/"> 
 <span class="menu-text">gteach</span></a>
@@ -190,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 <th>Block</th>
 <th>Scope</th>
 <th>Students should be able to</th>
-<th>Proposed worked example or practical</th>
+<th>Worked example or practical</th>
 </tr>
 </thead>
 <tbody>
@@ -542,7 +553,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="practical-session-coverage" class="level2">
 <h2 class="anchored" data-anchor-id="practical-session-coverage">Practical-session coverage</h2>
-<p>These are mappings of the practical lists supplied in the outlines, not a claim that executable practicals already exist.</p>
+<p>Every session in the supplied outlines now links to a practical. RNA-seq and pathway enrichment reuse the same source in both pathways. The examples are introductory teaching analyses with explicit assumptions and limits, not qualified operational workflows.</p>
 <section id="genomics-systems-biology-and-bioinformatics-practicals" class="level3">
 <h3 class="anchored" data-anchor-id="genomics-systems-biology-and-bioinformatics-practicals">Genomics, Systems Biology and Bioinformatics practicals</h3>
 <table class="caption-top table">
@@ -554,72 +565,68 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Biological Databases and Sequence Retrieval</td>
+<td><a href="./tutorials/p01_databases.html">Biological Databases and Sequence Retrieval</a></td>
 <td>B03, B04</td>
 </tr>
 <tr class="even">
-<td>Basic Sequence Analysis and Manipulation</td>
+<td><a href="./tutorials/p02_sequences.html">Basic Sequence Analysis and Manipulation</a></td>
 <td>B04, B05</td>
 </tr>
 <tr class="odd">
-<td>Command-Line Bioinformatics</td>
+<td><a href="./tutorials/p03_command_line.html">Command-Line Bioinformatics</a></td>
 <td>B04</td>
 </tr>
 <tr class="even">
-<td>Sequence Similarity and Homology Analysis</td>
+<td><a href="./tutorials/p04_similarity.html">Sequence Similarity and Homology Analysis</a></td>
 <td>B05</td>
 </tr>
 <tr class="odd">
-<td>Multiple Sequence Alignment and Conserved-Region Analysis</td>
+<td><a href="./tutorials/p05_alignment.html">Multiple Sequence Alignment and Conserved-Region Analysis</a></td>
 <td>B05</td>
 </tr>
 <tr class="even">
-<td>Phylogenetic Analysis</td>
+<td><a href="./tutorials/p06_phylogeny.html">Phylogenetic Analysis</a></td>
 <td>B05</td>
 </tr>
 <tr class="odd">
-<td>Protein Structure and Structural Bioinformatics</td>
+<td><a href="./tutorials/p07_structure.html">Protein Structure and Structural Bioinformatics</a></td>
 <td>B03, B08</td>
 </tr>
 <tr class="even">
-<td>Sequencing Data Quality Assessment</td>
+<td><a href="./tutorials/p08_sequence_qc.html">Sequencing Data Quality Assessment</a></td>
 <td>B05, B06</td>
 </tr>
 <tr class="odd">
-<td>RNA-Seq Data Analysis</td>
+<td><a href="./tutorials/p09_rnaseq.html">RNA-Seq Data Analysis</a></td>
 <td>B02, B06, B12</td>
 </tr>
 <tr class="even">
-<td>Functional Annotation and Pathway Analysis</td>
+<td><a href="./tutorials/p10_pathways.html">Functional Annotation and Pathway Analysis</a></td>
 <td>B03, B14</td>
 </tr>
 <tr class="odd">
-<td>Biological Network Analysis</td>
+<td><a href="./tutorials/p11_networks.html">Biological Network Analysis</a></td>
 <td>B14</td>
 </tr>
 <tr class="even">
-<td>Biological Data Visualization</td>
+<td><a href="./tutorials/p12_visualization.html">Biological Data Visualization</a></td>
 <td>B04, B12</td>
 </tr>
 <tr class="odd">
-<td>Integrated Bioinformatics Data Analysis</td>
+<td><a href="./tutorials/p23_integrated_analysis.html">Integrated Bioinformatics Data Analysis</a></td>
 <td>B12, B15</td>
 </tr>
 <tr class="even">
-<td>Scientific Reporting and Presentation</td>
+<td><a href="./tutorials/p13_reporting.html">Scientific Reporting and Presentation</a></td>
 <td>B17, B18</td>
 </tr>
 </tbody>
 </table>
-<p>A proposed addition is a focused association/regulatory-variation practical using B13. This would make the practical coverage of GSB4–5 more explicit without duplicating the introductory sequence-analysis exercises.</p>
+<p>The additional <a href="./tutorials/p29_association.html">association/regulatory-variation practical</a> makes the coverage of GSB4–5 explicit. <a href="./tutorials/p20_prediction.html">Regularized prediction</a> extends computational-method teaching without duplicating sequence exercises.</p>
 </section>
 <section id="multi-omics-practicals" class="level3">
 <h3 class="anchored" data-anchor-id="multi-omics-practicals">Multi-Omics practicals</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Original practical</th>
@@ -628,51 +635,51 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Multi-Omics Experimental Design in Animal Production</td>
+<td><a href="./tutorials/p15_experimental_design.html">Multi-Omics Experimental Design in Animal Production</a></td>
 <td>B01, B02, B18</td>
 </tr>
 <tr class="even">
-<td>Quality Assessment and Preprocessing of Multi-Omics Data</td>
+<td><a href="./tutorials/p16_multiomics_qc.html">Quality Assessment and Preprocessing of Multi-Omics Data</a></td>
 <td>B04, B05–B11 as relevant</td>
 </tr>
 <tr class="odd">
-<td>Transcriptome Data Analysis</td>
+<td><a href="./tutorials/p09_rnaseq.html">Transcriptome Data Analysis</a></td>
 <td>B06, B12</td>
 </tr>
 <tr class="even">
-<td>Metabolomics Data Processing and Analysis</td>
+<td><a href="./tutorials/p17_metabolomics.html">Metabolomics Data Processing and Analysis</a></td>
 <td>B09, B12</td>
 </tr>
 <tr class="odd">
-<td>Proteomics Data Analysis</td>
+<td><a href="./tutorials/p18_proteomics.html">Proteomics Data Analysis</a></td>
 <td>B08, B12</td>
 </tr>
 <tr class="even">
-<td>Exploratory Analysis of Multi-Omics Data</td>
+<td><a href="./tutorials/p19_exploration.html">Exploratory Analysis of Multi-Omics Data</a></td>
 <td>B12, B15</td>
 </tr>
 <tr class="odd">
-<td>Functional Enrichment and Pathway Analysis</td>
+<td><a href="./tutorials/p10_pathways.html">Functional Enrichment and Pathway Analysis</a></td>
 <td>B03, B14</td>
 </tr>
 <tr class="even">
-<td>Multi-Omics Data Integration</td>
+<td><a href="./tutorials/p21_integration.html">Multi-Omics Data Integration</a></td>
 <td>B15</td>
 </tr>
 <tr class="odd">
-<td>Multi-Omics Association with Animal Production Traits</td>
+<td><a href="./tutorials/p22_trait_association.html">Multi-Omics Association with Animal Production Traits</a></td>
 <td>B12, B13, B15, B18</td>
 </tr>
 <tr class="even">
-<td>Multi-Omics Network and Biomarker Analysis</td>
+<td><a href="./tutorials/p24_biomarkers.html">Multi-Omics Network and Biomarker Analysis</a></td>
 <td>B12, B14, B15</td>
 </tr>
 <tr class="odd">
-<td>Integrated Multi-Omics Interpretation</td>
+<td><a href="./tutorials/p25_interpretation.html">Integrated Multi-Omics Interpretation</a></td>
 <td>B15, B18</td>
 </tr>
 <tr class="even">
-<td>Multi-Omics Research Proposal and Scientific Reporting</td>
+<td><a href="./tutorials/p26_research_proposal.html">Multi-Omics Research Proposal and Scientific Reporting</a></td>
 <td>B02, B17, B18</td>
 </tr>
 </tbody>
@@ -748,7 +755,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="development-and-reuse" class="level2">
 <h2 class="anchored" data-anchor-id="development-and-reuse">Development and reuse</h2>
 <p>Keep this repository as the shared home. Use existing <code>slides/</code>, <code>notes/</code>, <code>tutorials/</code>, <code>exercises/</code>, <code>data/</code>, <code>images/</code>, <code>R/</code> and <code>scripts/</code> folders, with each resource labelled by its block identifier and linked from this map as it becomes available. Avoid copying the same explanation into separate course versions. Both pathways can link to one resource and assign different extensions.</p>
-<p>Develop one complete example first: <strong>B02/B04/B06, a small RNA-seq study with sample metadata, quality checks and a biological contrast</strong>. Follow it with B12/B14 interpretation and then a B15 integration example. This connects design, computation and biological interpretation without requiring all eighteen blocks to be written first.</p>
+<p>A useful teaching thread begins with <a href="./tutorials/p15_experimental_design.html">experimental design</a> and <a href="./tutorials/p14_data_handling.html">sample identity</a>, continues through <a href="./tutorials/p09_rnaseq.html">RNA-seq</a> and <a href="./tutorials/p10_pathways.html">pathways</a>, then examines <a href="./tutorials/p21_integration.html">integration</a>, <a href="./tutorials/p23_integrated_analysis.html">held-out prediction</a> and <a href="./tutorials/p25_interpretation.html">interpretation</a>. All eighteen modules and the practical collection are now available as an initial complete teaching version.</p>
 <p>Existing Population Genetics, Quantitative Genetics and Bayesian Linear Regression lessons can supply prerequisites or optional background. Link to suitable lessons after checking their assumptions and level. Package integrations should use current public interfaces and should not be prerequisites until an example has been implemented and verified.</p>
 <p>Return to the <a href="./index.html">course overview</a> or the <a href="https://psoerensen.github.io/gteach/">gteach hub</a>.</p>
 

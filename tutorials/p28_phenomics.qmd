@@ -1,0 +1,94 @@
+---
+title: "Phenomics, repeated records and decision-time alignment"
+subtitle: "Practical 28: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define a time-window phenotype; calculate animal-level summaries and coverage; avoid future-information leakage and pseudoreplication.
+
+## Biological question and data
+
+How should repeated sensor records be summarized for a molecular sample collected on day 3?
+
+Sensor values are fictional measurements in arbitrary units. Six animals have five daily records. One value is missing by construction. Diet or treatment allocation is animal-level, so daily rows are not independent treatment replicates.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Create and inspect the repeated data
+
+Keep animal and day as separate keys; define a missing value rather than silently replacing it.
+
+```{r}
+set.seed(2801)
+records <- data.frame(animal=rep(paste0("a",1:6),each=5),day=rep(1:5,6))
+records$value <- rep(seq(8,13),each=5)+.2*records$day+rnorm(30,sd=.3)
+records$value[2] <- NA_real_
+stopifnot(!anyDuplicated(records[c("animal","day")]))
+head(records,10)
+```
+
+The second record of animal a1 is unobserved. Its baseline summary therefore uses fewer recorded times.
+
+## 2. Define pre-sampling and future windows
+
+Use days1–3 as information available at day3 and days4–5 as a future response. Report coverage.
+
+```{r}
+baseline <- subset(records,day<=3)
+future <- subset(records,day>3)
+mean_recorded <- aggregate(value~animal,baseline,mean)
+coverage <- aggregate(observed~animal,transform(baseline,observed=!is.na(value)),sum)
+future_mean <- aggregate(value~animal,future,mean)
+summary <- merge(merge(mean_recorded,coverage,by="animal"),future_mean,by="animal",
+ suffixes=c("_baseline","_future"))
+summary
+stopifnot(nrow(summary)==6,summary$observed[summary$animal=="a1"]==2)
+```
+
+The mean summarizes observed times, not necessarily the full target interval. Coverage policies should be specified before comparing animals.
+
+## 3. Check the eligible prediction information
+
+A day3 predictor can use baseline records, while future measurements belong to evaluation outcomes.
+
+```{r}
+eligible_predictor <- records$day<=3
+c(sensor_rows=nrow(records),independent_animals=length(unique(records$animal)),
+ eligible_predictor_rows=sum(eligible_predictor))
+stopifnot(max(records$day[eligible_predictor])==3)
+```
+
+Counting thirty rows as thirty independently allocated animals would overstate replication.
+
+## Interpretation and limits
+
+Actual sensor pipelines need calibration, physical units, time zones/time stamps, unequal observation windows, serial dependence and missingness investigation. Repeated records may need mixed or longitudinal models; this practical illustrates grouping and timing rather than fitting such a model.
+
+## Exercises
+
+1. Why report coverage with the mean?
+2. Can future records be included to improve a day3 prediction?
+3. What changes when animals share a pen-level intervention?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Animals with different observation windows may have non-comparable summaries.
+2. Not if they were unavailable at day3; that would change the prediction task or leak information.
+3. The intervention unit is the pen, requiring pen-level replication/dependence handling.
+:::
+
+## Continue learning
+
+[B11 Phenomics](../notes/b11_phenomics.qmd) and [B02 Design](../notes/b02_design.qmd).
+
+Continue with [prediction](p20_prediction.qmd) or [study proposal](p26_research_proposal.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
