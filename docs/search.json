@@ -1,5 +1,257 @@
 [
   {
+    "objectID": "tutorials/p08_sequence_qc.html",
+    "href": "tutorials/p08_sequence_qc.html",
+    "title": "Sequencing data quality assessment",
+    "section": "",
+    "text": "Decode Phred+33 qualities; calculate per-read expected errors; distinguish read, library and biological replication; apply an explicit QC rule."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#learning-objectives",
+    "href": "tutorials/p08_sequence_qc.html#learning-objectives",
+    "title": "Sequencing data quality assessment",
+    "section": "",
+    "text": "Decode Phred+33 qualities; calculate per-read expected errors; distinguish read, library and biological replication; apply an explicit QC rule."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#biological-question-and-data",
+    "href": "tutorials/p08_sequence_qc.html#biological-question-and-data",
+    "title": "Sequencing data quality assessment",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow do low-quality positions influence a small read-quality summary?\nThe fictional FASTQ records use ASCII Phred+33 encoding. The error probabilities are interpreted as calibrated per-base probabilities solely for this example. The practical does not assess mapping or a real sequencing run.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#decode-quality-strings",
+    "href": "tutorials/p08_sequence_qc.html#decode-quality-strings",
+    "title": "Sequencing data quality assessment",
+    "section": "1. Decode quality strings",
+    "text": "1. Decode quality strings\nConfirm the sequence and quality strings have matching lengths.\n\n\nShow R code\nreads &lt;- c(read1=\"ACGTACGT\",read2=\"ACGTACGT\",read3=\"ACGTNNGT\")\nquality &lt;- c(read1=\"IIIIIIII\",read2=\"IIII!!II\",read3=\"55555555\")\nstopifnot(identical(names(reads),names(quality)),all(nchar(reads)==nchar(quality)))\nQ &lt;- t(vapply(quality,function(q) utf8ToInt(q)-33,numeric(8)))\nQ\n\n\n      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]\nread1   40   40   40   40   40   40   40   40\nread2   40   40   40   40    0    0   40   40\nread3   20   20   20   20   20   20   20   20\n\n\nShow R code\nstopifnot(Q[1,1]==40,Q[2,5]==0,Q[3,1]==20)\n\n\nI encodes Q40, ! Q0 and 5 Q20 under the stated convention. The convention must not be guessed from appearance."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#summarise-errors-and-unknown-calls",
+    "href": "tutorials/p08_sequence_qc.html#summarise-errors-and-unknown-calls",
+    "title": "Sequencing data quality assessment",
+    "section": "2. Summarise errors and unknown calls",
+    "text": "2. Summarise errors and unknown calls\nSum encoded error probabilities and count unknown bases separately.\n\n\nShow R code\nexpected_errors &lt;- rowSums(10^(-Q/10))\nunknown &lt;- vapply(reads,function(s) sum(strsplit(s,\"\")[[1]]==\"N\"),integer(1))\nqc &lt;- data.frame(read=names(reads),mean_Q=rowMeans(Q),expected_errors,unknown)\nqc\n\n\n       read mean_Q expected_errors unknown\nread1 read1     40          0.0008       0\nread2 read2     30          2.0006       0\nread3 read3     20          0.0800       2\n\n\nShow R code\nstopifnot(abs(expected_errors[1]-.0008)&lt;1e-12,expected_errors[2]&gt;2)\n\n\nTwo Q0 positions dominate the second read’s expected-error total. Mean quality alone compresses their location and severity."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#apply-and-report-a-specified-rule",
+    "href": "tutorials/p08_sequence_qc.html#apply-and-report-a-specified-rule",
+    "title": "Sequencing data quality assessment",
+    "section": "3. Apply and report a specified rule",
+    "text": "3. Apply and report a specified rule\nThe supplied rule retains reads with expected errors below .1 and no unknown calls; it is illustrative, not a universal threshold.\n\n\nShow R code\nqc$keep &lt;- qc$expected_errors&lt;.1 & qc$unknown==0\nqc\n\n\n       read mean_Q expected_errors unknown  keep\nread1 read1     40          0.0008       0  TRUE\nread2 read2     30          2.0006       0 FALSE\nread3 read3     20          0.0800       2 FALSE\n\n\nShow R code\nc(input_reads=nrow(qc),retained=sum(qc$keep))\n\n\ninput_reads    retained \n          3           1 \n\n\nShow R code\nstopifnot(sum(qc$keep)==1)\n\n\nThe third read meets the encoded-error rule but fails the unknown-base rule. Report the exclusions and their reason."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#interpretation-and-limits",
+    "href": "tutorials/p08_sequence_qc.html#interpretation-and-limits",
+    "title": "Sequencing data quality assessment",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nQuality encoding, adapter content, length distributions, contaminants, mapping, coverage and sample identity matter in a complete sequencing workflow. A threshold chosen after looking at a desired result can bias downstream analysis. More retained reads do not create more biological replicates."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#exercises",
+    "href": "tutorials/p08_sequence_qc.html#exercises",
+    "title": "Sequencing data quality assessment",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy can mean Q hide a problematic read?\nDoes summing error probabilities require independent errors?\nWhat information would mapping QC add?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA few extremely low-quality positions can be diluted in the average.\nNo; expectation is additive. Independence matters for some probability calculations, not this sum.\nReference alignment, multimapping, coverage and mapping-rate patterns, each requiring interpretation."
+  },
+  {
+    "objectID": "tutorials/p08_sequence_qc.html#continue-learning",
+    "href": "tutorials/p08_sequence_qc.html#continue-learning",
+    "title": "Sequencing data quality assessment",
+    "section": "Continue learning",
+    "text": "Continue learning\nB05 Genomics and B06 Transcriptomics.\nContinue with RNA-seq (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html",
+    "href": "tutorials/p06_phylogeny.html",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "",
+    "text": "Inspect a distance matrix and the four-point relation; build an illustrative UPGMA tree; distinguish a clock-dependent clustering result from a species-history claim."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#learning-objectives",
+    "href": "tutorials/p06_phylogeny.html#learning-objectives",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "",
+    "text": "Inspect a distance matrix and the four-point relation; build an illustrative UPGMA tree; distinguish a clock-dependent clustering result from a species-history claim."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#biological-question-and-data",
+    "href": "tutorials/p06_phylogeny.html#biological-question-and-data",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhat assumptions turn observed sequence differences into an evolutionary tree?\nThe supplied four-taxon distance matrix is fictional, additive and ultrametric. UPGMA is used only under this idealized equal-rate setting; it is not a general phylogenetic inference method.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#check-the-supplied-distances",
+    "href": "tutorials/p06_phylogeny.html#check-the-supplied-distances",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "1. Check the supplied distances",
+    "text": "1. Check the supplied distances\nFor the quartet ab|cd, the within-pair sum is smaller than the equal cross-pair sums.\n\n\nShow R code\nD &lt;- matrix(c(0,2,6,6,2,0,6,6,6,6,0,2,6,6,2,0),4,4,byrow=TRUE,\n dimnames=list(c(\"a\",\"b\",\"c\",\"d\"),c(\"a\",\"b\",\"c\",\"d\")))\nstopifnot(isSymmetric(D),all(diag(D)==0),all(D&gt;=0))\nsums &lt;- c(ab_cd=D[1,2]+D[3,4],ac_bd=D[1,3]+D[2,4],ad_bc=D[1,4]+D[2,3])\nsums\n\n\nab_cd ac_bd ad_bc \n    4    12    12 \n\n\nShow R code\nstopifnot(sums[2]==sums[3],sums[1]&lt;sums[2])\n\n\nThe four-point relation supports the supplied split in an additive tree model. Exact equality is a feature of the constructed distances."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#build-the-idealized-clustering-tree",
+    "href": "tutorials/p06_phylogeny.html#build-the-idealized-clustering-tree",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "2. Build the idealized clustering tree",
+    "text": "2. Build the idealized clustering tree\nAverage-linkage clustering is UPGMA. Tree branch heights can be interpreted with additional rate assumptions; plot heights are dissimilarities.\n\n\nShow R code\nfit &lt;- hclust(as.dist(D),method=\"average\")\nplot(fit,ylab=\"Supplied dissimilarity\",main=\"Idealized UPGMA example\")\n\n\n\n\n\n\n\n\n\nShow R code\nreconstructed &lt;- as.matrix(cophenetic(fit))\nstopifnot(max(abs(reconstructed-D))&lt;1e-12)\nfit$height\n\n\n[1] 2 2 6\n\n\nThe ideal matrix is exactly represented by the clustering ultrametric. That exact fit is not a general property of sequence distances."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#break-the-ideal-assumption",
+    "href": "tutorials/p06_phylogeny.html#break-the-ideal-assumption",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "3. Break the ideal assumption",
+    "text": "3. Break the ideal assumption\nAlter one pair symmetrically and measure the mismatch to its clustering representation.\n\n\nShow R code\nchanged &lt;- D; changed[1,3] &lt;- changed[3,1] &lt;- 8\nother &lt;- hclust(as.dist(changed),method=\"average\")\nc(max_cophenetic_discrepancy=max(abs(as.matrix(cophenetic(other))-changed)))\n\n\nmax_cophenetic_discrepancy \n                       1.5 \n\n\nThe new distances are no longer represented exactly by that UPGMA ultrametric."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#interpretation-and-limits",
+    "href": "tutorials/p06_phylogeny.html#interpretation-and-limits",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nReal analyses must address sequence alignment, substitution model, rate differences, sampling and uncertainty. A gene tree can differ from population/species history through processes such as lineage sorting and recombination. Branches measured in substitutions cannot be labelled years without calibration."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#exercises",
+    "href": "tutorials/p06_phylogeny.html#exercises",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy does UPGMA require an equal-rate interpretation for phylogeny?\nDoes exact reconstruction mean these fictional taxa exist?\nWhat would a bootstrap assess?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIts rooted ultrametric representation assumes equal root-to-tip evolutionary distances.\nNo; the matrix was constructed to illustrate the model.\nResampling stability conditional on the data and procedure, not proof that every evolutionary assumption holds."
+  },
+  {
+    "objectID": "tutorials/p06_phylogeny.html#continue-learning",
+    "href": "tutorials/p06_phylogeny.html#continue-learning",
+    "title": "Distances, clustering and phylogenetic interpretation",
+    "section": "Continue learning",
+    "text": "Continue learning\nB05 Genomics; the Population Genetics molecular-clock practical supplies additional background.\nContinue with sequencing quality. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html",
+    "href": "tutorials/p04_similarity.html",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "",
+    "text": "Compute aligned identity with a stated denominator; explore a composition-preserving shuffle comparison; distinguish similarity, homology and function."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#learning-objectives",
+    "href": "tutorials/p04_similarity.html#learning-objectives",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "",
+    "text": "Compute aligned identity with a stated denominator; explore a composition-preserving shuffle comparison; distinguish similarity, homology and function."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#biological-question-and-data",
+    "href": "tutorials/p04_similarity.html#biological-question-and-data",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nDoes a high number of matching bases provide enough evidence to claim common ancestry or shared function?\nTwo supplied short sequences are compared at corresponding positions without gaps. A shuffle calculation conditions on one sequence’s base composition; it is a restricted teaching null, not BLAST or an evolutionary test.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#measure-identity",
+    "href": "tutorials/p04_similarity.html#measure-identity",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "1. Measure identity",
+    "text": "1. Measure identity\nThe sequences have equal length. Record both matches and denominator.\n\n\nShow R code\na &lt;- strsplit(\"ACGTACGTACGTACGT\",\"\")[[1]]\nb &lt;- strsplit(\"ACGTACGTTCGTACGA\",\"\")[[1]]\nstopifnot(length(a)==length(b))\nobserved &lt;- sum(a==b)\nc(matches=observed,length=length(a),identity=observed/length(a))\n\n\n matches   length identity \n  14.000   16.000    0.875 \n\n\nShow R code\nstopifnot(observed==14)\n\n\nFourteen of sixteen corresponding bases match in this supplied alignment."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#compare-a-restricted-shuffle-null",
+    "href": "tutorials/p04_similarity.html#compare-a-restricted-shuffle-null",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "2. Compare a restricted shuffle null",
+    "text": "2. Compare a restricted shuffle null\nShuffle the second sequence without changing composition. Include the usual plus-one Monte Carlo tail convention.\n\n\nShow R code\nset.seed(401)\nshuffled &lt;- replicate(499,sum(a==sample(b)))\np_mc &lt;- (1+sum(shuffled&gt;=observed))/(length(shuffled)+1)\nc(shuffle_mean=mean(shuffled),observed=observed,shuffle_tail=p_mc)\n\n\nshuffle_mean     observed shuffle_tail \n    4.084168    14.000000     0.002000 \n\n\nShow R code\nhist(shuffled,breaks=seq(-.5,16.5,1),xlab=\"Matches under composition shuffle\",main=\"Restricted teaching null\")\nabline(v=observed,col=\"#d95f02\",lwd=2)\n\n\n\n\n\n\n\n\n\nThis comparison shows what positional matches look like after a particular randomization. It ignores database size, local-alignment selection, substitution models and sequence dependence."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#separate-claims",
+    "href": "tutorials/p04_similarity.html#separate-claims",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "3. Separate claims",
+    "text": "3. Separate claims\nPlace each claim beside the extra evidence it needs.\n\n\nShow R code\nclaims &lt;- data.frame(claim=c(\"sequence similarity\",\"homology\",\"shared function\"),\n evidence=c(\"explicit aligned comparison\",\"ancestry inference with appropriate context\",\n \"functional/domain/experimental evidence\"))\nclaims\n\n\n                claim                                    evidence\n1 sequence similarity                 explicit aligned comparison\n2            homology ancestry inference with appropriate context\n3     shared function     functional/domain/experimental evidence\n\n\nHomology is a relationship of common ancestry, not 87.5% homology. Shared function is a further biological claim."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#interpretation-and-limits",
+    "href": "tutorials/p04_similarity.html#interpretation-and-limits",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nUse the NCBI BLAST glossary to distinguish identity and homology. The toy shuffle tail is not a database-search E-value and cannot be substituted for one."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#exercises",
+    "href": "tutorials/p04_similarity.html#exercises",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "Exercises",
+    "text": "Exercises\n\nCompare two all-A sequences. Why is high identity weak evidence here?\nWhat is ignored by positional comparison when lengths differ?\nDoes a small shuffle tail establish function?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nLow complexity makes agreement unsurprising; the composition-preserving shuffle gives the same matches.\nAlignment, indels and local-versus-global coverage must be specified.\nNo; it addresses only the stated restricted null."
+  },
+  {
+    "objectID": "tutorials/p04_similarity.html#continue-learning",
+    "href": "tutorials/p04_similarity.html#continue-learning",
+    "title": "Sequence similarity and evidence for homology",
+    "section": "Continue learning",
+    "text": "Continue learning\nB05 Genomics.\nContinue with alignment. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html",
+    "href": "tutorials/p02_sequences.html",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "",
+    "text": "Parse FASTA records; validate sequence symbols; calculate called-base GC content; construct a reverse complement."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#learning-objectives",
+    "href": "tutorials/p02_sequences.html#learning-objectives",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "",
+    "text": "Parse FASTA records; validate sequence symbols; calculate called-base GC content; construct a reverse complement."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#biological-question-and-data",
+    "href": "tutorials/p02_sequences.html#biological-question-and-data",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow do file structure and unknown bases affect a sequence summary?\nFASTA inputs contain only A, C, G, T and N; these teaching records have no quality scores. N is unknown and is excluded from the GC denominator.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#parse-explicit-records",
+    "href": "tutorials/p02_sequences.html#parse-explicit-records",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "1. Parse explicit records",
+    "text": "1. Parse explicit records\nUse the local teaching parser, which rejects missing headers, duplicate IDs and invalid bases.\n\n\nShow R code\nsource(\"../R/sequence_helpers.R\")\nsequences &lt;- read_teaching_fasta(c(\"&gt;demo1\",\"ACGTNN\",\"GCGC\",\"&gt;demo2\",\"TTTACG\"))\nsequences\n\n\n       demo1        demo2 \n\"ACGTNNGCGC\"     \"TTTACG\" \n\n\nShow R code\nstopifnot(nchar(sequences[\"demo1\"])==10)\n\n\nWrapped sequence lines are joined within their records. Sequence length includes unknown bases."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#calculate-called-base-summaries",
+    "href": "tutorials/p02_sequences.html#calculate-called-base-summaries",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "2. Calculate called-base summaries",
+    "text": "2. Calculate called-base summaries\nCount unknowns separately. An all-unknown sequence has no estimable called-base GC proportion.\n\n\nShow R code\nsummary_one &lt;- function(s) {\n x &lt;- strsplit(s,\"\")[[1]]; called &lt;- x%in%c(\"A\",\"C\",\"G\",\"T\")\n c(length=length(x),called=sum(called),unknown=sum(!called),\n GC=if(any(called))mean(x[called]%in%c(\"G\",\"C\")) else NA_real_)\n}\nresult &lt;- t(vapply(sequences,summary_one,numeric(4)))\nresult\n\n\n      length called unknown        GC\ndemo1     10      8       2 0.7500000\ndemo2      6      6       0 0.3333333\n\n\nShow R code\nstopifnot(abs(result[\"demo1\",\"GC\"]-6/8)&lt;1e-12,\n is.na(summary_one(\"NNN\")[\"GC\"]))\n\n\ndemo1 has ten characters but eight called bases; six called bases are G or C."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#reverse-complement-the-sequence",
+    "href": "tutorials/p02_sequences.html#reverse-complement-the-sequence",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "3. Reverse-complement the sequence",
+    "text": "3. Reverse-complement the sequence\nReverse the base order as well as complementing each symbol. Keep unknown N as N.\n\n\nShow R code\nreverse_complement &lt;- function(s) {\n x &lt;- rev(strsplit(s,\"\")[[1]])\n paste(unname(c(A=\"T\",C=\"G\",G=\"C\",T=\"A\",N=\"N\")[x]),collapse=\"\")\n}\nrc &lt;- vapply(sequences,reverse_complement,character(1))\nrc\n\n\n       demo1        demo2 \n\"GCGCNNACGT\"     \"CGTAAA\" \n\n\nShow R code\nstopifnot(identical(unname(vapply(rc,reverse_complement,character(1))),unname(sequences)))\n\n\nReverse complementing twice restores the original sequence, a useful orientation check."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#interpretation-and-limits",
+    "href": "tutorials/p02_sequences.html#interpretation-and-limits",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nCalled-base GC is a descriptive proportion, not sequencing quality or coding potential. Unknown bases and selected regions can make whole-record comparisons misleading. This parser is intentionally small, not a general FASTA library."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#exercises",
+    "href": "tutorials/p02_sequences.html#exercises",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "Exercises",
+    "text": "Exercises\n\nRecalculate GC including N in the denominator; explain the change.\nAdd a duplicate header.\nWhy does complementing without reversing give a different object?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt decreases to 6/10, treating unknowns as if they were called non-GC bases.\nThe parser rejects the ambiguous identifier.\nA reverse complement changes strand orientation; complement alone preserves the original character order."
+  },
+  {
+    "objectID": "tutorials/p02_sequences.html#continue-learning",
+    "href": "tutorials/p02_sequences.html#continue-learning",
+    "title": "Basic sequence analysis and manipulation",
+    "section": "Continue learning",
+    "text": "Continue learning\nB04 Programming and B05 Genomics.\nContinue with sequence similarity. Return to the practical index or the unified map."
+  },
+  {
     "objectID": "notes/b18_synthesis.html",
     "href": "notes/b18_synthesis.html",
     "title": "Animal-production questions and integrated reporting",
@@ -333,7 +585,7 @@
     "href": "notes/b08_proteomics.html#practicals-and-course-pathways",
     "title": "Protein identification, abundance and structure",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nProtein structure (in development) and proteomics analysis (in development) address different measurements.\nUse the unified map to locate B08 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nProtein structure and proteomics analysis (in development) address different measurements.\nUse the unified map to locate B08 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b06_transcriptomics.html",
@@ -445,7 +697,7 @@
     "href": "notes/b04_programming.html#practicals-and-course-pathways",
     "title": "Programming and reproducible data handling",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nData handling (in development), command-line workflow (in development) and reporting (in development).\nUse the unified map to locate B04 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nData handling (in development), command-line workflow and reporting (in development).\nUse the unified map to locate B04 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b02_design.html",
@@ -515,7 +767,7 @@
     "href": "practicals.html#available-practicals",
     "title": "Practicals and exercises",
     "section": "Available practicals",
-    "text": "Available practicals\nThe first practicals are in development.\nUse the curriculum crosswalk to locate each session in the two original outlines. Shared practicals can have different pathway extensions."
+    "text": "Available practicals\n\nBiological databases and sequence retrieval\nBasic sequence analysis and manipulation\nCommand-line bioinformatics and reproducible execution\nSequence similarity and evidence for homology\nAlignment and conserved-region analysis\nDistances, clustering and phylogenetic interpretation\nProtein structure and structural bioinformatics\nSequencing data quality assessment\n\nUse the curriculum crosswalk to locate each session in the two original outlines. Shared practicals can have different pathway extensions."
   },
   {
     "objectID": "course_map.html",
@@ -781,7 +1033,7 @@
     "href": "notes/b03_databases.html#practicals-and-course-pathways",
     "title": "Biological databases and identifier mapping",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nDatabase retrieval (in development), annotation and pathways (in development) and sample handling (in development).\nUse the unified map to locate B03 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nDatabase retrieval, annotation and pathways (in development) and sample handling (in development).\nUse the unified map to locate B03 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b05_genomics.html",
@@ -837,7 +1089,7 @@
     "href": "notes/b05_genomics.html#practicals-and-course-pathways",
     "title": "Genomic measurements and sequence analysis",
     "section": "Practicals and course pathways",
-    "text": "Practicals and course pathways\nSequence handling (in development), similarity (in development), alignment (in development), phylogeny (in development) and sequencing QC (in development).\nUse the unified map to locate B05 in both harmonized outlines. Return to the building-block index."
+    "text": "Practicals and course pathways\nSequence handling, similarity, alignment, phylogeny and sequencing QC.\nUse the unified map to locate B05 in both harmonized outlines. Return to the building-block index."
   },
   {
     "objectID": "notes/b07_epigenomics.html",
@@ -1174,5 +1426,257 @@
     "title": "Reproducibility, data governance and responsible research",
     "section": "Practicals and course pathways",
     "text": "Practicals and course pathways\nScientific reporting (in development) and research proposal (in development) put provenance and governance into the deliverable.\nUse the unified map to locate B17 in both harmonized outlines. Return to the building-block index."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html",
+    "href": "tutorials/p01_databases.html",
+    "title": "Biological databases and sequence retrieval",
+    "section": "",
+    "text": "Identify record levels and provenance; retrieve local teaching records by explicit accession; audit one-to-many annotation."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#learning-objectives",
+    "href": "tutorials/p01_databases.html#learning-objectives",
+    "title": "Biological databases and sequence retrieval",
+    "section": "",
+    "text": "Identify record levels and provenance; retrieve local teaching records by explicit accession; audit one-to-many annotation."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#biological-question-and-data",
+    "href": "tutorials/p01_databases.html#biological-question-and-data",
+    "title": "Biological databases and sequence retrieval",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhich biological records are needed to connect a measured feature to its sequence and annotation? This offline exercise uses fictional records so retrieval is reproducible and does not depend on a live service.\nRecords are distinct objects; study, sample, gene and transcript identifiers are not interchangeable. Real retrieval needs species, assembly, version and access checks.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#inspect-the-resource-catalogue",
+    "href": "tutorials/p01_databases.html#inspect-the-resource-catalogue",
+    "title": "Biological databases and sequence retrieval",
+    "section": "1. Inspect the resource catalogue",
+    "text": "1. Inspect the resource catalogue\nUse the record type to determine what a query returns.\n\n\nShow R code\ncatalogue &lt;- data.frame(accession=c(\"study_demo\",\"sample_demo1\",\"gene_demo1\",\"tx_demo1\"),\n type=c(\"study\",\"sample\",\"gene\",\"transcript\"),\n parent=c(NA,\"study_demo\",NA,\"gene_demo1\"),version=c(\"v1\",\"v1\",\"v2\",\"v1\"))\ncatalogue\n\n\n     accession       type     parent version\n1   study_demo      study       &lt;NA&gt;      v1\n2 sample_demo1     sample study_demo      v1\n3   gene_demo1       gene       &lt;NA&gt;      v2\n4     tx_demo1 transcript gene_demo1      v1\n\n\nShow R code\nstopifnot(!anyDuplicated(catalogue$accession))\n\n\nAll identifiers are fictional. A sample belongs to a study; a transcript relates to a gene. Neither relationship supplies the measurement values."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#retrieve-and-preserve-records",
+    "href": "tutorials/p01_databases.html#retrieve-and-preserve-records",
+    "title": "Biological databases and sequence retrieval",
+    "section": "2. Retrieve and preserve records",
+    "text": "2. Retrieve and preserve records\nSelect explicitly and round-trip a temporary CSV. This represents retrieval from a supplied snapshot, not an API call.\n\n\nShow R code\nselected &lt;- catalogue[match(c(\"gene_demo1\",\"tx_demo1\"),catalogue$accession),]\nstopifnot(!anyNA(selected$accession))\nfile &lt;- tempfile(fileext=\".csv\")\nwrite.csv(selected,file,row.names=FALSE,na=\"\")\nrestored &lt;- read.csv(file,na.strings=\"\",stringsAsFactors=FALSE)\nstopifnot(identical(as.character(restored$accession),selected$accession))\ndata.frame(accession=restored$accession,version=restored$version,\n snapshot_checksum=unname(tools::md5sum(file)))\n\n\n   accession version                snapshot_checksum\n1 gene_demo1      v2 fb0a31a85fa5b9990b6d98b7dd797afa\n2   tx_demo1      v1 fb0a31a85fa5b9990b6d98b7dd797afa\n\n\nShow R code\nunlink(file)\n\n\nA checksum captures this snapshot’s bytes. The version remains separate because a checksum is not a biological accession."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#audit-annotation-expansion",
+    "href": "tutorials/p01_databases.html#audit-annotation-expansion",
+    "title": "Biological databases and sequence retrieval",
+    "section": "3. Audit annotation expansion",
+    "text": "3. Audit annotation expansion\nA gene-to-transcript mapping can expand the rows. Count distinct biological keys after the join.\n\n\nShow R code\nmeasurement &lt;- data.frame(gene=c(\"gene_demo1\",\"gene_demo2\"),value=c(8,10))\nmap &lt;- data.frame(gene=c(\"gene_demo1\",\"gene_demo1\"),transcript=c(\"tx1\",\"tx2\"))\njoined &lt;- merge(measurement,map,all.x=TRUE)\njoined\n\n\n        gene value transcript\n1 gene_demo1     8        tx1\n2 gene_demo1     8        tx2\n3 gene_demo2    10       &lt;NA&gt;\n\n\nShow R code\nstopifnot(nrow(joined)==3,length(unique(joined$gene))==2)\n\n\nThree joined rows still represent two measured genes, not three independent measurements."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#interpretation-and-limits",
+    "href": "tutorials/p01_databases.html#interpretation-and-limits",
+    "title": "Biological databases and sequence retrieval",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nFor a real GEO analysis, distinguish series, samples and platforms using NCBI’s record documentation. This practical does not download or validate an organism-specific annotation."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#exercises",
+    "href": "tutorials/p01_databases.html#exercises",
+    "title": "Biological databases and sequence retrieval",
+    "section": "Exercises",
+    "text": "Exercises\n\nAdd an unmatched query and require an informative check.\nExplain why transcript rows cannot be counted as independent gene measurements.\nWhat extra fields would a variant-annotation snapshot need?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nmatch returns NA; stop or record the exclusion before indexing.\nBoth transcript annotations reuse the gene measurement.\nSpecies, assembly, coordinate convention, counted alleles where relevant, annotation release, source and retrieval details."
+  },
+  {
+    "objectID": "tutorials/p01_databases.html#continue-learning",
+    "href": "tutorials/p01_databases.html#continue-learning",
+    "title": "Biological databases and sequence retrieval",
+    "section": "Continue learning",
+    "text": "Continue learning\nB03 Databases and B04 Programming.\nContinue with sequence handling. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html",
+    "href": "tutorials/p03_command_line.html",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "",
+    "text": "Pass an explicit input path to a script; inspect exit status; distinguish stdout and generated files; quote paths containing spaces."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#learning-objectives",
+    "href": "tutorials/p03_command_line.html#learning-objectives",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "",
+    "text": "Pass an explicit input path to a script; inspect exit status; distinguish stdout and generated files; quote paths containing spaces."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#biological-question-and-data",
+    "href": "tutorials/p03_command_line.html#biological-question-and-data",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nCan the same file-processing task run independently of an interactive R session?\nThis portable exercise launches the Rscript executable belonging to the current R installation. It requires no Unix shell or external bioinformatics program. It illustrates the command-line interface pattern used by larger tools.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#create-a-small-input-and-worker-script",
+    "href": "tutorials/p03_command_line.html#create-a-small-input-and-worker-script",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "1. Create a small input and worker script",
+    "text": "1. Create a small input and worker script\nBoth files live in a fresh temporary directory. The script takes exactly one input argument and validates it.\n\n\nShow R code\nwork &lt;- tempfile(\"cli-example-\"); dir.create(work)\ninput &lt;- file.path(work,\"sample counts.csv\")\nwrite.csv(data.frame(sample=c(\"s1\",\"s2\",\"s3\"),count=c(10,20,30)),input,row.names=FALSE)\nworker &lt;- file.path(work,\"summarise.R\")\nwriteLines(c('args &lt;- commandArgs(trailingOnly=TRUE)',\n 'stopifnot(length(args)==1L, file.exists(args[1]))',\n 'd &lt;- read.csv(args[1])',\n 'stopifnot(all(c(\"sample\",\"count\") %in% names(d)))',\n 'cat(sum(d$count), \"\\n\")'),worker)\nreadLines(worker)\n\n\n[1] \"args &lt;- commandArgs(trailingOnly=TRUE)\"               \n[2] \"stopifnot(length(args)==1L, file.exists(args[1]))\"    \n[3] \"d &lt;- read.csv(args[1])\"                               \n[4] \"stopifnot(all(c(\\\"sample\\\",\\\"count\\\") %in% names(d)))\"\n[5] \"cat(sum(d$count), \\\"\"                                 \n[6] \"\\\")\"                                                  \n\n\nExplicit arguments make the worker independent of objects in the current global environment."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#run-and-capture-the-process",
+    "href": "tutorials/p03_command_line.html#run-and-capture-the-process",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "2. Run and capture the process",
+    "text": "2. Run and capture the process\nQuote each path as a separate argument, including the intentionally spaced input filename.\n\n\nShow R code\nexecutable &lt;- file.path(R.home(\"bin\"),if(.Platform$OS.type==\"windows\") \"Rscript.exe\" else \"Rscript\")\noutput &lt;- system2(executable,args=c(\"--vanilla\",shQuote(worker),shQuote(input)),\n stdout=TRUE,stderr=TRUE)\nstatus &lt;- attr(output,\"status\"); if(is.null(status)) status &lt;- 0L\nc(status=status,total=as.numeric(tail(output,1)))\n\n\nstatus  total \n     0     60 \n\n\nShow R code\nstopifnot(status==0L,as.numeric(tail(output,1))==60)\n\n\nThe worker reports 60 and exits successfully. Locale-startup messages may appear before the final number on some systems."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#describe-the-workflow-boundary",
+    "href": "tutorials/p03_command_line.html#describe-the-workflow-boundary",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "3. Describe the workflow boundary",
+    "text": "3. Describe the workflow boundary\nRecord executable, arguments, input and expected output before applying this pattern to another tool.\n\n\nShow R code\nrecord &lt;- data.frame(step=\"sum counts\",executable=basename(executable),\n input=basename(input),output=\"stdout total\",expected_total=60)\nrecord\n\n\n        step  executable             input       output expected_total\n1 sum counts Rscript.exe sample counts.csv stdout total             60\n\n\nFor a real aligner, include reference, version, options, resource requirements and the meaning of each output. A zero exit code does not certify biological correctness."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#interpretation-and-limits",
+    "href": "tutorials/p03_command_line.html#interpretation-and-limits",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nUse tool-specific documentation for real aligners or quantifiers; this example runs no alignment. Keep restricted data out of command logs and public repositories. Temporary files are left in R’s temporary directory for inspection."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#exercises",
+    "href": "tutorials/p03_command_line.html#exercises",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhat changes if the worker relies on an interactive variable?\nWhy quote the filename?\nWhich check remains necessary after a successful exit?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA clean Rscript process does not contain that variable.\nSpaces must stay within one argument.\nCheck output structure, sample/reference identity and scientific plausibility, not just process completion."
+  },
+  {
+    "objectID": "tutorials/p03_command_line.html#continue-learning",
+    "href": "tutorials/p03_command_line.html#continue-learning",
+    "title": "Command-line bioinformatics and reproducible execution",
+    "section": "Continue learning",
+    "text": "Continue learning\nB04 Programming and B17 Integrity.\nContinue with data handling (in development). Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html",
+    "href": "tutorials/p05_alignment.html",
+    "title": "Alignment and conserved-region analysis",
+    "section": "",
+    "text": "Inspect a global-alignment score; distinguish gaps from nucleotide differences; calculate conservation across an explicitly supplied multiple alignment."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#learning-objectives",
+    "href": "tutorials/p05_alignment.html#learning-objectives",
+    "title": "Alignment and conserved-region analysis",
+    "section": "",
+    "text": "Inspect a global-alignment score; distinguish gaps from nucleotide differences; calculate conservation across an explicitly supplied multiple alignment."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#biological-question-and-data",
+    "href": "tutorials/p05_alignment.html#biological-question-and-data",
+    "title": "Alignment and conserved-region analysis",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nHow do alignment and missingness decisions change the apparent conservation of a region?\nThe local helper uses Needleman–Wunsch global alignment with fixed match, mismatch and linear-gap scores. The multiple alignment is supplied, not inferred by this pairwise helper.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#align-two-sequences-under-stated-scores",
+    "href": "tutorials/p05_alignment.html#align-two-sequences-under-stated-scores",
+    "title": "Alignment and conserved-region analysis",
+    "section": "1. Align two sequences under stated scores",
+    "text": "1. Align two sequences under stated scores\nGlobal alignment compares the entire supplied sequences. Different scoring choices can change an optimal alignment.\n\n\nShow R code\nsource(\"../R/sequence_helpers.R\")\na &lt;- \"ACGTACGT\"; b &lt;- \"ACGACGT\"\nfit &lt;- global_alignment(a,b)\nfit\n\n\n$a\n[1] \"ACGTACGT\"\n\n$b\n[1] \"ACG-ACGT\"\n\n$score\n[1] 12\n\n\nShow R code\nstopifnot(gsub(\"-\",\"\",fit$a)==a,gsub(\"-\",\"\",fit$b)==b,\n nchar(fit$a)==nchar(fit$b),fit$score==12)\nself &lt;- global_alignment(a,a)\nstopifnot(self$score==2*nchar(a),self$a==a,self$b==a)\n\n\nSeven matches and one gap produce a score of 12 under +2/−1/−2 scoring. The score is not an evolutionary distance."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#inspect-an-existing-multiple-alignment",
+    "href": "tutorials/p05_alignment.html#inspect-an-existing-multiple-alignment",
+    "title": "Alignment and conserved-region analysis",
+    "section": "2. Inspect an existing multiple alignment",
+    "text": "2. Inspect an existing multiple alignment\nA column is conservatively called conserved only when every sequence supplies a nucleotide and all those nucleotides match.\n\n\nShow R code\naligned &lt;- c(s1=\"ACGTACGT\",s2=\"ACG-ACGT\",s3=\"ACGTTCGN\")\nM &lt;- do.call(rbind,strsplit(aligned,\"\"))\ncalled &lt;- M%in%c(\"A\",\"C\",\"G\",\"T\"); dim(called) &lt;- dim(M)\nfully_called &lt;- colSums(called)==nrow(M)\nconserved &lt;- apply(M,2,function(z) all(z%in%c(\"A\",\"C\",\"G\",\"T\")) && length(unique(z))==1)\ndata.frame(position=seq_len(ncol(M)),fully_called,conserved)\n\n\n  position fully_called conserved\n1        1         TRUE      TRUE\n2        2         TRUE      TRUE\n3        3         TRUE      TRUE\n4        4        FALSE     FALSE\n5        5         TRUE     FALSE\n6        6         TRUE      TRUE\n7        7         TRUE      TRUE\n8        8        FALSE     FALSE\n\n\nShow R code\nstopifnot(sum(fully_called)==6,sum(conserved)==5)\n\n\nA gap and an unknown base are excluded from fully called columns; a genuine nucleotide difference breaks conservation in another column."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#compare-denominators",
+    "href": "tutorials/p05_alignment.html#compare-denominators",
+    "title": "Alignment and conserved-region analysis",
+    "section": "3. Compare denominators",
+    "text": "3. Compare denominators\nCalculate both the fraction of all alignment columns and the fraction of fully called columns that are conserved.\n\n\nShow R code\nc(conserved_of_all=sum(conserved)/ncol(M),\n conserved_of_fully_called=sum(conserved)/sum(fully_called))\n\n\n         conserved_of_all conserved_of_fully_called \n                0.6250000                 0.8333333 \n\n\nThese fractions answer different questions. Report the denominator and missingness rather than choosing the larger value."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#interpretation-and-limits",
+    "href": "tutorials/p05_alignment.html#interpretation-and-limits",
+    "title": "Alignment and conserved-region analysis",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nThe example does not identify an actual functional element. Conservation depends on alignment quality, phylogenetic diversity and evolutionary processes. Production multiple aligners and evolutionary conservation models need their own method choices and diagnostics."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#exercises",
+    "href": "tutorials/p05_alignment.html#exercises",
+    "title": "Alignment and conserved-region analysis",
+    "section": "Exercises",
+    "text": "Exercises\n\nChange the gap score and inspect the result.\nWhy is N not evidence for a conserved base?\nWhy does conservation alone not prove function?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nAlternative alignments can become optimal, particularly where mismatch and gap alternatives compete.\nIts nucleotide is unknown.\nContext, species sampling, evolutionary constraints and biological evidence determine the interpretation."
+  },
+  {
+    "objectID": "tutorials/p05_alignment.html#continue-learning",
+    "href": "tutorials/p05_alignment.html#continue-learning",
+    "title": "Alignment and conserved-region analysis",
+    "section": "Continue learning",
+    "text": "Continue learning\nB05 Genomics.\nContinue with phylogenetic reasoning. Return to the practical index or the unified map."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html",
+    "href": "tutorials/p07_structure.html",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "",
+    "text": "Interpret coordinate units and residue identifiers; calculate pairwise distances and non-neighbour contacts; distinguish geometric contacts from functional evidence."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#learning-objectives",
+    "href": "tutorials/p07_structure.html#learning-objectives",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "",
+    "text": "Interpret coordinate units and residue identifiers; calculate pairwise distances and non-neighbour contacts; distinguish geometric contacts from functional evidence."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#biological-question-and-data",
+    "href": "tutorials/p07_structure.html#biological-question-and-data",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "Biological question and data",
+    "text": "Biological question and data\nWhich residue pairs lie close together in a supplied protein-coordinate model?\nThe six coordinates are invented C-alpha positions in angstroms, not a protein database structure. Euclidean proximity is calculated under a supplied cutoff; consecutive residues are excluded from the contact summary.\nNo biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#inspect-coordinates-and-distances",
+    "href": "tutorials/p07_structure.html#inspect-coordinates-and-distances",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "1. Inspect coordinates and distances",
+    "text": "1. Inspect coordinates and distances\nRows represent residues. Distance is calculated in the stated coordinate system.\n\n\nShow R code\nxyz &lt;- rbind(c(0,0,0),c(3.8,0,0),c(7.6,0,0),c(7.6,3.8,0),c(3.8,3.8,0),c(0,3.8,0))\nrownames(xyz) &lt;- paste0(\"residue\",1:6)\nD &lt;- as.matrix(dist(xyz))\nround(D,2)\n\n\n         residue1 residue2 residue3 residue4 residue5 residue6\nresidue1     0.00     3.80     7.60     8.50     5.37     3.80\nresidue2     3.80     0.00     3.80     5.37     3.80     5.37\nresidue3     7.60     3.80     0.00     3.80     5.37     8.50\nresidue4     8.50     5.37     3.80     0.00     3.80     7.60\nresidue5     5.37     3.80     5.37     3.80     0.00     3.80\nresidue6     3.80     5.37     8.50     7.60     3.80     0.00\n\n\nShow R code\nstopifnot(abs(D[1,2]-3.8)&lt;1e-12,isSymmetric(D))\n\n\nThe folded-back hypothetical geometry places some non-neighbour positions near each other."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#define-a-contact-rule",
+    "href": "tutorials/p07_structure.html#define-a-contact-rule",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "2. Define a contact rule",
+    "text": "2. Define a contact rule\nA distance below five angstroms is a teaching cutoff. Exclude immediate sequence neighbours and diagonal entries.\n\n\nShow R code\ncontact &lt;- D&lt;5 & abs(row(D)-col(D))&gt;1\npairs &lt;- which(contact & upper.tri(contact),arr.ind=TRUE)\ndata.frame(residue1=rownames(D)[pairs[,1]],residue2=colnames(D)[pairs[,2]],\n distance_A=D[pairs])\n\n\n  residue1 residue2 distance_A\n1 residue2 residue5        3.8\n2 residue1 residue6        3.8\n\n\nShow R code\nstopifnot(nrow(pairs)==2)\nimage(1:6,1:6,contact,xlab=\"Residue index\",ylab=\"Residue index\",\n col=c(\"white\",\"#1b9e77\"),main=\"Supplied geometric contact rule\")\n\n\n\n\n\n\n\n\n\nContacts describe geometry under the chosen threshold. They are not measured interactions or binding energies."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#assess-threshold-dependence",
+    "href": "tutorials/p07_structure.html#assess-threshold-dependence",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "3. Assess threshold dependence",
+    "text": "3. Assess threshold dependence\nCount contacts at several cutoffs using the same non-neighbour rule.\n\n\nShow R code\ncutoffs &lt;- c(4,5,8)\ndata.frame(cutoff_A=cutoffs,contacts=vapply(cutoffs,function(cut)\n sum((D&lt;cut & abs(row(D)-col(D))&gt;1)[upper.tri(D)]),integer(1)))\n\n\n  cutoff_A contacts\n1        4        2\n2        5        2\n3        8        8\n\n\nA contact list changes when its operational definition changes."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#interpretation-and-limits",
+    "href": "tutorials/p07_structure.html#interpretation-and-limits",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "Interpretation and limits",
+    "text": "Interpretation and limits\nFor an actual structure, record accession, model, chain, residue numbering, units, experimental/predicted status and structural uncertainty. A C-alpha cutoff is an abstraction; side chains, ligands, solvent and conformational dynamics affect biological interpretation."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#exercises",
+    "href": "tutorials/p07_structure.html#exercises",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "Exercises",
+    "text": "Exercises\n\nWhat changes when coordinates are converted to nanometres?\nWhy exclude sequential neighbours?\nDoes a contact establish functional necessity?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nValues divide by ten and the cutoff must also divide by ten.\nThey reflect backbone proximity and can obscure non-local geometry.\nNo; perturbation and functional evidence are needed."
+  },
+  {
+    "objectID": "tutorials/p07_structure.html#continue-learning",
+    "href": "tutorials/p07_structure.html#continue-learning",
+    "title": "Protein structure and structural bioinformatics",
+    "section": "Continue learning",
+    "text": "Continue learning\nB08 Proteomics and structure.\nContinue with protein abundance (in development). Return to the practical index or the unified map."
   }
 ]
