@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#decide-which-aspect-of-the-community-matters" id="toc-decide-which-aspect-of-the-community-matters" class="nav-link" data-scroll-target="#decide-which-aspect-of-the-community-matters">Decide which aspect of the community matters</a></li>
+  <li><a href="#diversity-summarizes-a-chosen-representation" id="toc-diversity-summarizes-a-chosen-representation" class="nav-link" data-scroll-target="#diversity-summarizes-a-chosen-representation">Diversity summarizes a chosen representation</a></li>
+  <li><a href="#ratios-state-the-reference-explicitly" id="toc-ratios-state-the-reference-explicitly" class="nav-link" data-scroll-target="#ratios-state-the-reference-explicitly">Ratios state the reference explicitly</a></li>
+  <li><a href="#connect-to-host-traits-carefully" id="toc-connect-to-host-traits-carefully" class="nav-link" data-scroll-target="#connect-to-host-traits-carefully">Connect to host traits carefully</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4090,17 @@ window.Quarto = {
 <p>Distinguish amplicon and metagenomic measurements; explain compositionality; evaluate host–microbiome associations and sampling limitations.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>A microbiome sample measures a community at a particular site, time and collection process. Amplicon data focus on selected marker sequences; shotgun metagenomics samples broader sequence content. Sequence representation depends on extraction, library preparation, genome properties and reference annotation. A taxonomic abundance profile does not directly measure metabolic activity.</p>
 <p>Rumen, intestinal and faecal samples answer different questions. Host diet, genotype, management and physiology can influence the community while also influencing a production trait. Association between a taxon and methane, for example, can arise from those shared drivers; it does not demonstrate that changing the taxon would change emissions.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>Relative abundance is <span class="math inline">\(p_{ij}=x_{ij}/\sum_k x_{kj}\)</span>. Because the components sum to one, increasing one absolute component can reduce the relative representation of another whose absolute amount did not change.</p>
 <p>For strictly positive components, a log ratio <span class="math inline">\(\log(x_A/x_B)\)</span> is invariant to a common sample multiplier. Zero handling needs an explicit measurement assumption: adding an arbitrary constant can alter conclusions, especially for rare taxa.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4130,19 +4135,96 @@ after  0.5000000 0.2500000 0.2500000</code></pre>
 </div>
 <p>B becomes a smaller fraction even though its absolute amount is unchanged. A change in total microbial load is not observable from these fractions alone.</p>
 </section>
+<section id="decide-which-aspect-of-the-community-matters" class="level2">
+<h2 class="anchored" data-anchor-id="decide-which-aspect-of-the-community-matters">Decide which aspect of the community matters</h2>
+<p>A microbial community can be described by taxa, genes, transcripts or metabolites. These represent composition, genetic potential and aspects of activity at different scales. A taxon carrying a pathway does not demonstrate that the pathway is expressed in the sampled environment. Strains within a named taxon can also differ in gene content.</p>
+<p>Amplicon profiling targets a marker and is influenced by primer coverage and copy number. Shotgun sequencing samples broader DNA content but still has extraction, reference and depth limitations. A larger number of reads is not automatically a more representative biological sample. Host DNA, contamination and poorly represented organisms can change effective microbial coverage.</p>
+<p>Collection site and timing define the target. Faecal composition is a sample from that material; it should not be treated as an exact measurement of every intestinal or rumen community. Diet, medication, management and host physiology can influence both composition and production outcomes.</p>
+</section>
+<section id="diversity-summarizes-a-chosen-representation" class="level2">
+<h2 class="anchored" data-anchor-id="diversity-summarizes-a-chosen-representation">Diversity summarizes a chosen representation</h2>
+<p>Richness counts detected categories, while Shannon entropy combines relative representation and evenness. These statistics depend on the retained categories and observation process. Higher diversity is not universally healthier or more productive.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">even=</span><span class="fu">c</span>(.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>,.<span class="dv">25</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="at">dominated=</span><span class="fu">c</span>(.<span class="dv">85</span>,.<span class="dv">05</span>,.<span class="dv">05</span>,.<span class="dv">05</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>entropy <span class="ot">&lt;-</span> <span class="cf">function</span>(p) <span class="sc">-</span><span class="fu">sum</span>(p[p<span class="sc">&gt;</span><span class="dv">0</span>]<span class="sc">*</span><span class="fu">log</span>(p[p<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">profile=</span><span class="fu">rownames</span>(profiles),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="at">richness=</span><span class="fu">rowSums</span>(profiles<span class="sc">&gt;</span><span class="dv">0</span>),<span class="at">Shannon=</span><span class="fu">apply</span>(profiles,<span class="dv">1</span>,entropy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            profile richness   Shannon
+even           even        4 1.3862944
+dominated dominated        4 0.5875009</code></pre>
+</div>
+</div>
+<p>Both constructed communities have four categories; their evenness differs. Detection limits and sequencing depth can change apparent richness even without a true change in the community.</p>
+</section>
+<section id="ratios-state-the-reference-explicitly" class="level2">
+<h2 class="anchored" data-anchor-id="ratios-state-the-reference-explicitly">Ratios state the reference explicitly</h2>
+<p>A log ratio compares two components. It is invariant to a common multiplicative scale, but requires interpretable positive measurements. The denominator is part of the question: an A-to-B ratio differs from A-to-total and need not isolate A’s absolute change.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A=</span><span class="dv">20</span>,<span class="at">B=</span><span class="dv">10</span>,<span class="at">C=</span><span class="dv">70</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">log_A_to_B=</span><span class="fu">log</span>(x[<span class="st">&#39;A&#39;</span>]<span class="sc">/</span>x[<span class="st">&#39;B&#39;</span>]),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> <span class="at">log_A_to_B_after_scaling=</span><span class="fu">log</span>((<span class="dv">3</span><span class="sc">*</span>x[<span class="st">&#39;A&#39;</span>])<span class="sc">/</span>(<span class="dv">3</span><span class="sc">*</span>x[<span class="st">&#39;B&#39;</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              log_A_to_B.A log_A_to_B_after_scaling.A 
+                 0.6931472                  0.6931472 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A zero replaces knowledge of an amount with a measurement question.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rare <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">pseudocount=</span><span class="fu">c</span>(.<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">5</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a> <span class="at">log_first_to_second=</span><span class="fu">sapply</span>(<span class="fu">c</span>(.<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">5</span>),<span class="cf">function</span>(k) <span class="fu">log</span>((rare[<span class="dv">1</span>]<span class="sc">+</span>k)<span class="sc">/</span>(rare[<span class="dv">2</span>]<span class="sc">+</span>k))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  pseudocount log_first_to_second
+1         0.1          -2.3978953
+2         1.0          -0.6931472
+3         5.0          -0.1823216</code></pre>
+</div>
+</div>
+<p>The last result depends strongly on the supplied constant. A nondetection, sampling zero and true absence can require different reasoning. Sensitivity to zero handling should be reported rather than hidden in preprocessing.</p>
+</section>
+<section id="connect-to-host-traits-carefully" class="level2">
+<h2 class="anchored" data-anchor-id="connect-to-host-traits-carefully">Connect to host traits carefully</h2>
+<p>An observational taxon–methane association can reflect a dietary shift affecting both. A mechanistic claim needs evidence about the organism, pathway activity and intervention context. Sampling animals repeatedly adds temporal detail while retaining within-animal dependence.</p>
+<p>For prediction, define whether the community is measured before the outcome and whether new farms or diets are part of deployment. A model can exploit farm-specific collection or processing signatures. Independent evaluation and a baseline using ordinary management variables help assess the extra value of an assay.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Community challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Community challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The relative fraction of a methanogen decreases after a diet change. What additional evidence would clarify emissions? Measure the relevant output and consider microbial load and pathway activity. A lower fraction does not establish a smaller absolute population or lower total activity.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Distinguish microbial load, relative composition, genetic potential and activity. Consider contaminants, reference coverage, repeated measurements, host-level confounding and independent validation. Host–microbiome co-metabolism is a mechanistic hypothesis to examine with appropriate molecular and experimental evidence.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Which taxon changed absolute amount?</li>
 <li>Can relative B alone establish that B was depleted?</li>
 <li>What extra measurement could inform total microbial load?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4151,7 +4233,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>A doubled.</li>
@@ -4161,6 +4243,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://cambiotraining.github.io/metagenomics/">Cambridge introduction to metagenomics</a> provides a complementary workflow perspective. For broader multi-omics context, see <a href="https://www.nature.com/articles/nrg.2018.4"><em>Integrative omics for health and disease</em></a>; evaluate how its study context differs from a host–microbiome study.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

@@ -17,19 +17,19 @@ execute:
 
 Distinguish analytical features from confirmed metabolites; evaluate internal standards and scaling; separate concentration changes from relative signal differences.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Metabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.
 
 Targeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 If the observed signal is $x_{ij}=a_j c_{ij}$ and an internal standard has known concentration $c_s$ and the same multiplicative factor $a_j$, the ratio $x_{ij}/s_j$ cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.
 
 Scaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -45,11 +45,59 @@ stopifnot(max(abs(5*ratio-concentration))<1e-12)
 
 The common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete.
 
-## 4. Interpretation and scope
+## From an instrument feature to a compound
+
+A chromatographic mass-spectrometry feature is often defined by mass-to-charge ratio, retention time and signal. Isotopes, adducts and fragments can create several features from one compound. An accurate mass alone can match multiple candidate structures. Supporting evidence can include fragmentation and comparison with standards under documented conditions.
+
+Maintain an identification field separately from an abundance field. A feature can be quantified reproducibly while its chemical identity remains uncertain. Conversely, a confidently identified compound can have imprecise abundance measurements. Do not turn candidate identities into definite pathway membership when interpreting a differential-feature list.
+
+Targeted concentration requires a calibration model and an applicable range. Relative untargeted intensity can support within-feature comparisons but is not automatically comparable in molar units across compounds. Extraction recovery and ionization differ by molecule and sample matrix.
+
+## Calibration has a usable range
+
+Consider a simple hypothetical response $S=a+bC$, with intercept $a$ and sensitivity $b$. Estimating concentration from signal assumes that calibration applies to the analysed samples and that the relation remains appropriate over the range used.
+
+```{r}
+calibration <- data.frame(concentration=c(0,1,2,4,8),
+ signal=c(3,13,23,43,83))
+cal <- lm(signal~concentration,calibration)
+unknown_signal <- c(18,63,123)
+estimated <- (unknown_signal-coef(cal)[1])/coef(cal)[2]
+data.frame(signal=unknown_signal,estimated_concentration=estimated,
+ within_calibration=estimated>=0 & estimated<=8)
+```
+
+The last estimate extrapolates beyond the standards. Perfect linearity in this constructed example does not justify extrapolation in a real assay. Calibration uncertainty, blanks, detection limits and replicate measurements still need evaluation.
+
+## Standards and quality-control samples answer different questions
+
+An internal standard can track selected preparation or instrument variation. A pooled QC sample can reveal drift across acquisition order. A blank can reveal background or carryover. None alone represents independent biological replication, and none automatically diagnoses all compounds equally.
+
+If acquisition order follows treatment, drift can imitate a group effect. Distributing biological groups across the run and recording acquisition order supplies diagnostic information. A correction should be based on a justified technical model; excessive correction can remove biology if the technical and biological factors are confounded.
+
+## Choose scaling to match the interpretation
+
+Log transformations emphasize multiplicative changes. Unit-variance scaling makes features contribute equal marginal variance to a multivariate analysis. A rare, noisy feature can therefore gain influence. Other scaling rules balance this trade-off differently; the choice is part of the analysis rather than a cosmetic plotting option.
+
+```{r}
+set.seed(901)
+x <- cbind(high_signal=100+rnorm(20,sd=10),
+ low_signal=1+rnorm(20,sd=.01))
+rbind(original_variance=apply(x,2,var),
+ scaled_variance=apply(scale(x),2,var))
+```
+
+The equal scaled variances say nothing about equal biological information or chemical concentration. Inspect reliability and missingness before deciding which features enter PCA or prediction.
+
+::: {.callout-note collapse="true" title="Metabolite challenge"}
+Three correlated features receive the same candidate compound name. Are they three independent confirmations of pathway change? They may be adducts or related signals from one compound. Examine their analytical relationship and identification evidence before counting biological support.
+:::
+
+## Interpretation and scope
 
 Chemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the [EMBL-EBI metabolite-identification lesson](https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/) for the distinction between a detected signal and an assigned compound.
 
-## 5. Exercises
+## Exercises
 
 1. Why is a feature ID insufficient for a pathway claim?
 2. Under what assumption does the standard correction work?
@@ -60,6 +108,10 @@ Chemical identity should have documented supporting evidence; a feature ID is no
 2. Analyte and standard share the specified multiplicative response.
 3. Each retained feature is given similar variance weight, even when its original variation reflects measurement noise.
 :::
+
+## Further reading
+
+[EMBL-EBI introduction to metabolomics](https://www.ebi.ac.uk/training/online/courses/metabolomics-introduction/) provides broader context. Read it alongside the distinction between relative feature intensity and calibrated concentration in this module.
 
 ## Practicals and course pathways
 

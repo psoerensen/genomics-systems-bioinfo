@@ -17,7 +17,7 @@ execute:
 
 Define marker dosage and phenotype contrasts; identify confounding and linkage disequilibrium; distinguish GWAS, eQTL, TWAS, fine-mapping and prediction.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 GWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.
 
@@ -25,13 +25,13 @@ Relatedness and population structure can induce association when genetic groups 
 
 Genomic prediction evaluates the ability to predict new animals, rather than selecting the smallest association p-value. The deployment population and training relationships determine the relevant validation design.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 A basic unrelated-sample model is $y_i=\beta_0+\beta_g g_i+\gamma^T c_i+e_i$, where $g_i$ counts a stated allele and c contains prespecified covariates. Residual independence and the design matter. With correlated relatives, a mixed-model or other suitable framework is needed.
 
 For two marker vectors, their correlation describes association of the supplied dosages. It does not establish ancestry, phase, a causal allele or a calibrated fine-mapping probability.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -50,11 +50,61 @@ plot(g,y,col=ifelse(ancestry==0,"#1b9e77","#d95f02"),pch=19,
 
 The generating model contains no direct marker effect. Group differences can nevertheless create a marginal marker association. One realization does not make the adjusted estimate exactly zero.
 
-## 4. Interpretation and scope
+## Define the association at the measurement level
+
+A GWAS relates genotype to a stated phenotype; an eQTL analysis relates genotype to expression in a tissue and context. A cis label usually denotes a defined genomic neighborhood, while trans refers to more distant relationships under the study's convention. Proximity is a location rule, not proof of direct regulation.
+
+A TWAS signal relates genetically informed expression to a trait under a specified procedure. Shared genetic associations can arise through LD or pleiotropic effects rather than expression mediation. Colocalization and fine-mapping ask additional questions under their own assumptions about variants, signals and LD. They should not be collapsed into a single claim that a gene causes the trait.
+
+| Analysis | Direct target | Interpretation still conditional on |
+|---|---|---|
+| GWAS | Variant–trait association | Structure, relatedness, phenotype and allele alignment |
+| eQTL | Variant–expression association | Tissue, assay, design and normalization |
+| TWAS | Expression-related genetic association with trait | Prediction weights, LD and association model |
+| Fine-mapping | Candidate causal configurations | Candidate coverage, LD, model and priors |
+| Prediction | Performance for new observations | Information timing and deployment population |
+
+## LD links signals without isolating a mechanism
+
+Correlated markers can carry similar association evidence when one tags another. A near-perfect correlation also makes separate regression effects uncertain, even when joint prediction is stable.
+
+```{r}
+set.seed(1302)
+g1 <- rbinom(100,2,.4)
+g2 <- g1;g2[1:12] <- rbinom(12,2,.4)
+y <- .8*g1+rnorm(100)
+c(dosage_correlation=cor(g1,g2),
+ marginal_g1=coef(lm(y~g1))[2],marginal_g2=coef(lm(y~g2))[2])
+coef(summary(lm(y~g1+g2)))
+```
+
+The supplied generator gives g1 a direct role; in an observational dataset that truth is unknown. A strong g2 association does not independently identify another mechanism. In real analyses, LD depends on the population and can differ from a reference panel.
+
+## Relatedness and phenotype definition matter
+
+Livestock samples often share family relationships and management. A residual covariance structure can represent polygenic relatedness, while fixed covariates describe selected environmental differences. Neither should be added mechanically: the phenotype and target comparison determine what belongs in the model.
+
+For example, adjusting for body weight changes a feed-intake comparison relative to analysing intake alone. If a covariate is affected by treatment or shares unmeasured causes with the outcome, conditioning can change the causal interpretation. State the estimand rather than assuming every available covariate improves the model.
+
+## Allele alignment is a scientific consistency check
+
+Effect estimates require the counted allele. Flipping allele coding reverses the coefficient and changes the intercept but can preserve fitted values. Reference/alternate status is not the same as favorable/unfavorable status. For cross-study integration, check assembly, strand, allele pairs and frequencies before combining signs.
+
+An expression-associated variant can have different effects across tissues or environments. Failure to observe an effect in another tissue can reflect context, limited power or assay differences. Report what was measured and how precisely before asserting biological specificity.
+
+## Move from a signal to a follow-up
+
+Choose follow-up to discriminate explanations: replication in a new population addresses generalization, improved mapping addresses candidate ambiguity, and a perturbation addresses a proposed mechanism. A validated predictor can still be a proxy, while a mechanistic result may not improve prediction at the decision time.
+
+::: {.callout-note collapse="true" title="Candidate-gene challenge"}
+The nearest gene to a GWAS peak also changes expression with diet. Does the agreement establish mediation? No. Position, expression response and trait association are distinct evidence. Examine LD, tissue/context, temporal order and competing explanations before a causal claim.
+:::
+
+## Interpretation and scope
 
 Adjustment can reduce specified confounding but cannot guarantee that all confounding has been measured. Do not infer causality from conditional association, a TWAS signal or agreement between assays. Fit and validate appropriate models before applying any teaching formula to related livestock data.
 
-## 5. Exercises
+## Exercises
 
 1. Why can a variant associate with a trait without changing it?
 2. What is the eQTL response variable?
@@ -65,6 +115,10 @@ Adjustment can reduce specified confounding but cannot guarantee that all confou
 2. A specified expression measurement in a stated tissue/context.
 3. Close relatives in training and test can make the task easier than prediction in a new family or population.
 :::
+
+## Further reading
+
+[Methods of integrating data to uncover genotype–phenotype interactions](https://www.nature.com/articles/nrg3868), Nature Reviews Genetics, offers a broader conceptual reading. Use it to distinguish data integration from identification of a causal path.
 
 ## Practicals and course pathways
 

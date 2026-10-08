@@ -17,19 +17,19 @@ execute:
 
 Distinguish inference and prediction; evaluate multiple testing, regularization and dimensionality reduction; prevent preprocessing and repeated-animal leakage.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 High-dimensional assays contain correlated features, different scales and substantial measurement variation. More variables can improve a model, but can also overfit a small sample. Regression requires a stated response, experimental unit, design and assumptions. Clustering and principal components describe patterns; they do not prove biological mechanisms.
 
 Inference estimates an effect and its uncertainty under a model. Prediction evaluates performance for the intended new population. A split between rows can be inadequate if records from the same animal, family, farm or time series appear in both sets. The validation group should represent the deployment task, and preprocessing must be fitted using training data only.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For standardised training features X and centred response y, ridge regression minimises $\|y-X\beta\|^2+\lambda \|\beta\|^2$, giving $\widehat\beta=(X^T X+\lambda I)^{-1}X^Ty$. A positive lambda shrinks coefficients; choose it using training-only validation, not test outcomes. The intercept is handled separately.
 
 Benjamini–Hochberg adjustment addresses false-discovery-rate control under its applicable dependence conditions. An adjusted p-value is not the probability that an individual hypothesis is false.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -51,11 +51,65 @@ p.adjust(c(.001,.02,.04,.4),method="BH")
 
 The test rows affect neither scaling nor coefficients. One split illustrates the process; its performance is not a stable estimate for a livestock population.
 
-## 4. Interpretation and scope
+## Separate estimation, testing and prediction
+
+An estimated regression coefficient summarizes a conditional comparison under a model. A hypothesis test assesses compatibility with a specified null and sampling model. Prediction assesses error on eligible new observations. These tasks can use similar equations while requiring different evidence.
+
+In high-dimensional data, many correlated features can explain the same pattern. Ordinary least squares can become unstable or unidentified when predictors are numerous or collinear. Regularization changes the estimation target by constraining coefficients; it trades variance against bias rather than creating more independent biological information.
+
+For ridge regression, the penalty depends on feature scale. Standardizing makes the penalty comparable across feature units, but the standardization must be fitted to training data for prediction. A constant feature cannot be divided by its zero standard deviation; its treatment needs to be explicit.
+
+## Diagnose the response model
+
+Linear regression assumes a specified conditional mean and a variance/dependence structure for its inferential calculations. Residual plots can reveal departures from the mean pattern or changing spread. Normality of raw molecular measurements is not the same as normality of residuals under a model.
+
+```{r}
+set.seed(1202)
+x <- seq(0,3,length.out=60)
+y <- 1+x^2+rnorm(60,sd=.4)
+linear <- lm(y~x)
+plot(fitted(linear),residuals(linear),pch=16,
+ xlab='Fitted response',ylab='Residual')
+abline(h=0,lty=2)
+```
+
+The curved residual pattern follows from an omitted nonlinear mean relationship. Adding a quadratic term changes the model, but in a real study its rationale and evaluation should be recorded. Repeatedly trying models until p-values look attractive changes the interpretation of the reported evidence.
+
+## Put tuning inside validation
+
+A training set estimates parameters; internal validation selects tuning choices; a final held-out set evaluates the selected procedure. When data are limited, nested resampling can separate selection from evaluation, provided grouping and preprocessing are respected within each split.
+
+A feature screen on all responses leaks outcome information even if the final coefficients are fitted only in training. Similarly, selecting a PCA dimension or an imputation policy from test performance consumes the test set. An untouched evaluation must assess the entire procedure, not only the final fitting step.
+
+Choose splits that represent use: new animals, families, farms or future periods. Randomly separating rows is insufficient if closely related or repeated observations cross the boundary. Scores from many correlated folds are not independent experimental replications.
+
+## Compare loss, calibration and uncertainty
+
+RMSE gives greater weight to large errors; MAE describes average absolute error. Correlation measures co-variation and can remain perfect when predictions are systematically biased or on the wrong scale.
+
+```{r}
+observed <- c(2,4,6,8)
+predicted <- 10+2*observed
+c(correlation=cor(observed,predicted),
+ RMSE=sqrt(mean((observed-predicted)^2)),
+ MAE=mean(abs(observed-predicted)))
+```
+
+The predictions rank these animals exactly while missing their values. Assess the metric relevant to the decision and report units. Compare a molecular model with a plausible baseline on the same observations. Quantifying uncertainty should respect the independent unit and the fitting/evaluation structure.
+
+## Multiplicity and exploratory choices
+
+Many tests, overlapping pathways and alternative analysis choices create opportunities for selective findings. Define the tested family and use a justified adjustment. Report effect sizes and uncertainty alongside discoveries. A nonsignificant result can reflect imprecision; it does not establish absence of any meaningful effect.
+
+::: {.callout-note collapse="true" title="Validation challenge"}
+A student tries 50 penalties on the test animals and reports the best RMSE. What changed? The test set became a tuning set. Evaluate the selected procedure on genuinely untouched observations or use an appropriate nested validation design.
+:::
+
+## Interpretation and scope
 
 Use appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The [association practical](../tutorials/p29_association.qmd) distinguishes marker evidence from validated prediction.
 
-## 5. Exercises
+## Exercises
 
 1. Why reuse training means for test scaling?
 2. Can test RMSE be used to choose lambda and still be an untouched test score?
@@ -66,6 +120,10 @@ Use appropriate loss and uncertainty, inspect residuals and state model-selectio
 2. No; use a separate validation procedure within training, then evaluate once on test data.
 3. No; batches, other covariates and sampling can also create clusters.
 :::
+
+## Further reading
+
+[Computational Genomics with R](https://compgenomr.github.io/book/) provides complementary statistical and prediction material. Apply its methods with the animal, family, farm and timing structure of the current study made explicit.
 
 ## Practicals and course pathways
 

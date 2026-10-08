@@ -17,7 +17,7 @@ execute:
 
 Document provenance and exclusions; distinguish access control from reproducibility; evaluate privacy, research integrity and responsible AI use.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Reproducibility means that the documented inputs and procedures can produce the reported analysis. It requires traceable data versions, sample definitions, transformations, software, random draws and model choices. A script that runs is only part of this record: excluded samples, manual corrections and selection decisions affect the result.
 
@@ -25,13 +25,13 @@ A public teaching example can use hypothetical data while a real collaboration m
 
 Responsible AI use includes identifying what the tool contributed and verifying code, citations and interpretations. Do not upload restricted data to an external service without the applicable authorisation. Specific governance decisions depend on the project’s agreements and local requirements.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 A manifest connects a file identifier, checksum, role and access category. A checksum can detect byte-level changes; it cannot determine whether a biological measurement or label is correct. Separate data provenance from biological validity.
 
 An analysis record should distinguish prespecified decisions from exploratory choices and document deviations. Fixing a seed preserves one random realization; it does not establish that findings generalize.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -48,11 +48,56 @@ unlink(path) # Removes only the temporary file created in this example.
 
 The manifest identifies bytes of one fictional teaching table. A different formatting or row order can change the checksum even when the scientific content is equivalent.
 
-## 4. Interpretation and scope
+## Build an analysis record that explains decisions
+
+A reproducible result connects inputs, processing and outputs. Keep data versions, sample mappings, transformations, exclusions, software versions and randomization choices. Also document why an analysis was chosen. A fully automated script can reproduce a biased selection procedure exactly.
+
+Distinguish prespecified comparisons from exploratory follow-ups. Exploration is valuable when labelled clearly; confirmatory language should reflect the selection process. Record manual corrections with the original value, corrected value, reason and responsible review. Avoid modifying source data silently to make an analysis run.
+
+## Check bytes and meaning separately
+
+Checksums detect changed bytes. Semantic checks assess expected columns, identifier uniqueness, units and allowable ranges. Neither establishes that a specimen was correctly labelled at collection. These checks complement the biological provenance record.
+
+```{r}
+raw <- data.frame(animal=c('fictional_a1','fictional_a2'),value=c(3,5))
+reordered <- raw[2:1,]
+byte_file <- tempfile(fileext='.csv')
+write.csv(raw,byte_file,row.names=FALSE)
+hash1 <- unname(tools::md5sum(byte_file))
+write.csv(reordered,byte_file,row.names=FALSE)
+hash2 <- unname(tools::md5sum(byte_file))
+stopifnot(hash1!=hash2,
+ identical(raw,reordered[match(raw$animal,reordered$animal),]))
+unlink(byte_file)
+```
+
+A changed hash here reflects order, while explicit key alignment shows equivalent labelled observations. In other cases, changed bytes can encode a changed scientific result; inspect both levels.
+
+## Make public teaching reproducible without restricted records
+
+A synthetic example can demonstrate an algorithm and its assumptions without exposing real observations. Label it as hypothetical and document the generator. It cannot supply evidence of real biological performance. For a restricted-data project, reusable code, schemas and a non-sensitive example can support understanding while access follows the applicable agreements.
+
+Pseudonymization is not a guarantee of anonymity. Genetic and linked production records can reveal relationships or identities through combinations of information. Sharing permissions should be checked for the actual data and destination. Public and private inputs should remain distinguishable in the workflow.
+
+## Attribution should be specific and useful
+
+Link to selected readings and cite methods relevant to the calculation. If lesson text, code or figures are adapted, retain the required attribution and licence information and identify modifications. A freely readable article is not automatically licensed for copying its figures. Original explanation of a concept and linking to a reading are different from reproducing an asset.
+
+Avoid attributing a biological result to an introductory resource that did not establish it. A review summarizes evidence; an original study supports its own design-specific findings. Use citations to let students inspect that distinction.
+
+## Responsible AI needs verification
+
+Record substantial AI assistance where appropriate to the teaching or research context. Check generated code against a meaningful oracle or invariant and review scientific interpretations manually. Plausible citations should be resolved to real sources. Generated figures need clear labelling if they could be mistaken for observations.
+
+::: {.callout-note collapse="true" title="Integrity challenge"}
+A script, seed and plot are shared, but three animals were removed by hand. Is the analysis record complete? No. The exclusions and their reasons are part of the result. Reconstruct the selection, report it and assess its effect before describing the analysis as reproducible.
+:::
+
+## Interpretation and scope
 
 Keep credentials, private observations and restricted metadata out of public teaching sources. Report validation and limitations plainly, including null or inconsistent results. Reproducibility does not guarantee correct inference, responsible access or scientific validity.
 
-## 5. Exercises
+## Exercises
 
 1. Does an unchanged checksum certify correct animal identity?
 2. What should be shared when data access is restricted?
@@ -63,6 +108,10 @@ Keep credentials, private observations and restricted metadata out of public tea
 2. Methods, metadata descriptions, access procedures and an appropriately non-sensitive example, subject to the governing agreements.
 3. Selection affects uncertainty and replication; readers need to know how the analysis was chosen.
 :::
+
+## Further reading
+
+[Data Carpentry Genomics](https://datacarpentry.github.io/genomics-workshop/) provides project-organization teaching. Use the reporting practical to connect those habits to provenance, exclusions and a clean-session analysis.
 
 ## Practicals and course pathways
 

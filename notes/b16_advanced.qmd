@@ -17,7 +17,7 @@ execute:
 
 Define cell, specimen and animal units; distinguish measurement resolution from biological replication; evaluate advanced assays and AI evidence.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Single-cell assays can resolve molecular differences across sampled cells, but cells are nested within specimens and animals. Treatment allocation to an animal does not create independent treatment allocations to every sampled cell. Cell recovery and QC affect the representation of cell types. For an animal-level comparison, one approach aggregates measurements by animal and cell type before using an appropriate sample-level analysis; this still requires biological replication.
 
@@ -25,13 +25,13 @@ Spatial assays retain positional information at a platform-dependent resolution.
 
 AI models can learn useful patterns, but a sophisticated architecture does not eliminate sample dependence, leakage or confounding. A generated explanation is not supporting biological evidence. Specify training data, evaluation units, uncertainty and validation context.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For m cells per animal with equal marginal variance $\sigma^2$ and within-animal correlation rho, a design-effect approximation is $D=1+(m-1)\rho$. Treating $nm$ cells as independent can overstate precision; $nm/D$ is an effective-count illustration under this equal-correlation model, not a replacement for a valid hierarchical analysis or degrees of freedom.
 
 For high-dimensional prediction, keep animals or specimens separated across training and evaluation when that represents the intended task.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -49,11 +49,55 @@ aggregate(value~animal,cell,mean)
 
 The example retains six animals despite measuring many cells. The effective-count approximation is a description of variance inflation in a stylised model, not permission to conduct inference with an invented sample size.
 
-## 4. Interpretation and scope
+## Resolution changes what can be observed
+
+Single-cell RNA-seq can describe heterogeneity hidden by bulk averages. A cell is still sampled from a specimen and animal. Capture efficiency, cell recovery and processing determine which cells are represented. A missing cell type can reflect biology, dissociation sensitivity, sampling or QC rather than true absence.
+
+A cluster is a grouping under selected features, transformations, distances and algorithm settings. Cell-type annotation combines marker evidence and context; a label transferred from another dataset can be inappropriate for a new tissue or species. Continuous states may be forced into discrete clusters, and a trajectory inferred from a snapshot does not directly observe cells moving through time.
+
+## Pseudobulk preserves the sample-level comparison
+
+For a given cell type, aggregating counts within each animal produces animal-by-feature evidence. The number of recovered cells affects measurement precision and representativeness, but the independent biological comparison still relies on animals or the allocation unit. A sum of counts and a mean of transformed values are different operations.
+
+```{r}
+cell_counts <- matrix(c(1,2,4,8,3,6),nrow=2,
+ dimnames=list(c('g1','g2'),c('a1_c1','a1_c2','a2_c1')))
+subject <- c('a1','a1','a2')
+pseudobulk <- t(rowsum(t(cell_counts),subject))
+pseudobulk
+stopifnot(all(rowSums(pseudobulk)==rowSums(cell_counts)))
+```
+
+This is only an aggregation illustration, with two fictional animals and no inferential analysis. Real pseudobulk workflows need cell-type definitions, replicated subjects, appropriate count models and attention to unequal cell recovery. A type absent from a sample creates a biological/measurement question before a model input.
+
+## Spatial assays retain location at a defined scale
+
+A spot can contain several cells; segmented cell measurements depend on the segmentation procedure. Adjacent observations can share local environment and technical effects. Co-location at a platform's resolution is weaker evidence than a demonstrated molecular interaction.
+
+Consider the tissue area covered, sectioning, registration and matched molecular layers. Combining sections requires a mapping, and an animal-level treatment comparison cannot treat every spot as an independent treatment replicate. Spatial dependence and the biological unit remain part of the statistical model.
+
+## Evaluate AI by the complete procedure
+
+An AI model can exploit animal, batch or study identity even when those labels are absent from the predictor table. Separating cells from the same animal across training and test allows animal-specific information to appear on both sides. Pretrained models also need evaluation for the new species, tissue and task.
+
+Traceable model inputs, version, preprocessing, split design and outputs are needed for reproducibility. A generated biological explanation must be checked against evidence. High predictive performance does not establish a causal mechanism or ensure calibration for the intended use.
+
+| Claim | Critical check |
+|---|---|
+| A new cell type was discovered | Marker/context evidence, annotation sensitivity and replication |
+| A trajectory reflects development | Sampling design, temporal evidence and alternative states |
+| A spatial contact is regulatory | Resolution, mixed cells, assay meaning and perturbation |
+| An AI model transfers to new animals | Animal-separated evaluation and deployment relevance |
+
+::: {.callout-note collapse="true" title="Advanced-method challenge"}
+Thousands of cells from three control and three treated animals give a tiny independent-cell p-value. What should be reviewed? The allocation unit, within-animal dependence, assay-specific model and sample-level evidence. More cells improve resolution without creating more independently treated animals.
+:::
+
+## Interpretation and scope
 
 Evaluate cell-type annotation, recovery, doublets, QC, spatial scale and biological replication. Method-specific pipelines and validations are needed before a real analysis. Advanced extensions in this course critique supplied designs and evidence; they do not claim to implement single-cell or spatial software workflows.
 
-## 5. Exercises
+## Exercises
 
 1. Why is splitting cells from each animal across train and test unsafe for new-animal prediction?
 2. What can a spatial co-location establish?
@@ -64,6 +108,10 @@ Evaluate cell-type annotation, recovery, doublets, QC, spatial scale and biologi
 2. Proximity at the assay’s resolution, not necessarily molecular interaction.
 3. Traceable data, valid model evaluation, independent biological evidence and appropriate experimental follow-up.
 :::
+
+## Further reading
+
+[Harvard introduction to single-cell RNA-seq](https://hbctraining.github.io/Intro-to-scRNAseq/) provides workflow teaching. Use its lessons alongside the animal-level replication critique in the advanced practical.
 
 ## Practicals and course pathways
 

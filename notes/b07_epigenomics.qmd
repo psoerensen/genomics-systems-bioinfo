@@ -17,19 +17,19 @@ execute:
 
 Distinguish methylation proportions, chromatin-accessibility measurements and expression; evaluate coverage, tissue composition and regulatory claims.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Epigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.
 
 Nutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 A simple methylation summary is $\widehat{p}=m/(m+u)$, where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, $\mathrm{Var}(\widehat p)=p(1-p)/n$. This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.
 
 A pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -45,11 +45,53 @@ data.frame(reads=n,conditional_SE=sqrt(.5*.5/n))
 
 The pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication.
 
-## 4. Interpretation and scope
+## Match the assay to the regulatory question
+
+DNA methylation, chromatin accessibility and protein occupancy describe different properties. A methylation assay estimates modification-related evidence at cytosines; ATAC-seq samples fragments associated with accessible chromatin; ChIP-seq enriches material associated with a targeted protein or modification. An apparent peak is therefore specific to an assay and its processing. Accessible chromatin can permit regulation without identifying the regulator or demonstrating that transcription increased.
+
+Regulatory annotations depend on tissue and state. A promoter annotation supplies a positional context; an enhancer–gene link is an additional hypothesis. Assigning every peak to its nearest gene is a reproducible rule, but distance alone does not establish which gene responds. Regions can act across distances and their activity can differ between cell types.
+
+| Question | Measurement to consider | Evidence still needed |
+|---|---|---|
+| Did a cytosine-related signal change? | Methylated/unmethylated evidence and depth | Conversion, mapping and biological replication |
+| Is a region accessible? | Accessibility fragments | QC, cell composition and assay context |
+| Is a regulator associated with a region? | Target-specific enrichment | Specificity, controls and reproducibility |
+| Does the region affect a gene? | Perturbation or complementary regulatory evidence | Direction and context of the response |
+
+## Read depth and animal variation enter at different levels
+
+A binomial model conditions on an animal's underlying proportion. Animals can have different proportions even in the same group. Combining read counts into one group total weights deeply sequenced animals more strongly and can hide the biological variation needed for an animal-level comparison.
+
+```{r}
+proportion <- c(.2,.8)
+depth <- c(10,100)
+c(equal_animal_mean=mean(proportion),
+ read_weighted_mean=weighted.mean(proportion,depth))
+# A beta-binomial-style variance illustration with intraread correlation.
+p <- .5;rho <- .05;n <- c(10,100,1000)
+data.frame(depth=n,binomial_variance=p*(1-p)/n,
+ overdispersed_variance=p*(1-p)*(1+(n-1)*rho)/n)
+```
+
+The second calculation is a stylized correlated-read model. Its variance does not decline as quickly as an independent binomial variance. It illustrates the consequence of dependence, not a complete methylation-analysis method or a fitted animal variance.
+
+## Design a regulatory interpretation
+
+Place the assay time before or after the outcome deliberately. An exposure-associated profile measured after a production change can reflect an adaptation or consequence. Genotype, cell composition and handling may affect both the profile and the phenotype. Adjustment variables should follow the target question; adjusting for a downstream change can alter the effect being estimated.
+
+Inspect coverage across animals, genomic regions and groups. A region retained only because it has coverage in one group changes the eligible universe. For enrichment, use regions or genes that could have been assessed under the selection rule and document the region-to-gene mapping.
+
+A convincing follow-up should distinguish competing explanations. Cell-type measurements can address mixture changes; a time series can clarify ordering; a targeted perturbation can test a proposed regulatory role. None automatically solves every source of confounding, but each contributes a specific kind of evidence.
+
+::: {.callout-note collapse="true" title="Regulatory challenge"}
+A diet-associated accessible region is near a differentially expressed gene. Does this prove enhancer mediation? No. The two observations can share a driver, and the region–gene link is uncertain. Ask for mapping context, matched samples, timing and a perturbation that tests the proposed relationship.
+:::
+
+## Interpretation and scope
 
 Conversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate.
 
-## 5. Exercises
+## Exercises
 
 1. Did either cell type change methylation in the example?
 2. Does sequencing one animal 100 times create 100 treatment replicates?
@@ -60,6 +102,10 @@ Conversion efficiency, assay specificity, mapping, coverage and cell composition
 2. No; these are measurements of one animal, not independent allocations.
 3. A profile measured after a phenotype changes can reflect its consequences rather than its antecedent causes.
 :::
+
+## Further reading
+
+[Harvard chromatin-biology teaching](https://hbctraining.github.io/Investigating-chromatin-biology-ChIPseq/) supplies an assay-workflow perspective. Compare the measurement targeted by each assay with the regulatory claim in a paper.
 
 ## Practicals and course pathways
 

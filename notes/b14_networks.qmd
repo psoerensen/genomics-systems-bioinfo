@@ -17,19 +17,19 @@ execute:
 
 Define eligible backgrounds and selection rules; calculate enrichment under a supplied null; construct and interpret networks with explicit edge definitions.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 A pathway analysis asks whether selected features are represented in a gene set more than expected under a specified model. Define the eligible background from genes that could have been selected, not every annotated gene regardless of assay coverage. Selection can depend on abundance, length, missingness or mapping, which can violate equal-selection assumptions.
 
 A network represents entities as nodes and a defined relationship as edges. A correlation network, protein-interaction database and curated metabolic network have different edge meanings. A dense cluster can reflect a common driver, duplicated measurements or technical structure. Gene regulation involves direction and mechanism; undirected correlation alone supplies neither.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 With N eligible genes, K in a pathway and n selected genes, the hypergeometric null assumes a uniformly selected subset of size n. For overlap x, the enrichment tail is $P(X\ge x)$ under $X\sim Hypergeometric(N,K,n)$. If pathway tests are numerous, address multiplicity.
 
 For a binary undirected adjacency matrix A with zero diagonal, degree is $d_i=\sum_j A_{ij}$. It describes connectivity under the selected definition and threshold, not an intrinsic universal importance of the gene.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -45,11 +45,59 @@ rowSums(A)
 
 The expected overlap is two under the supplied background and sampling rule. Degree depends on the four chosen nodes and their edges. These are fictional pathways and networks.
 
-## 4. Interpretation and scope
+## Enrichment depends on a selection process
+
+A pathway table supplies membership under a resource and version. Over-representation analysis compares selected genes with an eligible background. Its hypergeometric null treats subsets of the stated size as equally likely. Selection can depend on measurement abundance, gene length, assay coverage or annotation quality, making that assumption questionable.
+
+A protein panel should not automatically use every gene in the genome as its background. Genes that could never be measured cannot enter its selected list. Duplicated annotation rows should not create extra genes in an overlap count. Pathway tests also overlap with one another, so several significant pathways can reflect many of the same genes.
+
+## An edge needs a definition
+
+In a correlation graph, an edge means the supplied association passed a rule. In a curated interaction graph, it reflects database evidence of a specified type. In a directed regulatory model, it proposes an influence under a model. Node degree and centrality depend on this definition, retained nodes and threshold.
+
+A hub can result from a common latent factor affecting many measurements. It can also arise from duplicated or technically coupled features. Resampling animals evaluates sensitivity to the sampled population, while changing a threshold examines a different source of sensitivity. Neither converts a correlation graph into a causal regulatory map.
+
+## A dynamic model asks a different question
+
+Systems biology can model how quantities change over time. For a hypothetical molecule with constant production $a$ and first-order loss $b$, the equation is:
+
+$$\frac{dx}{dt}=a-bx,\qquad x^*=a/b.$$
+
+The equilibrium $x^*$ follows when production equals loss. A perturbation can change the production rate, degradation rate or starting state; these changes can produce different trajectories even if one final measurement is similar.
+
+```{r}
+time <- seq(0,8,length.out=100)
+a <- 4;b <- 1;x0 <- 0
+trajectory <- a/b+(x0-a/b)*exp(-b*time)
+slow <- a/.5+(x0-a/.5)*exp(-.5*time)
+plot(time,trajectory,type='l',ylim=range(c(trajectory,slow)),
+ xlab='Time (arbitrary units)',ylab='Hypothetical abundance')
+lines(time,slow,col='#B85E32',lty=2)
+legend('bottomright',c('loss rate 1','loss rate 0.5'),
+ col=c('black','#B85E32'),lty=c(1,2),bty='n')
+```
+
+This is an analytic solution, avoiding numerical-integration error. Its units must be consistent: production is abundance per time and loss is inverse time. Real pathways may have nonlinear feedback, delays and interactions; their parameters need supporting data.
+
+## Feedback, stability and identifiability
+
+Negative feedback can regulate a response; positive feedback can support switching under suitable nonlinear dynamics. Oscillation requires a suitable system structure and parameter regime, not merely a loop drawn on a graph. A pathway diagram describes possible relationships; a dynamical model supplies quantitative rules and initial conditions.
+
+Different parameter combinations can fit limited observations similarly. Distinguish structural identifiability, concerning whether ideal observations can identify parameters, from practical uncertainty under the available sampling. Perturbations and time-resolved measurements can supply information missing from a steady-state comparison.
+
+## Translate a network result into an experiment
+
+Ask which node, interaction or process is actually being tested. A targeted perturbation with a measured time course may discriminate models more clearly than another large correlation panel. Document expected outcomes under competing hypotheses and the controls needed to interpret them.
+
+::: {.callout-note collapse="true" title="Systems challenge"}
+A molecule doubles at equilibrium. Is doubled production the only explanation? No. Halved loss also doubles the equilibrium in the simple model. A time course or additional measurement can help distinguish the explanations.
+:::
+
+## Interpretation and scope
 
 Overlapping gene sets and correlated gene statistics complicate enrichment inference. Report membership/version, mapping, background, selection rule and adjustment. Network robustness requires resampling or independent validation; causality requires stronger design or assumptions than correlation.
 
-## 5. Exercises
+## Exercises
 
 1. Why can a genome-wide background be inappropriate for a protein assay?
 2. Does an enrichment p-value measure pathway activity?
@@ -60,6 +108,10 @@ Overlapping gene sets and correlated gene statistics complicate enrichment infer
 2. No; it concerns representation under a null, not direct activity.
 3. Edges and node degrees can change, showing their dependence on the supplied rule.
 :::
+
+## Further reading
+
+[MIT OpenCourseWare Systems Biology](https://ocw.mit.edu/courses/8-591j-systems-biology-fall-2014/) provides lectures and problems for deeper dynamics. The equations and figures here are original teaching examples; use the course to extend the ideas of feedback and perturbation.
 
 ## Practicals and course pathways
 

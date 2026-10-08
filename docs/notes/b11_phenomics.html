@@ -4048,11 +4048,17 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#define-the-phenotype-before-aggregating-records" id="toc-define-the-phenotype-before-aggregating-records" class="nav-link" data-scroll-target="#define-the-phenotype-before-aggregating-records">Define the phenotype before aggregating records</a></li>
+  <li><a href="#aggregation-can-change-the-target" id="toc-aggregation-can-change-the-target" class="nav-link" data-scroll-target="#aggregation-can-change-the-target">Aggregation can change the target</a></li>
+  <li><a href="#repeated-records-are-nested-measurements" id="toc-repeated-records-are-nested-measurements" class="nav-link" data-scroll-target="#repeated-records-are-nested-measurements">Repeated records are nested measurements</a></li>
+  <li><a href="#align-molecular-sampling-with-the-decision" id="toc-align-molecular-sampling-with-the-decision" class="nav-link" data-scroll-target="#align-molecular-sampling-with-the-decision">Align molecular sampling with the decision</a></li>
+  <li><a href="#interpret-useful-performance" id="toc-interpret-useful-performance" class="nav-link" data-scroll-target="#interpret-useful-performance">Interpret useful performance</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4091,17 @@ window.Quarto = {
 <p>Define phenotypes and units; distinguish repeated observations from independent animals; align sensor measurements to biological sampling and decision times.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Phenomics can describe production, behaviour, physiology and environmental response across animals and time. Sensors create dense records, but the biological quantity still needs definition. A daily average, total, slope and within-day variability answer different questions. Document units, calibration, missing coverage and the interval represented by each summary.</p>
 <p>When aligning a molecular sample with sensor data, decide whether the intended feature is a pre-sampling baseline, concurrent response or future outcome. A model for day-30 prediction cannot use day-45 sensor records at deployment. Aggregation can also hide short-lived events and differences in monitoring duration.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>For animal i observed at <span class="math inline">\(n_i\)</span> times, <span class="math inline">\(\bar y_i=\sum_t y_{it}/n_i\)</span> is a mean over those recorded times, not necessarily the mean over the entire target period. Missing times need a coverage policy.</p>
 <p>Under equal marginal variance <span class="math inline">\(\sigma^2\)</span> and equal within-animal correlation <span class="math inline">\(\rho\)</span>, <span class="math inline">\(\mathrm{Var}(\bar y_i)=\sigma^2[1+(n_i-1)\rho]/n_i\)</span>. Additional correlated records improve precision more slowly than independent records.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4127,19 +4133,90 @@ window.Quarto = {
 </div>
 <p>The variance approaches the correlation component rather than zero as repeated records accumulate. The summary intentionally uses days 1–3, demonstrating a defined time window.</p>
 </section>
+<section id="define-the-phenotype-before-aggregating-records" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-phenotype-before-aggregating-records">Define the phenotype before aggregating records</h2>
+<p>A sensor measures a physical signal which is then interpreted as a biological quantity. Calibration, placement, device version and the algorithm converting signal to phenotype are part of that definition. Two datasets labelled activity may represent different sampling rates, units or classification rules.</p>
+<p>A mean, total, maximum and variability summarize different aspects of a time series. A daily total requires appropriate coverage; an average over observed intervals can remain biased when missing intervals are systematically different. A short fever episode can disappear in a weekly average while a sensor fault can create an apparent extreme.</p>
+</section>
+<section id="aggregation-can-change-the-target" class="level2">
+<h2 class="anchored" data-anchor-id="aggregation-can-change-the-target">Aggregation can change the target</h2>
+<p>Suppose one animal is observed on all five days while another is missing high-value days. An average of recorded values describes the observation window, not necessarily the target period.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>full <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> full;observed[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">target_period_mean=</span><span class="fu">mean</span>(full),<span class="at">recorded_mean=</span><span class="fu">mean</span>(observed,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="at">coverage=</span><span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(observed)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>target_period_mean      recorded_mean           coverage 
+         10.000000           8.333333           0.600000 </code></pre>
+</div>
+</div>
+<p>A coverage threshold makes inclusion explicit but does not guarantee unbiased selection. If illness affects both the phenotype and sensor availability, exclusion can change the population represented. For irregular intervals, a time-weighted summary requires a justified interpolation or integration rule rather than simply treating every record equally.</p>
+</section>
+<section id="repeated-records-are-nested-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="repeated-records-are-nested-measurements">Repeated records are nested measurements</h2>
+<p>Within-animal variation and between-animal variation answer different questions. Pooling them can produce a relationship that differs from a within-animal comparison. An animal with a generally high response can contribute high values at every time point even if its day-to-day fluctuations have no relationship to an exposure.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1102</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,<span class="at">each=</span><span class="dv">5</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">9</span>),<span class="at">each=</span><span class="dv">5</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> base<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">40</span>,<span class="at">sd=</span>.<span class="dv">2</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> base<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">40</span>,<span class="at">sd=</span>.<span class="dv">2</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x_within <span class="ot">&lt;-</span> x<span class="sc">-</span><span class="fu">ave</span>(x,id,<span class="at">FUN=</span>mean)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>y_within <span class="ot">&lt;-</span> y<span class="sc">-</span><span class="fu">ave</span>(y,id,<span class="at">FUN=</span>mean)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">pooled_correlation=</span><span class="fu">cor</span>(x,y),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="at">within_animal_correlation=</span><span class="fu">cor</span>(x_within,y_within))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       pooled_correlation within_animal_correlation 
+               0.99358867                0.06538265 </code></pre>
+</div>
+</div>
+<p>The strong pooled association is generated largely by between-animal differences. A longitudinal model should specify which effects and correlations are of interest. The within-animal calculation is descriptive, not a complete repeated-measures model.</p>
+</section>
+<section id="align-molecular-sampling-with-the-decision" class="level2">
+<h2 class="anchored" data-anchor-id="align-molecular-sampling-with-the-decision">Align molecular sampling with the decision</h2>
+<p>A baseline profile, a concurrent profile and a future profile can each be scientifically valuable, but support different tasks. Define the prediction time and a feature-availability table. Include the processing delay of a laboratory assay: collection before a decision does not mean the result was available before that decision.</p>
+<p>A valid retrospective analysis can mimic deployment by using only eligible records. Rolling summaries must not include future observations; training and test separation should respect animal identity and the temporal task. A model intended for new farms also requires evaluation across farms rather than only across nearby time points.</p>
+</section>
+<section id="interpret-useful-performance" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-useful-performance">Interpret useful performance</h2>
+<p>Measure error in units relevant to the phenotype. Compare with a baseline such as previous performance or a management-only prediction. Calibration matters when a predicted quantity informs thresholds. Changes in devices, breeds or management can shift the relationship between sensor signal and the target.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Timing challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Timing challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A day-30 risk prediction includes the average sensor response from days 1–40. Is it valid for day-30 use? No: future records enter the feature. Recompute summaries using information available by day 30 and define the future outcome separately.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>The equal-correlation model is a teaching simplification; actual serial correlation, drift, unequal coverage and animal-level variation need appropriate modelling. Neither millions of sensor rows nor precise technology automatically establish millions of experimental units.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>What happens to variance when rho is zero?</li>
 <li>Why should each animal’s monitoring coverage be reported?</li>
 <li>Which records are eligible for a prediction made on day 3?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4148,7 +4225,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>It is sigma squared divided by n.</li>
@@ -4158,6 +4235,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://compgenomr.github.io/book/">Computational Genomics with R</a> supplies complementary statistical foundations. Use the phenomics practical to apply those ideas to repeated records, measurement units and decision-time availability.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

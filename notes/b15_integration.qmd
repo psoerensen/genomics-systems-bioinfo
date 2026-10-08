@@ -17,19 +17,19 @@ execute:
 
 Distinguish early, intermediate and late integration; align samples and scales; evaluate common latent patterns, missing layers and validation.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Integration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.
 
 Verify animal identity, specimen and time before computing cross-layer associations. Samples from the same animal but different time points are not automatically interchangeable. A missing layer can depend on disease severity or technical failure, so a complete-case subset may not represent the target population. Feature scaling controls the influence of units and variance; block weighting also controls the influence of unequal feature counts.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For layer matrices $X_k$ with animals in rows, a simple concatenation is $X=[w_1 Z_1,\ldots,w_K Z_K]$, where $Z_k$ uses training-derived centering/scaling. Choosing $w_k=1/\sqrt{p_k}$ gives each standardized block the same total marginal variance p-weight in training when it has $p_k$ nonconstant features. It is a design choice, not a universally optimal integration method.
 
 Correlated layers may share biology, batch effects or repeated measurements. Cross-layer agreement is not independent replication by default.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -49,11 +49,63 @@ stopifnot(abs(sum(apply(ZA/sqrt(2),2,var))-1)<1e-12)
 
 Each block has total marginal variance one, but the joint PCs still depend on covariance. The common latent variable was deliberately supplied; a principal component is not a discovered mechanism.
 
-## 4. Interpretation and scope
+## Start with matched biological units
+
+A joint matrix should represent the intended unit. Measurements from one animal at two different times are related but not simultaneous; assays from different tissues answer different questions. Build an explicit map between biological subjects, specimens and assay columns before stacking numerical values.
+
+Missingness can occur at feature or whole-assay level. Complete-case integration selects subjects with all required measurements. If assay failure depends on health or sample quality, this selection can change the population. Report numbers available per layer and numbers retained jointly, then explain what inference targets that subset.
+
+## Choose the integration strategy for the task
+
+Early integration concatenates transformed features. Intermediate integration learns a joint or linked representation. Late integration combines layer-specific outputs. These strategies have different strengths: early integration is direct but sensitive to scales and feature counts; a factor model can describe shared and layer-specific variation; late integration can retain separate processing and missingness policies.
+
+| Task | Possible strategy | Evaluation question |
+|---|---|---|
+| Describe shared variation | Joint or linked factor representation | What variance and covariance are represented? |
+| Predict a future trait | Early or late predictive integration | Does it improve untouched-unit performance? |
+| Prioritize mechanisms | Evidence integration with biological context | Which alternative explanations remain? |
+| Handle unequal assay coverage | Explicit mappings and justified model | Which subjects/layers contribute to each result? |
+
+No strategy makes incompatible samples comparable by itself. More layers can add measurement noise, redundancy or batch structure as well as biological information.
+
+## Feature duplication changes influence
+
+Unit-variance scaling gives each feature similar marginal variance. A large block therefore contributes more total variance before weighting. Repeating a correlated measurement can increase its influence even though no new biological information was acquired.
+
+```{r}
+set.seed(1502)
+z <- rnorm(30)
+x <- cbind(signal=z+rnorm(30,sd=.1),other=rnorm(30))
+x_duplicate <- cbind(x,x[,1],x[,1],x[,1])
+p1 <- prcomp(x,scale.=TRUE)
+p2 <- prcomp(x_duplicate,scale.=TRUE)
+c(original_PC1_fraction=p1$sdev[1]^2/sum(p1$sdev^2),
+ duplicated_PC1_fraction=p2$sdev[1]^2/sum(p2$sdev^2))
+```
+
+The changed PCA reflects representation choices. Block weighting can balance total marginal variance, but it does not eliminate within-block redundancy or guarantee an optimal biological representation.
+
+## Interpret latent factors conservatively
+
+A factor is an inferred coordinate describing variation under a model. A factor correlated with diet may represent diet response, batch structure or another associated variable. Inspect sample scores, feature loadings, variance contributions and sensitivity to included layers. Assigning a pathway name is an interpretation, not an observed identity.
+
+The MOFA paper provides an advanced example of unsupervised multi-omics factor analysis. It is useful for discussion of shared and layer-specific structure, but the small PCA examples here do not implement that method. Matching its terminology requires understanding its actual model rather than renaming a principal component.
+
+## Evaluate incremental value
+
+Compare integrated predictions with each individual layer and a nonmolecular baseline using the same held-out subjects. Fit every transformation and selection inside training. An integrated model that improves one split needs replication and a cost/availability assessment before deployment.
+
+For causal interpretation, cross-layer agreement is not independent experimental replication. A single latent biological or technical driver can influence every assay. A targeted follow-up should test the proposed connection rather than merely acquire another correlated layer.
+
+::: {.callout-note collapse="true" title="Integration challenge"}
+A joint factor has strong RNA and protein loadings and separates the diets. What evidence would establish a regulatory path? Matched measurements and biological context help, but temporal and perturbation evidence are needed to distinguish mediation from a shared response or confounding.
+:::
+
+## Interpretation and scope
 
 An integration example must specify the unit, timing, transformation, missingness policy, target and validation. The [MultiAssayExperiment documentation](https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment_cheatsheet.html) illustrates explicit mappings between assay columns and biological subjects; these practicals implement small analogous checks with base R.
 
-## 5. Exercises
+## Exercises
 
 1. Why can a large feature block dominate concatenated PCA?
 2. Does block weighting remove batch effects?
@@ -64,6 +116,10 @@ An integration example must specify the unit, timing, transformation, missingnes
 2. No; weighting changes influence, not confounding.
 3. Within each training split, then applied to held-out animals.
 :::
+
+## Further reading
+
+[MOFA: Multi-Omics Factor Analysis](https://doi.org/10.15252/msb.20178124), Molecular Systems Biology, is an advanced methods reading. Compare its inferential model with concatenated PCA. [MultiAssayExperiment documentation](https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment_cheatsheet.html) explains explicit subject-to-assay mappings.
 
 ## Practicals and course pathways
 

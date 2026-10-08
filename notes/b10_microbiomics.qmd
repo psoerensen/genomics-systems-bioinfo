@@ -17,19 +17,19 @@ execute:
 
 Distinguish amplicon and metagenomic measurements; explain compositionality; evaluate host–microbiome associations and sampling limitations.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 A microbiome sample measures a community at a particular site, time and collection process. Amplicon data focus on selected marker sequences; shotgun metagenomics samples broader sequence content. Sequence representation depends on extraction, library preparation, genome properties and reference annotation. A taxonomic abundance profile does not directly measure metabolic activity.
 
 Rumen, intestinal and faecal samples answer different questions. Host diet, genotype, management and physiology can influence the community while also influencing a production trait. Association between a taxon and methane, for example, can arise from those shared drivers; it does not demonstrate that changing the taxon would change emissions.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 Relative abundance is $p_{ij}=x_{ij}/\sum_k x_{kj}$. Because the components sum to one, increasing one absolute component can reduce the relative representation of another whose absolute amount did not change.
 
 For strictly positive components, a log ratio $\log(x_A/x_B)$ is invariant to a common sample multiplier. Zero handling needs an explicit measurement assumption: adding an arbitrary constant can alter conclusions, especially for rare taxa.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -45,11 +45,59 @@ log(absolute[,"A"]/absolute[,"B"])
 
 B becomes a smaller fraction even though its absolute amount is unchanged. A change in total microbial load is not observable from these fractions alone.
 
-## 4. Interpretation and scope
+## Decide which aspect of the community matters
+
+A microbial community can be described by taxa, genes, transcripts or metabolites. These represent composition, genetic potential and aspects of activity at different scales. A taxon carrying a pathway does not demonstrate that the pathway is expressed in the sampled environment. Strains within a named taxon can also differ in gene content.
+
+Amplicon profiling targets a marker and is influenced by primer coverage and copy number. Shotgun sequencing samples broader DNA content but still has extraction, reference and depth limitations. A larger number of reads is not automatically a more representative biological sample. Host DNA, contamination and poorly represented organisms can change effective microbial coverage.
+
+Collection site and timing define the target. Faecal composition is a sample from that material; it should not be treated as an exact measurement of every intestinal or rumen community. Diet, medication, management and host physiology can influence both composition and production outcomes.
+
+## Diversity summarizes a chosen representation
+
+Richness counts detected categories, while Shannon entropy combines relative representation and evenness. These statistics depend on the retained categories and observation process. Higher diversity is not universally healthier or more productive.
+
+```{r}
+profiles <- rbind(even=c(.25,.25,.25,.25),
+ dominated=c(.85,.05,.05,.05))
+entropy <- function(p) -sum(p[p>0]*log(p[p>0]))
+data.frame(profile=rownames(profiles),
+ richness=rowSums(profiles>0),Shannon=apply(profiles,1,entropy))
+```
+
+Both constructed communities have four categories; their evenness differs. Detection limits and sequencing depth can change apparent richness even without a true change in the community.
+
+## Ratios state the reference explicitly
+
+A log ratio compares two components. It is invariant to a common multiplicative scale, but requires interpretable positive measurements. The denominator is part of the question: an A-to-B ratio differs from A-to-total and need not isolate A's absolute change.
+
+```{r}
+x <- c(A=20,B=10,C=70)
+c(log_A_to_B=log(x['A']/x['B']),
+ log_A_to_B_after_scaling=log((3*x['A'])/(3*x['B'])))
+# A zero replaces knowledge of an amount with a measurement question.
+rare <- c(0,1,4)
+data.frame(pseudocount=c(.1,1,5),
+ log_first_to_second=sapply(c(.1,1,5),function(k) log((rare[1]+k)/(rare[2]+k))))
+```
+
+The last result depends strongly on the supplied constant. A nondetection, sampling zero and true absence can require different reasoning. Sensitivity to zero handling should be reported rather than hidden in preprocessing.
+
+## Connect to host traits carefully
+
+An observational taxon–methane association can reflect a dietary shift affecting both. A mechanistic claim needs evidence about the organism, pathway activity and intervention context. Sampling animals repeatedly adds temporal detail while retaining within-animal dependence.
+
+For prediction, define whether the community is measured before the outcome and whether new farms or diets are part of deployment. A model can exploit farm-specific collection or processing signatures. Independent evaluation and a baseline using ordinary management variables help assess the extra value of an assay.
+
+::: {.callout-note collapse="true" title="Community challenge"}
+The relative fraction of a methanogen decreases after a diet change. What additional evidence would clarify emissions? Measure the relevant output and consider microbial load and pathway activity. A lower fraction does not establish a smaller absolute population or lower total activity.
+:::
+
+## Interpretation and scope
 
 Distinguish microbial load, relative composition, genetic potential and activity. Consider contaminants, reference coverage, repeated measurements, host-level confounding and independent validation. Host–microbiome co-metabolism is a mechanistic hypothesis to examine with appropriate molecular and experimental evidence.
 
-## 5. Exercises
+## Exercises
 
 1. Which taxon changed absolute amount?
 2. Can relative B alone establish that B was depleted?
@@ -60,6 +108,10 @@ Distinguish microbial load, relative composition, genetic potential and activity
 2. No; its fraction decreased through the change in A.
 3. A justified absolute-quantification measurement, such as calibrated load estimates, with its own sampling and technical assumptions.
 :::
+
+## Further reading
+
+[Cambridge introduction to metagenomics](https://cambiotraining.github.io/metagenomics/) provides a complementary workflow perspective. For broader multi-omics context, see [*Integrative omics for health and disease*](https://www.nature.com/articles/nrg.2018.4); evaluate how its study context differs from a host–microbiome study.
 
 ## Practicals and course pathways
 

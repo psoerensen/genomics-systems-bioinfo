@@ -17,19 +17,19 @@ execute:
 
 Define phenotypes and units; distinguish repeated observations from independent animals; align sensor measurements to biological sampling and decision times.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Phenomics can describe production, behaviour, physiology and environmental response across animals and time. Sensors create dense records, but the biological quantity still needs definition. A daily average, total, slope and within-day variability answer different questions. Document units, calibration, missing coverage and the interval represented by each summary.
 
 When aligning a molecular sample with sensor data, decide whether the intended feature is a pre-sampling baseline, concurrent response or future outcome. A model for day-30 prediction cannot use day-45 sensor records at deployment. Aggregation can also hide short-lived events and differences in monitoring duration.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For animal i observed at $n_i$ times, $\bar y_i=\sum_t y_{it}/n_i$ is a mean over those recorded times, not necessarily the mean over the entire target period. Missing times need a coverage policy.
 
 Under equal marginal variance $\sigma^2$ and equal within-animal correlation $\rho$, $\mathrm{Var}(\bar y_i)=\sigma^2[1+(n_i-1)\rho]/n_i$. Additional correlated records improve precision more slowly than independent records.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -46,11 +46,62 @@ aggregate(value~animal,subset(records,day<=3),mean)
 
 The variance approaches the correlation component rather than zero as repeated records accumulate. The summary intentionally uses days 1–3, demonstrating a defined time window.
 
-## 4. Interpretation and scope
+## Define the phenotype before aggregating records
+
+A sensor measures a physical signal which is then interpreted as a biological quantity. Calibration, placement, device version and the algorithm converting signal to phenotype are part of that definition. Two datasets labelled activity may represent different sampling rates, units or classification rules.
+
+A mean, total, maximum and variability summarize different aspects of a time series. A daily total requires appropriate coverage; an average over observed intervals can remain biased when missing intervals are systematically different. A short fever episode can disappear in a weekly average while a sensor fault can create an apparent extreme.
+
+## Aggregation can change the target
+
+Suppose one animal is observed on all five days while another is missing high-value days. An average of recorded values describes the observation window, not necessarily the target period.
+
+```{r}
+full <- c(8,9,12,13,8)
+observed <- full;observed[c(3,4)] <- NA
+c(target_period_mean=mean(full),recorded_mean=mean(observed,na.rm=TRUE),
+ coverage=mean(!is.na(observed)))
+```
+
+A coverage threshold makes inclusion explicit but does not guarantee unbiased selection. If illness affects both the phenotype and sensor availability, exclusion can change the population represented. For irregular intervals, a time-weighted summary requires a justified interpolation or integration rule rather than simply treating every record equally.
+
+## Repeated records are nested measurements
+
+Within-animal variation and between-animal variation answer different questions. Pooling them can produce a relationship that differs from a within-animal comparison. An animal with a generally high response can contribute high values at every time point even if its day-to-day fluctuations have no relationship to an exposure.
+
+```{r}
+set.seed(1102)
+id <- rep(1:8,each=5)
+base <- rep(seq(2,9),each=5)
+x <- base+rnorm(40,sd=.2)
+y <- base+rnorm(40,sd=.2)
+x_within <- x-ave(x,id,FUN=mean)
+y_within <- y-ave(y,id,FUN=mean)
+c(pooled_correlation=cor(x,y),
+ within_animal_correlation=cor(x_within,y_within))
+```
+
+The strong pooled association is generated largely by between-animal differences. A longitudinal model should specify which effects and correlations are of interest. The within-animal calculation is descriptive, not a complete repeated-measures model.
+
+## Align molecular sampling with the decision
+
+A baseline profile, a concurrent profile and a future profile can each be scientifically valuable, but support different tasks. Define the prediction time and a feature-availability table. Include the processing delay of a laboratory assay: collection before a decision does not mean the result was available before that decision.
+
+A valid retrospective analysis can mimic deployment by using only eligible records. Rolling summaries must not include future observations; training and test separation should respect animal identity and the temporal task. A model intended for new farms also requires evaluation across farms rather than only across nearby time points.
+
+## Interpret useful performance
+
+Measure error in units relevant to the phenotype. Compare with a baseline such as previous performance or a management-only prediction. Calibration matters when a predicted quantity informs thresholds. Changes in devices, breeds or management can shift the relationship between sensor signal and the target.
+
+::: {.callout-note collapse="true" title="Timing challenge"}
+A day-30 risk prediction includes the average sensor response from days 1–40. Is it valid for day-30 use? No: future records enter the feature. Recompute summaries using information available by day 30 and define the future outcome separately.
+:::
+
+## Interpretation and scope
 
 The equal-correlation model is a teaching simplification; actual serial correlation, drift, unequal coverage and animal-level variation need appropriate modelling. Neither millions of sensor rows nor precise technology automatically establish millions of experimental units.
 
-## 5. Exercises
+## Exercises
 
 1. What happens to variance when rho is zero?
 2. Why should each animal’s monitoring coverage be reported?
@@ -61,6 +112,10 @@ The equal-correlation model is a teaching simplification; actual serial correlat
 2. Means from different windows or selective missing times may not be comparable.
 3. Information observed by day 3; later records are eligible only as outcomes or in a different task.
 :::
+
+## Further reading
+
+[Computational Genomics with R](https://compgenomr.github.io/book/) supplies complementary statistical foundations. Use the phenomics practical to apply those ideas to repeated records, measurement units and decision-time availability.
 
 ## Practicals and course pathways
 

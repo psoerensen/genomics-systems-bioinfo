@@ -1025,36 +1025,36 @@
     "objectID": "notes/b17_integrity.html#biological-question-and-measurements",
     "href": "notes/b17_integrity.html#biological-question-and-measurements",
     "title": "Reproducibility, data governance and responsible research",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nReproducibility means that the documented inputs and procedures can produce the reported analysis. It requires traceable data versions, sample definitions, transformations, software, random draws and model choices. A script that runs is only part of this record: excluded samples, manual corrections and selection decisions affect the result.\nA public teaching example can use hypothetical data while a real collaboration may need controlled access. Genetic, ownership, location or linked production records can carry sensitive information. Permissions, consent or institutional agreements determine what may be shared; changing names alone does not necessarily prevent re-identification. Publish reusable methods and non-sensitive demonstrations without transferring restricted records into public repositories.\nResponsible AI use includes identifying what the tool contributed and verifying code, citations and interpretations. Do not upload restricted data to an external service without the applicable authorisation. Specific governance decisions depend on the project’s agreements and local requirements."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nReproducibility means that the documented inputs and procedures can produce the reported analysis. It requires traceable data versions, sample definitions, transformations, software, random draws and model choices. A script that runs is only part of this record: excluded samples, manual corrections and selection decisions affect the result.\nA public teaching example can use hypothetical data while a real collaboration may need controlled access. Genetic, ownership, location or linked production records can carry sensitive information. Permissions, consent or institutional agreements determine what may be shared; changing names alone does not necessarily prevent re-identification. Publish reusable methods and non-sensitive demonstrations without transferring restricted records into public repositories.\nResponsible AI use includes identifying what the tool contributed and verifying code, citations and interpretations. Do not upload restricted data to an external service without the applicable authorisation. Specific governance decisions depend on the project’s agreements and local requirements."
   },
   {
     "objectID": "notes/b17_integrity.html#model-and-assumptions",
     "href": "notes/b17_integrity.html#model-and-assumptions",
     "title": "Reproducibility, data governance and responsible research",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nA manifest connects a file identifier, checksum, role and access category. A checksum can detect byte-level changes; it cannot determine whether a biological measurement or label is correct. Separate data provenance from biological validity.\nAn analysis record should distinguish prespecified decisions from exploratory choices and document deviations. Fixing a seed preserves one random realization; it does not establish that findings generalize."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nA manifest connects a file identifier, checksum, role and access category. A checksum can detect byte-level changes; it cannot determine whether a biological measurement or label is correct. Separate data provenance from biological validity.\nAn analysis record should distinguish prespecified decisions from exploratory choices and document deviations. Fixing a seed preserves one random realization; it does not establish that findings generalize."
   },
   {
     "objectID": "notes/b17_integrity.html#worked-example",
     "href": "notes/b17_integrity.html#worked-example",
     "title": "Reproducibility, data governance and responsible research",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\npath &lt;- tempfile(fileext=\".csv\")\nwrite.csv(data.frame(animal=c(\"fictional_a1\",\"fictional_a2\"),value=c(3,5)),\n path,row.names=FALSE)\nmanifest &lt;- data.frame(role=\"hypothetical teaching input\",checksum=unname(tools::md5sum(path)),\n access=\"public synthetic\",unit=\"animal\")\nmanifest\n\n\n                         role                         checksum           access\n1 hypothetical teaching input ca1fa9541bfb9f91c7a0cced0ac7f804 public synthetic\n    unit\n1 animal\n\n\nShow R code\nstopifnot(nchar(manifest$checksum)==32)\nunlink(path) # Removes only the temporary file created in this example.\n\n\nThe manifest identifies bytes of one fictional teaching table. A different formatting or row order can change the checksum even when the scientific content is equivalent."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\npath &lt;- tempfile(fileext=\".csv\")\nwrite.csv(data.frame(animal=c(\"fictional_a1\",\"fictional_a2\"),value=c(3,5)),\n path,row.names=FALSE)\nmanifest &lt;- data.frame(role=\"hypothetical teaching input\",checksum=unname(tools::md5sum(path)),\n access=\"public synthetic\",unit=\"animal\")\nmanifest\n\n\n                         role                         checksum           access\n1 hypothetical teaching input ca1fa9541bfb9f91c7a0cced0ac7f804 public synthetic\n    unit\n1 animal\n\n\nShow R code\nstopifnot(nchar(manifest$checksum)==32)\nunlink(path) # Removes only the temporary file created in this example.\n\n\nThe manifest identifies bytes of one fictional teaching table. A different formatting or row order can change the checksum even when the scientific content is equivalent."
   },
   {
     "objectID": "notes/b17_integrity.html#interpretation-and-scope",
     "href": "notes/b17_integrity.html#interpretation-and-scope",
     "title": "Reproducibility, data governance and responsible research",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nKeep credentials, private observations and restricted metadata out of public teaching sources. Report validation and limitations plainly, including null or inconsistent results. Reproducibility does not guarantee correct inference, responsible access or scientific validity."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nKeep credentials, private observations and restricted metadata out of public teaching sources. Report validation and limitations plainly, including null or inconsistent results. Reproducibility does not guarantee correct inference, responsible access or scientific validity."
   },
   {
     "objectID": "notes/b17_integrity.html#exercises",
     "href": "notes/b17_integrity.html#exercises",
     "title": "Reproducibility, data governance and responsible research",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nDoes an unchanged checksum certify correct animal identity?\nWhat should be shared when data access is restricted?\nWhy record an exploratory feature-selection decision?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nNo; it only certifies the same file bytes under the checksum mechanism.\nMethods, metadata descriptions, access procedures and an appropriately non-sensitive example, subject to the governing agreements.\nSelection affects uncertainty and replication; readers need to know how the analysis was chosen."
+    "section": "Exercises",
+    "text": "Exercises\n\nDoes an unchanged checksum certify correct animal identity?\nWhat should be shared when data access is restricted?\nWhy record an exploratory feature-selection decision?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nNo; it only certifies the same file bytes under the checksum mechanism.\nMethods, metadata descriptions, access procedures and an appropriately non-sensitive example, subject to the governing agreements.\nSelection affects uncertainty and replication; readers need to know how the analysis was chosen."
   },
   {
     "objectID": "notes/b17_integrity.html#practicals-and-course-pathways",
@@ -1081,36 +1081,36 @@
     "objectID": "notes/b15_integration.html#biological-question-and-measurements",
     "href": "notes/b15_integration.html#biological-question-and-measurements",
     "title": "Integrating molecular layers and phenotypes",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nIntegration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.\nVerify animal identity, specimen and time before computing cross-layer associations. Samples from the same animal but different time points are not automatically interchangeable. A missing layer can depend on disease severity or technical failure, so a complete-case subset may not represent the target population. Feature scaling controls the influence of units and variance; block weighting also controls the influence of unequal feature counts."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nIntegration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.\nVerify animal identity, specimen and time before computing cross-layer associations. Samples from the same animal but different time points are not automatically interchangeable. A missing layer can depend on disease severity or technical failure, so a complete-case subset may not represent the target population. Feature scaling controls the influence of units and variance; block weighting also controls the influence of unequal feature counts."
   },
   {
     "objectID": "notes/b15_integration.html#model-and-assumptions",
     "href": "notes/b15_integration.html#model-and-assumptions",
     "title": "Integrating molecular layers and phenotypes",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor layer matrices \\(X_k\\) with animals in rows, a simple concatenation is \\(X=[w_1 Z_1,\\ldots,w_K Z_K]\\), where \\(Z_k\\) uses training-derived centering/scaling. Choosing \\(w_k=1/\\sqrt{p_k}\\) gives each standardized block the same total marginal variance p-weight in training when it has \\(p_k\\) nonconstant features. It is a design choice, not a universally optimal integration method.\nCorrelated layers may share biology, batch effects or repeated measurements. Cross-layer agreement is not independent replication by default."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor layer matrices \\(X_k\\) with animals in rows, a simple concatenation is \\(X=[w_1 Z_1,\\ldots,w_K Z_K]\\), where \\(Z_k\\) uses training-derived centering/scaling. Choosing \\(w_k=1/\\sqrt{p_k}\\) gives each standardized block the same total marginal variance p-weight in training when it has \\(p_k\\) nonconstant features. It is a design choice, not a universally optimal integration method.\nCorrelated layers may share biology, batch effects or repeated measurements. Cross-layer agreement is not independent replication by default."
   },
   {
     "objectID": "notes/b15_integration.html#worked-example",
     "href": "notes/b15_integration.html#worked-example",
     "title": "Integrating molecular layers and phenotypes",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1501)\nz &lt;- rnorm(12)\nA &lt;- cbind(z+rnorm(12,sd=.2), z+rnorm(12,sd=.2))\nB &lt;- cbind(z+rnorm(12,sd=.3), rnorm(12), rnorm(12))\nZA &lt;- scale(A); ZB &lt;- scale(B)\ncombined &lt;- cbind(ZA/sqrt(ncol(ZA)),ZB/sqrt(ncol(ZB)))\nfit &lt;- prcomp(combined,center=FALSE,scale.=FALSE)\nc(A_total_variance=sum(apply(ZA/sqrt(2),2,var)),\n B_total_variance=sum(apply(ZB/sqrt(3),2,var)),\n PC1_fraction=fit$sdev[1]^2/sum(fit$sdev^2))\n\n\nA_total_variance B_total_variance     PC1_fraction \n       1.0000000        1.0000000        0.7082201 \n\n\nShow R code\nstopifnot(abs(sum(apply(ZA/sqrt(2),2,var))-1)&lt;1e-12)\n\n\nEach block has total marginal variance one, but the joint PCs still depend on covariance. The common latent variable was deliberately supplied; a principal component is not a discovered mechanism."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1501)\nz &lt;- rnorm(12)\nA &lt;- cbind(z+rnorm(12,sd=.2), z+rnorm(12,sd=.2))\nB &lt;- cbind(z+rnorm(12,sd=.3), rnorm(12), rnorm(12))\nZA &lt;- scale(A); ZB &lt;- scale(B)\ncombined &lt;- cbind(ZA/sqrt(ncol(ZA)),ZB/sqrt(ncol(ZB)))\nfit &lt;- prcomp(combined,center=FALSE,scale.=FALSE)\nc(A_total_variance=sum(apply(ZA/sqrt(2),2,var)),\n B_total_variance=sum(apply(ZB/sqrt(3),2,var)),\n PC1_fraction=fit$sdev[1]^2/sum(fit$sdev^2))\n\n\nA_total_variance B_total_variance     PC1_fraction \n       1.0000000        1.0000000        0.7082201 \n\n\nShow R code\nstopifnot(abs(sum(apply(ZA/sqrt(2),2,var))-1)&lt;1e-12)\n\n\nEach block has total marginal variance one, but the joint PCs still depend on covariance. The common latent variable was deliberately supplied; a principal component is not a discovered mechanism."
   },
   {
     "objectID": "notes/b15_integration.html#interpretation-and-scope",
     "href": "notes/b15_integration.html#interpretation-and-scope",
     "title": "Integrating molecular layers and phenotypes",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nAn integration example must specify the unit, timing, transformation, missingness policy, target and validation. The MultiAssayExperiment documentation illustrates explicit mappings between assay columns and biological subjects; these practicals implement small analogous checks with base R."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nAn integration example must specify the unit, timing, transformation, missingness policy, target and validation. The MultiAssayExperiment documentation illustrates explicit mappings between assay columns and biological subjects; these practicals implement small analogous checks with base R."
   },
   {
     "objectID": "notes/b15_integration.html#exercises",
     "href": "notes/b15_integration.html#exercises",
     "title": "Integrating molecular layers and phenotypes",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy can a large feature block dominate concatenated PCA?\nDoes block weighting remove batch effects?\nWhere should scaling be estimated for prediction?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nMore standardized features contribute more total variance.\nNo; weighting changes influence, not confounding.\nWithin each training split, then applied to held-out animals."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy can a large feature block dominate concatenated PCA?\nDoes block weighting remove batch effects?\nWhere should scaling be estimated for prediction?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nMore standardized features contribute more total variance.\nNo; weighting changes influence, not confounding.\nWithin each training split, then applied to held-out animals."
   },
   {
     "objectID": "notes/b15_integration.html#practicals-and-course-pathways",
@@ -1137,36 +1137,36 @@
     "objectID": "notes/b13_association.html#biological-question-and-measurements",
     "href": "notes/b13_association.html#biological-question-and-measurements",
     "title": "Association, prediction and regulatory evidence",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nGWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.\nRelatedness and population structure can induce association when genetic groups differ in environment or phenotype. Linkage disequilibrium allows a marker to tag nearby variation; multiple correlated associations need not imply multiple mechanisms. Fine-mapping compares candidate explanations under an explicit model and requires appropriate LD, coverage, allele alignment and prior assumptions. A posterior probability is conditional on that model and supplied candidates.\nGenomic prediction evaluates the ability to predict new animals, rather than selecting the smallest association p-value. The deployment population and training relationships determine the relevant validation design."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nGWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.\nRelatedness and population structure can induce association when genetic groups differ in environment or phenotype. Linkage disequilibrium allows a marker to tag nearby variation; multiple correlated associations need not imply multiple mechanisms. Fine-mapping compares candidate explanations under an explicit model and requires appropriate LD, coverage, allele alignment and prior assumptions. A posterior probability is conditional on that model and supplied candidates.\nGenomic prediction evaluates the ability to predict new animals, rather than selecting the smallest association p-value. The deployment population and training relationships determine the relevant validation design."
   },
   {
     "objectID": "notes/b13_association.html#model-and-assumptions",
     "href": "notes/b13_association.html#model-and-assumptions",
     "title": "Association, prediction and regulatory evidence",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nA basic unrelated-sample model is \\(y_i=\\beta_0+\\beta_g g_i+\\gamma^T c_i+e_i\\), where \\(g_i\\) counts a stated allele and c contains prespecified covariates. Residual independence and the design matter. With correlated relatives, a mixed-model or other suitable framework is needed.\nFor two marker vectors, their correlation describes association of the supplied dosages. It does not establish ancestry, phase, a causal allele or a calibrated fine-mapping probability."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nA basic unrelated-sample model is \\(y_i=\\beta_0+\\beta_g g_i+\\gamma^T c_i+e_i\\), where \\(g_i\\) counts a stated allele and c contains prespecified covariates. Residual independence and the design matter. With correlated relatives, a mixed-model or other suitable framework is needed.\nFor two marker vectors, their correlation describes association of the supplied dosages. It does not establish ancestry, phase, a causal allele or a calibrated fine-mapping probability."
   },
   {
     "objectID": "notes/b13_association.html#worked-example",
     "href": "notes/b13_association.html#worked-example",
     "title": "Association, prediction and regulatory evidence",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1301)\nancestry &lt;- rep(c(0,1),each=20)\ng &lt;- rbinom(40,2,ifelse(ancestry==0,.2,.8))\ny &lt;- 3*ancestry+rnorm(40)\nunadjusted &lt;- lm(y~g)\nadjusted &lt;- lm(y~g+ancestry)\nc(unadjusted_marker=coef(unadjusted)[\"g\"],adjusted_marker=coef(adjusted)[\"g\"])\n\n\nunadjusted_marker.g   adjusted_marker.g \n         1.44495380         -0.02545743 \n\n\nShow R code\nstopifnot(qr(model.matrix(adjusted))$rank==3)\nplot(g,y,col=ifelse(ancestry==0,\"#1b9e77\",\"#d95f02\"),pch=19,\n xlab=\"Counted-allele dosage\",ylab=\"Hypothetical phenotype\")\n\n\n\n\n\n\n\n\n\nThe generating model contains no direct marker effect. Group differences can nevertheless create a marginal marker association. One realization does not make the adjusted estimate exactly zero."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1301)\nancestry &lt;- rep(c(0,1),each=20)\ng &lt;- rbinom(40,2,ifelse(ancestry==0,.2,.8))\ny &lt;- 3*ancestry+rnorm(40)\nunadjusted &lt;- lm(y~g)\nadjusted &lt;- lm(y~g+ancestry)\nc(unadjusted_marker=coef(unadjusted)[\"g\"],adjusted_marker=coef(adjusted)[\"g\"])\n\n\nunadjusted_marker.g   adjusted_marker.g \n         1.44495380         -0.02545743 \n\n\nShow R code\nstopifnot(qr(model.matrix(adjusted))$rank==3)\nplot(g,y,col=ifelse(ancestry==0,\"#1b9e77\",\"#d95f02\"),pch=19,\n xlab=\"Counted-allele dosage\",ylab=\"Hypothetical phenotype\")\n\n\n\n\n\n\n\n\n\nThe generating model contains no direct marker effect. Group differences can nevertheless create a marginal marker association. One realization does not make the adjusted estimate exactly zero."
   },
   {
     "objectID": "notes/b13_association.html#interpretation-and-scope",
     "href": "notes/b13_association.html#interpretation-and-scope",
     "title": "Association, prediction and regulatory evidence",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nAdjustment can reduce specified confounding but cannot guarantee that all confounding has been measured. Do not infer causality from conditional association, a TWAS signal or agreement between assays. Fit and validate appropriate models before applying any teaching formula to related livestock data."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nAdjustment can reduce specified confounding but cannot guarantee that all confounding has been measured. Do not infer causality from conditional association, a TWAS signal or agreement between assays. Fit and validate appropriate models before applying any teaching formula to related livestock data."
   },
   {
     "objectID": "notes/b13_association.html#exercises",
     "href": "notes/b13_association.html#exercises",
     "title": "Association, prediction and regulatory evidence",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy can a variant associate with a trait without changing it?\nWhat is the eQTL response variable?\nWhy can randomly splitting relatives exaggerate deployment performance?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nLD with causal variation or association with ancestry/environment can produce the signal.\nA specified expression measurement in a stated tissue/context.\nClose relatives in training and test can make the task easier than prediction in a new family or population."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy can a variant associate with a trait without changing it?\nWhat is the eQTL response variable?\nWhy can randomly splitting relatives exaggerate deployment performance?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nLD with causal variation or association with ancestry/environment can produce the signal.\nA specified expression measurement in a stated tissue/context.\nClose relatives in training and test can make the task easier than prediction in a new family or population."
   },
   {
     "objectID": "notes/b13_association.html#practicals-and-course-pathways",
@@ -1193,36 +1193,36 @@
     "objectID": "notes/b11_phenomics.html#biological-question-and-measurements",
     "href": "notes/b11_phenomics.html#biological-question-and-measurements",
     "title": "Phenomics, sensors and measurement timing",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nPhenomics can describe production, behaviour, physiology and environmental response across animals and time. Sensors create dense records, but the biological quantity still needs definition. A daily average, total, slope and within-day variability answer different questions. Document units, calibration, missing coverage and the interval represented by each summary.\nWhen aligning a molecular sample with sensor data, decide whether the intended feature is a pre-sampling baseline, concurrent response or future outcome. A model for day-30 prediction cannot use day-45 sensor records at deployment. Aggregation can also hide short-lived events and differences in monitoring duration."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nPhenomics can describe production, behaviour, physiology and environmental response across animals and time. Sensors create dense records, but the biological quantity still needs definition. A daily average, total, slope and within-day variability answer different questions. Document units, calibration, missing coverage and the interval represented by each summary.\nWhen aligning a molecular sample with sensor data, decide whether the intended feature is a pre-sampling baseline, concurrent response or future outcome. A model for day-30 prediction cannot use day-45 sensor records at deployment. Aggregation can also hide short-lived events and differences in monitoring duration."
   },
   {
     "objectID": "notes/b11_phenomics.html#model-and-assumptions",
     "href": "notes/b11_phenomics.html#model-and-assumptions",
     "title": "Phenomics, sensors and measurement timing",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor animal i observed at \\(n_i\\) times, \\(\\bar y_i=\\sum_t y_{it}/n_i\\) is a mean over those recorded times, not necessarily the mean over the entire target period. Missing times need a coverage policy.\nUnder equal marginal variance \\(\\sigma^2\\) and equal within-animal correlation \\(\\rho\\), \\(\\mathrm{Var}(\\bar y_i)=\\sigma^2[1+(n_i-1)\\rho]/n_i\\). Additional correlated records improve precision more slowly than independent records."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor animal i observed at \\(n_i\\) times, \\(\\bar y_i=\\sum_t y_{it}/n_i\\) is a mean over those recorded times, not necessarily the mean over the entire target period. Missing times need a coverage policy.\nUnder equal marginal variance \\(\\sigma^2\\) and equal within-animal correlation \\(\\rho\\), \\(\\mathrm{Var}(\\bar y_i)=\\sigma^2[1+(n_i-1)\\rho]/n_i\\). Additional correlated records improve precision more slowly than independent records."
   },
   {
     "objectID": "notes/b11_phenomics.html#worked-example",
     "href": "notes/b11_phenomics.html#worked-example",
     "title": "Phenomics, sensors and measurement timing",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nn &lt;- c(1,5,20)\nrho &lt;- .6\nvariance &lt;- (1+(n-1)*rho)/n\ndata.frame(records=n,variance_of_mean=variance)\n\n\n  records variance_of_mean\n1       1             1.00\n2       5             0.68\n3      20             0.62\n\n\nShow R code\nset.seed(1101)\nrecords &lt;- data.frame(animal=rep(c(\"a1\",\"a2\",\"a3\"),each=5),\n day=rep(1:5,3), value=rep(c(8,10,12),each=5)+rnorm(15,sd=.4))\naggregate(value~animal,subset(records,day&lt;=3),mean)\n\n\n  animal     value\n1     a1  7.726248\n2     a2 10.086693\n3     a3 12.094211\n\n\nThe variance approaches the correlation component rather than zero as repeated records accumulate. The summary intentionally uses days 1–3, demonstrating a defined time window."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nn &lt;- c(1,5,20)\nrho &lt;- .6\nvariance &lt;- (1+(n-1)*rho)/n\ndata.frame(records=n,variance_of_mean=variance)\n\n\n  records variance_of_mean\n1       1             1.00\n2       5             0.68\n3      20             0.62\n\n\nShow R code\nset.seed(1101)\nrecords &lt;- data.frame(animal=rep(c(\"a1\",\"a2\",\"a3\"),each=5),\n day=rep(1:5,3), value=rep(c(8,10,12),each=5)+rnorm(15,sd=.4))\naggregate(value~animal,subset(records,day&lt;=3),mean)\n\n\n  animal     value\n1     a1  7.726248\n2     a2 10.086693\n3     a3 12.094211\n\n\nThe variance approaches the correlation component rather than zero as repeated records accumulate. The summary intentionally uses days 1–3, demonstrating a defined time window."
   },
   {
     "objectID": "notes/b11_phenomics.html#interpretation-and-scope",
     "href": "notes/b11_phenomics.html#interpretation-and-scope",
     "title": "Phenomics, sensors and measurement timing",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nThe equal-correlation model is a teaching simplification; actual serial correlation, drift, unequal coverage and animal-level variation need appropriate modelling. Neither millions of sensor rows nor precise technology automatically establish millions of experimental units."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nThe equal-correlation model is a teaching simplification; actual serial correlation, drift, unequal coverage and animal-level variation need appropriate modelling. Neither millions of sensor rows nor precise technology automatically establish millions of experimental units."
   },
   {
     "objectID": "notes/b11_phenomics.html#exercises",
     "href": "notes/b11_phenomics.html#exercises",
     "title": "Phenomics, sensors and measurement timing",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhat happens to variance when rho is zero?\nWhy should each animal’s monitoring coverage be reported?\nWhich records are eligible for a prediction made on day 3?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt is sigma squared divided by n.\nMeans from different windows or selective missing times may not be comparable.\nInformation observed by day 3; later records are eligible only as outcomes or in a different task."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhat happens to variance when rho is zero?\nWhy should each animal’s monitoring coverage be reported?\nWhich records are eligible for a prediction made on day 3?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt is sigma squared divided by n.\nMeans from different windows or selective missing times may not be comparable.\nInformation observed by day 3; later records are eligible only as outcomes or in a different task."
   },
   {
     "objectID": "notes/b11_phenomics.html#practicals-and-course-pathways",
@@ -1249,36 +1249,36 @@
     "objectID": "notes/b09_metabolomics.html#biological-question-and-measurements",
     "href": "notes/b09_metabolomics.html#biological-question-and-measurements",
     "title": "Metabolite features, identification and quantification",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nMetabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.\nTargeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nMetabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.\nTargeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement."
   },
   {
     "objectID": "notes/b09_metabolomics.html#model-and-assumptions",
     "href": "notes/b09_metabolomics.html#model-and-assumptions",
     "title": "Metabolite features, identification and quantification",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nIf the observed signal is \\(x_{ij}=a_j c_{ij}\\) and an internal standard has known concentration \\(c_s\\) and the same multiplicative factor \\(a_j\\), the ratio \\(x_{ij}/s_j\\) cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.\nScaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nIf the observed signal is \\(x_{ij}=a_j c_{ij}\\) and an internal standard has known concentration \\(c_s\\) and the same multiplicative factor \\(a_j\\), the ratio \\(x_{ij}/s_j\\) cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.\nScaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations."
   },
   {
     "objectID": "notes/b09_metabolomics.html#worked-example",
     "href": "notes/b09_metabolomics.html#worked-example",
     "title": "Metabolite features, identification and quantification",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nconcentration &lt;- c(2,3,4)\ndrift &lt;- c(.8,1.1,1.4)\nsignal &lt;- concentration*drift\nstandard &lt;- 5*drift\nratio &lt;- signal/standard\ndata.frame(concentration,signal,standard,ratio)\n\n\n  concentration signal standard ratio\n1             2    1.6      4.0   0.4\n2             3    3.3      5.5   0.6\n3             4    5.6      7.0   0.8\n\n\nShow R code\nstopifnot(max(abs(5*ratio-concentration))&lt;1e-12)\n\n\nThe common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nconcentration &lt;- c(2,3,4)\ndrift &lt;- c(.8,1.1,1.4)\nsignal &lt;- concentration*drift\nstandard &lt;- 5*drift\nratio &lt;- signal/standard\ndata.frame(concentration,signal,standard,ratio)\n\n\n  concentration signal standard ratio\n1             2    1.6      4.0   0.4\n2             3    3.3      5.5   0.6\n3             4    5.6      7.0   0.8\n\n\nShow R code\nstopifnot(max(abs(5*ratio-concentration))&lt;1e-12)\n\n\nThe common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete."
   },
   {
     "objectID": "notes/b09_metabolomics.html#interpretation-and-scope",
     "href": "notes/b09_metabolomics.html#interpretation-and-scope",
     "title": "Metabolite features, identification and quantification",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nChemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the EMBL-EBI metabolite-identification lesson for the distinction between a detected signal and an assigned compound."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nChemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the EMBL-EBI metabolite-identification lesson for the distinction between a detected signal and an assigned compound."
   },
   {
     "objectID": "notes/b09_metabolomics.html#exercises",
     "href": "notes/b09_metabolomics.html#exercises",
     "title": "Metabolite features, identification and quantification",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy is a feature ID insufficient for a pathway claim?\nUnder what assumption does the standard correction work?\nWhy can unit-variance scaling amplify noisy features?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe compound may not be established; mass, retention and additional chemical evidence need evaluation.\nAnalyte and standard share the specified multiplicative response.\nEach retained feature is given similar variance weight, even when its original variation reflects measurement noise."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is a feature ID insufficient for a pathway claim?\nUnder what assumption does the standard correction work?\nWhy can unit-variance scaling amplify noisy features?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe compound may not be established; mass, retention and additional chemical evidence need evaluation.\nAnalyte and standard share the specified multiplicative response.\nEach retained feature is given similar variance weight, even when its original variation reflects measurement noise."
   },
   {
     "objectID": "notes/b09_metabolomics.html#practicals-and-course-pathways",
@@ -1305,36 +1305,36 @@
     "objectID": "notes/b07_epigenomics.html#biological-question-and-measurements",
     "href": "notes/b07_epigenomics.html#biological-question-and-measurements",
     "title": "Epigenomic measurements and regulatory interpretation",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nEpigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.\nNutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nEpigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.\nNutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation."
   },
   {
     "objectID": "notes/b07_epigenomics.html#model-and-assumptions",
     "href": "notes/b07_epigenomics.html#model-and-assumptions",
     "title": "Epigenomic measurements and regulatory interpretation",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nA simple methylation summary is \\(\\widehat{p}=m/(m+u)\\), where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, \\(\\mathrm{Var}(\\widehat p)=p(1-p)/n\\). This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.\nA pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nA simple methylation summary is \\(\\widehat{p}=m/(m+u)\\), where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, \\(\\mathrm{Var}(\\widehat p)=p(1-p)/n\\). This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.\nA pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant."
   },
   {
     "objectID": "notes/b07_epigenomics.html#worked-example",
     "href": "notes/b07_epigenomics.html#worked-example",
     "title": "Epigenomic measurements and regulatory interpretation",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\ncell_methylation &lt;- c(typeA=.2,typeB=.8)\ncomposition &lt;- rbind(control=c(.8,.2),treated=c(.3,.7))\npooled &lt;- as.vector(composition %*% cell_methylation)\ndata.frame(group=rownames(composition), pooled_methylation=pooled)\n\n\n    group pooled_methylation\n1 control               0.32\n2 treated               0.62\n\n\nShow R code\nstopifnot(abs(pooled[1]-.32)&lt;1e-12, abs(pooled[2]-.62)&lt;1e-12)\nn &lt;- c(10,100)\ndata.frame(reads=n,conditional_SE=sqrt(.5*.5/n))\n\n\n  reads conditional_SE\n1    10      0.1581139\n2   100      0.0500000\n\n\nThe pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\ncell_methylation &lt;- c(typeA=.2,typeB=.8)\ncomposition &lt;- rbind(control=c(.8,.2),treated=c(.3,.7))\npooled &lt;- as.vector(composition %*% cell_methylation)\ndata.frame(group=rownames(composition), pooled_methylation=pooled)\n\n\n    group pooled_methylation\n1 control               0.32\n2 treated               0.62\n\n\nShow R code\nstopifnot(abs(pooled[1]-.32)&lt;1e-12, abs(pooled[2]-.62)&lt;1e-12)\nn &lt;- c(10,100)\ndata.frame(reads=n,conditional_SE=sqrt(.5*.5/n))\n\n\n  reads conditional_SE\n1    10      0.1581139\n2   100      0.0500000\n\n\nThe pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication."
   },
   {
     "objectID": "notes/b07_epigenomics.html#interpretation-and-scope",
     "href": "notes/b07_epigenomics.html#interpretation-and-scope",
     "title": "Epigenomic measurements and regulatory interpretation",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nConversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nConversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate."
   },
   {
     "objectID": "notes/b07_epigenomics.html#exercises",
     "href": "notes/b07_epigenomics.html#exercises",
     "title": "Epigenomic measurements and regulatory interpretation",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nDid either cell type change methylation in the example?\nDoes sequencing one animal 100 times create 100 treatment replicates?\nHow could sampling time affect a regulatory interpretation?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nNo; the mixture changed.\nNo; these are measurements of one animal, not independent allocations.\nA profile measured after a phenotype changes can reflect its consequences rather than its antecedent causes."
+    "section": "Exercises",
+    "text": "Exercises\n\nDid either cell type change methylation in the example?\nDoes sequencing one animal 100 times create 100 treatment replicates?\nHow could sampling time affect a regulatory interpretation?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nNo; the mixture changed.\nNo; these are measurements of one animal, not independent allocations.\nA profile measured after a phenotype changes can reflect its consequences rather than its antecedent causes."
   },
   {
     "objectID": "notes/b07_epigenomics.html#practicals-and-course-pathways",
@@ -2033,36 +2033,36 @@
     "objectID": "notes/b08_proteomics.html#biological-question-and-measurements",
     "href": "notes/b08_proteomics.html#biological-question-and-measurements",
     "title": "Protein identification, abundance and structure",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nProteomics can quantify molecular evidence from peptides or proteins using platforms such as mass spectrometry. A measured peptide may be shared by multiple proteins; assigning it to a unique gene product is an inference problem. Identification confidence and abundance uncertainty are separate. Sample preparation, digestion, instrument response and batch effects influence measured values.\nA protein table can contain missing values because abundance is low, a feature was not identified or processing failed. These mechanisms imply different analysis choices. Replacing every missing value by zero treats non-observation as a known measurement and can introduce artificial group differences. On a log scale, zero is not an absence: it represents an original-scale value of one.\nStructural records describe coordinates of a measured or predicted molecular model. A geometrical contact suggests spatial proximity within that model; it does not alone establish biochemical interaction or functional importance."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nProteomics can quantify molecular evidence from peptides or proteins using platforms such as mass spectrometry. A measured peptide may be shared by multiple proteins; assigning it to a unique gene product is an inference problem. Identification confidence and abundance uncertainty are separate. Sample preparation, digestion, instrument response and batch effects influence measured values.\nA protein table can contain missing values because abundance is low, a feature was not identified or processing failed. These mechanisms imply different analysis choices. Replacing every missing value by zero treats non-observation as a known measurement and can introduce artificial group differences. On a log scale, zero is not an absence: it represents an original-scale value of one.\nStructural records describe coordinates of a measured or predicted molecular model. A geometrical contact suggests spatial proximity within that model; it does not alone establish biochemical interaction or functional importance."
   },
   {
     "objectID": "notes/b08_proteomics.html#model-and-assumptions",
     "href": "notes/b08_proteomics.html#model-and-assumptions",
     "title": "Protein identification, abundance and structure",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nIf \\(z=\\log_2(x)\\) for positive abundance x, a difference \\(z_T-z_C\\) corresponds to a ratio \\(2^{z_T-z_C}\\). The example compares arithmetic means of log2 measurements, so the ratio corresponds to geometric means on the original scale.\nComplete-case comparisons require recording which values remain in each group. They can be biased when observation depends on abundance or group."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nIf \\(z=\\log_2(x)\\) for positive abundance x, a difference \\(z_T-z_C\\) corresponds to a ratio \\(2^{z_T-z_C}\\). The example compares arithmetic means of log2 measurements, so the ratio corresponds to geometric means on the original scale.\nComplete-case comparisons require recording which values remain in each group. They can be biased when observation depends on abundance or group."
   },
   {
     "objectID": "notes/b08_proteomics.html#worked-example",
     "href": "notes/b08_proteomics.html#worked-example",
     "title": "Protein identification, abundance and structure",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nz &lt;- c(8,8.5,NA,9,9.2,NA)\ngroup &lt;- factor(c(\"C\",\"C\",\"C\",\"T\",\"T\",\"T\"))\nmeans &lt;- tapply(z,group,mean,na.rm=TRUE)\nobserved &lt;- tapply(!is.na(z),group,sum)\ndata.frame(group=names(means),observed=as.vector(observed),mean_log2=as.vector(means))\n\n\n  group observed mean_log2\n1     C        2      8.25\n2     T        2      9.10\n\n\nShow R code\nc(log2_difference=means[\"T\"]-means[\"C\"],\n geometric_mean_ratio=2^(means[\"T\"]-means[\"C\"]))\n\n\n     log2_difference.T geometric_mean_ratio.T \n              0.850000               1.802501 \n\n\nBoth groups retain two measurements. The numerical ratio describes the observed log2 values, not a verified biological treatment effect."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nz &lt;- c(8,8.5,NA,9,9.2,NA)\ngroup &lt;- factor(c(\"C\",\"C\",\"C\",\"T\",\"T\",\"T\"))\nmeans &lt;- tapply(z,group,mean,na.rm=TRUE)\nobserved &lt;- tapply(!is.na(z),group,sum)\ndata.frame(group=names(means),observed=as.vector(observed),mean_log2=as.vector(means))\n\n\n  group observed mean_log2\n1     C        2      8.25\n2     T        2      9.10\n\n\nShow R code\nc(log2_difference=means[\"T\"]-means[\"C\"],\n geometric_mean_ratio=2^(means[\"T\"]-means[\"C\"]))\n\n\n     log2_difference.T geometric_mean_ratio.T \n              0.850000               1.802501 \n\n\nBoth groups retain two measurements. The numerical ratio describes the observed log2 values, not a verified biological treatment effect."
   },
   {
     "objectID": "notes/b08_proteomics.html#interpretation-and-scope",
     "href": "notes/b08_proteomics.html#interpretation-and-scope",
     "title": "Protein identification, abundance and structure",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nThe teaching protein values are supplied log2 abundances. They are not raw spectra and do not implement peptide identification or protein inference. Report platform, processing, quantification scale, identification thresholds and missingness. Protein structure and abundance answer different questions."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nThe teaching protein values are supplied log2 abundances. They are not raw spectra and do not implement peptide identification or protein inference. Report platform, processing, quantification scale, identification thresholds and missingness. Protein structure and abundance answer different questions."
   },
   {
     "objectID": "notes/b08_proteomics.html#exercises",
     "href": "notes/b08_proteomics.html#exercises",
     "title": "Protein identification, abundance and structure",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhat ratio corresponds to a log2 difference of one?\nWhy might low-value imputation strengthen a spurious difference?\nDoes a close residue pair establish an interaction in a living animal?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nTwo.\nIf one group has more missing values, the imputation can manufacture a lower group mean; its assumptions need justification.\nNo; context, structural uncertainty and biological evidence are required."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhat ratio corresponds to a log2 difference of one?\nWhy might low-value imputation strengthen a spurious difference?\nDoes a close residue pair establish an interaction in a living animal?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nTwo.\nIf one group has more missing values, the imputation can manufacture a lower group mean; its assumptions need justification.\nNo; context, structural uncertainty and biological evidence are required."
   },
   {
     "objectID": "notes/b08_proteomics.html#practicals-and-course-pathways",
@@ -2089,36 +2089,36 @@
     "objectID": "notes/b10_microbiomics.html#biological-question-and-measurements",
     "href": "notes/b10_microbiomics.html#biological-question-and-measurements",
     "title": "Microbial communities and host relationships",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nA microbiome sample measures a community at a particular site, time and collection process. Amplicon data focus on selected marker sequences; shotgun metagenomics samples broader sequence content. Sequence representation depends on extraction, library preparation, genome properties and reference annotation. A taxonomic abundance profile does not directly measure metabolic activity.\nRumen, intestinal and faecal samples answer different questions. Host diet, genotype, management and physiology can influence the community while also influencing a production trait. Association between a taxon and methane, for example, can arise from those shared drivers; it does not demonstrate that changing the taxon would change emissions."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nA microbiome sample measures a community at a particular site, time and collection process. Amplicon data focus on selected marker sequences; shotgun metagenomics samples broader sequence content. Sequence representation depends on extraction, library preparation, genome properties and reference annotation. A taxonomic abundance profile does not directly measure metabolic activity.\nRumen, intestinal and faecal samples answer different questions. Host diet, genotype, management and physiology can influence the community while also influencing a production trait. Association between a taxon and methane, for example, can arise from those shared drivers; it does not demonstrate that changing the taxon would change emissions."
   },
   {
     "objectID": "notes/b10_microbiomics.html#model-and-assumptions",
     "href": "notes/b10_microbiomics.html#model-and-assumptions",
     "title": "Microbial communities and host relationships",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nRelative abundance is \\(p_{ij}=x_{ij}/\\sum_k x_{kj}\\). Because the components sum to one, increasing one absolute component can reduce the relative representation of another whose absolute amount did not change.\nFor strictly positive components, a log ratio \\(\\log(x_A/x_B)\\) is invariant to a common sample multiplier. Zero handling needs an explicit measurement assumption: adding an arbitrary constant can alter conclusions, especially for rare taxa."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nRelative abundance is \\(p_{ij}=x_{ij}/\\sum_k x_{kj}\\). Because the components sum to one, increasing one absolute component can reduce the relative representation of another whose absolute amount did not change.\nFor strictly positive components, a log ratio \\(\\log(x_A/x_B)\\) is invariant to a common sample multiplier. Zero handling needs an explicit measurement assumption: adding an arbitrary constant can alter conclusions, especially for rare taxa."
   },
   {
     "objectID": "notes/b10_microbiomics.html#worked-example",
     "href": "notes/b10_microbiomics.html#worked-example",
     "title": "Microbial communities and host relationships",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nabsolute &lt;- rbind(before=c(A=10,B=10,C=10),after=c(A=20,B=10,C=10))\nrelative &lt;- absolute/rowSums(absolute)\nrelative\n\n\n               A         B         C\nbefore 0.3333333 0.3333333 0.3333333\nafter  0.5000000 0.2500000 0.2500000\n\n\nShow R code\nc(B_absolute_change=absolute[2,\"B\"]-absolute[1,\"B\"],\n B_relative_change=relative[2,\"B\"]-relative[1,\"B\"])\n\n\nB_absolute_change B_relative_change \n       0.00000000       -0.08333333 \n\n\nShow R code\nstopifnot(absolute[2,\"B\"]==absolute[1,\"B\"],relative[2,\"B\"]&lt;relative[1,\"B\"])\nlog(absolute[,\"A\"]/absolute[,\"B\"])\n\n\n   before     after \n0.0000000 0.6931472 \n\n\nB becomes a smaller fraction even though its absolute amount is unchanged. A change in total microbial load is not observable from these fractions alone."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nabsolute &lt;- rbind(before=c(A=10,B=10,C=10),after=c(A=20,B=10,C=10))\nrelative &lt;- absolute/rowSums(absolute)\nrelative\n\n\n               A         B         C\nbefore 0.3333333 0.3333333 0.3333333\nafter  0.5000000 0.2500000 0.2500000\n\n\nShow R code\nc(B_absolute_change=absolute[2,\"B\"]-absolute[1,\"B\"],\n B_relative_change=relative[2,\"B\"]-relative[1,\"B\"])\n\n\nB_absolute_change B_relative_change \n       0.00000000       -0.08333333 \n\n\nShow R code\nstopifnot(absolute[2,\"B\"]==absolute[1,\"B\"],relative[2,\"B\"]&lt;relative[1,\"B\"])\nlog(absolute[,\"A\"]/absolute[,\"B\"])\n\n\n   before     after \n0.0000000 0.6931472 \n\n\nB becomes a smaller fraction even though its absolute amount is unchanged. A change in total microbial load is not observable from these fractions alone."
   },
   {
     "objectID": "notes/b10_microbiomics.html#interpretation-and-scope",
     "href": "notes/b10_microbiomics.html#interpretation-and-scope",
     "title": "Microbial communities and host relationships",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nDistinguish microbial load, relative composition, genetic potential and activity. Consider contaminants, reference coverage, repeated measurements, host-level confounding and independent validation. Host–microbiome co-metabolism is a mechanistic hypothesis to examine with appropriate molecular and experimental evidence."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nDistinguish microbial load, relative composition, genetic potential and activity. Consider contaminants, reference coverage, repeated measurements, host-level confounding and independent validation. Host–microbiome co-metabolism is a mechanistic hypothesis to examine with appropriate molecular and experimental evidence."
   },
   {
     "objectID": "notes/b10_microbiomics.html#exercises",
     "href": "notes/b10_microbiomics.html#exercises",
     "title": "Microbial communities and host relationships",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhich taxon changed absolute amount?\nCan relative B alone establish that B was depleted?\nWhat extra measurement could inform total microbial load?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA doubled.\nNo; its fraction decreased through the change in A.\nA justified absolute-quantification measurement, such as calibrated load estimates, with its own sampling and technical assumptions."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhich taxon changed absolute amount?\nCan relative B alone establish that B was depleted?\nWhat extra measurement could inform total microbial load?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nA doubled.\nNo; its fraction decreased through the change in A.\nA justified absolute-quantification measurement, such as calibrated load estimates, with its own sampling and technical assumptions."
   },
   {
     "objectID": "notes/b10_microbiomics.html#practicals-and-course-pathways",
@@ -2145,36 +2145,36 @@
     "objectID": "notes/b12_statistics.html#biological-question-and-measurements",
     "href": "notes/b12_statistics.html#biological-question-and-measurements",
     "title": "Statistical models and honest validation",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nHigh-dimensional assays contain correlated features, different scales and substantial measurement variation. More variables can improve a model, but can also overfit a small sample. Regression requires a stated response, experimental unit, design and assumptions. Clustering and principal components describe patterns; they do not prove biological mechanisms.\nInference estimates an effect and its uncertainty under a model. Prediction evaluates performance for the intended new population. A split between rows can be inadequate if records from the same animal, family, farm or time series appear in both sets. The validation group should represent the deployment task, and preprocessing must be fitted using training data only."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nHigh-dimensional assays contain correlated features, different scales and substantial measurement variation. More variables can improve a model, but can also overfit a small sample. Regression requires a stated response, experimental unit, design and assumptions. Clustering and principal components describe patterns; they do not prove biological mechanisms.\nInference estimates an effect and its uncertainty under a model. Prediction evaluates performance for the intended new population. A split between rows can be inadequate if records from the same animal, family, farm or time series appear in both sets. The validation group should represent the deployment task, and preprocessing must be fitted using training data only."
   },
   {
     "objectID": "notes/b12_statistics.html#model-and-assumptions",
     "href": "notes/b12_statistics.html#model-and-assumptions",
     "title": "Statistical models and honest validation",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor standardised training features X and centred response y, ridge regression minimises \\(\\|y-X\\beta\\|^2+\\lambda \\|\\beta\\|^2\\), giving \\(\\widehat\\beta=(X^T X+\\lambda I)^{-1}X^Ty\\). A positive lambda shrinks coefficients; choose it using training-only validation, not test outcomes. The intercept is handled separately.\nBenjamini–Hochberg adjustment addresses false-discovery-rate control under its applicable dependence conditions. An adjusted p-value is not the probability that an individual hypothesis is false."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor standardised training features X and centred response y, ridge regression minimises \\(\\|y-X\\beta\\|^2+\\lambda \\|\\beta\\|^2\\), giving \\(\\widehat\\beta=(X^T X+\\lambda I)^{-1}X^Ty\\). A positive lambda shrinks coefficients; choose it using training-only validation, not test outcomes. The intercept is handled separately.\nBenjamini–Hochberg adjustment addresses false-discovery-rate control under its applicable dependence conditions. An adjusted p-value is not the probability that an individual hypothesis is false."
   },
   {
     "objectID": "notes/b12_statistics.html#worked-example",
     "href": "notes/b12_statistics.html#worked-example",
     "title": "Statistical models and honest validation",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1201)\nX &lt;- matrix(rnorm(30*4),30,4)\ny &lt;- 1+X[,1]-.5*X[,2]+rnorm(30)\ntrain &lt;- 1:20; test &lt;- 21:30\ncenter &lt;- colMeans(X[train,]); scale_train &lt;- apply(X[train,],2,sd)\nZtrain &lt;- scale(X[train,],center,scale_train)\nZtest &lt;- scale(X[test,],center,scale_train)\nybar &lt;- mean(y[train]); lambda &lt;- 2 # Supplied, not tuned on the test set.\nbeta &lt;- solve(crossprod(Ztrain)+lambda*diag(4),crossprod(Ztrain,y[train]-ybar))\nprediction &lt;- as.vector(ybar+Ztest%*%beta)\nc(test_RMSE=sqrt(mean((y[test]-prediction)^2)),\n baseline_RMSE=sqrt(mean((y[test]-ybar)^2)))\n\n\n    test_RMSE baseline_RMSE \n     1.055431      1.539884 \n\n\nShow R code\np.adjust(c(.001,.02,.04,.4),method=\"BH\")\n\n\n[1] 0.00400000 0.04000000 0.05333333 0.40000000\n\n\nThe test rows affect neither scaling nor coefficients. One split illustrates the process; its performance is not a stable estimate for a livestock population."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nset.seed(1201)\nX &lt;- matrix(rnorm(30*4),30,4)\ny &lt;- 1+X[,1]-.5*X[,2]+rnorm(30)\ntrain &lt;- 1:20; test &lt;- 21:30\ncenter &lt;- colMeans(X[train,]); scale_train &lt;- apply(X[train,],2,sd)\nZtrain &lt;- scale(X[train,],center,scale_train)\nZtest &lt;- scale(X[test,],center,scale_train)\nybar &lt;- mean(y[train]); lambda &lt;- 2 # Supplied, not tuned on the test set.\nbeta &lt;- solve(crossprod(Ztrain)+lambda*diag(4),crossprod(Ztrain,y[train]-ybar))\nprediction &lt;- as.vector(ybar+Ztest%*%beta)\nc(test_RMSE=sqrt(mean((y[test]-prediction)^2)),\n baseline_RMSE=sqrt(mean((y[test]-ybar)^2)))\n\n\n    test_RMSE baseline_RMSE \n     1.055431      1.539884 \n\n\nShow R code\np.adjust(c(.001,.02,.04,.4),method=\"BH\")\n\n\n[1] 0.00400000 0.04000000 0.05333333 0.40000000\n\n\nThe test rows affect neither scaling nor coefficients. One split illustrates the process; its performance is not a stable estimate for a livestock population."
   },
   {
     "objectID": "notes/b12_statistics.html#interpretation-and-scope",
     "href": "notes/b12_statistics.html#interpretation-and-scope",
     "title": "Statistical models and honest validation",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nUse appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The association practical distinguishes marker evidence from validated prediction."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nUse appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The association practical distinguishes marker evidence from validated prediction."
   },
   {
     "objectID": "notes/b12_statistics.html#exercises",
     "href": "notes/b12_statistics.html#exercises",
     "title": "Statistical models and honest validation",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy reuse training means for test scaling?\nCan test RMSE be used to choose lambda and still be an untouched test score?\nDoes a PCA cluster establish a treatment effect?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe deployment transformation must not depend on the new group’s distribution.\nNo; use a separate validation procedure within training, then evaluate once on test data.\nNo; batches, other covariates and sampling can also create clusters."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy reuse training means for test scaling?\nCan test RMSE be used to choose lambda and still be an untouched test score?\nDoes a PCA cluster establish a treatment effect?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe deployment transformation must not depend on the new group’s distribution.\nNo; use a separate validation procedure within training, then evaluate once on test data.\nNo; batches, other covariates and sampling can also create clusters."
   },
   {
     "objectID": "notes/b12_statistics.html#practicals-and-course-pathways",
@@ -2201,36 +2201,36 @@
     "objectID": "notes/b14_networks.html#biological-question-and-measurements",
     "href": "notes/b14_networks.html#biological-question-and-measurements",
     "title": "Pathway enrichment and biological networks",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nA pathway analysis asks whether selected features are represented in a gene set more than expected under a specified model. Define the eligible background from genes that could have been selected, not every annotated gene regardless of assay coverage. Selection can depend on abundance, length, missingness or mapping, which can violate equal-selection assumptions.\nA network represents entities as nodes and a defined relationship as edges. A correlation network, protein-interaction database and curated metabolic network have different edge meanings. A dense cluster can reflect a common driver, duplicated measurements or technical structure. Gene regulation involves direction and mechanism; undirected correlation alone supplies neither."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nA pathway analysis asks whether selected features are represented in a gene set more than expected under a specified model. Define the eligible background from genes that could have been selected, not every annotated gene regardless of assay coverage. Selection can depend on abundance, length, missingness or mapping, which can violate equal-selection assumptions.\nA network represents entities as nodes and a defined relationship as edges. A correlation network, protein-interaction database and curated metabolic network have different edge meanings. A dense cluster can reflect a common driver, duplicated measurements or technical structure. Gene regulation involves direction and mechanism; undirected correlation alone supplies neither."
   },
   {
     "objectID": "notes/b14_networks.html#model-and-assumptions",
     "href": "notes/b14_networks.html#model-and-assumptions",
     "title": "Pathway enrichment and biological networks",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nWith N eligible genes, K in a pathway and n selected genes, the hypergeometric null assumes a uniformly selected subset of size n. For overlap x, the enrichment tail is \\(P(X\\ge x)\\) under \\(X\\sim Hypergeometric(N,K,n)\\). If pathway tests are numerous, address multiplicity.\nFor a binary undirected adjacency matrix A with zero diagonal, degree is \\(d_i=\\sum_j A_{ij}\\). It describes connectivity under the selected definition and threshold, not an intrinsic universal importance of the gene."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nWith N eligible genes, K in a pathway and n selected genes, the hypergeometric null assumes a uniformly selected subset of size n. For overlap x, the enrichment tail is \\(P(X\\ge x)\\) under \\(X\\sim Hypergeometric(N,K,n)\\). If pathway tests are numerous, address multiplicity.\nFor a binary undirected adjacency matrix A with zero diagonal, degree is \\(d_i=\\sum_j A_{ij}\\). It describes connectivity under the selected definition and threshold, not an intrinsic universal importance of the gene."
   },
   {
     "objectID": "notes/b14_networks.html#worked-example",
     "href": "notes/b14_networks.html#worked-example",
     "title": "Pathway enrichment and biological networks",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nN &lt;- 100; K &lt;- 20; n &lt;- 10; x &lt;- 5\np &lt;- phyper(x-1,K,N-K,n,lower.tail=FALSE)\nc(expected_overlap=n*K/N,observed_overlap=x,enrichment_p=p)\n\n\nexpected_overlap observed_overlap     enrichment_p \n      2.00000000       5.00000000       0.02546455 \n\n\nShow R code\nA &lt;- matrix(c(0,1,1,0,1,0,1,0,1,1,0,1,0,0,1,0),4,4,byrow=TRUE)\ndimnames(A) &lt;- list(paste0(\"g\",1:4),paste0(\"g\",1:4))\nstopifnot(isSymmetric(A),all(diag(A)==0),sum(A)==2*4)\nrowSums(A)\n\n\ng1 g2 g3 g4 \n 2  2  3  1 \n\n\nThe expected overlap is two under the supplied background and sampling rule. Degree depends on the four chosen nodes and their edges. These are fictional pathways and networks."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nN &lt;- 100; K &lt;- 20; n &lt;- 10; x &lt;- 5\np &lt;- phyper(x-1,K,N-K,n,lower.tail=FALSE)\nc(expected_overlap=n*K/N,observed_overlap=x,enrichment_p=p)\n\n\nexpected_overlap observed_overlap     enrichment_p \n      2.00000000       5.00000000       0.02546455 \n\n\nShow R code\nA &lt;- matrix(c(0,1,1,0,1,0,1,0,1,1,0,1,0,0,1,0),4,4,byrow=TRUE)\ndimnames(A) &lt;- list(paste0(\"g\",1:4),paste0(\"g\",1:4))\nstopifnot(isSymmetric(A),all(diag(A)==0),sum(A)==2*4)\nrowSums(A)\n\n\ng1 g2 g3 g4 \n 2  2  3  1 \n\n\nThe expected overlap is two under the supplied background and sampling rule. Degree depends on the four chosen nodes and their edges. These are fictional pathways and networks."
   },
   {
     "objectID": "notes/b14_networks.html#interpretation-and-scope",
     "href": "notes/b14_networks.html#interpretation-and-scope",
     "title": "Pathway enrichment and biological networks",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nOverlapping gene sets and correlated gene statistics complicate enrichment inference. Report membership/version, mapping, background, selection rule and adjustment. Network robustness requires resampling or independent validation; causality requires stronger design or assumptions than correlation."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nOverlapping gene sets and correlated gene statistics complicate enrichment inference. Report membership/version, mapping, background, selection rule and adjustment. Network robustness requires resampling or independent validation; causality requires stronger design or assumptions than correlation."
   },
   {
     "objectID": "notes/b14_networks.html#exercises",
     "href": "notes/b14_networks.html#exercises",
     "title": "Pathway enrichment and biological networks",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy can a genome-wide background be inappropriate for a protein assay?\nDoes an enrichment p-value measure pathway activity?\nWhat changes when a correlation threshold is raised?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nMany genes could not have been observed or selected.\nNo; it concerns representation under a null, not direct activity.\nEdges and node degrees can change, showing their dependence on the supplied rule."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy can a genome-wide background be inappropriate for a protein assay?\nDoes an enrichment p-value measure pathway activity?\nWhat changes when a correlation threshold is raised?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nMany genes could not have been observed or selected.\nNo; it concerns representation under a null, not direct activity.\nEdges and node degrees can change, showing their dependence on the supplied rule."
   },
   {
     "objectID": "notes/b14_networks.html#practicals-and-course-pathways",
@@ -2257,36 +2257,36 @@
     "objectID": "notes/b16_advanced.html#biological-question-and-measurements",
     "href": "notes/b16_advanced.html#biological-question-and-measurements",
     "title": "Single-cell, spatial and emerging methods",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nSingle-cell assays can resolve molecular differences across sampled cells, but cells are nested within specimens and animals. Treatment allocation to an animal does not create independent treatment allocations to every sampled cell. Cell recovery and QC affect the representation of cell types. For an animal-level comparison, one approach aggregates measurements by animal and cell type before using an appropriate sample-level analysis; this still requires biological replication.\nSpatial assays retain positional information at a platform-dependent resolution. Spots can mix cells, adjacent positions can be dependent, and resolution varies. Chromatin conformation assays estimate selected contact relationships, not a deterministic map of regulatory causation. Advanced epigenomic measurements retain their assay-specific limitations.\nAI models can learn useful patterns, but a sophisticated architecture does not eliminate sample dependence, leakage or confounding. A generated explanation is not supporting biological evidence. Specify training data, evaluation units, uncertainty and validation context."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nSingle-cell assays can resolve molecular differences across sampled cells, but cells are nested within specimens and animals. Treatment allocation to an animal does not create independent treatment allocations to every sampled cell. Cell recovery and QC affect the representation of cell types. For an animal-level comparison, one approach aggregates measurements by animal and cell type before using an appropriate sample-level analysis; this still requires biological replication.\nSpatial assays retain positional information at a platform-dependent resolution. Spots can mix cells, adjacent positions can be dependent, and resolution varies. Chromatin conformation assays estimate selected contact relationships, not a deterministic map of regulatory causation. Advanced epigenomic measurements retain their assay-specific limitations.\nAI models can learn useful patterns, but a sophisticated architecture does not eliminate sample dependence, leakage or confounding. A generated explanation is not supporting biological evidence. Specify training data, evaluation units, uncertainty and validation context."
   },
   {
     "objectID": "notes/b16_advanced.html#model-and-assumptions",
     "href": "notes/b16_advanced.html#model-and-assumptions",
     "title": "Single-cell, spatial and emerging methods",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor m cells per animal with equal marginal variance \\(\\sigma^2\\) and within-animal correlation rho, a design-effect approximation is \\(D=1+(m-1)\\rho\\). Treating \\(nm\\) cells as independent can overstate precision; \\(nm/D\\) is an effective-count illustration under this equal-correlation model, not a replacement for a valid hierarchical analysis or degrees of freedom.\nFor high-dimensional prediction, keep animals or specimens separated across training and evaluation when that represents the intended task."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor m cells per animal with equal marginal variance \\(\\sigma^2\\) and within-animal correlation rho, a design-effect approximation is \\(D=1+(m-1)\\rho\\). Treating \\(nm\\) cells as independent can overstate precision; \\(nm/D\\) is an effective-count illustration under this equal-correlation model, not a replacement for a valid hierarchical analysis or degrees of freedom.\nFor high-dimensional prediction, keep animals or specimens separated across training and evaluation when that represents the intended task."
   },
   {
     "objectID": "notes/b16_advanced.html#worked-example",
     "href": "notes/b16_advanced.html#worked-example",
     "title": "Single-cell, spatial and emerging methods",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nanimals &lt;- 6; cells &lt;- 100; rho &lt;- .1\ndesign_effect &lt;- 1+(cells-1)*rho\nc(raw_cell_count=animals*cells,\n equal_correlation_effective_count=animals*cells/design_effect,\n independent_animals=animals)\n\n\n                   raw_cell_count equal_correlation_effective_count \n                        600.00000                          55.04587 \n              independent_animals \n                          6.00000 \n\n\nShow R code\nset.seed(1601)\ncell &lt;- data.frame(animal=rep(paste0(\"a\",1:6),each=10),\n value=rep(rnorm(6),each=10)+rnorm(60,sd=.2))\naggregate(value~animal,cell,mean)\n\n\n  animal      value\n1     a1 -2.2732628\n2     a2 -1.2333922\n3     a3 -1.1853579\n4     a4 -0.1604756\n5     a5 -1.4696498\n6     a6  0.5503939\n\n\nThe example retains six animals despite measuring many cells. The effective-count approximation is a description of variance inflation in a stylised model, not permission to conduct inference with an invented sample size."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nanimals &lt;- 6; cells &lt;- 100; rho &lt;- .1\ndesign_effect &lt;- 1+(cells-1)*rho\nc(raw_cell_count=animals*cells,\n equal_correlation_effective_count=animals*cells/design_effect,\n independent_animals=animals)\n\n\n                   raw_cell_count equal_correlation_effective_count \n                        600.00000                          55.04587 \n              independent_animals \n                          6.00000 \n\n\nShow R code\nset.seed(1601)\ncell &lt;- data.frame(animal=rep(paste0(\"a\",1:6),each=10),\n value=rep(rnorm(6),each=10)+rnorm(60,sd=.2))\naggregate(value~animal,cell,mean)\n\n\n  animal      value\n1     a1 -2.2732628\n2     a2 -1.2333922\n3     a3 -1.1853579\n4     a4 -0.1604756\n5     a5 -1.4696498\n6     a6  0.5503939\n\n\nThe example retains six animals despite measuring many cells. The effective-count approximation is a description of variance inflation in a stylised model, not permission to conduct inference with an invented sample size."
   },
   {
     "objectID": "notes/b16_advanced.html#interpretation-and-scope",
     "href": "notes/b16_advanced.html#interpretation-and-scope",
     "title": "Single-cell, spatial and emerging methods",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nEvaluate cell-type annotation, recovery, doublets, QC, spatial scale and biological replication. Method-specific pipelines and validations are needed before a real analysis. Advanced extensions in this course critique supplied designs and evidence; they do not claim to implement single-cell or spatial software workflows."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nEvaluate cell-type annotation, recovery, doublets, QC, spatial scale and biological replication. Method-specific pipelines and validations are needed before a real analysis. Advanced extensions in this course critique supplied designs and evidence; they do not claim to implement single-cell or spatial software workflows."
   },
   {
     "objectID": "notes/b16_advanced.html#exercises",
     "href": "notes/b16_advanced.html#exercises",
     "title": "Single-cell, spatial and emerging methods",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy is splitting cells from each animal across train and test unsafe for new-animal prediction?\nWhat can a spatial co-location establish?\nWhat evidence should support an AI-derived candidate?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe model can learn animal-specific patterns present in both sets.\nProximity at the assay’s resolution, not necessarily molecular interaction.\nTraceable data, valid model evaluation, independent biological evidence and appropriate experimental follow-up."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is splitting cells from each animal across train and test unsafe for new-animal prediction?\nWhat can a spatial co-location establish?\nWhat evidence should support an AI-derived candidate?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe model can learn animal-specific patterns present in both sets.\nProximity at the assay’s resolution, not necessarily molecular interaction.\nTraceable data, valid model evaluation, independent biological evidence and appropriate experimental follow-up."
   },
   {
     "objectID": "notes/b16_advanced.html#practicals-and-course-pathways",
@@ -2313,36 +2313,36 @@
     "objectID": "notes/b18_synthesis.html#biological-question-and-measurements",
     "href": "notes/b18_synthesis.html#biological-question-and-measurements",
     "title": "Animal-production questions and integrated reporting",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nAnimal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.\nAn integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nAnimal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.\nAn integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance."
   },
   {
     "objectID": "notes/b18_synthesis.html#model-and-assumptions",
     "href": "notes/b18_synthesis.html#model-and-assumptions",
     "title": "Animal-production questions and integrated reporting",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are \\(e_{i0}\\) and \\(e_{i1}\\), the paired improvement in squared error is \\(d_i=e_{i0}^2-e_{i1}^2\\). Its mean is positive when the augmented model has smaller mean squared error in that group.\nOne evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are \\(e_{i0}\\) and \\(e_{i1}\\), the paired improvement in squared error is \\(d_i=e_{i0}^2-e_{i1}^2\\). Its mean is positive when the augmented model has smaller mean squared error in that group.\nOne evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment."
   },
   {
     "objectID": "notes/b18_synthesis.html#worked-example",
     "href": "notes/b18_synthesis.html#worked-example",
     "title": "Animal-production questions and integrated reporting",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nobserved &lt;- c(10,12,9,14,11,13)\nbaseline &lt;- c(11,11,11,11,11,11)\naugmented &lt;- c(10.5,11.7,9.5,13.4,11.2,12.7)\nd &lt;- (observed-baseline)^2-(observed-augmented)^2\nc(baseline_RMSE=sqrt(mean((observed-baseline)^2)),\n augmented_RMSE=sqrt(mean((observed-augmented)^2)),\n paired_MSE_improvement=mean(d))\n\n\n         baseline_RMSE         augmented_RMSE paired_MSE_improvement \n             1.7795130              0.4242641              2.9866667 \n\n\nShow R code\nstopifnot(abs(mean(d)-(mean((observed-baseline)^2)-mean((observed-augmented)^2)))&lt;1e-12)\n\n\nThe supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nobserved &lt;- c(10,12,9,14,11,13)\nbaseline &lt;- c(11,11,11,11,11,11)\naugmented &lt;- c(10.5,11.7,9.5,13.4,11.2,12.7)\nd &lt;- (observed-baseline)^2-(observed-augmented)^2\nc(baseline_RMSE=sqrt(mean((observed-baseline)^2)),\n augmented_RMSE=sqrt(mean((observed-augmented)^2)),\n paired_MSE_improvement=mean(d))\n\n\n         baseline_RMSE         augmented_RMSE paired_MSE_improvement \n             1.7795130              0.4242641              2.9866667 \n\n\nShow R code\nstopifnot(abs(mean(d)-(mean((observed-baseline)^2)-mean((observed-augmented)^2)))&lt;1e-12)\n\n\nThe supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize."
   },
   {
     "objectID": "notes/b18_synthesis.html#interpretation-and-scope",
     "href": "notes/b18_synthesis.html#interpretation-and-scope",
     "title": "Animal-production questions and integrated reporting",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nFollow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nFollow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements."
   },
   {
     "objectID": "notes/b18_synthesis.html#exercises",
     "href": "notes/b18_synthesis.html#exercises",
     "title": "Animal-production questions and integrated reporting",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy compare predictions on the same test animals?\nDoes predictive improvement show that an assay measures a causal mediator?\nWhat belongs in a concise final report?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt makes the comparison paired and avoids changing the population between models.\nNo; proxies can predict through correlation.\nQuestion, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy compare predictions on the same test animals?\nDoes predictive improvement show that an assay measures a causal mediator?\nWhat belongs in a concise final report?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt makes the comparison paired and avoids changing the population between models.\nNo; proxies can predict through correlation.\nQuestion, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step."
   },
   {
     "objectID": "notes/b18_synthesis.html#practicals-and-course-pathways",
@@ -3575,5 +3575,467 @@
     "title": "Genomic measurements and sequence analysis",
     "section": "Further reading",
     "text": "Further reading\nUse the NCBI BLAST glossary for terminology and Data Carpentry Genomics for a complete sequencing-workflow teaching context. The calculations here are original restricted demonstrations."
+  },
+  {
+    "objectID": "notes/b07_epigenomics.html#match-the-assay-to-the-regulatory-question",
+    "href": "notes/b07_epigenomics.html#match-the-assay-to-the-regulatory-question",
+    "title": "Epigenomic measurements and regulatory interpretation",
+    "section": "Match the assay to the regulatory question",
+    "text": "Match the assay to the regulatory question\nDNA methylation, chromatin accessibility and protein occupancy describe different properties. A methylation assay estimates modification-related evidence at cytosines; ATAC-seq samples fragments associated with accessible chromatin; ChIP-seq enriches material associated with a targeted protein or modification. An apparent peak is therefore specific to an assay and its processing. Accessible chromatin can permit regulation without identifying the regulator or demonstrating that transcription increased.\nRegulatory annotations depend on tissue and state. A promoter annotation supplies a positional context; an enhancer–gene link is an additional hypothesis. Assigning every peak to its nearest gene is a reproducible rule, but distance alone does not establish which gene responds. Regions can act across distances and their activity can differ between cell types.\n\n\n\n\n\n\n\n\nQuestion\nMeasurement to consider\nEvidence still needed\n\n\n\n\nDid a cytosine-related signal change?\nMethylated/unmethylated evidence and depth\nConversion, mapping and biological replication\n\n\nIs a region accessible?\nAccessibility fragments\nQC, cell composition and assay context\n\n\nIs a regulator associated with a region?\nTarget-specific enrichment\nSpecificity, controls and reproducibility\n\n\nDoes the region affect a gene?\nPerturbation or complementary regulatory evidence\nDirection and context of the response"
+  },
+  {
+    "objectID": "notes/b07_epigenomics.html#read-depth-and-animal-variation-enter-at-different-levels",
+    "href": "notes/b07_epigenomics.html#read-depth-and-animal-variation-enter-at-different-levels",
+    "title": "Epigenomic measurements and regulatory interpretation",
+    "section": "Read depth and animal variation enter at different levels",
+    "text": "Read depth and animal variation enter at different levels\nA binomial model conditions on an animal’s underlying proportion. Animals can have different proportions even in the same group. Combining read counts into one group total weights deeply sequenced animals more strongly and can hide the biological variation needed for an animal-level comparison.\n\n\nShow R code\nproportion &lt;- c(.2,.8)\ndepth &lt;- c(10,100)\nc(equal_animal_mean=mean(proportion),\n read_weighted_mean=weighted.mean(proportion,depth))\n\n\n equal_animal_mean read_weighted_mean \n         0.5000000          0.7454545 \n\n\nShow R code\n# A beta-binomial-style variance illustration with intraread correlation.\np &lt;- .5;rho &lt;- .05;n &lt;- c(10,100,1000)\ndata.frame(depth=n,binomial_variance=p*(1-p)/n,\n overdispersed_variance=p*(1-p)*(1+(n-1)*rho)/n)\n\n\n  depth binomial_variance overdispersed_variance\n1    10           0.02500              0.0362500\n2   100           0.00250              0.0148750\n3  1000           0.00025              0.0127375\n\n\nThe second calculation is a stylized correlated-read model. Its variance does not decline as quickly as an independent binomial variance. It illustrates the consequence of dependence, not a complete methylation-analysis method or a fitted animal variance."
+  },
+  {
+    "objectID": "notes/b07_epigenomics.html#design-a-regulatory-interpretation",
+    "href": "notes/b07_epigenomics.html#design-a-regulatory-interpretation",
+    "title": "Epigenomic measurements and regulatory interpretation",
+    "section": "Design a regulatory interpretation",
+    "text": "Design a regulatory interpretation\nPlace the assay time before or after the outcome deliberately. An exposure-associated profile measured after a production change can reflect an adaptation or consequence. Genotype, cell composition and handling may affect both the profile and the phenotype. Adjustment variables should follow the target question; adjusting for a downstream change can alter the effect being estimated.\nInspect coverage across animals, genomic regions and groups. A region retained only because it has coverage in one group changes the eligible universe. For enrichment, use regions or genes that could have been assessed under the selection rule and document the region-to-gene mapping.\nA convincing follow-up should distinguish competing explanations. Cell-type measurements can address mixture changes; a time series can clarify ordering; a targeted perturbation can test a proposed regulatory role. None automatically solves every source of confounding, but each contributes a specific kind of evidence.\n\n\n\n\n\n\nRegulatory challenge\n\n\n\n\n\nA diet-associated accessible region is near a differentially expressed gene. Does this prove enhancer mediation? No. The two observations can share a driver, and the region–gene link is uncertain. Ask for mapping context, matched samples, timing and a perturbation that tests the proposed relationship."
+  },
+  {
+    "objectID": "notes/b07_epigenomics.html#further-reading",
+    "href": "notes/b07_epigenomics.html#further-reading",
+    "title": "Epigenomic measurements and regulatory interpretation",
+    "section": "Further reading",
+    "text": "Further reading\nHarvard chromatin-biology teaching supplies an assay-workflow perspective. Compare the measurement targeted by each assay with the regulatory claim in a paper."
+  },
+  {
+    "objectID": "notes/b08_proteomics.html#identification-and-quantification-are-separate-inferences",
+    "href": "notes/b08_proteomics.html#identification-and-quantification-are-separate-inferences",
+    "title": "Protein identification, abundance and structure",
+    "section": "Identification and quantification are separate inferences",
+    "text": "Identification and quantification are separate inferences\nIn bottom-up proteomics, proteins are digested into peptides and the instrument measures peptide-related ions. Matching spectra to candidate sequences produces identification evidence. Combining peptide evidence into proteins or protein groups is another inference. Shared peptides, isoforms and incomplete sequence coverage can prevent a unique assignment.\nAn identification FDR addresses a defined set of identifications at a stated level. It does not automatically control errors in differential-abundance tests performed later. Keep identification thresholds, protein-group rules and abundance inference separate in the analysis record.\n\n\n\n\n\n\n\n\nStage\nOutput\nKey interpretation question\n\n\n\n\nSpectrum matching\nCandidate peptide evidence\nHow was identification error assessed?\n\n\nProtein inference\nProtein or protein group\nAre peptides unique or shared?\n\n\nQuantification\nIntensity or ratio\nWhat scale and normalization apply?\n\n\nGroup comparison\nEffect and uncertainty\nWhat samples, missingness and model support it?"
+  },
+  {
+    "objectID": "notes/b08_proteomics.html#the-scale-determines-the-summary",
+    "href": "notes/b08_proteomics.html#the-scale-determines-the-summary",
+    "title": "Protein identification, abundance and structure",
+    "section": "The scale determines the summary",
+    "text": "The scale determines the summary\nInstrument response can span orders of magnitude. A log transformation makes multiplicative differences additive, but also changes the meaning of an average. An arithmetic mean on the original scale and a geometric mean need not agree. Report which one your model compares.\n\n\nShow R code\nx &lt;- c(2,4,16)\nc(arithmetic_mean=mean(x),geometric_mean=2^mean(log2(x)))\n\n\narithmetic_mean  geometric_mean \n       7.333333        5.039684 \n\n\nShow R code\n# A common multiplier becomes an additive shift in log2 units.\nstopifnot(max(abs(log2(2*x)-log2(x)-1))&lt;1e-12)\n\n\nSample scaling can address a defined technical reference, but must not erase a biological global shift merely because equal totals were assumed. The choice of normalization needs a biological and assay rationale."
+  },
+  {
+    "objectID": "notes/b08_proteomics.html#missingness-can-depend-on-abundance",
+    "href": "notes/b08_proteomics.html#missingness-can-depend-on-abundance",
+    "title": "Protein identification, abundance and structure",
+    "section": "Missingness can depend on abundance",
+    "text": "Missingness can depend on abundance\nA low-abundance peptide is less likely to be detected in some acquisition settings. Other missing values reflect failed preparation, interference or identification. Thus a missing value can be informative, and one imputation rule need not suit every mechanism.\n\n\nShow R code\nset.seed(801)\ntrue_log2 &lt;- rnorm(1000,8,1)\nobserved &lt;- true_log2\nobserved[true_log2&lt;7.5] &lt;- NA\nc(full_mean=mean(true_log2),observed_mean=mean(observed,na.rm=TRUE),\n observed_fraction=mean(!is.na(observed)))\n\n\n        full_mean     observed_mean observed_fraction \n         7.991462          8.471608          0.702000 \n\n\nThe detected subset has a higher mean by construction. Complete-case analysis and low-value imputation answer questions under different assumptions; neither restores the unobserved measurements without uncertainty. Record observation rates by group and examine sensitivity to plausible policies."
+  },
+  {
+    "objectID": "notes/b08_proteomics.html#structure-provides-a-complementary-type-of-evidence",
+    "href": "notes/b08_proteomics.html#structure-provides-a-complementary-type-of-evidence",
+    "title": "Protein identification, abundance and structure",
+    "section": "Structure provides a complementary type of evidence",
+    "text": "Structure provides a complementary type of evidence\nA coordinate model describes a conformation under its source conditions. Distance units, chain identity, missing residues and the representation chosen affect contact summaries. A C-alpha distance uses backbone representatives rather than all interacting atoms. A close pair can be geometrically interesting while lacking a demonstrated functional role.\nPredicted structures also have confidence information that can vary across regions. A high-confidence local fold does not necessarily establish relative domain positioning, binding partners or the physiological state. Use structural evidence to formulate a testable hypothesis about an abundance or variant result, and keep those claims distinct.\n\n\n\n\n\n\nProtein challenge\n\n\n\n\n\nA shared peptide increases in the treatment group and matches two proteins. Can both proteins be declared independently increased? No. The evidence is ambiguous at that level. Report the group or unresolved assignment and identify unique evidence needed for separation."
+  },
+  {
+    "objectID": "notes/b08_proteomics.html#further-reading",
+    "href": "notes/b08_proteomics.html#further-reading",
+    "title": "Protein identification, abundance and structure",
+    "section": "Further reading",
+    "text": "Further reading\nEMBL-EBI proteomics bioinformatics materials provide complementary assay and analysis lessons. Use them to distinguish spectra, peptide evidence and protein-level claims."
+  },
+  {
+    "objectID": "notes/b09_metabolomics.html#from-an-instrument-feature-to-a-compound",
+    "href": "notes/b09_metabolomics.html#from-an-instrument-feature-to-a-compound",
+    "title": "Metabolite features, identification and quantification",
+    "section": "From an instrument feature to a compound",
+    "text": "From an instrument feature to a compound\nA chromatographic mass-spectrometry feature is often defined by mass-to-charge ratio, retention time and signal. Isotopes, adducts and fragments can create several features from one compound. An accurate mass alone can match multiple candidate structures. Supporting evidence can include fragmentation and comparison with standards under documented conditions.\nMaintain an identification field separately from an abundance field. A feature can be quantified reproducibly while its chemical identity remains uncertain. Conversely, a confidently identified compound can have imprecise abundance measurements. Do not turn candidate identities into definite pathway membership when interpreting a differential-feature list.\nTargeted concentration requires a calibration model and an applicable range. Relative untargeted intensity can support within-feature comparisons but is not automatically comparable in molar units across compounds. Extraction recovery and ionization differ by molecule and sample matrix."
+  },
+  {
+    "objectID": "notes/b09_metabolomics.html#calibration-has-a-usable-range",
+    "href": "notes/b09_metabolomics.html#calibration-has-a-usable-range",
+    "title": "Metabolite features, identification and quantification",
+    "section": "Calibration has a usable range",
+    "text": "Calibration has a usable range\nConsider a simple hypothetical response \\(S=a+bC\\), with intercept \\(a\\) and sensitivity \\(b\\). Estimating concentration from signal assumes that calibration applies to the analysed samples and that the relation remains appropriate over the range used.\n\n\nShow R code\ncalibration &lt;- data.frame(concentration=c(0,1,2,4,8),\n signal=c(3,13,23,43,83))\ncal &lt;- lm(signal~concentration,calibration)\nunknown_signal &lt;- c(18,63,123)\nestimated &lt;- (unknown_signal-coef(cal)[1])/coef(cal)[2]\ndata.frame(signal=unknown_signal,estimated_concentration=estimated,\n within_calibration=estimated&gt;=0 & estimated&lt;=8)\n\n\n  signal estimated_concentration within_calibration\n1     18                     1.5               TRUE\n2     63                     6.0               TRUE\n3    123                    12.0              FALSE\n\n\nThe last estimate extrapolates beyond the standards. Perfect linearity in this constructed example does not justify extrapolation in a real assay. Calibration uncertainty, blanks, detection limits and replicate measurements still need evaluation."
+  },
+  {
+    "objectID": "notes/b09_metabolomics.html#standards-and-quality-control-samples-answer-different-questions",
+    "href": "notes/b09_metabolomics.html#standards-and-quality-control-samples-answer-different-questions",
+    "title": "Metabolite features, identification and quantification",
+    "section": "Standards and quality-control samples answer different questions",
+    "text": "Standards and quality-control samples answer different questions\nAn internal standard can track selected preparation or instrument variation. A pooled QC sample can reveal drift across acquisition order. A blank can reveal background or carryover. None alone represents independent biological replication, and none automatically diagnoses all compounds equally.\nIf acquisition order follows treatment, drift can imitate a group effect. Distributing biological groups across the run and recording acquisition order supplies diagnostic information. A correction should be based on a justified technical model; excessive correction can remove biology if the technical and biological factors are confounded."
+  },
+  {
+    "objectID": "notes/b09_metabolomics.html#choose-scaling-to-match-the-interpretation",
+    "href": "notes/b09_metabolomics.html#choose-scaling-to-match-the-interpretation",
+    "title": "Metabolite features, identification and quantification",
+    "section": "Choose scaling to match the interpretation",
+    "text": "Choose scaling to match the interpretation\nLog transformations emphasize multiplicative changes. Unit-variance scaling makes features contribute equal marginal variance to a multivariate analysis. A rare, noisy feature can therefore gain influence. Other scaling rules balance this trade-off differently; the choice is part of the analysis rather than a cosmetic plotting option.\n\n\nShow R code\nset.seed(901)\nx &lt;- cbind(high_signal=100+rnorm(20,sd=10),\n low_signal=1+rnorm(20,sd=.01))\nrbind(original_variance=apply(x,2,var),\n scaled_variance=apply(scale(x),2,var))\n\n\n                  high_signal  low_signal\noriginal_variance    71.27785 0.000111737\nscaled_variance       1.00000 1.000000000\n\n\nThe equal scaled variances say nothing about equal biological information or chemical concentration. Inspect reliability and missingness before deciding which features enter PCA or prediction.\n\n\n\n\n\n\nMetabolite challenge\n\n\n\n\n\nThree correlated features receive the same candidate compound name. Are they three independent confirmations of pathway change? They may be adducts or related signals from one compound. Examine their analytical relationship and identification evidence before counting biological support."
+  },
+  {
+    "objectID": "notes/b09_metabolomics.html#further-reading",
+    "href": "notes/b09_metabolomics.html#further-reading",
+    "title": "Metabolite features, identification and quantification",
+    "section": "Further reading",
+    "text": "Further reading\nEMBL-EBI introduction to metabolomics provides broader context. Read it alongside the distinction between relative feature intensity and calibrated concentration in this module."
+  },
+  {
+    "objectID": "notes/b10_microbiomics.html#decide-which-aspect-of-the-community-matters",
+    "href": "notes/b10_microbiomics.html#decide-which-aspect-of-the-community-matters",
+    "title": "Microbial communities and host relationships",
+    "section": "Decide which aspect of the community matters",
+    "text": "Decide which aspect of the community matters\nA microbial community can be described by taxa, genes, transcripts or metabolites. These represent composition, genetic potential and aspects of activity at different scales. A taxon carrying a pathway does not demonstrate that the pathway is expressed in the sampled environment. Strains within a named taxon can also differ in gene content.\nAmplicon profiling targets a marker and is influenced by primer coverage and copy number. Shotgun sequencing samples broader DNA content but still has extraction, reference and depth limitations. A larger number of reads is not automatically a more representative biological sample. Host DNA, contamination and poorly represented organisms can change effective microbial coverage.\nCollection site and timing define the target. Faecal composition is a sample from that material; it should not be treated as an exact measurement of every intestinal or rumen community. Diet, medication, management and host physiology can influence both composition and production outcomes."
+  },
+  {
+    "objectID": "notes/b10_microbiomics.html#diversity-summarizes-a-chosen-representation",
+    "href": "notes/b10_microbiomics.html#diversity-summarizes-a-chosen-representation",
+    "title": "Microbial communities and host relationships",
+    "section": "Diversity summarizes a chosen representation",
+    "text": "Diversity summarizes a chosen representation\nRichness counts detected categories, while Shannon entropy combines relative representation and evenness. These statistics depend on the retained categories and observation process. Higher diversity is not universally healthier or more productive.\n\n\nShow R code\nprofiles &lt;- rbind(even=c(.25,.25,.25,.25),\n dominated=c(.85,.05,.05,.05))\nentropy &lt;- function(p) -sum(p[p&gt;0]*log(p[p&gt;0]))\ndata.frame(profile=rownames(profiles),\n richness=rowSums(profiles&gt;0),Shannon=apply(profiles,1,entropy))\n\n\n            profile richness   Shannon\neven           even        4 1.3862944\ndominated dominated        4 0.5875009\n\n\nBoth constructed communities have four categories; their evenness differs. Detection limits and sequencing depth can change apparent richness even without a true change in the community."
+  },
+  {
+    "objectID": "notes/b10_microbiomics.html#ratios-state-the-reference-explicitly",
+    "href": "notes/b10_microbiomics.html#ratios-state-the-reference-explicitly",
+    "title": "Microbial communities and host relationships",
+    "section": "Ratios state the reference explicitly",
+    "text": "Ratios state the reference explicitly\nA log ratio compares two components. It is invariant to a common multiplicative scale, but requires interpretable positive measurements. The denominator is part of the question: an A-to-B ratio differs from A-to-total and need not isolate A’s absolute change.\n\n\nShow R code\nx &lt;- c(A=20,B=10,C=70)\nc(log_A_to_B=log(x['A']/x['B']),\n log_A_to_B_after_scaling=log((3*x['A'])/(3*x['B'])))\n\n\n              log_A_to_B.A log_A_to_B_after_scaling.A \n                 0.6931472                  0.6931472 \n\n\nShow R code\n# A zero replaces knowledge of an amount with a measurement question.\nrare &lt;- c(0,1,4)\ndata.frame(pseudocount=c(.1,1,5),\n log_first_to_second=sapply(c(.1,1,5),function(k) log((rare[1]+k)/(rare[2]+k))))\n\n\n  pseudocount log_first_to_second\n1         0.1          -2.3978953\n2         1.0          -0.6931472\n3         5.0          -0.1823216\n\n\nThe last result depends strongly on the supplied constant. A nondetection, sampling zero and true absence can require different reasoning. Sensitivity to zero handling should be reported rather than hidden in preprocessing."
+  },
+  {
+    "objectID": "notes/b10_microbiomics.html#connect-to-host-traits-carefully",
+    "href": "notes/b10_microbiomics.html#connect-to-host-traits-carefully",
+    "title": "Microbial communities and host relationships",
+    "section": "Connect to host traits carefully",
+    "text": "Connect to host traits carefully\nAn observational taxon–methane association can reflect a dietary shift affecting both. A mechanistic claim needs evidence about the organism, pathway activity and intervention context. Sampling animals repeatedly adds temporal detail while retaining within-animal dependence.\nFor prediction, define whether the community is measured before the outcome and whether new farms or diets are part of deployment. A model can exploit farm-specific collection or processing signatures. Independent evaluation and a baseline using ordinary management variables help assess the extra value of an assay.\n\n\n\n\n\n\nCommunity challenge\n\n\n\n\n\nThe relative fraction of a methanogen decreases after a diet change. What additional evidence would clarify emissions? Measure the relevant output and consider microbial load and pathway activity. A lower fraction does not establish a smaller absolute population or lower total activity."
+  },
+  {
+    "objectID": "notes/b10_microbiomics.html#further-reading",
+    "href": "notes/b10_microbiomics.html#further-reading",
+    "title": "Microbial communities and host relationships",
+    "section": "Further reading",
+    "text": "Further reading\nCambridge introduction to metagenomics provides a complementary workflow perspective. For broader multi-omics context, see Integrative omics for health and disease; evaluate how its study context differs from a host–microbiome study."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#define-the-phenotype-before-aggregating-records",
+    "href": "notes/b11_phenomics.html#define-the-phenotype-before-aggregating-records",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Define the phenotype before aggregating records",
+    "text": "Define the phenotype before aggregating records\nA sensor measures a physical signal which is then interpreted as a biological quantity. Calibration, placement, device version and the algorithm converting signal to phenotype are part of that definition. Two datasets labelled activity may represent different sampling rates, units or classification rules.\nA mean, total, maximum and variability summarize different aspects of a time series. A daily total requires appropriate coverage; an average over observed intervals can remain biased when missing intervals are systematically different. A short fever episode can disappear in a weekly average while a sensor fault can create an apparent extreme."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#aggregation-can-change-the-target",
+    "href": "notes/b11_phenomics.html#aggregation-can-change-the-target",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Aggregation can change the target",
+    "text": "Aggregation can change the target\nSuppose one animal is observed on all five days while another is missing high-value days. An average of recorded values describes the observation window, not necessarily the target period.\n\n\nShow R code\nfull &lt;- c(8,9,12,13,8)\nobserved &lt;- full;observed[c(3,4)] &lt;- NA\nc(target_period_mean=mean(full),recorded_mean=mean(observed,na.rm=TRUE),\n coverage=mean(!is.na(observed)))\n\n\ntarget_period_mean      recorded_mean           coverage \n         10.000000           8.333333           0.600000 \n\n\nA coverage threshold makes inclusion explicit but does not guarantee unbiased selection. If illness affects both the phenotype and sensor availability, exclusion can change the population represented. For irregular intervals, a time-weighted summary requires a justified interpolation or integration rule rather than simply treating every record equally."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#repeated-records-are-nested-measurements",
+    "href": "notes/b11_phenomics.html#repeated-records-are-nested-measurements",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Repeated records are nested measurements",
+    "text": "Repeated records are nested measurements\nWithin-animal variation and between-animal variation answer different questions. Pooling them can produce a relationship that differs from a within-animal comparison. An animal with a generally high response can contribute high values at every time point even if its day-to-day fluctuations have no relationship to an exposure.\n\n\nShow R code\nset.seed(1102)\nid &lt;- rep(1:8,each=5)\nbase &lt;- rep(seq(2,9),each=5)\nx &lt;- base+rnorm(40,sd=.2)\ny &lt;- base+rnorm(40,sd=.2)\nx_within &lt;- x-ave(x,id,FUN=mean)\ny_within &lt;- y-ave(y,id,FUN=mean)\nc(pooled_correlation=cor(x,y),\n within_animal_correlation=cor(x_within,y_within))\n\n\n       pooled_correlation within_animal_correlation \n               0.99358867                0.06538265 \n\n\nThe strong pooled association is generated largely by between-animal differences. A longitudinal model should specify which effects and correlations are of interest. The within-animal calculation is descriptive, not a complete repeated-measures model."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#align-molecular-sampling-with-the-decision",
+    "href": "notes/b11_phenomics.html#align-molecular-sampling-with-the-decision",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Align molecular sampling with the decision",
+    "text": "Align molecular sampling with the decision\nA baseline profile, a concurrent profile and a future profile can each be scientifically valuable, but support different tasks. Define the prediction time and a feature-availability table. Include the processing delay of a laboratory assay: collection before a decision does not mean the result was available before that decision.\nA valid retrospective analysis can mimic deployment by using only eligible records. Rolling summaries must not include future observations; training and test separation should respect animal identity and the temporal task. A model intended for new farms also requires evaluation across farms rather than only across nearby time points."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#interpret-useful-performance",
+    "href": "notes/b11_phenomics.html#interpret-useful-performance",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Interpret useful performance",
+    "text": "Interpret useful performance\nMeasure error in units relevant to the phenotype. Compare with a baseline such as previous performance or a management-only prediction. Calibration matters when a predicted quantity informs thresholds. Changes in devices, breeds or management can shift the relationship between sensor signal and the target.\n\n\n\n\n\n\nTiming challenge\n\n\n\n\n\nA day-30 risk prediction includes the average sensor response from days 1–40. Is it valid for day-30 use? No: future records enter the feature. Recompute summaries using information available by day 30 and define the future outcome separately."
+  },
+  {
+    "objectID": "notes/b11_phenomics.html#further-reading",
+    "href": "notes/b11_phenomics.html#further-reading",
+    "title": "Phenomics, sensors and measurement timing",
+    "section": "Further reading",
+    "text": "Further reading\nComputational Genomics with R supplies complementary statistical foundations. Use the phenomics practical to apply those ideas to repeated records, measurement units and decision-time availability."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#separate-estimation-testing-and-prediction",
+    "href": "notes/b12_statistics.html#separate-estimation-testing-and-prediction",
+    "title": "Statistical models and honest validation",
+    "section": "Separate estimation, testing and prediction",
+    "text": "Separate estimation, testing and prediction\nAn estimated regression coefficient summarizes a conditional comparison under a model. A hypothesis test assesses compatibility with a specified null and sampling model. Prediction assesses error on eligible new observations. These tasks can use similar equations while requiring different evidence.\nIn high-dimensional data, many correlated features can explain the same pattern. Ordinary least squares can become unstable or unidentified when predictors are numerous or collinear. Regularization changes the estimation target by constraining coefficients; it trades variance against bias rather than creating more independent biological information.\nFor ridge regression, the penalty depends on feature scale. Standardizing makes the penalty comparable across feature units, but the standardization must be fitted to training data for prediction. A constant feature cannot be divided by its zero standard deviation; its treatment needs to be explicit."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#diagnose-the-response-model",
+    "href": "notes/b12_statistics.html#diagnose-the-response-model",
+    "title": "Statistical models and honest validation",
+    "section": "Diagnose the response model",
+    "text": "Diagnose the response model\nLinear regression assumes a specified conditional mean and a variance/dependence structure for its inferential calculations. Residual plots can reveal departures from the mean pattern or changing spread. Normality of raw molecular measurements is not the same as normality of residuals under a model.\n\n\nShow R code\nset.seed(1202)\nx &lt;- seq(0,3,length.out=60)\ny &lt;- 1+x^2+rnorm(60,sd=.4)\nlinear &lt;- lm(y~x)\nplot(fitted(linear),residuals(linear),pch=16,\n xlab='Fitted response',ylab='Residual')\nabline(h=0,lty=2)\n\n\n\n\n\n\n\n\n\nThe curved residual pattern follows from an omitted nonlinear mean relationship. Adding a quadratic term changes the model, but in a real study its rationale and evaluation should be recorded. Repeatedly trying models until p-values look attractive changes the interpretation of the reported evidence."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#put-tuning-inside-validation",
+    "href": "notes/b12_statistics.html#put-tuning-inside-validation",
+    "title": "Statistical models and honest validation",
+    "section": "Put tuning inside validation",
+    "text": "Put tuning inside validation\nA training set estimates parameters; internal validation selects tuning choices; a final held-out set evaluates the selected procedure. When data are limited, nested resampling can separate selection from evaluation, provided grouping and preprocessing are respected within each split.\nA feature screen on all responses leaks outcome information even if the final coefficients are fitted only in training. Similarly, selecting a PCA dimension or an imputation policy from test performance consumes the test set. An untouched evaluation must assess the entire procedure, not only the final fitting step.\nChoose splits that represent use: new animals, families, farms or future periods. Randomly separating rows is insufficient if closely related or repeated observations cross the boundary. Scores from many correlated folds are not independent experimental replications."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#compare-loss-calibration-and-uncertainty",
+    "href": "notes/b12_statistics.html#compare-loss-calibration-and-uncertainty",
+    "title": "Statistical models and honest validation",
+    "section": "Compare loss, calibration and uncertainty",
+    "text": "Compare loss, calibration and uncertainty\nRMSE gives greater weight to large errors; MAE describes average absolute error. Correlation measures co-variation and can remain perfect when predictions are systematically biased or on the wrong scale.\n\n\nShow R code\nobserved &lt;- c(2,4,6,8)\npredicted &lt;- 10+2*observed\nc(correlation=cor(observed,predicted),\n RMSE=sqrt(mean((observed-predicted)^2)),\n MAE=mean(abs(observed-predicted)))\n\n\ncorrelation        RMSE         MAE \n    1.00000    15.16575    15.00000 \n\n\nThe predictions rank these animals exactly while missing their values. Assess the metric relevant to the decision and report units. Compare a molecular model with a plausible baseline on the same observations. Quantifying uncertainty should respect the independent unit and the fitting/evaluation structure."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#multiplicity-and-exploratory-choices",
+    "href": "notes/b12_statistics.html#multiplicity-and-exploratory-choices",
+    "title": "Statistical models and honest validation",
+    "section": "Multiplicity and exploratory choices",
+    "text": "Multiplicity and exploratory choices\nMany tests, overlapping pathways and alternative analysis choices create opportunities for selective findings. Define the tested family and use a justified adjustment. Report effect sizes and uncertainty alongside discoveries. A nonsignificant result can reflect imprecision; it does not establish absence of any meaningful effect.\n\n\n\n\n\n\nValidation challenge\n\n\n\n\n\nA student tries 50 penalties on the test animals and reports the best RMSE. What changed? The test set became a tuning set. Evaluate the selected procedure on genuinely untouched observations or use an appropriate nested validation design."
+  },
+  {
+    "objectID": "notes/b12_statistics.html#further-reading",
+    "href": "notes/b12_statistics.html#further-reading",
+    "title": "Statistical models and honest validation",
+    "section": "Further reading",
+    "text": "Further reading\nComputational Genomics with R provides complementary statistical and prediction material. Apply its methods with the animal, family, farm and timing structure of the current study made explicit."
+  },
+  {
+    "objectID": "notes/b13_association.html#define-the-association-at-the-measurement-level",
+    "href": "notes/b13_association.html#define-the-association-at-the-measurement-level",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "Define the association at the measurement level",
+    "text": "Define the association at the measurement level\nA GWAS relates genotype to a stated phenotype; an eQTL analysis relates genotype to expression in a tissue and context. A cis label usually denotes a defined genomic neighborhood, while trans refers to more distant relationships under the study’s convention. Proximity is a location rule, not proof of direct regulation.\nA TWAS signal relates genetically informed expression to a trait under a specified procedure. Shared genetic associations can arise through LD or pleiotropic effects rather than expression mediation. Colocalization and fine-mapping ask additional questions under their own assumptions about variants, signals and LD. They should not be collapsed into a single claim that a gene causes the trait.\n\n\n\n\n\n\n\n\nAnalysis\nDirect target\nInterpretation still conditional on\n\n\n\n\nGWAS\nVariant–trait association\nStructure, relatedness, phenotype and allele alignment\n\n\neQTL\nVariant–expression association\nTissue, assay, design and normalization\n\n\nTWAS\nExpression-related genetic association with trait\nPrediction weights, LD and association model\n\n\nFine-mapping\nCandidate causal configurations\nCandidate coverage, LD, model and priors\n\n\nPrediction\nPerformance for new observations\nInformation timing and deployment population"
+  },
+  {
+    "objectID": "notes/b13_association.html#ld-links-signals-without-isolating-a-mechanism",
+    "href": "notes/b13_association.html#ld-links-signals-without-isolating-a-mechanism",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "LD links signals without isolating a mechanism",
+    "text": "LD links signals without isolating a mechanism\nCorrelated markers can carry similar association evidence when one tags another. A near-perfect correlation also makes separate regression effects uncertain, even when joint prediction is stable.\n\n\nShow R code\nset.seed(1302)\ng1 &lt;- rbinom(100,2,.4)\ng2 &lt;- g1;g2[1:12] &lt;- rbinom(12,2,.4)\ny &lt;- .8*g1+rnorm(100)\nc(dosage_correlation=cor(g1,g2),\n marginal_g1=coef(lm(y~g1))[2],marginal_g2=coef(lm(y~g2))[2])\n\n\ndosage_correlation     marginal_g1.g1     marginal_g2.g2 \n         0.9347726          0.7386323          0.7341350 \n\n\nShow R code\ncoef(summary(lm(y~g1+g2)))\n\n\n              Estimate Std. Error    t value  Pr(&gt;|t|)\n(Intercept) -0.1954570  0.1402732 -1.3934023 0.1666828\ng1           0.2715971  0.4062394  0.6685641 0.5053615\ng2           0.4867802  0.3957958  1.2298771 0.2217178\n\n\nThe supplied generator gives g1 a direct role; in an observational dataset that truth is unknown. A strong g2 association does not independently identify another mechanism. In real analyses, LD depends on the population and can differ from a reference panel."
+  },
+  {
+    "objectID": "notes/b13_association.html#relatedness-and-phenotype-definition-matter",
+    "href": "notes/b13_association.html#relatedness-and-phenotype-definition-matter",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "Relatedness and phenotype definition matter",
+    "text": "Relatedness and phenotype definition matter\nLivestock samples often share family relationships and management. A residual covariance structure can represent polygenic relatedness, while fixed covariates describe selected environmental differences. Neither should be added mechanically: the phenotype and target comparison determine what belongs in the model.\nFor example, adjusting for body weight changes a feed-intake comparison relative to analysing intake alone. If a covariate is affected by treatment or shares unmeasured causes with the outcome, conditioning can change the causal interpretation. State the estimand rather than assuming every available covariate improves the model."
+  },
+  {
+    "objectID": "notes/b13_association.html#allele-alignment-is-a-scientific-consistency-check",
+    "href": "notes/b13_association.html#allele-alignment-is-a-scientific-consistency-check",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "Allele alignment is a scientific consistency check",
+    "text": "Allele alignment is a scientific consistency check\nEffect estimates require the counted allele. Flipping allele coding reverses the coefficient and changes the intercept but can preserve fitted values. Reference/alternate status is not the same as favorable/unfavorable status. For cross-study integration, check assembly, strand, allele pairs and frequencies before combining signs.\nAn expression-associated variant can have different effects across tissues or environments. Failure to observe an effect in another tissue can reflect context, limited power or assay differences. Report what was measured and how precisely before asserting biological specificity."
+  },
+  {
+    "objectID": "notes/b13_association.html#move-from-a-signal-to-a-follow-up",
+    "href": "notes/b13_association.html#move-from-a-signal-to-a-follow-up",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "Move from a signal to a follow-up",
+    "text": "Move from a signal to a follow-up\nChoose follow-up to discriminate explanations: replication in a new population addresses generalization, improved mapping addresses candidate ambiguity, and a perturbation addresses a proposed mechanism. A validated predictor can still be a proxy, while a mechanistic result may not improve prediction at the decision time.\n\n\n\n\n\n\nCandidate-gene challenge\n\n\n\n\n\nThe nearest gene to a GWAS peak also changes expression with diet. Does the agreement establish mediation? No. Position, expression response and trait association are distinct evidence. Examine LD, tissue/context, temporal order and competing explanations before a causal claim."
+  },
+  {
+    "objectID": "notes/b13_association.html#further-reading",
+    "href": "notes/b13_association.html#further-reading",
+    "title": "Association, prediction and regulatory evidence",
+    "section": "Further reading",
+    "text": "Further reading\nMethods of integrating data to uncover genotype–phenotype interactions, Nature Reviews Genetics, offers a broader conceptual reading. Use it to distinguish data integration from identification of a causal path."
+  },
+  {
+    "objectID": "notes/b14_networks.html#enrichment-depends-on-a-selection-process",
+    "href": "notes/b14_networks.html#enrichment-depends-on-a-selection-process",
+    "title": "Pathway enrichment and biological networks",
+    "section": "Enrichment depends on a selection process",
+    "text": "Enrichment depends on a selection process\nA pathway table supplies membership under a resource and version. Over-representation analysis compares selected genes with an eligible background. Its hypergeometric null treats subsets of the stated size as equally likely. Selection can depend on measurement abundance, gene length, assay coverage or annotation quality, making that assumption questionable.\nA protein panel should not automatically use every gene in the genome as its background. Genes that could never be measured cannot enter its selected list. Duplicated annotation rows should not create extra genes in an overlap count. Pathway tests also overlap with one another, so several significant pathways can reflect many of the same genes."
+  },
+  {
+    "objectID": "notes/b14_networks.html#an-edge-needs-a-definition",
+    "href": "notes/b14_networks.html#an-edge-needs-a-definition",
+    "title": "Pathway enrichment and biological networks",
+    "section": "An edge needs a definition",
+    "text": "An edge needs a definition\nIn a correlation graph, an edge means the supplied association passed a rule. In a curated interaction graph, it reflects database evidence of a specified type. In a directed regulatory model, it proposes an influence under a model. Node degree and centrality depend on this definition, retained nodes and threshold.\nA hub can result from a common latent factor affecting many measurements. It can also arise from duplicated or technically coupled features. Resampling animals evaluates sensitivity to the sampled population, while changing a threshold examines a different source of sensitivity. Neither converts a correlation graph into a causal regulatory map."
+  },
+  {
+    "objectID": "notes/b14_networks.html#a-dynamic-model-asks-a-different-question",
+    "href": "notes/b14_networks.html#a-dynamic-model-asks-a-different-question",
+    "title": "Pathway enrichment and biological networks",
+    "section": "A dynamic model asks a different question",
+    "text": "A dynamic model asks a different question\nSystems biology can model how quantities change over time. For a hypothetical molecule with constant production \\(a\\) and first-order loss \\(b\\), the equation is:\n\\[\\frac{dx}{dt}=a-bx,\\qquad x^*=a/b.\\]\nThe equilibrium \\(x^*\\) follows when production equals loss. A perturbation can change the production rate, degradation rate or starting state; these changes can produce different trajectories even if one final measurement is similar.\n\n\nShow R code\ntime &lt;- seq(0,8,length.out=100)\na &lt;- 4;b &lt;- 1;x0 &lt;- 0\ntrajectory &lt;- a/b+(x0-a/b)*exp(-b*time)\nslow &lt;- a/.5+(x0-a/.5)*exp(-.5*time)\nplot(time,trajectory,type='l',ylim=range(c(trajectory,slow)),\n xlab='Time (arbitrary units)',ylab='Hypothetical abundance')\nlines(time,slow,col='#B85E32',lty=2)\nlegend('bottomright',c('loss rate 1','loss rate 0.5'),\n col=c('black','#B85E32'),lty=c(1,2),bty='n')\n\n\n\n\n\n\n\n\n\nThis is an analytic solution, avoiding numerical-integration error. Its units must be consistent: production is abundance per time and loss is inverse time. Real pathways may have nonlinear feedback, delays and interactions; their parameters need supporting data."
+  },
+  {
+    "objectID": "notes/b14_networks.html#feedback-stability-and-identifiability",
+    "href": "notes/b14_networks.html#feedback-stability-and-identifiability",
+    "title": "Pathway enrichment and biological networks",
+    "section": "Feedback, stability and identifiability",
+    "text": "Feedback, stability and identifiability\nNegative feedback can regulate a response; positive feedback can support switching under suitable nonlinear dynamics. Oscillation requires a suitable system structure and parameter regime, not merely a loop drawn on a graph. A pathway diagram describes possible relationships; a dynamical model supplies quantitative rules and initial conditions.\nDifferent parameter combinations can fit limited observations similarly. Distinguish structural identifiability, concerning whether ideal observations can identify parameters, from practical uncertainty under the available sampling. Perturbations and time-resolved measurements can supply information missing from a steady-state comparison."
+  },
+  {
+    "objectID": "notes/b14_networks.html#translate-a-network-result-into-an-experiment",
+    "href": "notes/b14_networks.html#translate-a-network-result-into-an-experiment",
+    "title": "Pathway enrichment and biological networks",
+    "section": "Translate a network result into an experiment",
+    "text": "Translate a network result into an experiment\nAsk which node, interaction or process is actually being tested. A targeted perturbation with a measured time course may discriminate models more clearly than another large correlation panel. Document expected outcomes under competing hypotheses and the controls needed to interpret them.\n\n\n\n\n\n\nSystems challenge\n\n\n\n\n\nA molecule doubles at equilibrium. Is doubled production the only explanation? No. Halved loss also doubles the equilibrium in the simple model. A time course or additional measurement can help distinguish the explanations."
+  },
+  {
+    "objectID": "notes/b14_networks.html#further-reading",
+    "href": "notes/b14_networks.html#further-reading",
+    "title": "Pathway enrichment and biological networks",
+    "section": "Further reading",
+    "text": "Further reading\nMIT OpenCourseWare Systems Biology provides lectures and problems for deeper dynamics. The equations and figures here are original teaching examples; use the course to extend the ideas of feedback and perturbation."
+  },
+  {
+    "objectID": "notes/b15_integration.html#start-with-matched-biological-units",
+    "href": "notes/b15_integration.html#start-with-matched-biological-units",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Start with matched biological units",
+    "text": "Start with matched biological units\nA joint matrix should represent the intended unit. Measurements from one animal at two different times are related but not simultaneous; assays from different tissues answer different questions. Build an explicit map between biological subjects, specimens and assay columns before stacking numerical values.\nMissingness can occur at feature or whole-assay level. Complete-case integration selects subjects with all required measurements. If assay failure depends on health or sample quality, this selection can change the population. Report numbers available per layer and numbers retained jointly, then explain what inference targets that subset."
+  },
+  {
+    "objectID": "notes/b15_integration.html#choose-the-integration-strategy-for-the-task",
+    "href": "notes/b15_integration.html#choose-the-integration-strategy-for-the-task",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Choose the integration strategy for the task",
+    "text": "Choose the integration strategy for the task\nEarly integration concatenates transformed features. Intermediate integration learns a joint or linked representation. Late integration combines layer-specific outputs. These strategies have different strengths: early integration is direct but sensitive to scales and feature counts; a factor model can describe shared and layer-specific variation; late integration can retain separate processing and missingness policies.\n\n\n\n\n\n\n\n\nTask\nPossible strategy\nEvaluation question\n\n\n\n\nDescribe shared variation\nJoint or linked factor representation\nWhat variance and covariance are represented?\n\n\nPredict a future trait\nEarly or late predictive integration\nDoes it improve untouched-unit performance?\n\n\nPrioritize mechanisms\nEvidence integration with biological context\nWhich alternative explanations remain?\n\n\nHandle unequal assay coverage\nExplicit mappings and justified model\nWhich subjects/layers contribute to each result?\n\n\n\nNo strategy makes incompatible samples comparable by itself. More layers can add measurement noise, redundancy or batch structure as well as biological information."
+  },
+  {
+    "objectID": "notes/b15_integration.html#feature-duplication-changes-influence",
+    "href": "notes/b15_integration.html#feature-duplication-changes-influence",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Feature duplication changes influence",
+    "text": "Feature duplication changes influence\nUnit-variance scaling gives each feature similar marginal variance. A large block therefore contributes more total variance before weighting. Repeating a correlated measurement can increase its influence even though no new biological information was acquired.\n\n\nShow R code\nset.seed(1502)\nz &lt;- rnorm(30)\nx &lt;- cbind(signal=z+rnorm(30,sd=.1),other=rnorm(30))\nx_duplicate &lt;- cbind(x,x[,1],x[,1],x[,1])\np1 &lt;- prcomp(x,scale.=TRUE)\np2 &lt;- prcomp(x_duplicate,scale.=TRUE)\nc(original_PC1_fraction=p1$sdev[1]^2/sum(p1$sdev^2),\n duplicated_PC1_fraction=p2$sdev[1]^2/sum(p2$sdev^2))\n\n\n  original_PC1_fraction duplicated_PC1_fraction \n              0.5849307               0.8075979 \n\n\nThe changed PCA reflects representation choices. Block weighting can balance total marginal variance, but it does not eliminate within-block redundancy or guarantee an optimal biological representation."
+  },
+  {
+    "objectID": "notes/b15_integration.html#interpret-latent-factors-conservatively",
+    "href": "notes/b15_integration.html#interpret-latent-factors-conservatively",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Interpret latent factors conservatively",
+    "text": "Interpret latent factors conservatively\nA factor is an inferred coordinate describing variation under a model. A factor correlated with diet may represent diet response, batch structure or another associated variable. Inspect sample scores, feature loadings, variance contributions and sensitivity to included layers. Assigning a pathway name is an interpretation, not an observed identity.\nThe MOFA paper provides an advanced example of unsupervised multi-omics factor analysis. It is useful for discussion of shared and layer-specific structure, but the small PCA examples here do not implement that method. Matching its terminology requires understanding its actual model rather than renaming a principal component."
+  },
+  {
+    "objectID": "notes/b15_integration.html#evaluate-incremental-value",
+    "href": "notes/b15_integration.html#evaluate-incremental-value",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Evaluate incremental value",
+    "text": "Evaluate incremental value\nCompare integrated predictions with each individual layer and a nonmolecular baseline using the same held-out subjects. Fit every transformation and selection inside training. An integrated model that improves one split needs replication and a cost/availability assessment before deployment.\nFor causal interpretation, cross-layer agreement is not independent experimental replication. A single latent biological or technical driver can influence every assay. A targeted follow-up should test the proposed connection rather than merely acquire another correlated layer.\n\n\n\n\n\n\nIntegration challenge\n\n\n\n\n\nA joint factor has strong RNA and protein loadings and separates the diets. What evidence would establish a regulatory path? Matched measurements and biological context help, but temporal and perturbation evidence are needed to distinguish mediation from a shared response or confounding."
+  },
+  {
+    "objectID": "notes/b15_integration.html#further-reading",
+    "href": "notes/b15_integration.html#further-reading",
+    "title": "Integrating molecular layers and phenotypes",
+    "section": "Further reading",
+    "text": "Further reading\nMOFA: Multi-Omics Factor Analysis, Molecular Systems Biology, is an advanced methods reading. Compare its inferential model with concatenated PCA. MultiAssayExperiment documentation explains explicit subject-to-assay mappings."
+  },
+  {
+    "objectID": "notes/b16_advanced.html#resolution-changes-what-can-be-observed",
+    "href": "notes/b16_advanced.html#resolution-changes-what-can-be-observed",
+    "title": "Single-cell, spatial and emerging methods",
+    "section": "Resolution changes what can be observed",
+    "text": "Resolution changes what can be observed\nSingle-cell RNA-seq can describe heterogeneity hidden by bulk averages. A cell is still sampled from a specimen and animal. Capture efficiency, cell recovery and processing determine which cells are represented. A missing cell type can reflect biology, dissociation sensitivity, sampling or QC rather than true absence.\nA cluster is a grouping under selected features, transformations, distances and algorithm settings. Cell-type annotation combines marker evidence and context; a label transferred from another dataset can be inappropriate for a new tissue or species. Continuous states may be forced into discrete clusters, and a trajectory inferred from a snapshot does not directly observe cells moving through time."
+  },
+  {
+    "objectID": "notes/b16_advanced.html#pseudobulk-preserves-the-sample-level-comparison",
+    "href": "notes/b16_advanced.html#pseudobulk-preserves-the-sample-level-comparison",
+    "title": "Single-cell, spatial and emerging methods",
+    "section": "Pseudobulk preserves the sample-level comparison",
+    "text": "Pseudobulk preserves the sample-level comparison\nFor a given cell type, aggregating counts within each animal produces animal-by-feature evidence. The number of recovered cells affects measurement precision and representativeness, but the independent biological comparison still relies on animals or the allocation unit. A sum of counts and a mean of transformed values are different operations.\n\n\nShow R code\ncell_counts &lt;- matrix(c(1,2,4,8,3,6),nrow=2,\n dimnames=list(c('g1','g2'),c('a1_c1','a1_c2','a2_c1')))\nsubject &lt;- c('a1','a1','a2')\npseudobulk &lt;- t(rowsum(t(cell_counts),subject))\npseudobulk\n\n\n   a1 a2\ng1  5  3\ng2 10  6\n\n\nShow R code\nstopifnot(all(rowSums(pseudobulk)==rowSums(cell_counts)))\n\n\nThis is only an aggregation illustration, with two fictional animals and no inferential analysis. Real pseudobulk workflows need cell-type definitions, replicated subjects, appropriate count models and attention to unequal cell recovery. A type absent from a sample creates a biological/measurement question before a model input."
+  },
+  {
+    "objectID": "notes/b16_advanced.html#spatial-assays-retain-location-at-a-defined-scale",
+    "href": "notes/b16_advanced.html#spatial-assays-retain-location-at-a-defined-scale",
+    "title": "Single-cell, spatial and emerging methods",
+    "section": "Spatial assays retain location at a defined scale",
+    "text": "Spatial assays retain location at a defined scale\nA spot can contain several cells; segmented cell measurements depend on the segmentation procedure. Adjacent observations can share local environment and technical effects. Co-location at a platform’s resolution is weaker evidence than a demonstrated molecular interaction.\nConsider the tissue area covered, sectioning, registration and matched molecular layers. Combining sections requires a mapping, and an animal-level treatment comparison cannot treat every spot as an independent treatment replicate. Spatial dependence and the biological unit remain part of the statistical model."
+  },
+  {
+    "objectID": "notes/b16_advanced.html#evaluate-ai-by-the-complete-procedure",
+    "href": "notes/b16_advanced.html#evaluate-ai-by-the-complete-procedure",
+    "title": "Single-cell, spatial and emerging methods",
+    "section": "Evaluate AI by the complete procedure",
+    "text": "Evaluate AI by the complete procedure\nAn AI model can exploit animal, batch or study identity even when those labels are absent from the predictor table. Separating cells from the same animal across training and test allows animal-specific information to appear on both sides. Pretrained models also need evaluation for the new species, tissue and task.\nTraceable model inputs, version, preprocessing, split design and outputs are needed for reproducibility. A generated biological explanation must be checked against evidence. High predictive performance does not establish a causal mechanism or ensure calibration for the intended use.\n\n\n\n\n\n\n\nClaim\nCritical check\n\n\n\n\nA new cell type was discovered\nMarker/context evidence, annotation sensitivity and replication\n\n\nA trajectory reflects development\nSampling design, temporal evidence and alternative states\n\n\nA spatial contact is regulatory\nResolution, mixed cells, assay meaning and perturbation\n\n\nAn AI model transfers to new animals\nAnimal-separated evaluation and deployment relevance\n\n\n\n\n\n\n\n\n\nAdvanced-method challenge\n\n\n\n\n\nThousands of cells from three control and three treated animals give a tiny independent-cell p-value. What should be reviewed? The allocation unit, within-animal dependence, assay-specific model and sample-level evidence. More cells improve resolution without creating more independently treated animals."
+  },
+  {
+    "objectID": "notes/b16_advanced.html#further-reading",
+    "href": "notes/b16_advanced.html#further-reading",
+    "title": "Single-cell, spatial and emerging methods",
+    "section": "Further reading",
+    "text": "Further reading\nHarvard introduction to single-cell RNA-seq provides workflow teaching. Use its lessons alongside the animal-level replication critique in the advanced practical."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#build-an-analysis-record-that-explains-decisions",
+    "href": "notes/b17_integrity.html#build-an-analysis-record-that-explains-decisions",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Build an analysis record that explains decisions",
+    "text": "Build an analysis record that explains decisions\nA reproducible result connects inputs, processing and outputs. Keep data versions, sample mappings, transformations, exclusions, software versions and randomization choices. Also document why an analysis was chosen. A fully automated script can reproduce a biased selection procedure exactly.\nDistinguish prespecified comparisons from exploratory follow-ups. Exploration is valuable when labelled clearly; confirmatory language should reflect the selection process. Record manual corrections with the original value, corrected value, reason and responsible review. Avoid modifying source data silently to make an analysis run."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#check-bytes-and-meaning-separately",
+    "href": "notes/b17_integrity.html#check-bytes-and-meaning-separately",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Check bytes and meaning separately",
+    "text": "Check bytes and meaning separately\nChecksums detect changed bytes. Semantic checks assess expected columns, identifier uniqueness, units and allowable ranges. Neither establishes that a specimen was correctly labelled at collection. These checks complement the biological provenance record.\n\n\nShow R code\nraw &lt;- data.frame(animal=c('fictional_a1','fictional_a2'),value=c(3,5))\nreordered &lt;- raw[2:1,]\nbyte_file &lt;- tempfile(fileext='.csv')\nwrite.csv(raw,byte_file,row.names=FALSE)\nhash1 &lt;- unname(tools::md5sum(byte_file))\nwrite.csv(reordered,byte_file,row.names=FALSE)\nhash2 &lt;- unname(tools::md5sum(byte_file))\nstopifnot(hash1!=hash2,\n identical(raw,reordered[match(raw$animal,reordered$animal),]))\nunlink(byte_file)\n\n\nA changed hash here reflects order, while explicit key alignment shows equivalent labelled observations. In other cases, changed bytes can encode a changed scientific result; inspect both levels."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#make-public-teaching-reproducible-without-restricted-records",
+    "href": "notes/b17_integrity.html#make-public-teaching-reproducible-without-restricted-records",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Make public teaching reproducible without restricted records",
+    "text": "Make public teaching reproducible without restricted records\nA synthetic example can demonstrate an algorithm and its assumptions without exposing real observations. Label it as hypothetical and document the generator. It cannot supply evidence of real biological performance. For a restricted-data project, reusable code, schemas and a non-sensitive example can support understanding while access follows the applicable agreements.\nPseudonymization is not a guarantee of anonymity. Genetic and linked production records can reveal relationships or identities through combinations of information. Sharing permissions should be checked for the actual data and destination. Public and private inputs should remain distinguishable in the workflow."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#attribution-should-be-specific-and-useful",
+    "href": "notes/b17_integrity.html#attribution-should-be-specific-and-useful",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Attribution should be specific and useful",
+    "text": "Attribution should be specific and useful\nLink to selected readings and cite methods relevant to the calculation. If lesson text, code or figures are adapted, retain the required attribution and licence information and identify modifications. A freely readable article is not automatically licensed for copying its figures. Original explanation of a concept and linking to a reading are different from reproducing an asset.\nAvoid attributing a biological result to an introductory resource that did not establish it. A review summarizes evidence; an original study supports its own design-specific findings. Use citations to let students inspect that distinction."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#responsible-ai-needs-verification",
+    "href": "notes/b17_integrity.html#responsible-ai-needs-verification",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Responsible AI needs verification",
+    "text": "Responsible AI needs verification\nRecord substantial AI assistance where appropriate to the teaching or research context. Check generated code against a meaningful oracle or invariant and review scientific interpretations manually. Plausible citations should be resolved to real sources. Generated figures need clear labelling if they could be mistaken for observations.\n\n\n\n\n\n\nIntegrity challenge\n\n\n\n\n\nA script, seed and plot are shared, but three animals were removed by hand. Is the analysis record complete? No. The exclusions and their reasons are part of the result. Reconstruct the selection, report it and assess its effect before describing the analysis as reproducible."
+  },
+  {
+    "objectID": "notes/b17_integrity.html#further-reading",
+    "href": "notes/b17_integrity.html#further-reading",
+    "title": "Reproducibility, data governance and responsible research",
+    "section": "Further reading",
+    "text": "Further reading\nData Carpentry Genomics provides project-organization teaching. Use the reporting practical to connect those habits to provenance, exclusions and a clean-session analysis."
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#turn-a-production-problem-into-an-evidence-plan",
+    "href": "notes/b18_synthesis.html#turn-a-production-problem-into-an-evidence-plan",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Turn a production problem into an evidence plan",
+    "text": "Turn a production problem into an evidence plan\nStart with a decision: selecting animals, changing a diet, detecting a health problem or understanding a mechanism. Define the target population, outcome, unit and timing. The same assay can be useful for one purpose and infeasible for another. Tissue collection burden, assay delay and cost affect whether a scientifically informative measurement is deployable.\nFor each layer, identify the uncertainty it reduces. Genotype can describe inherited variation; RNA can describe a tissue response; proteins and metabolites can reflect downstream state; microbial assays can add community information. None automatically supplies the other layers’ evidence. A coherent study argument explains why the combination is needed."
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#compare-with-a-relevant-baseline",
+    "href": "notes/b18_synthesis.html#compare-with-a-relevant-baseline",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Compare with a relevant baseline",
+    "text": "Compare with a relevant baseline\nA molecular model should be compared with ordinary information available at the same decision time. Previous performance, management, breed or age can provide a strong baseline. Compare models on the same held-out animals, and evaluate both aggregate error and relevant subgroups.\nA paired error comparison retains animal identity. Its uncertainty concerns the sampled evaluation units and the supplied trained models. Generalization to other farms or time periods requires broader evidence.\n\n\nShow R code\nobserved &lt;- c(10,12,9,14,11,13)\nbaseline &lt;- rep(11,6)\naugmented &lt;- c(10.5,11.7,9.5,13.4,11.2,12.7)\npaired &lt;- (observed-baseline)^2-(observed-augmented)^2\nset.seed(1802)\nboot &lt;- replicate(500,mean(sample(paired,replace=TRUE)))\nc(mean_improvement=mean(paired),quantile(boot,c(.025,.975)))\n\n\nmean_improvement             2.5%            97.5% \n       2.9866667        0.8943333        5.4066667 \n\n\nThis small bootstrap illustrates resampling evaluation animals, conditional on the supplied predictions. Six fictional animals do not provide robust population evidence. If evaluation units are clustered, resampling individual animals can be inappropriate. Retraining uncertainty is also absent from this calculation."
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#predictive-value-and-practical-value-differ",
+    "href": "notes/b18_synthesis.html#predictive-value-and-practical-value-differ",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Predictive value and practical value differ",
+    "text": "Predictive value and practical value differ\nA lower RMSE does not alone establish a worthwhile decision. Consider calibration, action thresholds, assay cost and availability. Predicting an outcome after its collection time is a different task from predicting before a management choice. An assay that requires sacrificing an animal cannot be treated as a routine live-animal selection measurement.\nFor breeding, phenotype prediction and breeding-value estimation are different targets. Environmental responses can improve prediction of observed performance without identifying transmissible genetic merit. Link the current question to the quantitative-genetics course rather than assuming an omics association is an additive genetic effect."
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#build-a-report-around-claims-and-limits",
+    "href": "notes/b18_synthesis.html#build-a-report-around-claims-and-limits",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Build a report around claims and limits",
+    "text": "Build a report around claims and limits\nThe report should move from question to design, measurements, processing, model, evaluation and biological interpretation. Include enough numerical evidence to distinguish direction, magnitude and uncertainty. Describe the tested universe, sample exclusions and unavailable layers. Use figures to answer a question rather than decorate the document.\n\n\n\n\n\n\n\nReport claim\nEvidence to show\n\n\n\n\nA group differs\nContrast, unit, adjustment, effect and uncertainty\n\n\nA model predicts\nEligible inputs, split, baseline, error and calibration\n\n\nA pathway is enriched\nMapping, eligible background, overlap and multiplicity\n\n\nA mechanism is proposed\nOrdering, alternative explanations and discriminating follow-up"
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#choose-the-next-experiment-deliberately",
+    "href": "notes/b18_synthesis.html#choose-the-next-experiment-deliberately",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Choose the next experiment deliberately",
+    "text": "Choose the next experiment deliberately\nReplication addresses robustness; a new farm addresses transport; a targeted assay can address identity; a perturbation can address mechanism. Specify the expected result under competing explanations. More layers are useful when they resolve an identified uncertainty, not simply because integration is available.\n\n\n\n\n\n\nSynthesis challenge\n\n\n\n\n\nA protein panel improves prediction within one farm but fails on another. What should change next? Inspect sampling, management, assay batches and population differences; distinguish calibration failure from lost ranking. A new expensive panel is not the first explanation to assume."
+  },
+  {
+    "objectID": "notes/b18_synthesis.html#further-reading",
+    "href": "notes/b18_synthesis.html#further-reading",
+    "title": "Animal-production questions and integrated reporting",
+    "section": "Further reading",
+    "text": "Further reading\nRead Integrative omics for health and disease as a comparative application review. Translate its study arguments into animal-production units, decision times and follow-up experiments rather than transferring clinical conclusions directly."
   }
 ]

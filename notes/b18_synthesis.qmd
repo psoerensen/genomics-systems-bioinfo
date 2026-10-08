@@ -17,19 +17,19 @@ execute:
 
 Translate a production question into design and analysis; evaluate usefulness at the intended decision time; communicate uncertainty, alternatives and follow-up.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Animal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.
 
 An integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are $e_{i0}$ and $e_{i1}$, the paired improvement in squared error is $d_i=e_{i0}^2-e_{i1}^2$. Its mean is positive when the augmented model has smaller mean squared error in that group.
 
 One evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -46,11 +46,60 @@ stopifnot(abs(mean(d)-(mean((observed-baseline)^2)-mean((observed-augmented)^2))
 
 The supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize.
 
-## 4. Interpretation and scope
+## Turn a production problem into an evidence plan
+
+Start with a decision: selecting animals, changing a diet, detecting a health problem or understanding a mechanism. Define the target population, outcome, unit and timing. The same assay can be useful for one purpose and infeasible for another. Tissue collection burden, assay delay and cost affect whether a scientifically informative measurement is deployable.
+
+For each layer, identify the uncertainty it reduces. Genotype can describe inherited variation; RNA can describe a tissue response; proteins and metabolites can reflect downstream state; microbial assays can add community information. None automatically supplies the other layers' evidence. A coherent study argument explains why the combination is needed.
+
+## Compare with a relevant baseline
+
+A molecular model should be compared with ordinary information available at the same decision time. Previous performance, management, breed or age can provide a strong baseline. Compare models on the same held-out animals, and evaluate both aggregate error and relevant subgroups.
+
+A paired error comparison retains animal identity. Its uncertainty concerns the sampled evaluation units and the supplied trained models. Generalization to other farms or time periods requires broader evidence.
+
+```{r}
+observed <- c(10,12,9,14,11,13)
+baseline <- rep(11,6)
+augmented <- c(10.5,11.7,9.5,13.4,11.2,12.7)
+paired <- (observed-baseline)^2-(observed-augmented)^2
+set.seed(1802)
+boot <- replicate(500,mean(sample(paired,replace=TRUE)))
+c(mean_improvement=mean(paired),quantile(boot,c(.025,.975)))
+```
+
+This small bootstrap illustrates resampling evaluation animals, conditional on the supplied predictions. Six fictional animals do not provide robust population evidence. If evaluation units are clustered, resampling individual animals can be inappropriate. Retraining uncertainty is also absent from this calculation.
+
+## Predictive value and practical value differ
+
+A lower RMSE does not alone establish a worthwhile decision. Consider calibration, action thresholds, assay cost and availability. Predicting an outcome after its collection time is a different task from predicting before a management choice. An assay that requires sacrificing an animal cannot be treated as a routine live-animal selection measurement.
+
+For breeding, phenotype prediction and breeding-value estimation are different targets. Environmental responses can improve prediction of observed performance without identifying transmissible genetic merit. Link the current question to the quantitative-genetics course rather than assuming an omics association is an additive genetic effect.
+
+## Build a report around claims and limits
+
+The report should move from question to design, measurements, processing, model, evaluation and biological interpretation. Include enough numerical evidence to distinguish direction, magnitude and uncertainty. Describe the tested universe, sample exclusions and unavailable layers. Use figures to answer a question rather than decorate the document.
+
+| Report claim | Evidence to show |
+|---|---|
+| A group differs | Contrast, unit, adjustment, effect and uncertainty |
+| A model predicts | Eligible inputs, split, baseline, error and calibration |
+| A pathway is enriched | Mapping, eligible background, overlap and multiplicity |
+| A mechanism is proposed | Ordering, alternative explanations and discriminating follow-up |
+
+## Choose the next experiment deliberately
+
+Replication addresses robustness; a new farm addresses transport; a targeted assay can address identity; a perturbation can address mechanism. Specify the expected result under competing explanations. More layers are useful when they resolve an identified uncertainty, not simply because integration is available.
+
+::: {.callout-note collapse="true" title="Synthesis challenge"}
+A protein panel improves prediction within one farm but fails on another. What should change next? Inspect sampling, management, assay batches and population differences; distinguish calibration failure from lost ranking. A new expensive panel is not the first explanation to assume.
+:::
+
+## Interpretation and scope
 
 Follow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements.
 
-## 5. Exercises
+## Exercises
 
 1. Why compare predictions on the same test animals?
 2. Does predictive improvement show that an assay measures a causal mediator?
@@ -61,6 +110,10 @@ Follow-up can include replication in a new farm, time, breed or management setti
 2. No; proxies can predict through correlation.
 3. Question, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step.
 :::
+
+## Further reading
+
+Read [*Integrative omics for health and disease*](https://www.nature.com/articles/nrg.2018.4) as a comparative application review. Translate its study arguments into animal-production units, decision times and follow-up experiments rather than transferring clinical conclusions directly.
 
 ## Practicals and course pathways
 

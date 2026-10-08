@@ -3909,11 +3909,17 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#build-an-analysis-record-that-explains-decisions" id="toc-build-an-analysis-record-that-explains-decisions" class="nav-link" data-scroll-target="#build-an-analysis-record-that-explains-decisions">Build an analysis record that explains decisions</a></li>
+  <li><a href="#check-bytes-and-meaning-separately" id="toc-check-bytes-and-meaning-separately" class="nav-link" data-scroll-target="#check-bytes-and-meaning-separately">Check bytes and meaning separately</a></li>
+  <li><a href="#make-public-teaching-reproducible-without-restricted-records" id="toc-make-public-teaching-reproducible-without-restricted-records" class="nav-link" data-scroll-target="#make-public-teaching-reproducible-without-restricted-records">Make public teaching reproducible without restricted records</a></li>
+  <li><a href="#attribution-should-be-specific-and-useful" id="toc-attribution-should-be-specific-and-useful" class="nav-link" data-scroll-target="#attribution-should-be-specific-and-useful">Attribution should be specific and useful</a></li>
+  <li><a href="#responsible-ai-needs-verification" id="toc-responsible-ai-needs-verification" class="nav-link" data-scroll-target="#responsible-ai-needs-verification">Responsible AI needs verification</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -3946,18 +3952,18 @@ vertical-align: -.125em;
 <p>Document provenance and exclusions; distinguish access control from reproducibility; evaluate privacy, research integrity and responsible AI use.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Reproducibility means that the documented inputs and procedures can produce the reported analysis. It requires traceable data versions, sample definitions, transformations, software, random draws and model choices. A script that runs is only part of this record: excluded samples, manual corrections and selection decisions affect the result.</p>
 <p>A public teaching example can use hypothetical data while a real collaboration may need controlled access. Genetic, ownership, location or linked production records can carry sensitive information. Permissions, consent or institutional agreements determine what may be shared; changing names alone does not necessarily prevent re-identification. Publish reusable methods and non-sensitive demonstrations without transferring restricted records into public repositories.</p>
 <p>Responsible AI use includes identifying what the tool contributed and verifying code, citations and interpretations. Do not upload restricted data to an external service without the applicable authorisation. Specific governance decisions depend on the project’s agreements and local requirements.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>A manifest connects a file identifier, checksum, role and access category. A checksum can detect byte-level changes; it cannot determine whether a biological measurement or label is correct. Separate data provenance from biological validity.</p>
 <p>An analysis record should distinguish prespecified decisions from exploratory choices and document deviations. Fixing a seed preserves one random realization; it does not establish that findings generalize.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -3983,19 +3989,74 @@ vertical-align: -.125em;
 </div>
 <p>The manifest identifies bytes of one fictional teaching table. A different formatting or row order can change the checksum even when the scientific content is equivalent.</p>
 </section>
+<section id="build-an-analysis-record-that-explains-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="build-an-analysis-record-that-explains-decisions">Build an analysis record that explains decisions</h2>
+<p>A reproducible result connects inputs, processing and outputs. Keep data versions, sample mappings, transformations, exclusions, software versions and randomization choices. Also document why an analysis was chosen. A fully automated script can reproduce a biased selection procedure exactly.</p>
+<p>Distinguish prespecified comparisons from exploratory follow-ups. Exploration is valuable when labelled clearly; confirmatory language should reflect the selection process. Record manual corrections with the original value, corrected value, reason and responsible review. Avoid modifying source data silently to make an analysis run.</p>
+</section>
+<section id="check-bytes-and-meaning-separately" class="level2">
+<h2 class="anchored" data-anchor-id="check-bytes-and-meaning-separately">Check bytes and meaning separately</h2>
+<p>Checksums detect changed bytes. Semantic checks assess expected columns, identifier uniqueness, units and allowable ranges. Neither establishes that a specimen was correctly labelled at collection. These checks complement the biological provenance record.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">animal=</span><span class="fu">c</span>(<span class="st">&#39;fictional_a1&#39;</span>,<span class="st">&#39;fictional_a2&#39;</span>),<span class="at">value=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reordered <span class="ot">&lt;-</span> raw[<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>,]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>byte_file <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">&#39;.csv&#39;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(raw,byte_file,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>hash1 <span class="ot">&lt;-</span> <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(byte_file))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(reordered,byte_file,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>hash2 <span class="ot">&lt;-</span> <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(byte_file))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(hash1<span class="sc">!=</span>hash2,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">identical</span>(raw,reordered[<span class="fu">match</span>(raw<span class="sc">$</span>animal,reordered<span class="sc">$</span>animal),]))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(byte_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A changed hash here reflects order, while explicit key alignment shows equivalent labelled observations. In other cases, changed bytes can encode a changed scientific result; inspect both levels.</p>
+</section>
+<section id="make-public-teaching-reproducible-without-restricted-records" class="level2">
+<h2 class="anchored" data-anchor-id="make-public-teaching-reproducible-without-restricted-records">Make public teaching reproducible without restricted records</h2>
+<p>A synthetic example can demonstrate an algorithm and its assumptions without exposing real observations. Label it as hypothetical and document the generator. It cannot supply evidence of real biological performance. For a restricted-data project, reusable code, schemas and a non-sensitive example can support understanding while access follows the applicable agreements.</p>
+<p>Pseudonymization is not a guarantee of anonymity. Genetic and linked production records can reveal relationships or identities through combinations of information. Sharing permissions should be checked for the actual data and destination. Public and private inputs should remain distinguishable in the workflow.</p>
+</section>
+<section id="attribution-should-be-specific-and-useful" class="level2">
+<h2 class="anchored" data-anchor-id="attribution-should-be-specific-and-useful">Attribution should be specific and useful</h2>
+<p>Link to selected readings and cite methods relevant to the calculation. If lesson text, code or figures are adapted, retain the required attribution and licence information and identify modifications. A freely readable article is not automatically licensed for copying its figures. Original explanation of a concept and linking to a reading are different from reproducing an asset.</p>
+<p>Avoid attributing a biological result to an introductory resource that did not establish it. A review summarizes evidence; an original study supports its own design-specific findings. Use citations to let students inspect that distinction.</p>
+</section>
+<section id="responsible-ai-needs-verification" class="level2">
+<h2 class="anchored" data-anchor-id="responsible-ai-needs-verification">Responsible AI needs verification</h2>
+<p>Record substantial AI assistance where appropriate to the teaching or research context. Check generated code against a meaningful oracle or invariant and review scientific interpretations manually. Plausible citations should be resolved to real sources. Generated figures need clear labelling if they could be mistaken for observations.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Integrity challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Integrity challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A script, seed and plot are shared, but three animals were removed by hand. Is the analysis record complete? No. The exclusions and their reasons are part of the result. Reconstruct the selection, report it and assess its effect before describing the analysis as reproducible.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Keep credentials, private observations and restricted metadata out of public teaching sources. Report validation and limitations plainly, including null or inconsistent results. Reproducibility does not guarantee correct inference, responsible access or scientific validity.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Does an unchanged checksum certify correct animal identity?</li>
 <li>What should be shared when data access is restricted?</li>
 <li>Why record an exploratory feature-selection decision?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4004,7 +4065,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>No; it only certifies the same file bytes under the checksum mechanism.</li>
@@ -4014,6 +4075,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://datacarpentry.github.io/genomics-workshop/">Data Carpentry Genomics</a> provides project-organization teaching. Use the reporting practical to connect those habits to provenance, exclusions and a clean-session analysis.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

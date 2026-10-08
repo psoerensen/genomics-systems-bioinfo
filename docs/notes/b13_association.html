@@ -4048,11 +4048,17 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#define-the-association-at-the-measurement-level" id="toc-define-the-association-at-the-measurement-level" class="nav-link" data-scroll-target="#define-the-association-at-the-measurement-level">Define the association at the measurement level</a></li>
+  <li><a href="#ld-links-signals-without-isolating-a-mechanism" id="toc-ld-links-signals-without-isolating-a-mechanism" class="nav-link" data-scroll-target="#ld-links-signals-without-isolating-a-mechanism">LD links signals without isolating a mechanism</a></li>
+  <li><a href="#relatedness-and-phenotype-definition-matter" id="toc-relatedness-and-phenotype-definition-matter" class="nav-link" data-scroll-target="#relatedness-and-phenotype-definition-matter">Relatedness and phenotype definition matter</a></li>
+  <li><a href="#allele-alignment-is-a-scientific-consistency-check" id="toc-allele-alignment-is-a-scientific-consistency-check" class="nav-link" data-scroll-target="#allele-alignment-is-a-scientific-consistency-check">Allele alignment is a scientific consistency check</a></li>
+  <li><a href="#move-from-a-signal-to-a-follow-up" id="toc-move-from-a-signal-to-a-follow-up" class="nav-link" data-scroll-target="#move-from-a-signal-to-a-follow-up">Move from a signal to a follow-up</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,18 +4091,18 @@ window.Quarto = {
 <p>Define marker dosage and phenotype contrasts; identify confounding and linkage disequilibrium; distinguish GWAS, eQTL, TWAS, fine-mapping and prediction.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>GWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.</p>
 <p>Relatedness and population structure can induce association when genetic groups differ in environment or phenotype. Linkage disequilibrium allows a marker to tag nearby variation; multiple correlated associations need not imply multiple mechanisms. Fine-mapping compares candidate explanations under an explicit model and requires appropriate LD, coverage, allele alignment and prior assumptions. A posterior probability is conditional on that model and supplied candidates.</p>
 <p>Genomic prediction evaluates the ability to predict new animals, rather than selecting the smallest association p-value. The deployment population and training relationships determine the relevant validation design.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>A basic unrelated-sample model is <span class="math inline">\(y_i=\beta_0+\beta_g g_i+\gamma^T c_i+e_i\)</span>, where <span class="math inline">\(g_i\)</span> counts a stated allele and c contains prespecified covariates. Residual independence and the design matter. With correlated relatives, a mixed-model or other suitable framework is needed.</p>
 <p>For two marker vectors, their correlation describes association of the supplied dosages. It does not establish ancestry, phase, a causal allele or a calibrated fine-mapping probability.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4129,19 +4135,125 @@ window.Quarto = {
 </div>
 <p>The generating model contains no direct marker effect. Group differences can nevertheless create a marginal marker association. One realization does not make the adjusted estimate exactly zero.</p>
 </section>
+<section id="define-the-association-at-the-measurement-level" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-association-at-the-measurement-level">Define the association at the measurement level</h2>
+<p>A GWAS relates genotype to a stated phenotype; an eQTL analysis relates genotype to expression in a tissue and context. A cis label usually denotes a defined genomic neighborhood, while trans refers to more distant relationships under the study’s convention. Proximity is a location rule, not proof of direct regulation.</p>
+<p>A TWAS signal relates genetically informed expression to a trait under a specified procedure. Shared genetic associations can arise through LD or pleiotropic effects rather than expression mediation. Colocalization and fine-mapping ask additional questions under their own assumptions about variants, signals and LD. They should not be collapsed into a single claim that a gene causes the trait.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Analysis</th>
+<th>Direct target</th>
+<th>Interpretation still conditional on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GWAS</td>
+<td>Variant–trait association</td>
+<td>Structure, relatedness, phenotype and allele alignment</td>
+</tr>
+<tr class="even">
+<td>eQTL</td>
+<td>Variant–expression association</td>
+<td>Tissue, assay, design and normalization</td>
+</tr>
+<tr class="odd">
+<td>TWAS</td>
+<td>Expression-related genetic association with trait</td>
+<td>Prediction weights, LD and association model</td>
+</tr>
+<tr class="even">
+<td>Fine-mapping</td>
+<td>Candidate causal configurations</td>
+<td>Candidate coverage, LD, model and priors</td>
+</tr>
+<tr class="odd">
+<td>Prediction</td>
+<td>Performance for new observations</td>
+<td>Information timing and deployment population</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ld-links-signals-without-isolating-a-mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="ld-links-signals-without-isolating-a-mechanism">LD links signals without isolating a mechanism</h2>
+<p>Correlated markers can carry similar association evidence when one tags another. A near-perfect correlation also makes separate regression effects uncertain, even when joint prediction is stable.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1302</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">100</span>,<span class="dv">2</span>,.<span class="dv">4</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> g1;g2[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">12</span>,<span class="dv">2</span>,.<span class="dv">4</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> .<span class="dv">8</span><span class="sc">*</span>g1<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">dosage_correlation=</span><span class="fu">cor</span>(g1,g2),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> <span class="at">marginal_g1=</span><span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>g1))[<span class="dv">2</span>],<span class="at">marginal_g2=</span><span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>g2))[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>dosage_correlation     marginal_g1.g1     marginal_g2.g2 
+         0.9347726          0.7386323          0.7341350 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(y<span class="sc">~</span>g1<span class="sc">+</span>g2)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error    t value  Pr(&gt;|t|)
+(Intercept) -0.1954570  0.1402732 -1.3934023 0.1666828
+g1           0.2715971  0.4062394  0.6685641 0.5053615
+g2           0.4867802  0.3957958  1.2298771 0.2217178</code></pre>
+</div>
+</div>
+<p>The supplied generator gives g1 a direct role; in an observational dataset that truth is unknown. A strong g2 association does not independently identify another mechanism. In real analyses, LD depends on the population and can differ from a reference panel.</p>
+</section>
+<section id="relatedness-and-phenotype-definition-matter" class="level2">
+<h2 class="anchored" data-anchor-id="relatedness-and-phenotype-definition-matter">Relatedness and phenotype definition matter</h2>
+<p>Livestock samples often share family relationships and management. A residual covariance structure can represent polygenic relatedness, while fixed covariates describe selected environmental differences. Neither should be added mechanically: the phenotype and target comparison determine what belongs in the model.</p>
+<p>For example, adjusting for body weight changes a feed-intake comparison relative to analysing intake alone. If a covariate is affected by treatment or shares unmeasured causes with the outcome, conditioning can change the causal interpretation. State the estimand rather than assuming every available covariate improves the model.</p>
+</section>
+<section id="allele-alignment-is-a-scientific-consistency-check" class="level2">
+<h2 class="anchored" data-anchor-id="allele-alignment-is-a-scientific-consistency-check">Allele alignment is a scientific consistency check</h2>
+<p>Effect estimates require the counted allele. Flipping allele coding reverses the coefficient and changes the intercept but can preserve fitted values. Reference/alternate status is not the same as favorable/unfavorable status. For cross-study integration, check assembly, strand, allele pairs and frequencies before combining signs.</p>
+<p>An expression-associated variant can have different effects across tissues or environments. Failure to observe an effect in another tissue can reflect context, limited power or assay differences. Report what was measured and how precisely before asserting biological specificity.</p>
+</section>
+<section id="move-from-a-signal-to-a-follow-up" class="level2">
+<h2 class="anchored" data-anchor-id="move-from-a-signal-to-a-follow-up">Move from a signal to a follow-up</h2>
+<p>Choose follow-up to discriminate explanations: replication in a new population addresses generalization, improved mapping addresses candidate ambiguity, and a perturbation addresses a proposed mechanism. A validated predictor can still be a proxy, while a mechanistic result may not improve prediction at the decision time.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Candidate-gene challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Candidate-gene challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The nearest gene to a GWAS peak also changes expression with diet. Does the agreement establish mediation? No. Position, expression response and trait association are distinct evidence. Examine LD, tissue/context, temporal order and competing explanations before a causal claim.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Adjustment can reduce specified confounding but cannot guarantee that all confounding has been measured. Do not infer causality from conditional association, a TWAS signal or agreement between assays. Fit and validate appropriate models before applying any teaching formula to related livestock data.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why can a variant associate with a trait without changing it?</li>
 <li>What is the eQTL response variable?</li>
 <li>Why can randomly splitting relatives exaggerate deployment performance?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4150,7 +4262,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>LD with causal variation or association with ancestry/environment can produce the signal.</li>
@@ -4160,6 +4272,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://www.nature.com/articles/nrg3868">Methods of integrating data to uncover genotype–phenotype interactions</a>, Nature Reviews Genetics, offers a broader conceptual reading. Use it to distinguish data integration from identification of a causal path.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

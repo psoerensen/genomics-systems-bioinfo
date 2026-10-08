@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#from-an-instrument-feature-to-a-compound" id="toc-from-an-instrument-feature-to-a-compound" class="nav-link" data-scroll-target="#from-an-instrument-feature-to-a-compound">From an instrument feature to a compound</a></li>
+  <li><a href="#calibration-has-a-usable-range" id="toc-calibration-has-a-usable-range" class="nav-link" data-scroll-target="#calibration-has-a-usable-range">Calibration has a usable range</a></li>
+  <li><a href="#standards-and-quality-control-samples-answer-different-questions" id="toc-standards-and-quality-control-samples-answer-different-questions" class="nav-link" data-scroll-target="#standards-and-quality-control-samples-answer-different-questions">Standards and quality-control samples answer different questions</a></li>
+  <li><a href="#choose-scaling-to-match-the-interpretation" id="toc-choose-scaling-to-match-the-interpretation" class="nav-link" data-scroll-target="#choose-scaling-to-match-the-interpretation">Choose scaling to match the interpretation</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4090,17 @@ window.Quarto = {
 <p>Distinguish analytical features from confirmed metabolites; evaluate internal standards and scaling; separate concentration changes from relative signal differences.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Metabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.</p>
 <p>Targeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>If the observed signal is <span class="math inline">\(x_{ij}=a_j c_{ij}\)</span> and an internal standard has known concentration <span class="math inline">\(c_s\)</span> and the same multiplicative factor <span class="math inline">\(a_j\)</span>, the ratio <span class="math inline">\(x_{ij}/s_j\)</span> cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.</p>
 <p>Scaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4120,19 +4125,89 @@ window.Quarto = {
 </div>
 <p>The common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete.</p>
 </section>
+<section id="from-an-instrument-feature-to-a-compound" class="level2">
+<h2 class="anchored" data-anchor-id="from-an-instrument-feature-to-a-compound">From an instrument feature to a compound</h2>
+<p>A chromatographic mass-spectrometry feature is often defined by mass-to-charge ratio, retention time and signal. Isotopes, adducts and fragments can create several features from one compound. An accurate mass alone can match multiple candidate structures. Supporting evidence can include fragmentation and comparison with standards under documented conditions.</p>
+<p>Maintain an identification field separately from an abundance field. A feature can be quantified reproducibly while its chemical identity remains uncertain. Conversely, a confidently identified compound can have imprecise abundance measurements. Do not turn candidate identities into definite pathway membership when interpreting a differential-feature list.</p>
+<p>Targeted concentration requires a calibration model and an applicable range. Relative untargeted intensity can support within-feature comparisons but is not automatically comparable in molar units across compounds. Extraction recovery and ionization differ by molecule and sample matrix.</p>
+</section>
+<section id="calibration-has-a-usable-range" class="level2">
+<h2 class="anchored" data-anchor-id="calibration-has-a-usable-range">Calibration has a usable range</h2>
+<p>Consider a simple hypothetical response <span class="math inline">\(S=a+bC\)</span>, with intercept <span class="math inline">\(a\)</span> and sensitivity <span class="math inline">\(b\)</span>. Estimating concentration from signal assumes that calibration applies to the analysed samples and that the relation remains appropriate over the range used.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>calibration <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">concentration=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> <span class="at">signal=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">13</span>,<span class="dv">23</span>,<span class="dv">43</span>,<span class="dv">83</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cal <span class="ot">&lt;-</span> <span class="fu">lm</span>(signal<span class="sc">~</span>concentration,calibration)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>unknown_signal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">63</span>,<span class="dv">123</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>estimated <span class="ot">&lt;-</span> (unknown_signal<span class="sc">-</span><span class="fu">coef</span>(cal)[<span class="dv">1</span>])<span class="sc">/</span><span class="fu">coef</span>(cal)[<span class="dv">2</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">signal=</span>unknown_signal,<span class="at">estimated_concentration=</span>estimated,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> <span class="at">within_calibration=</span>estimated<span class="sc">&gt;=</span><span class="dv">0</span> <span class="sc">&amp;</span> estimated<span class="sc">&lt;=</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  signal estimated_concentration within_calibration
+1     18                     1.5               TRUE
+2     63                     6.0               TRUE
+3    123                    12.0              FALSE</code></pre>
+</div>
+</div>
+<p>The last estimate extrapolates beyond the standards. Perfect linearity in this constructed example does not justify extrapolation in a real assay. Calibration uncertainty, blanks, detection limits and replicate measurements still need evaluation.</p>
+</section>
+<section id="standards-and-quality-control-samples-answer-different-questions" class="level2">
+<h2 class="anchored" data-anchor-id="standards-and-quality-control-samples-answer-different-questions">Standards and quality-control samples answer different questions</h2>
+<p>An internal standard can track selected preparation or instrument variation. A pooled QC sample can reveal drift across acquisition order. A blank can reveal background or carryover. None alone represents independent biological replication, and none automatically diagnoses all compounds equally.</p>
+<p>If acquisition order follows treatment, drift can imitate a group effect. Distributing biological groups across the run and recording acquisition order supplies diagnostic information. A correction should be based on a justified technical model; excessive correction can remove biology if the technical and biological factors are confounded.</p>
+</section>
+<section id="choose-scaling-to-match-the-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="choose-scaling-to-match-the-interpretation">Choose scaling to match the interpretation</h2>
+<p>Log transformations emphasize multiplicative changes. Unit-variance scaling makes features contribute equal marginal variance to a multivariate analysis. A rare, noisy feature can therefore gain influence. Other scaling rules balance this trade-off differently; the choice is part of the analysis rather than a cosmetic plotting option.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">901</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">high_signal=</span><span class="dv">100</span><span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="at">sd=</span><span class="dv">10</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="at">low_signal=</span><span class="dv">1</span><span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="at">sd=</span>.<span class="dv">01</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">original_variance=</span><span class="fu">apply</span>(x,<span class="dv">2</span>,var),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="at">scaled_variance=</span><span class="fu">apply</span>(<span class="fu">scale</span>(x),<span class="dv">2</span>,var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  high_signal  low_signal
+original_variance    71.27785 0.000111737
+scaled_variance       1.00000 1.000000000</code></pre>
+</div>
+</div>
+<p>The equal scaled variances say nothing about equal biological information or chemical concentration. Inspect reliability and missingness before deciding which features enter PCA or prediction.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Metabolite challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Metabolite challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Three correlated features receive the same candidate compound name. Are they three independent confirmations of pathway change? They may be adducts or related signals from one compound. Examine their analytical relationship and identification evidence before counting biological support.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Chemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the <a href="https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/">EMBL-EBI metabolite-identification lesson</a> for the distinction between a detected signal and an assigned compound.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why is a feature ID insufficient for a pathway claim?</li>
 <li>Under what assumption does the standard correction work?</li>
 <li>Why can unit-variance scaling amplify noisy features?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4141,7 +4216,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The compound may not be established; mass, retention and additional chemical evidence need evaluation.</li>
@@ -4151,6 +4226,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://www.ebi.ac.uk/training/online/courses/metabolomics-introduction/">EMBL-EBI introduction to metabolomics</a> provides broader context. Read it alongside the distinction between relative feature intensity and calibrated concentration in this module.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

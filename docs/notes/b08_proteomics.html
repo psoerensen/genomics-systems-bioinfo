@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#identification-and-quantification-are-separate-inferences" id="toc-identification-and-quantification-are-separate-inferences" class="nav-link" data-scroll-target="#identification-and-quantification-are-separate-inferences">Identification and quantification are separate inferences</a></li>
+  <li><a href="#the-scale-determines-the-summary" id="toc-the-scale-determines-the-summary" class="nav-link" data-scroll-target="#the-scale-determines-the-summary">The scale determines the summary</a></li>
+  <li><a href="#missingness-can-depend-on-abundance" id="toc-missingness-can-depend-on-abundance" class="nav-link" data-scroll-target="#missingness-can-depend-on-abundance">Missingness can depend on abundance</a></li>
+  <li><a href="#structure-provides-a-complementary-type-of-evidence" id="toc-structure-provides-a-complementary-type-of-evidence" class="nav-link" data-scroll-target="#structure-provides-a-complementary-type-of-evidence">Structure provides a complementary type of evidence</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,18 +4090,18 @@ window.Quarto = {
 <p>Distinguish peptide evidence, protein-group inference and abundance; evaluate missing values and transformations; interpret structural information without overclaiming function.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Proteomics can quantify molecular evidence from peptides or proteins using platforms such as mass spectrometry. A measured peptide may be shared by multiple proteins; assigning it to a unique gene product is an inference problem. Identification confidence and abundance uncertainty are separate. Sample preparation, digestion, instrument response and batch effects influence measured values.</p>
 <p>A protein table can contain missing values because abundance is low, a feature was not identified or processing failed. These mechanisms imply different analysis choices. Replacing every missing value by zero treats non-observation as a known measurement and can introduce artificial group differences. On a log scale, zero is not an absence: it represents an original-scale value of one.</p>
 <p>Structural records describe coordinates of a measured or predicted molecular model. A geometrical contact suggests spatial proximity within that model; it does not alone establish biochemical interaction or functional importance.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>If <span class="math inline">\(z=\log_2(x)\)</span> for positive abundance x, a difference <span class="math inline">\(z_T-z_C\)</span> corresponds to a ratio <span class="math inline">\(2^{z_T-z_C}\)</span>. The example compares arithmetic means of log2 measurements, so the ratio corresponds to geometric means on the original scale.</p>
 <p>Complete-case comparisons require recording which values remain in each group. They can be biased when observation depends on abundance or group.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4124,19 +4129,122 @@ window.Quarto = {
 </div>
 <p>Both groups retain two measurements. The numerical ratio describes the observed log2 values, not a verified biological treatment effect.</p>
 </section>
+<section id="identification-and-quantification-are-separate-inferences" class="level2">
+<h2 class="anchored" data-anchor-id="identification-and-quantification-are-separate-inferences">Identification and quantification are separate inferences</h2>
+<p>In bottom-up proteomics, proteins are digested into peptides and the instrument measures peptide-related ions. Matching spectra to candidate sequences produces identification evidence. Combining peptide evidence into proteins or protein groups is another inference. Shared peptides, isoforms and incomplete sequence coverage can prevent a unique assignment.</p>
+<p>An identification FDR addresses a defined set of identifications at a stated level. It does not automatically control errors in differential-abundance tests performed later. Keep identification thresholds, protein-group rules and abundance inference separate in the analysis record.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Output</th>
+<th>Key interpretation question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectrum matching</td>
+<td>Candidate peptide evidence</td>
+<td>How was identification error assessed?</td>
+</tr>
+<tr class="even">
+<td>Protein inference</td>
+<td>Protein or protein group</td>
+<td>Are peptides unique or shared?</td>
+</tr>
+<tr class="odd">
+<td>Quantification</td>
+<td>Intensity or ratio</td>
+<td>What scale and normalization apply?</td>
+</tr>
+<tr class="even">
+<td>Group comparison</td>
+<td>Effect and uncertainty</td>
+<td>What samples, missingness and model support it?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-scale-determines-the-summary" class="level2">
+<h2 class="anchored" data-anchor-id="the-scale-determines-the-summary">The scale determines the summary</h2>
+<p>Instrument response can span orders of magnitude. A log transformation makes multiplicative differences additive, but also changes the meaning of an average. An arithmetic mean on the original scale and a geometric mean need not agree. Report which one your model compares.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">16</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">arithmetic_mean=</span><span class="fu">mean</span>(x),<span class="at">geometric_mean=</span><span class="dv">2</span><span class="sc">^</span><span class="fu">mean</span>(<span class="fu">log2</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>arithmetic_mean  geometric_mean 
+       7.333333        5.039684 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A common multiplier becomes an additive shift in log2 units.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">log2</span>(<span class="dv">2</span><span class="sc">*</span>x)<span class="sc">-</span><span class="fu">log2</span>(x)<span class="sc">-</span><span class="dv">1</span>))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Sample scaling can address a defined technical reference, but must not erase a biological global shift merely because equal totals were assumed. The choice of normalization needs a biological and assay rationale.</p>
+</section>
+<section id="missingness-can-depend-on-abundance" class="level2">
+<h2 class="anchored" data-anchor-id="missingness-can-depend-on-abundance">Missingness can depend on abundance</h2>
+<p>A low-abundance peptide is less likely to be detected in some acquisition settings. Other missing values reflect failed preparation, interference or identification. Thus a missing value can be informative, and one imputation rule need not suit every mechanism.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">801</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>true_log2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">8</span>,<span class="dv">1</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> true_log2</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>observed[true_log2<span class="sc">&lt;</span><span class="fl">7.5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">full_mean=</span><span class="fu">mean</span>(true_log2),<span class="at">observed_mean=</span><span class="fu">mean</span>(observed,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="at">observed_fraction=</span><span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(observed)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        full_mean     observed_mean observed_fraction 
+         7.991462          8.471608          0.702000 </code></pre>
+</div>
+</div>
+<p>The detected subset has a higher mean by construction. Complete-case analysis and low-value imputation answer questions under different assumptions; neither restores the unobserved measurements without uncertainty. Record observation rates by group and examine sensitivity to plausible policies.</p>
+</section>
+<section id="structure-provides-a-complementary-type-of-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="structure-provides-a-complementary-type-of-evidence">Structure provides a complementary type of evidence</h2>
+<p>A coordinate model describes a conformation under its source conditions. Distance units, chain identity, missing residues and the representation chosen affect contact summaries. A C-alpha distance uses backbone representatives rather than all interacting atoms. A close pair can be geometrically interesting while lacking a demonstrated functional role.</p>
+<p>Predicted structures also have confidence information that can vary across regions. A high-confidence local fold does not necessarily establish relative domain positioning, binding partners or the physiological state. Use structural evidence to formulate a testable hypothesis about an abundance or variant result, and keep those claims distinct.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Protein challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Protein challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A shared peptide increases in the treatment group and matches two proteins. Can both proteins be declared independently increased? No. The evidence is ambiguous at that level. Report the group or unresolved assignment and identify unique evidence needed for separation.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>The teaching protein values are supplied log2 abundances. They are not raw spectra and do not implement peptide identification or protein inference. Report platform, processing, quantification scale, identification thresholds and missingness. Protein structure and abundance answer different questions.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>What ratio corresponds to a log2 difference of one?</li>
 <li>Why might low-value imputation strengthen a spurious difference?</li>
 <li>Does a close residue pair establish an interaction in a living animal?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4145,7 +4253,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Two.</li>
@@ -4155,6 +4263,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://www.ebi.ac.uk/training/materials/proteomics-bioinformatics-materials/course-content/">EMBL-EBI proteomics bioinformatics materials</a> provide complementary assay and analysis lessons. Use them to distinguish spectra, peptide evidence and protein-level claims.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

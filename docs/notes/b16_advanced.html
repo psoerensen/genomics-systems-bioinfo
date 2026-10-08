@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#resolution-changes-what-can-be-observed" id="toc-resolution-changes-what-can-be-observed" class="nav-link" data-scroll-target="#resolution-changes-what-can-be-observed">Resolution changes what can be observed</a></li>
+  <li><a href="#pseudobulk-preserves-the-sample-level-comparison" id="toc-pseudobulk-preserves-the-sample-level-comparison" class="nav-link" data-scroll-target="#pseudobulk-preserves-the-sample-level-comparison">Pseudobulk preserves the sample-level comparison</a></li>
+  <li><a href="#spatial-assays-retain-location-at-a-defined-scale" id="toc-spatial-assays-retain-location-at-a-defined-scale" class="nav-link" data-scroll-target="#spatial-assays-retain-location-at-a-defined-scale">Spatial assays retain location at a defined scale</a></li>
+  <li><a href="#evaluate-ai-by-the-complete-procedure" id="toc-evaluate-ai-by-the-complete-procedure" class="nav-link" data-scroll-target="#evaluate-ai-by-the-complete-procedure">Evaluate AI by the complete procedure</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,18 +4090,18 @@ window.Quarto = {
 <p>Define cell, specimen and animal units; distinguish measurement resolution from biological replication; evaluate advanced assays and AI evidence.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Single-cell assays can resolve molecular differences across sampled cells, but cells are nested within specimens and animals. Treatment allocation to an animal does not create independent treatment allocations to every sampled cell. Cell recovery and QC affect the representation of cell types. For an animal-level comparison, one approach aggregates measurements by animal and cell type before using an appropriate sample-level analysis; this still requires biological replication.</p>
 <p>Spatial assays retain positional information at a platform-dependent resolution. Spots can mix cells, adjacent positions can be dependent, and resolution varies. Chromatin conformation assays estimate selected contact relationships, not a deterministic map of regulatory causation. Advanced epigenomic measurements retain their assay-specific limitations.</p>
 <p>AI models can learn useful patterns, but a sophisticated architecture does not eliminate sample dependence, leakage or confounding. A generated explanation is not supporting biological evidence. Specify training data, evaluation units, uncertainty and validation context.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>For m cells per animal with equal marginal variance <span class="math inline">\(\sigma^2\)</span> and within-animal correlation rho, a design-effect approximation is <span class="math inline">\(D=1+(m-1)\rho\)</span>. Treating <span class="math inline">\(nm\)</span> cells as independent can overstate precision; <span class="math inline">\(nm/D\)</span> is an effective-count illustration under this equal-correlation model, not a replacement for a valid hierarchical analysis or degrees of freedom.</p>
 <p>For high-dimensional prediction, keep animals or specimens separated across training and evaluation when that represents the intended task.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4132,19 +4137,104 @@ window.Quarto = {
 </div>
 <p>The example retains six animals despite measuring many cells. The effective-count approximation is a description of variance inflation in a stylised model, not permission to conduct inference with an invented sample size.</p>
 </section>
+<section id="resolution-changes-what-can-be-observed" class="level2">
+<h2 class="anchored" data-anchor-id="resolution-changes-what-can-be-observed">Resolution changes what can be observed</h2>
+<p>Single-cell RNA-seq can describe heterogeneity hidden by bulk averages. A cell is still sampled from a specimen and animal. Capture efficiency, cell recovery and processing determine which cells are represented. A missing cell type can reflect biology, dissociation sensitivity, sampling or QC rather than true absence.</p>
+<p>A cluster is a grouping under selected features, transformations, distances and algorithm settings. Cell-type annotation combines marker evidence and context; a label transferred from another dataset can be inappropriate for a new tissue or species. Continuous states may be forced into discrete clusters, and a trajectory inferred from a snapshot does not directly observe cells moving through time.</p>
+</section>
+<section id="pseudobulk-preserves-the-sample-level-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="pseudobulk-preserves-the-sample-level-comparison">Pseudobulk preserves the sample-level comparison</h2>
+<p>For a given cell type, aggregating counts within each animal produces animal-by-feature evidence. The number of recovered cells affects measurement precision and representativeness, but the independent biological comparison still relies on animals or the allocation unit. A sum of counts and a mean of transformed values are different operations.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cell_counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">6</span>),<span class="at">nrow=</span><span class="dv">2</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> <span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&#39;g1&#39;</span>,<span class="st">&#39;g2&#39;</span>),<span class="fu">c</span>(<span class="st">&#39;a1_c1&#39;</span>,<span class="st">&#39;a1_c2&#39;</span>,<span class="st">&#39;a2_c1&#39;</span>)))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>subject <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a1&#39;</span>,<span class="st">&#39;a1&#39;</span>,<span class="st">&#39;a2&#39;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pseudobulk <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">rowsum</span>(<span class="fu">t</span>(cell_counts),subject))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pseudobulk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   a1 a2
+g1  5  3
+g2 10  6</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(<span class="fu">rowSums</span>(pseudobulk)<span class="sc">==</span><span class="fu">rowSums</span>(cell_counts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This is only an aggregation illustration, with two fictional animals and no inferential analysis. Real pseudobulk workflows need cell-type definitions, replicated subjects, appropriate count models and attention to unequal cell recovery. A type absent from a sample creates a biological/measurement question before a model input.</p>
+</section>
+<section id="spatial-assays-retain-location-at-a-defined-scale" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-assays-retain-location-at-a-defined-scale">Spatial assays retain location at a defined scale</h2>
+<p>A spot can contain several cells; segmented cell measurements depend on the segmentation procedure. Adjacent observations can share local environment and technical effects. Co-location at a platform’s resolution is weaker evidence than a demonstrated molecular interaction.</p>
+<p>Consider the tissue area covered, sectioning, registration and matched molecular layers. Combining sections requires a mapping, and an animal-level treatment comparison cannot treat every spot as an independent treatment replicate. Spatial dependence and the biological unit remain part of the statistical model.</p>
+</section>
+<section id="evaluate-ai-by-the-complete-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="evaluate-ai-by-the-complete-procedure">Evaluate AI by the complete procedure</h2>
+<p>An AI model can exploit animal, batch or study identity even when those labels are absent from the predictor table. Separating cells from the same animal across training and test allows animal-specific information to appear on both sides. Pretrained models also need evaluation for the new species, tissue and task.</p>
+<p>Traceable model inputs, version, preprocessing, split design and outputs are needed for reproducibility. A generated biological explanation must be checked against evidence. High predictive performance does not establish a causal mechanism or ensure calibration for the intended use.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Claim</th>
+<th>Critical check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A new cell type was discovered</td>
+<td>Marker/context evidence, annotation sensitivity and replication</td>
+</tr>
+<tr class="even">
+<td>A trajectory reflects development</td>
+<td>Sampling design, temporal evidence and alternative states</td>
+</tr>
+<tr class="odd">
+<td>A spatial contact is regulatory</td>
+<td>Resolution, mixed cells, assay meaning and perturbation</td>
+</tr>
+<tr class="even">
+<td>An AI model transfers to new animals</td>
+<td>Animal-separated evaluation and deployment relevance</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled" title="Advanced-method challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advanced-method challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Thousands of cells from three control and three treated animals give a tiny independent-cell p-value. What should be reviewed? The allocation unit, within-animal dependence, assay-specific model and sample-level evidence. More cells improve resolution without creating more independently treated animals.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Evaluate cell-type annotation, recovery, doublets, QC, spatial scale and biological replication. Method-specific pipelines and validations are needed before a real analysis. Advanced extensions in this course critique supplied designs and evidence; they do not claim to implement single-cell or spatial software workflows.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why is splitting cells from each animal across train and test unsafe for new-animal prediction?</li>
 <li>What can a spatial co-location establish?</li>
 <li>What evidence should support an AI-derived candidate?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4153,7 +4243,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The model can learn animal-specific patterns present in both sets.</li>
@@ -4163,6 +4253,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://hbctraining.github.io/Intro-to-scRNAseq/">Harvard introduction to single-cell RNA-seq</a> provides workflow teaching. Use its lessons alongside the animal-level replication critique in the advanced practical.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

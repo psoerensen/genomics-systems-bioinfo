@@ -4048,11 +4048,17 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#turn-a-production-problem-into-an-evidence-plan" id="toc-turn-a-production-problem-into-an-evidence-plan" class="nav-link" data-scroll-target="#turn-a-production-problem-into-an-evidence-plan">Turn a production problem into an evidence plan</a></li>
+  <li><a href="#compare-with-a-relevant-baseline" id="toc-compare-with-a-relevant-baseline" class="nav-link" data-scroll-target="#compare-with-a-relevant-baseline">Compare with a relevant baseline</a></li>
+  <li><a href="#predictive-value-and-practical-value-differ" id="toc-predictive-value-and-practical-value-differ" class="nav-link" data-scroll-target="#predictive-value-and-practical-value-differ">Predictive value and practical value differ</a></li>
+  <li><a href="#build-a-report-around-claims-and-limits" id="toc-build-a-report-around-claims-and-limits" class="nav-link" data-scroll-target="#build-a-report-around-claims-and-limits">Build a report around claims and limits</a></li>
+  <li><a href="#choose-the-next-experiment-deliberately" id="toc-choose-the-next-experiment-deliberately" class="nav-link" data-scroll-target="#choose-the-next-experiment-deliberately">Choose the next experiment deliberately</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4091,17 @@ window.Quarto = {
 <p>Translate a production question into design and analysis; evaluate usefulness at the intended decision time; communicate uncertainty, alternatives and follow-up.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Animal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.</p>
 <p>An integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>For a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are <span class="math inline">\(e_{i0}\)</span> and <span class="math inline">\(e_{i1}\)</span>, the paired improvement in squared error is <span class="math inline">\(d_i=e_{i0}^2-e_{i1}^2\)</span>. Its mean is positive when the augmented model has smaller mean squared error in that group.</p>
 <p>One evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4119,19 +4125,105 @@ window.Quarto = {
 </div>
 <p>The supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize.</p>
 </section>
+<section id="turn-a-production-problem-into-an-evidence-plan" class="level2">
+<h2 class="anchored" data-anchor-id="turn-a-production-problem-into-an-evidence-plan">Turn a production problem into an evidence plan</h2>
+<p>Start with a decision: selecting animals, changing a diet, detecting a health problem or understanding a mechanism. Define the target population, outcome, unit and timing. The same assay can be useful for one purpose and infeasible for another. Tissue collection burden, assay delay and cost affect whether a scientifically informative measurement is deployable.</p>
+<p>For each layer, identify the uncertainty it reduces. Genotype can describe inherited variation; RNA can describe a tissue response; proteins and metabolites can reflect downstream state; microbial assays can add community information. None automatically supplies the other layers’ evidence. A coherent study argument explains why the combination is needed.</p>
+</section>
+<section id="compare-with-a-relevant-baseline" class="level2">
+<h2 class="anchored" data-anchor-id="compare-with-a-relevant-baseline">Compare with a relevant baseline</h2>
+<p>A molecular model should be compared with ordinary information available at the same decision time. Previous performance, management, breed or age can provide a strong baseline. Compare models on the same held-out animals, and evaluate both aggregate error and relevant subgroups.</p>
+<p>A paired error comparison retains animal identity. Its uncertainty concerns the sampled evaluation units and the supplied trained models. Generalization to other farms or time periods requires broader evidence.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">11</span>,<span class="dv">13</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">11</span>,<span class="dv">6</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>augmented <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.5</span>,<span class="fl">11.7</span>,<span class="fl">9.5</span>,<span class="fl">13.4</span>,<span class="fl">11.2</span>,<span class="fl">12.7</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>paired <span class="ot">&lt;-</span> (observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span><span class="sc">-</span>(observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1802</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">500</span>,<span class="fu">mean</span>(<span class="fu">sample</span>(paired,<span class="at">replace=</span><span class="cn">TRUE</span>)))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">mean_improvement=</span><span class="fu">mean</span>(paired),<span class="fu">quantile</span>(boot,<span class="fu">c</span>(.<span class="dv">025</span>,.<span class="dv">975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean_improvement             2.5%            97.5% 
+       2.9866667        0.8943333        5.4066667 </code></pre>
+</div>
+</div>
+<p>This small bootstrap illustrates resampling evaluation animals, conditional on the supplied predictions. Six fictional animals do not provide robust population evidence. If evaluation units are clustered, resampling individual animals can be inappropriate. Retraining uncertainty is also absent from this calculation.</p>
+</section>
+<section id="predictive-value-and-practical-value-differ" class="level2">
+<h2 class="anchored" data-anchor-id="predictive-value-and-practical-value-differ">Predictive value and practical value differ</h2>
+<p>A lower RMSE does not alone establish a worthwhile decision. Consider calibration, action thresholds, assay cost and availability. Predicting an outcome after its collection time is a different task from predicting before a management choice. An assay that requires sacrificing an animal cannot be treated as a routine live-animal selection measurement.</p>
+<p>For breeding, phenotype prediction and breeding-value estimation are different targets. Environmental responses can improve prediction of observed performance without identifying transmissible genetic merit. Link the current question to the quantitative-genetics course rather than assuming an omics association is an additive genetic effect.</p>
+</section>
+<section id="build-a-report-around-claims-and-limits" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-report-around-claims-and-limits">Build a report around claims and limits</h2>
+<p>The report should move from question to design, measurements, processing, model, evaluation and biological interpretation. Include enough numerical evidence to distinguish direction, magnitude and uncertainty. Describe the tested universe, sample exclusions and unavailable layers. Use figures to answer a question rather than decorate the document.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Report claim</th>
+<th>Evidence to show</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A group differs</td>
+<td>Contrast, unit, adjustment, effect and uncertainty</td>
+</tr>
+<tr class="even">
+<td>A model predicts</td>
+<td>Eligible inputs, split, baseline, error and calibration</td>
+</tr>
+<tr class="odd">
+<td>A pathway is enriched</td>
+<td>Mapping, eligible background, overlap and multiplicity</td>
+</tr>
+<tr class="even">
+<td>A mechanism is proposed</td>
+<td>Ordering, alternative explanations and discriminating follow-up</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="choose-the-next-experiment-deliberately" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-next-experiment-deliberately">Choose the next experiment deliberately</h2>
+<p>Replication addresses robustness; a new farm addresses transport; a targeted assay can address identity; a perturbation can address mechanism. Specify the expected result under competing explanations. More layers are useful when they resolve an identified uncertainty, not simply because integration is available.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Synthesis challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Synthesis challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A protein panel improves prediction within one farm but fails on another. What should change next? Inspect sampling, management, assay batches and population differences; distinguish calibration failure from lost ranking. A new expensive panel is not the first explanation to assume.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Follow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why compare predictions on the same test animals?</li>
 <li>Does predictive improvement show that an assay measures a causal mediator?</li>
 <li>What belongs in a concise final report?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4140,7 +4232,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>It makes the comparison paired and avoids changing the population between models.</li>
@@ -4150,6 +4242,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>Read <a href="https://www.nature.com/articles/nrg.2018.4"><em>Integrative omics for health and disease</em></a> as a comparative application review. Translate its study arguments into animal-production units, decision times and follow-up experiments rather than transferring clinical conclusions directly.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

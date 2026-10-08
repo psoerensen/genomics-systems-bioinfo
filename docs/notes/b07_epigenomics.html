@@ -4048,11 +4048,15 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#match-the-assay-to-the-regulatory-question" id="toc-match-the-assay-to-the-regulatory-question" class="nav-link" data-scroll-target="#match-the-assay-to-the-regulatory-question">Match the assay to the regulatory question</a></li>
+  <li><a href="#read-depth-and-animal-variation-enter-at-different-levels" id="toc-read-depth-and-animal-variation-enter-at-different-levels" class="nav-link" data-scroll-target="#read-depth-and-animal-variation-enter-at-different-levels">Read depth and animal variation enter at different levels</a></li>
+  <li><a href="#design-a-regulatory-interpretation" id="toc-design-a-regulatory-interpretation" class="nav-link" data-scroll-target="#design-a-regulatory-interpretation">Design a regulatory interpretation</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4089,17 @@ window.Quarto = {
 <p>Distinguish methylation proportions, chromatin-accessibility measurements and expression; evaluate coverage, tissue composition and regulatory claims.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Epigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.</p>
 <p>Nutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>A simple methylation summary is <span class="math inline">\(\widehat{p}=m/(m+u)\)</span>, where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, <span class="math inline">\(\mathrm{Var}(\widehat p)=p(1-p)/n\)</span>. This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.</p>
 <p>A pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4124,19 +4128,113 @@ window.Quarto = {
 </div>
 <p>The pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication.</p>
 </section>
+<section id="match-the-assay-to-the-regulatory-question" class="level2">
+<h2 class="anchored" data-anchor-id="match-the-assay-to-the-regulatory-question">Match the assay to the regulatory question</h2>
+<p>DNA methylation, chromatin accessibility and protein occupancy describe different properties. A methylation assay estimates modification-related evidence at cytosines; ATAC-seq samples fragments associated with accessible chromatin; ChIP-seq enriches material associated with a targeted protein or modification. An apparent peak is therefore specific to an assay and its processing. Accessible chromatin can permit regulation without identifying the regulator or demonstrating that transcription increased.</p>
+<p>Regulatory annotations depend on tissue and state. A promoter annotation supplies a positional context; an enhancer–gene link is an additional hypothesis. Assigning every peak to its nearest gene is a reproducible rule, but distance alone does not establish which gene responds. Regions can act across distances and their activity can differ between cell types.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Measurement to consider</th>
+<th>Evidence still needed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Did a cytosine-related signal change?</td>
+<td>Methylated/unmethylated evidence and depth</td>
+<td>Conversion, mapping and biological replication</td>
+</tr>
+<tr class="even">
+<td>Is a region accessible?</td>
+<td>Accessibility fragments</td>
+<td>QC, cell composition and assay context</td>
+</tr>
+<tr class="odd">
+<td>Is a regulator associated with a region?</td>
+<td>Target-specific enrichment</td>
+<td>Specificity, controls and reproducibility</td>
+</tr>
+<tr class="even">
+<td>Does the region affect a gene?</td>
+<td>Perturbation or complementary regulatory evidence</td>
+<td>Direction and context of the response</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="read-depth-and-animal-variation-enter-at-different-levels" class="level2">
+<h2 class="anchored" data-anchor-id="read-depth-and-animal-variation-enter-at-different-levels">Read depth and animal variation enter at different levels</h2>
+<p>A binomial model conditions on an animal’s underlying proportion. Animals can have different proportions even in the same group. Combining read counts into one group total weights deeply sequenced animals more strongly and can hide the biological variation needed for an animal-level comparison.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>proportion <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">2</span>,.<span class="dv">8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">equal_animal_mean=</span><span class="fu">mean</span>(proportion),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="at">read_weighted_mean=</span><span class="fu">weighted.mean</span>(proportion,depth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> equal_animal_mean read_weighted_mean 
+         0.5000000          0.7454545 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A beta-binomial-style variance illustration with intraread correlation.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> .<span class="dv">5</span>;rho <span class="ot">&lt;-</span> .<span class="dv">05</span>;n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">depth=</span>n,<span class="at">binomial_variance=</span>p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">/</span>n,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="at">overdispersed_variance=</span>p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span>(n<span class="dv">-1</span>)<span class="sc">*</span>rho)<span class="sc">/</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  depth binomial_variance overdispersed_variance
+1    10           0.02500              0.0362500
+2   100           0.00250              0.0148750
+3  1000           0.00025              0.0127375</code></pre>
+</div>
+</div>
+<p>The second calculation is a stylized correlated-read model. Its variance does not decline as quickly as an independent binomial variance. It illustrates the consequence of dependence, not a complete methylation-analysis method or a fitted animal variance.</p>
+</section>
+<section id="design-a-regulatory-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="design-a-regulatory-interpretation">Design a regulatory interpretation</h2>
+<p>Place the assay time before or after the outcome deliberately. An exposure-associated profile measured after a production change can reflect an adaptation or consequence. Genotype, cell composition and handling may affect both the profile and the phenotype. Adjustment variables should follow the target question; adjusting for a downstream change can alter the effect being estimated.</p>
+<p>Inspect coverage across animals, genomic regions and groups. A region retained only because it has coverage in one group changes the eligible universe. For enrichment, use regions or genes that could have been assessed under the selection rule and document the region-to-gene mapping.</p>
+<p>A convincing follow-up should distinguish competing explanations. Cell-type measurements can address mixture changes; a time series can clarify ordering; a targeted perturbation can test a proposed regulatory role. None automatically solves every source of confounding, but each contributes a specific kind of evidence.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Regulatory challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Regulatory challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A diet-associated accessible region is near a differentially expressed gene. Does this prove enhancer mediation? No. The two observations can share a driver, and the region–gene link is uncertain. Ask for mapping context, matched samples, timing and a perturbation that tests the proposed relationship.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Conversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Did either cell type change methylation in the example?</li>
 <li>Does sequencing one animal 100 times create 100 treatment replicates?</li>
 <li>How could sampling time affect a regulatory interpretation?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4145,7 +4243,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>No; the mixture changed.</li>
@@ -4155,6 +4253,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://hbctraining.github.io/Investigating-chromatin-biology-ChIPseq/">Harvard chromatin-biology teaching</a> supplies an assay-workflow perspective. Compare the measurement targeted by each assay with the regulatory claim in a paper.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
