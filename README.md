@@ -12,6 +12,7 @@ Teaching-materials hub: <https://psoerensen.github.io/gteach/>
 genomics-systems-bioinfo/
   _quarto.yml
   index.qmd
+  course_map.qmd
   slides/
   notes/
   tutorials/
@@ -28,11 +29,11 @@ genomics-systems-bioinfo/
 
 The course overview is migrated from gteach. The other teaching folders are ready for development; no slides or executable practicals are included yet.
 
-## Planned teaching sequence
+## Unified curriculum map
 
-The original course outline proposes sequencing technologies, genome variation, GWAS principles, fine-mapping, multi-omics integration, network models and machine learning in genomics. Planned practicals cover RNA-seq, GWAS, network analysis and regularized regression. Planned notes cover high-dimensional regression, population-structure correction, multiple testing and reproducible workflows.
+[The course map](course_map.qmd) aligns all 10 Genomics, Systems Biology and Bioinformatics modules and all 12 Multi-Omics modules with 18 reusable blocks. It also maps both practical lists, preserves the original assessment weights and proposes pathway-specific extensions.
 
-These are planned topics, rather than links to materials that already exist. Add sources to the Quarto render list and navigation as each is developed.
+The repository is the unified home for both outlines. The map describes planned teaching material; it does not imply that the practicals have been implemented. Maintain shared resources once in the existing folders, label them by block identifier and link them into each pathway.
 
 ## Requirements and rendering
 
@@ -42,6 +43,7 @@ Open the RStudio project and render the overview:
 
 ```bash
 quarto render index.qmd
+quarto render course_map.qmd
 ```
 
 Generated website files are tracked in `docs/`. GitHub Pages publishes from the `main` branch's `/docs` folder, matching the other course repositories. Avoid committing local caches, downloaded private data or credentials.

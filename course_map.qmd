@@ -1,0 +1,200 @@
+---
+title: "Unified course map"
+subtitle: "Reusable building blocks for genomics, systems biology, bioinformatics and multi-omics"
+toc: true
+---
+
+## One framework, reusable teaching blocks
+
+Genomics, Systems Biology and Bioinformatics is the unified teaching framework spanning both harmonized MSc outlines: **Genomics, Systems Biology and Bioinformatics** and **Multi-Omics Technology in Animal Production**. The two outlines define different pathways through the same library of material. The unified course can also select its own sequence from that library.
+
+Each block has one maintained explanation and worked example. A pathway chooses its depth, exercises and assessment. Shared content is revisited through a new question or a more demanding analysis when students take both courses.
+
+This map is a curriculum design. Only the overview and this map are currently implemented; the lessons, practicals and assessments below are proposed. Original module numbering is retained in the crosswalks. Partner assignments, credit hours and assessment weights remain as specified in the supplied outlines; this map does not revise them or allocate teaching hours.
+
+## Building blocks
+
+The block numbers are stable identifiers, rather than a compulsory teaching order. Technologies can be introduced alongside the data and design decisions that make their measurements interpretable.
+
+| Block | Scope | Students should be able to | Proposed worked example or practical |
+| --- | --- | --- | --- |
+| B01 Foundations and biological questions | Genomics, systems biology, bioinformatics; omics layers; genotype–phenotype relationships | Define a biological question and identify the measurements needed to address it | Map a feed-efficiency question to genomic, expression, microbial and phenotype measurements |
+| B02 Experimental design and sampling | Experimental units, biological replication, tissue and time, matched samples, collection and preservation, batch allocation | Specify a sampling design and distinguish biological effects from confounding | Compare matched and unmatched multi-omics designs; diagnose a treatment–batch confounding problem |
+| B03 Databases and biological identifiers | Sequence, protein, structure, genome, comparative, annotation and pathway resources; identifier mapping | Retrieve and document records while preserving identifier meaning and annotation provenance | Trace a variant to a gene, transcript, protein and pathway using a small documented example |
+| B04 Programming and reproducible data handling | R; optional command-line/Python extensions; file formats, joins, sequence manipulation and workflow organisation | Import data, verify sample identity and produce a reproducible analysis | Join phenotype and assay tables; detect swapped samples, missing identifiers and duplicate records |
+| B05 Genomics and sequence analysis | Genome organisation, sequencing, genotyping, variation, assembly and annotation concepts; sequence similarity, alignment and phylogeny | Explain genomic measurements and evaluate basic sequence/genotype quality | Inspect sequence and genotype data; compare homologous sequences with explicit assumptions |
+| B06 Transcriptomics | RNA-seq technologies, expression quantification, quality control, normalization, differential expression and functional interpretation | Explain an expression analysis and its design, contrasts and uncertainty | Analyse a small count dataset with biological replicates and a stated experimental contrast |
+| B07 Epigenomics | DNA methylation, chromatin measurements, nutritional/environmental influences and regulatory interpretation | Interpret epigenomic measurements without equating association with causation | Compare regulatory measurements across tissues or conditions and identify alternative explanations |
+| B08 Proteomics and structural information | Platforms, identification, quantification, protein structures and functional interpretation | Explain protein measurements and assess identification and quantification limitations | Explore a protein-abundance table with missing values and batch information |
+| B09 Metabolomics | Analytical platforms, identification confidence, quantification, preprocessing and biochemical interpretation | Evaluate metabolite measurements and distinguish identified compounds from unresolved features | Examine a small metabolite panel, measurement scales and feature-identification uncertainty |
+| B10 Microbiomics and host–microbiome relationships | Community profiling, host effects, co-metabolism, compositionality and production applications | Interpret community differences while accounting for sampling and measurement constraints | Compare rumen-community profiles with diet and host metadata; discuss relative versus absolute abundance |
+| B11 Phenomics and precision production | Sensors, repeated measurements, high-throughput phenotyping and links to omics | Define meaningful phenotypes and account for measurement timing and repeated records | Align animal-level sensor summaries with biological sampling dates |
+| B12 Statistical analysis and validation | Regression, multivariate analysis, multiple testing, clustering, dimension reduction, regularization and machine learning | Select an analysis and evaluate uncertainty, overfitting, confounding and leakage | Fit and compare predictive models with animal-level train/test separation and preprocessing fitted on training data |
+| B13 Association, prediction and regulatory variation | GWAS, relatedness, population structure, fine-mapping, functional annotation, genomic prediction, eQTL and TWAS | Distinguish association, prediction and causal claims and explain their assumptions | Interpret an association region and expression evidence; assess prediction on an appropriate held-out group |
+| B14 Pathways, networks and systems inference | Enrichment, gene regulation, protein interactions, metabolic/signalling networks and causal-model concepts | Evaluate pathway/network evidence, background sets, uncertainty and limits of inference | Compare enrichment backgrounds and assess whether a network supports a biological hypothesis |
+| B15 Multi-omics integration | Integration strategies, sample matching, scaling, missing layers, cross-layer association and genotype-to-phenotype integration | Justify an integration strategy and interpret agreement and disagreement between layers | Integrate matched expression, protein and phenotype summaries with a documented design and validation plan |
+| B16 Advanced and emerging methods | Single-cell, spatial omics, advanced epigenomics, 3D genome organisation and emerging AI methods | Evaluate what a new technology measures and whether it answers the study question | Critique an advanced-omics paper, separating measurement, association and mechanistic evidence |
+| B17 Ethics, governance and research integrity | Privacy/security, sharing, open science, provenance, reproducibility and responsible AI | Specify responsible data handling and communicate analysis provenance and limitations | Write a data-management and reproducibility plan, including justified AI use |
+| B18 Animal-production synthesis and reporting | Growth, feed efficiency, meat/milk quality, reproduction, health, adaptation, methane and sustainability | Connect a justified study design and analysis to an animal-production question | Develop an integrated case study, computational report or research proposal |
+
+B02, B04 and B17 recur throughout the course. B12 supports analyses across technologies. B18 provides applications throughout the teaching sequence, as well as a final synthesis.
+
+## How the blocks connect
+
+```{mermaid}
+flowchart TD
+  A[Biological question B01] --> B[Design and sampling B02]
+  B --> C[Measurements B05–B11]
+  C --> D[Data resources and handling B03–B04]
+  D --> E[Statistics and validation B12]
+  E --> F[Association and regulation B13]
+  E --> G[Pathways and networks B14]
+  F --> H[Integration B15]
+  G --> H
+  H --> I[Animal-production synthesis B18]
+  J[Ethics and reproducibility B17] -.-> B
+  J -.-> D
+  J -.-> I
+  H --> K[Advanced extensions B16]
+```
+
+This diagram shows the main dependencies, not a rule that all analyses require every block. A transcriptomics practical, for example, can use B02, B04, B06 and B12 before introducing pathways or integration.
+
+## Crosswalk from the Genomics, Systems Biology and Bioinformatics outline
+
+**GSB** below identifies modules from this harmonized outline. A block may contribute selected lessons to several modules; it is not taught in full each time.
+
+| Original module | Reusable blocks | Pathway emphasis |
+| --- | --- | --- |
+| GSB1 Introduction to Genomics, Systems Biology and Bioinformatics | B01, introductions to B05–B11 | Biological data types, interdisciplinary concepts and animal-science questions |
+| GSB2 Biological Databases and Data Resources | B03; B04 for retrieval | Sequence, protein, genome, comparative, structure and pathway resources |
+| GSB3 Molecular Technologies | B05–B07; survey of B08–B11; B04 for formats | Sequencing, genotyping, RNA-seq and epigenomic/multi-omics measurements |
+| GSB4 Genomic Association and Mapping | B13, supported by B12 and B03 | GWAS, confounding, genomic prediction, fine-mapping and annotation |
+| GSB5 Multi-Omics Integration | B15; regulatory lessons from B13 | eQTL, TWAS, genotype–expression relationships and cross-layer modelling |
+| GSB6 Systems-Level Modeling | B14, connected to B15 | Gene regulation, pathways, protein interactions, networks and causal-model concepts |
+| GSB7 Programming and Scripting for Bioinformatics | B04, applied to B03 and B05 | Programming, file handling and sequence manipulation; introduce these skills early |
+| GSB8 Computational and Statistical Methods | B12, supported by B04 and B17 | Regression, multivariate analysis, shrinkage, machine learning, clustering and reproducible workflows |
+| GSB9 Advanced Genomics, Systems Biology, Ethics, and Future Directions | B16; AI lessons from B12 and B17 | Single-cell, epigenomics, 3D genomes, spatial omics and emerging methods |
+| GSB10 Ethical, Data and Research Considerations | B17 | Privacy, sharing, integrity, reproducibility and responsible AI |
+
+B02, B10, B11 and B18 expand the unified framework beyond the explicit module structure of this outline. Their inclusion as full modules in this pathway is a curriculum choice, rather than a claim that the original outline already specifies them at that depth. Protein/metabolite/microbiome examples are mentioned in its description, but dedicated technology modules occur in the Multi-Omics outline.
+
+## Crosswalk from the Multi-Omics Technology in Animal Production outline
+
+**MO** below identifies modules from this harmonized outline.
+
+| Original module | Reusable blocks | Pathway emphasis |
+| --- | --- | --- |
+| MO1 Introduction to Multi-Omics Technology | B01; survey of B05–B11 and B15 | Omics layers, integration concepts and animal-production questions |
+| MO2 Genomics in Animal Production | B05; prediction lessons from B13 | Genome organisation, variation, sequencing, genomic selection and applications |
+| MO3 Transcriptomics | B06, supported by B02 and B12 | Profiling, RNA-seq processing, differential expression and interpretation |
+| MO4 Epigenomics | B07 | Technologies, regulation and nutritional/environmental applications |
+| MO5 Proteomics | B08 | Platforms, protein identification/quantification and functional/structural interpretation |
+| MO6 Metabolomics | B09, supported by B12 | Platforms, identification, quantification and analysis |
+| MO7 Microbiomics and Host–Microbiome Interactions | B10, connected to B14 and B15 | Communities, host effects, co-metabolism and livestock applications |
+| MO8 Phenomics and Precision Animal Production | B11, connected to B15 | Sensors, high-throughput phenotypes and links to omics |
+| MO9 Multi-Omics Experimental Design | B02; technology-specific sampling from B05–B11 | Animal/sample selection, collection, processing, quality control and experimental challenges |
+| MO10 Bioinformatics for Multi-Omics | B03, B04 and B12; enrichment lessons from B14 | Resources, processing, quality control, statistics and visualization |
+| MO11 Integration of Multi-Omics Data | B15; selected B13 and B14 lessons | Integration strategies, association, networks and genotype-to-phenotype interpretation |
+| MO12 Applications of Multi-Omics in Animal Production | B18, using B02 and B05–B15 as needed | Production, nutrition, reproduction, health, adaptation and environmental sustainability |
+
+B16 and the full B17 treatment are extensions to this outline. Responsible data handling and reproducibility should still be embedded in its practicals, with the depth chosen explicitly.
+
+## Shared lessons and different extensions
+
+Each shared lesson should have a clear entry requirement, a core explanation, a worked example, exercises with solutions and optional extensions. Reuse the same lesson when its learning objective is the same. Assign a different exercise when the objective or depth differs.
+
+| Example | Shared core | GSB pathway extension | Multi-Omics pathway extension |
+| --- | --- | --- | --- |
+| RNA-seq | Experimental units, count data, quality control, normalization and contrasts | Model design, uncertainty and statistical interpretation | Tissue/time selection, complementary assays and integration with protein measurements |
+| Genomic prediction | Genotypes, phenotypes, relatedness and appropriate validation | Model comparison, population structure and limits of transfer | Assess whether extra omics measurements add useful information at the intended decision time |
+| Pathway enrichment | Gene identifiers, eligible background, multiple testing and interpretation | Sensitivity to background choice and analysis assumptions | Compare pathway evidence across layers without treating agreement as independent replication |
+| Networks | Nodes, edges, construction assumptions and uncertainty | Compare network methods and distinguish association from causal evidence | Interpret host–microbiome or molecular relationships in a production-trait study |
+| Integration | Matched samples, compatible identifiers/scales, missing layers and validation | Compare statistical integration strategies under stated assumptions | Justify technology and sampling choices and interpret the integrated biological evidence |
+
+An advanced extension should not quietly become a prerequisite for an introductory lesson. Students taking both pathways can reuse the core lesson and demonstrate a new competence in the extension.
+
+## Practical-session coverage
+
+These are mappings of the practical lists supplied in the outlines, not a claim that executable practicals already exist.
+
+### Genomics, Systems Biology and Bioinformatics practicals
+
+| Original practical | Blocks |
+| --- | --- |
+| Biological Databases and Sequence Retrieval | B03, B04 |
+| Basic Sequence Analysis and Manipulation | B04, B05 |
+| Command-Line Bioinformatics | B04 |
+| Sequence Similarity and Homology Analysis | B05 |
+| Multiple Sequence Alignment and Conserved-Region Analysis | B05 |
+| Phylogenetic Analysis | B05 |
+| Protein Structure and Structural Bioinformatics | B03, B08 |
+| Sequencing Data Quality Assessment | B05, B06 |
+| RNA-Seq Data Analysis | B02, B06, B12 |
+| Functional Annotation and Pathway Analysis | B03, B14 |
+| Biological Network Analysis | B14 |
+| Biological Data Visualization | B04, B12 |
+| Integrated Bioinformatics Data Analysis | B12, B15 |
+| Scientific Reporting and Presentation | B17, B18 |
+
+A proposed addition is a focused association/regulatory-variation practical using B13. This would make the practical coverage of GSB4–5 more explicit without duplicating the introductory sequence-analysis exercises.
+
+### Multi-Omics practicals
+
+| Original practical | Blocks |
+| --- | --- |
+| Multi-Omics Experimental Design in Animal Production | B01, B02, B18 |
+| Quality Assessment and Preprocessing of Multi-Omics Data | B04, B05–B11 as relevant |
+| Transcriptome Data Analysis | B06, B12 |
+| Metabolomics Data Processing and Analysis | B09, B12 |
+| Proteomics Data Analysis | B08, B12 |
+| Exploratory Analysis of Multi-Omics Data | B12, B15 |
+| Functional Enrichment and Pathway Analysis | B03, B14 |
+| Multi-Omics Data Integration | B15 |
+| Multi-Omics Association with Animal Production Traits | B12, B13, B15, B18 |
+| Multi-Omics Network and Biomarker Analysis | B12, B14, B15 |
+| Integrated Multi-Omics Interpretation | B15, B18 |
+| Multi-Omics Research Proposal and Scientific Reporting | B02, B17, B18 |
+
+## Learning outcomes and assessment
+
+The GSB outline emphasises applying computational methods, explaining association and networks, integrating data, and evaluating quality and biological significance. B03–B06 and B12–B15 provide the main analytical spine; B17–B18 support evaluation and reporting.
+
+The Multi-Omics outline explicitly assesses distinguishing technologies, explaining collection/preservation, interpreting genomic/transcriptomic data and evaluating animal-production applications. B01–B02, B05–B11 and B18 directly support those stated outcomes. Its content also includes substantial integration and analysis in MO10–11; proposed additional outcomes would ask students to **design a multi-omics study**, **evaluate data quality and confounding**, and **justify and interpret an integration strategy**. These additions should be agreed before being presented as formal course requirements.
+
+The original assessment weights are preserved:
+
+| Assessment component | GSB outline | Multi-Omics outline |
+| --- | --- | --- |
+| Quizzes and continuous assessment | 10% | — |
+| Practical assignments | 20% | 30% |
+| Journal review/presentation | 10% | 20% |
+| Mid-term examination | 15% | 25% |
+| Computational research project | 15% | — |
+| Research proposal/project | — | 25% |
+| Final examination | 30% | — |
+| **Total** | **100%** | **100%** |
+
+Shared practicals can use a common core rubric: correct sample/variable definitions, justified methods, reproducibility and interpretation. Pathway extensions assess additional competencies. A GSB computational report can emphasise method evaluation; a Multi-Omics proposal can emphasise sampling, technology choice and integration design. Neither project form replaces the original assessment scheme without agreement.
+
+## Suggested pathways through the framework
+
+These are teaching sequences, not allocations of credit hours. Each course can select a subset appropriate to its available time.
+
+**Unified course:** introduce B01, B02, B04 and B17; survey B05–B11 alongside B03; build the analytical foundation in B12; develop B13, B14 and B15; finish with B18 and selected B16 extensions. Animal-production examples recur throughout.
+
+**GSB pathway:** B01 → B03/B04 → selected B05–B07 → B12 → B13 → B14/B15 → selected B16 → synthesis and reporting. Introduce design and reproducibility as needed throughout, and use B08–B11 where they support the selected questions.
+
+**Multi-Omics pathway:** B01/B02 → B05–B11 → B03/B04/B12 → B14/B15 → B18. Revisit study design before integration and use selected B13 lessons for prediction and genotype-to-phenotype relationships.
+
+R is the primary environment for shared computational examples, consistent with the existing teaching sites. Command-line and Python exercises can be optional extensions where the original bioinformatics pathway calls for them. Software choices and dataset size should be specified when each practical is developed.
+
+## Development and reuse
+
+Keep this repository as the shared home. Use existing `slides/`, `notes/`, `tutorials/`, `exercises/`, `data/`, `images/`, `R/` and `scripts/` folders, with each resource labelled by its block identifier and linked from this map as it becomes available. Avoid copying the same explanation into separate course versions. Both pathways can link to one resource and assign different extensions.
+
+Develop one complete example first: **B02/B04/B06, a small RNA-seq study with sample metadata, quality checks and a biological contrast**. Follow it with B12/B14 interpretation and then a B15 integration example. This connects design, computation and biological interpretation without requiring all eighteen blocks to be written first.
+
+Existing Population Genetics, Quantitative Genetics and Bayesian Linear Regression lessons can supply prerequisites or optional background. Link to suitable lessons after checking their assumptions and level. Package integrations should use current public interfaces and should not be prerequisites until an example has been implemented and verified.
+
+Return to the [course overview](index.qmd) or the [gteach hub](https://psoerensen.github.io/gteach/).

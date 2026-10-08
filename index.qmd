@@ -9,7 +9,9 @@ This course provides a conceptual and computational framework for analyzing mole
 
 The focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.
 
-The course integrates biological interpretation, statistical methodology, and practical implementation in R.
+The course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.
+
+Use the [unified course map](course_map.qmd) to explore the reusable teaching blocks and the two pathways through them.
 
 ---
 
@@ -73,7 +75,7 @@ As the course is developed, chapters and practicals will include:
 - Executable R code
 - Visualizations and case studies
 
-The overview is currently available. Slides, notes and practicals will be added in the folders described in the repository README. Students will be encouraged to reproduce worked examples and explore parameter choices as those materials become available.
+The overview and curriculum map are currently available. Slides, notes and practicals will be added in the folders described in the repository README. Students will be encouraged to reproduce worked examples and explore parameter choices as those materials become available.
 
 ---
 
