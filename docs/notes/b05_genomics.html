@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4005,7 +4005,7 @@ window.Quarto = {
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#follow-the-evidence-from-reads-to-variants" id="toc-follow-the-evidence-from-reads-to-variants" class="nav-link" data-scroll-target="#follow-the-evidence-from-reads-to-variants">Follow the evidence from reads to variants</a></li>
+  <li><a href="#alignment-is-an-optimization-under-a-scoring-rule" id="toc-alignment-is-an-optimization-under-a-scoring-rule" class="nav-link" data-scroll-target="#alignment-is-an-optimization-under-a-scoring-rule">Alignment is an optimization under a scoring rule</a></li>
+  <li><a href="#distances-saturation-and-phylogenies" id="toc-distances-saturation-and-phylogenies" class="nav-link" data-scroll-target="#distances-saturation-and-phylogenies">Distances, saturation and phylogenies</a></li>
+  <li><a href="#quality-decisions-need-denominators" id="toc-quality-decisions-need-denominators" class="nav-link" data-scroll-target="#quality-decisions-need-denominators">Quality decisions need denominators</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,18 +4090,18 @@ window.Quarto = {
 <p>Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>Sequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.</p>
 <p>A FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.</p>
 <p>Identity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>For an aligned comparison with n comparable sites and k differences, <span class="math inline">\(p=k/n\)</span> is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, <span class="math inline">\(d=-3/4\log(1-4p/3)\)</span> estimates substitutions per site for <span class="math inline">\(p&lt;3/4\)</span>. Alignment uncertainty and saturation limit this model.</p>
 <p>For a Phred quality Q, the encoded error probability is <span class="math inline">\(10^{-Q/10}\)</span>. Summing these probabilities gives an expected number of errors, without assuming the errors are independent.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4130,19 +4135,128 @@ window.Quarto = {
 </div>
 <p>The correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate.</p>
 </section>
+<section id="follow-the-evidence-from-reads-to-variants" class="level2">
+<h2 class="anchored" data-anchor-id="follow-the-evidence-from-reads-to-variants">Follow the evidence from reads to variants</h2>
+<p>A read is a sampled sequence observation with errors and biases. A reference alignment proposes where it originated; a genotype call combines evidence at a site under a model. These are successive inferences. A base with high reported quality can still map ambiguously, and a confidently mapped read can contain uncertain bases. Distinguish base quality from mapping quality.</p>
+<p>Coverage is the number of relevant observations at a position under a counting convention. Mean depth can hide regions with little coverage. PCR duplicates and overlapping mates can affect the amount of independent molecular evidence. Reference divergence and missing sequence can also affect alignment differently across animals.</p>
+<p>Genotype dosage counts a specified allele; changing the counted allele from A to B changes dosage from <span class="math inline">\(g\)</span> to <span class="math inline">\(2-g\)</span> at a diploid biallelic site. This reverses a regression coefficient’s sign without reversing the underlying biological comparison.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gA <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>gA)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gB <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">-</span>gA;b <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>gB)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">A_effect=</span><span class="fu">coef</span>(a)[<span class="dv">2</span>],<span class="at">B_effect=</span><span class="fu">coef</span>(b)[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A_effect.gA B_effect.gB 
+          2          -2 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">fitted</span>(a)<span class="sc">-</span><span class="fu">fitted</span>(b)))<span class="sc">&lt;</span><span class="fl">1e-12</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">abs</span>(<span class="fu">coef</span>(a)[<span class="dv">2</span>]<span class="sc">+</span><span class="fu">coef</span>(b)[<span class="dv">2</span>])<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Record reference and alternate alleles, strand and assembly when joining results. Palindromic allele pairs can be particularly ambiguous without additional frequency and reference information.</p>
+</section>
+<section id="alignment-is-an-optimization-under-a-scoring-rule" class="level2">
+<h2 class="anchored" data-anchor-id="alignment-is-an-optimization-under-a-scoring-rule">Alignment is an optimization under a scoring rule</h2>
+<p>Global alignment compares whole supplied sequences; local alignment searches for a high-scoring region. Match rewards, mismatch costs and gap costs encode assumptions about what constitutes a useful comparison. Changing them can change the alignment and the reported identity denominator.</p>
+<p>A short conserved domain can give high local identity while covering little of the protein. Conversely, global alignment of distant or rearranged sequences may be misleading. Always report alignment coverage and context alongside identity. Low-complexity sequence can match often without supplying strong functional evidence.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Observation</th>
+<th>What it supports directly</th>
+<th>What remains to investigate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Matching aligned bases</td>
+<td>Identity under this alignment</td>
+<td>Significance and evolutionary relationship</td>
+</tr>
+<tr class="even">
+<td>Similar domain sequence</td>
+<td>A candidate domain relationship</td>
+<td>Full architecture and functional evidence</td>
+</tr>
+<tr class="odd">
+<td>Shared variant association</td>
+<td>A statistical signal</td>
+<td>LD, confounding and causal allele</td>
+</tr>
+<tr class="even">
+<td>Supported tree branch</td>
+<td>A relationship under the tree model</td>
+<td>Alignment/model sensitivity and gene/species histories</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="distances-saturation-and-phylogenies" class="level2">
+<h2 class="anchored" data-anchor-id="distances-saturation-and-phylogenies">Distances, saturation and phylogenies</h2>
+<p>Observed mismatches undercount substitutions when a site changes more than once. The Jukes–Cantor correction makes a restrictive equal-rate assumption; its corrected distance rises rapidly near the model boundary. That behavior is a warning about limited information, not evidence of precise very deep divergence.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,.<span class="dv">7</span>,<span class="at">length.out=</span><span class="dv">80</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p,<span class="sc">-</span>.<span class="dv">75</span><span class="sc">*</span><span class="fu">log</span>(<span class="dv">1-4</span><span class="sc">*</span>p<span class="sc">/</span><span class="dv">3</span>),<span class="at">type=</span><span class="st">&#39;l&#39;</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> <span class="at">xlab=</span><span class="st">&#39;Observed mismatch fraction&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;JC substitutions per site&#39;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">lty=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">&#39;grey50&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A distance tree summarizes a supplied dissimilarity matrix under an algorithm. UPGMA assumes an ultrametric structure for its evolutionary interpretation, while other methods have different models. Branch support depends on what is resampled and does not establish that an incorrect model becomes correct. Gene histories can differ from species histories through duplication, recombination and other processes.</p>
+</section>
+<section id="quality-decisions-need-denominators" class="level2">
+<h2 class="anchored" data-anchor-id="quality-decisions-need-denominators">Quality decisions need denominators</h2>
+<p>For an assay summary, record the number of positions or samples assessed. A genotype call rate is the fraction called among eligible observations; a high call rate does not certify correct calls. Filtering can remove poor measurements but can also change the set of variants or animals represented.</p>
+<p>Before linking a sequence result to biology, inspect reference coverage, sample quality and annotation. Confirm whether the inference concerns the observed region, the full gene or an organism relationship. A pipeline ending with a neat table still requires those distinctions.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Interpretation challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interpretation challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two proteins share 95% identity over 20 residues but each has 500 residues. Is their overall function established? No. Assess alignment coverage, domain architecture, complexity and biological evidence; a short region supplies a limited claim.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Whole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review <a href="https://www.ncbi.nlm.nih.gov/books/NBK62051/">NCBI’s BLAST glossary</a> for the distinction between identity and homology.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why is the denominator comparable sites rather than all supplied characters?</li>
 <li>Why can a dosage of 2 not be interpreted before specifying the counted allele?</li>
 <li>Can a high-identity short alignment establish function?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4151,7 +4265,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Gaps and unknown bases do not supply called nucleotide comparisons.</li>
@@ -4161,6 +4275,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>Use the <a href="https://www.ncbi.nlm.nih.gov/books/NBK62051/">NCBI BLAST glossary</a> for terminology and <a href="https://datacarpentry.github.io/genomics-workshop/">Data Carpentry Genomics</a> for a complete sequencing-workflow teaching context. The calculations here are original restricted demonstrations.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

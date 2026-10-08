@@ -17,7 +17,7 @@ execute:
 
 Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.
 
@@ -25,13 +25,13 @@ Genomics records sequence variation, transcriptomics records RNA abundance, prot
 
 Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 Let $Y_i(1)$ and $Y_i(0)$ denote the performance that animal i would show under two diets. The average intervention effect is $E[Y(1)-Y(0)]$. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation $\mathrm{cor}(X,Y)$ generally cannot.
 
 For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -45,11 +45,53 @@ plan
 
 The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.
 
-## 4. Interpretation and scope
+## Define what an omics layer contributes
+
+An omics layer is a measurement system with a biological target and an observation process. Genomic dosage describes inherited alleles at measured sites. RNA, proteins and metabolites reflect tissue, time and physiological state. A microbial profile concerns organisms and their genetic potential or activity; a phenotype describes the animal or production system. These layers overlap in biological meaning but have different errors and units.
+
+Consider a proposed chain from genotype to RNA to protein to a production phenotype. Each arrow asks a distinct question. Does a variant alter a transcript in this tissue? Does that transcript change a protein under these conditions? Does the protein affect the phenotype, or merely accompany it? Feedback can run in the other direction: disease or diet can change molecular profiles. A cross-sectional chain of correlations does not establish that ordered process.
+
+| Purpose | Target | Useful evidence | Main danger |
+|---|---|---|---|
+| Description | What differs between sampled groups? | Defined samples and measurement scale | Treating a selected sample as the whole population |
+| Association | Which measurements vary together? | Replication and adjustment with a rationale | Shared causes or reverse direction |
+| Prediction | What will happen for new animals? | Information available at decision time and independent evaluation | Leakage or a changed deployment population |
+| Intervention | What would change under an action? | Allocation or justified causal assumptions | Confounding and an ill-defined action |
+| Mechanism | Through what process does change occur? | Temporal and perturbation evidence | Treating a correlated molecular feature as a mediator |
+
+## Measurement error and biological signal
+
+A useful introductory decomposition is $X=S+E$, with biological signal $S$ and measurement error $E$. If the terms are independent, observed variance is the sum of their variances. More variability in a feature need not mean more biological information. A noisy assay can appear striking in an unscaled plot and still be an unreliable predictor.
+
+In a hypothetical classical-error example, adding independent noise to a predictor attenuates its expected simple regression slope. This statement requires the independent-error model; systematic batch error can have a different effect.
+
+```{r}
+set.seed(101)
+signal <- rnorm(2000)
+response <- 2*signal+rnorm(2000)
+noisy <- signal+rnorm(2000,sd=2)
+c(clean_slope=coef(lm(response~signal))[2],
+ noisy_slope=coef(lm(response~noisy))[2],
+ expected_noisy_slope=2/(1+4))
+```
+
+The observed noisy slope need not equal the expectation exactly. Recovering the biological slope requires information about measurement reliability and a suitable model; simply increasing the number of noisy columns is not a correction.
+
+## Build a study argument
+
+Begin with a target population and a decision: predicting later growth in a specified breed is different from explaining a diet response in a sampled group. State the outcome and its units, the allocation unit, measurement times and what contrast will be reported. For each assay, write the extra question it answers. If two layers provide the same information for the current decision, their acquisition cost and failure rate still matter.
+
+Check feasibility before collecting data. A day-14 blood assay may be practical for monitoring but unavailable for a day-1 management decision. A liver measurement may address mechanism while being unsuitable for routine selection. Separate scientific usefulness from deployment usefulness.
+
+::: {.callout-note collapse="true" title="Discussion: choose the evidence"}
+A protein predicts methane output, and the protein is associated with diet. What experiment would test whether changing the protein changes methane? A perturbation directed at the proposed mechanism, with appropriate controls and outcomes, addresses a different question from another observational association study. Changing diet alone may alter many pathways, so it need not isolate that protein's role.
+:::
+
+## Interpretation and scope
 
 An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.
 
-## 5. Exercises
+## Exercises
 
 1. Define one diet-effect question and one prediction question.
 2. Which measurements would be available before a breeding decision?
@@ -60,6 +102,10 @@ An integrated explanation remains a hypothesis unless the design and analysis su
 2. Only information observed at the stated decision time is eligible.
 3. Both can respond to an unmeasured common cause or changes in cell composition.
 :::
+
+## Further reading
+
+[EMBL-EBI introductory bioinformatics](https://www.ebi.ac.uk/training/online/courses/introductory-bioinformatics-pathway/) introduces the major resources. For a broader integration perspective, see [*Integrative omics for health and disease*](https://www.nature.com/articles/nrg.2018.4), Nature Reviews Genetics. Ask which ideas transfer to animal production and which depend on the original clinical setting.
 
 ## Practicals and course pathways
 

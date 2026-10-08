@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4005,7 +4005,7 @@ window.Quarto = {
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#data-objects-should-express-the-scientific-unit" id="toc-data-objects-should-express-the-scientific-unit" class="nav-link" data-scroll-target="#data-objects-should-express-the-scientific-unit">Data objects should express the scientific unit</a></li>
+  <li><a href="#program-with-contracts-and-small-functions" id="toc-program-with-contracts-and-small-functions" class="nav-link" data-scroll-target="#program-with-contracts-and-small-functions">Program with contracts and small functions</a></li>
+  <li><a href="#missing-values-carry-information-about-observation" id="toc-missing-values-carry-information-about-observation" class="nav-link" data-scroll-target="#missing-values-carry-information-about-observation">Missing values carry information about observation</a></li>
+  <li><a href="#make-a-workflow-portable" id="toc-make-a-workflow-portable" class="nav-link" data-scroll-target="#make-a-workflow-portable">Make a workflow portable</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4090,17 @@ window.Quarto = {
 <p>Import and join tables by explicit keys; preserve feature/sample orientation; detect missing, duplicated and reordered records; distinguish source data from derived output.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>A reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.</p>
 <p>Use stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>Suppose an assay column is labelled <span class="math inline">\(a_j\)</span> and metadata row i has animal ID <span class="math inline">\(m_i\)</span>. Alignment is the explicit index <span class="math inline">\(j_i=\mathrm{match}(m_i,a)\)</span>, followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.</p>
 <p>A successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4117,19 +4122,94 @@ f2  4  6  2</code></pre>
 </div>
 <p>Animal a1 now receives its labelled measurement, not the value in the original first column. Keeping <code>drop=FALSE</code> preserves matrix shape when selecting a single column.</p>
 </section>
+<section id="data-objects-should-express-the-scientific-unit" class="level2">
+<h2 class="anchored" data-anchor-id="data-objects-should-express-the-scientific-unit">Data objects should express the scientific unit</h2>
+<p>A matrix has dimensions and values, but the scientific meaning comes from labels and units. A long table with one row per animal–time–feature observation differs from metadata with one row per animal. State the key for every table. If several rows share an animal ID legitimately, joining on animal alone can multiply measurements unexpectedly.</p>
+<p>Use separate names for raw counts, normalized counts and log-transformed values. Transposing a matrix changes the location of the observation dimension; it does not change the biological unit. After filtering, confirm identifiers again rather than relying on the previous check.</p>
+</section>
+<section id="program-with-contracts-and-small-functions" class="level2">
+<h2 class="anchored" data-anchor-id="program-with-contracts-and-small-functions">Program with contracts and small functions</h2>
+<p>A function should state what it accepts, what it returns and what assumptions it checks. In a teaching analysis, detecting an unexpected input early is often more useful than making the program silently guess. Positive abundance is required for an ordinary logarithm; an all-missing feature cannot supply a mean or standard deviation.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>log2_positive <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">stopifnot</span>(<span class="fu">is.numeric</span>(x),<span class="fu">all</span>(<span class="fu">is.finite</span>(x)),<span class="fu">all</span>(x<span class="sc">&gt;</span><span class="dv">0</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">log2</span>(x)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="dv">2</span><span class="sc">^</span><span class="fu">log2_positive</span>(x)<span class="sc">-</span>x))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Demonstrate rejection without stopping the teaching document.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bad_input <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">log2_positive</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>)),<span class="at">error=</span><span class="cf">function</span>(e) <span class="st">&#39;rejected&#39;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>bad_input</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;rejected&quot;</code></pre>
+</div>
+</div>
+<p>This function deliberately disallows missing observations. A different function could support them, but should define their treatment. A successfully returned vector is not evidence that the input measurement was biologically valid.</p>
+</section>
+<section id="missing-values-carry-information-about-observation" class="level2">
+<h2 class="anchored" data-anchor-id="missing-values-carry-information-about-observation">Missing values carry information about observation</h2>
+<p><code>NA</code> is an unknown value, while zero is an observed value on the stated scale. A missing sample, a failed protein identification and a recorded concentration below a detection threshold should not be conflated. A complete-case analysis changes the included population; mean imputation changes variability and covariance.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="cn">NA</span>,<span class="dv">9</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">observed_n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),<span class="at">observed_mean=</span><span class="fu">mean</span>(x,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   observed_n observed_mean 
+     3.000000      5.666667 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x_zero <span class="ot">&lt;-</span> <span class="fu">replace</span>(x,<span class="fu">is.na</span>(x),<span class="dv">0</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">zero_imputed_mean=</span><span class="fu">mean</span>(x_zero),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="at">zero_imputed_variance=</span><span class="fu">var</span>(x_zero))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    zero_imputed_mean zero_imputed_variance 
+                 4.25                 14.25 </code></pre>
+</div>
+</div>
+<p>The lower imputed mean follows from a fabricated measurement, not newly acquired evidence. Choose a missingness policy using the assay and question, then report its impact.</p>
+</section>
+<section id="make-a-workflow-portable" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-workflow-portable">Make a workflow portable</h2>
+<p>Use project-relative paths and explicit input/output locations. A clean R session exposes dependencies hidden in an interactive workspace. Functions isolate calculations from unrelated objects, while scripts record the order of operations. Record package versions and data versions; a seed only handles selected random operations.</p>
+<p>A command-line program receives arguments as text and should validate their meaning. Filenames containing spaces require appropriate quoting. Capture the exit status of a worker process before reading its outputs. Existing files can be stale after a failed run, so their presence alone does not prove success.</p>
+<p>Keep source inputs separate from derived outputs. Do not overwrite the only copy of a measurement table during a transformation. A compact analysis manifest can list each output’s input, transformation and expected row count. Temporary outputs should remain in an explicitly temporary location.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Debugging challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Debugging challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An analysis runs interactively but fails in a clean session because <code>normalized</code> is missing. The original session contained an object created manually. Put its creation into the script, state its inputs and verify that the complete workflow runs from the documented starting point.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Checking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why is <code>cbind(metadata, t(assay))</code> unsafe before alignment?</li>
 <li>What does <code>match</code> return for an absent animal?</li>
 <li>Why should raw and transformed matrices have different names?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4138,7 +4218,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>It binds by position and can attach measurements to the wrong animals.</li>
@@ -4148,6 +4228,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://datacarpentry.github.io/genomics-workshop/">Data Carpentry Genomics</a> provides complementary project-organization and command-line lessons. <a href="https://compgenomr.github.io/book/">Computational Genomics with R</a> is a broader reference; compare its examples with the explicit keys and units used here.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

@@ -1361,36 +1361,36 @@
     "objectID": "notes/b05_genomics.html#biological-question-and-measurements",
     "href": "notes/b05_genomics.html#biological-question-and-measurements",
     "title": "Genomic measurements and sequence analysis",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nSequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.\nA FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.\nIdentity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nSequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.\nA FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.\nIdentity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context."
   },
   {
     "objectID": "notes/b05_genomics.html#model-and-assumptions",
     "href": "notes/b05_genomics.html#model-and-assumptions",
     "title": "Genomic measurements and sequence analysis",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nFor an aligned comparison with n comparable sites and k differences, \\(p=k/n\\) is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, \\(d=-3/4\\log(1-4p/3)\\) estimates substitutions per site for \\(p&lt;3/4\\). Alignment uncertainty and saturation limit this model.\nFor a Phred quality Q, the encoded error probability is \\(10^{-Q/10}\\). Summing these probabilities gives an expected number of errors, without assuming the errors are independent."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nFor an aligned comparison with n comparable sites and k differences, \\(p=k/n\\) is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, \\(d=-3/4\\log(1-4p/3)\\) estimates substitutions per site for \\(p&lt;3/4\\). Alignment uncertainty and saturation limit this model.\nFor a Phred quality Q, the encoded error probability is \\(10^{-Q/10}\\). Summing these probabilities gives an expected number of errors, without assuming the errors are independent."
   },
   {
     "objectID": "notes/b05_genomics.html#worked-example",
     "href": "notes/b05_genomics.html#worked-example",
     "title": "Genomic measurements and sequence analysis",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nQ &lt;- c(10,20,30,40)\ndata.frame(Q=Q,error_probability=10^(-Q/10))\n\n\n   Q error_probability\n1 10             1e-01\n2 20             1e-02\n3 30             1e-03\n4 40             1e-04\n\n\nShow R code\na &lt;- strsplit(\"ACGTACGTACGT\",\"\")[[1]]\nb &lt;- strsplit(\"ACGTTCGTTCGT\",\"\")[[1]]\np &lt;- mean(a!=b)\nd &lt;- -.75*log(1-4*p/3)\nc(observed_fraction=p, JC_distance=d)\n\n\nobserved_fraction       JC_distance \n        0.1666667         0.1884858 \n\n\nShow R code\nstopifnot(abs(p-2/12)&lt;1e-12, d&gt;p)\n\n\nThe correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nQ &lt;- c(10,20,30,40)\ndata.frame(Q=Q,error_probability=10^(-Q/10))\n\n\n   Q error_probability\n1 10             1e-01\n2 20             1e-02\n3 30             1e-03\n4 40             1e-04\n\n\nShow R code\na &lt;- strsplit(\"ACGTACGTACGT\",\"\")[[1]]\nb &lt;- strsplit(\"ACGTTCGTTCGT\",\"\")[[1]]\np &lt;- mean(a!=b)\nd &lt;- -.75*log(1-4*p/3)\nc(observed_fraction=p, JC_distance=d)\n\n\nobserved_fraction       JC_distance \n        0.1666667         0.1884858 \n\n\nShow R code\nstopifnot(abs(p-2/12)&lt;1e-12, d&gt;p)\n\n\nThe correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate."
   },
   {
     "objectID": "notes/b05_genomics.html#interpretation-and-scope",
     "href": "notes/b05_genomics.html#interpretation-and-scope",
     "title": "Genomic measurements and sequence analysis",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nWhole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review NCBI’s BLAST glossary for the distinction between identity and homology."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nWhole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review NCBI’s BLAST glossary for the distinction between identity and homology."
   },
   {
     "objectID": "notes/b05_genomics.html#exercises",
     "href": "notes/b05_genomics.html#exercises",
     "title": "Genomic measurements and sequence analysis",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy is the denominator comparable sites rather than all supplied characters?\nWhy can a dosage of 2 not be interpreted before specifying the counted allele?\nCan a high-identity short alignment establish function?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nGaps and unknown bases do not supply called nucleotide comparisons.\nTwo counts refer to a particular allele, not a universally favourable genotype.\nNo; coverage, complexity, evolutionary relationship and functional evidence matter."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is the denominator comparable sites rather than all supplied characters?\nWhy can a dosage of 2 not be interpreted before specifying the counted allele?\nCan a high-identity short alignment establish function?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nGaps and unknown bases do not supply called nucleotide comparisons.\nTwo counts refer to a particular allele, not a universally favourable genotype.\nNo; coverage, complexity, evolutionary relationship and functional evidence matter."
   },
   {
     "objectID": "notes/b05_genomics.html#practicals-and-course-pathways",
@@ -1417,36 +1417,36 @@
     "objectID": "notes/b03_databases.html#biological-question-and-measurements",
     "href": "notes/b03_databases.html#biological-question-and-measurements",
     "title": "Biological databases and identifier mapping",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nA database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.\nIn a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nA database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.\nIn a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata."
   },
   {
     "objectID": "notes/b03_databases.html#model-and-assumptions",
     "href": "notes/b03_databases.html#model-and-assumptions",
     "title": "Biological databases and identifier mapping",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nIf feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.\nCheck key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nIf feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.\nCheck key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions."
   },
   {
     "objectID": "notes/b03_databases.html#worked-example",
     "href": "notes/b03_databases.html#worked-example",
     "title": "Biological databases and identifier mapping",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nfeatures &lt;- data.frame(gene=c(\"geneA\",\"geneB\",\"geneC\"), effect=c(.5,-.2,.1))\nannotation &lt;- data.frame(gene=c(\"geneA\",\"geneA\",\"geneB\"),\n transcript=c(\"txA1\",\"txA2\",\"txB1\"))\njoined &lt;- merge(features, annotation, by=\"gene\", all.x=TRUE)\njoined\n\n\n   gene effect transcript\n1 geneA    0.5       txA1\n2 geneA    0.5       txA2\n3 geneB   -0.2       txB1\n4 geneC    0.1       &lt;NA&gt;\n\n\nShow R code\nc(input_rows=nrow(features), joined_rows=nrow(joined),\n unmatched=sum(is.na(joined$transcript)))\n\n\n input_rows joined_rows   unmatched \n          3           4           1 \n\n\nShow R code\nstopifnot(nrow(joined)==4, sum(is.na(joined$transcript))==1)\n\n\ngeneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nfeatures &lt;- data.frame(gene=c(\"geneA\",\"geneB\",\"geneC\"), effect=c(.5,-.2,.1))\nannotation &lt;- data.frame(gene=c(\"geneA\",\"geneA\",\"geneB\"),\n transcript=c(\"txA1\",\"txA2\",\"txB1\"))\njoined &lt;- merge(features, annotation, by=\"gene\", all.x=TRUE)\njoined\n\n\n   gene effect transcript\n1 geneA    0.5       txA1\n2 geneA    0.5       txA2\n3 geneB   -0.2       txB1\n4 geneC    0.1       &lt;NA&gt;\n\n\nShow R code\nc(input_rows=nrow(features), joined_rows=nrow(joined),\n unmatched=sum(is.na(joined$transcript)))\n\n\n input_rows joined_rows   unmatched \n          3           4           1 \n\n\nShow R code\nstopifnot(nrow(joined)==4, sum(is.na(joined$transcript))==1)\n\n\ngeneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge."
   },
   {
     "objectID": "notes/b03_databases.html#interpretation-and-scope",
     "href": "notes/b03_databases.html#interpretation-and-scope",
     "title": "Biological databases and identifier mapping",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nThe fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the NCBI GEO documentation."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nThe fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the NCBI GEO documentation."
   },
   {
     "objectID": "notes/b03_databases.html#exercises",
     "href": "notes/b03_databases.html#exercises",
     "title": "Biological databases and identifier mapping",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy did the row count increase?\nWhat happens with an inner join?\nName four metadata fields needed for a genomic coordinate.\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\ngeneA has a one-to-many mapping.\ngeneC disappears; this is an exclusion that should be reported.\nSpecies, assembly, chromosome and coordinate convention; also record the annotation/version and feature identity."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy did the row count increase?\nWhat happens with an inner join?\nName four metadata fields needed for a genomic coordinate.\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\ngeneA has a one-to-many mapping.\ngeneC disappears; this is an exclusion that should be reported.\nSpecies, assembly, chromosome and coordinate convention; also record the annotation/version and feature identity."
   },
   {
     "objectID": "notes/b03_databases.html#practicals-and-course-pathways",
@@ -1473,36 +1473,36 @@
     "objectID": "notes/b01_foundations.html#biological-question-and-measurements",
     "href": "notes/b01_foundations.html#biological-question-and-measurements",
     "title": "Biological questions and omics measurements",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nA study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.\nGenomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.\nBegin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nA study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.\nGenomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.\nBegin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question."
   },
   {
     "objectID": "notes/b01_foundations.html#model-and-assumptions",
     "href": "notes/b01_foundations.html#model-and-assumptions",
     "title": "Biological questions and omics measurements",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nLet \\(Y_i(1)\\) and \\(Y_i(0)\\) denote the performance that animal i would show under two diets. The average intervention effect is \\(E[Y(1)-Y(0)]\\). Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation \\(\\mathrm{cor}(X,Y)\\) generally cannot.\nFor prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nLet \\(Y_i(1)\\) and \\(Y_i(0)\\) denote the performance that animal i would show under two diets. The average intervention effect is \\(E[Y(1)-Y(0)]\\). Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation \\(\\mathrm{cor}(X,Y)\\) generally cannot.\nFor prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision."
   },
   {
     "objectID": "notes/b01_foundations.html#worked-example",
     "href": "notes/b01_foundations.html#worked-example",
     "title": "Biological questions and omics measurements",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nplan &lt;- data.frame(layer=c(\"genome\", \"transcriptome\", \"proteome\", \"phenome\"),\n measurement=c(\"genotype dosage\", \"RNA counts\", \"protein abundance\", \"feed-efficiency phenotype\"),\n timing=c(\"baseline\", \"day 14\", \"day 14\", \"days 1-28\"),\n purpose=c(\"inherited variation\", \"molecular response\", \"molecular response\", \"production response\"))\nplan\n\n\n          layer               measurement    timing             purpose\n1        genome           genotype dosage  baseline inherited variation\n2 transcriptome                RNA counts    day 14  molecular response\n3      proteome         protein abundance    day 14  molecular response\n4       phenome feed-efficiency phenotype days 1-28 production response\n\n\nThe table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nplan &lt;- data.frame(layer=c(\"genome\", \"transcriptome\", \"proteome\", \"phenome\"),\n measurement=c(\"genotype dosage\", \"RNA counts\", \"protein abundance\", \"feed-efficiency phenotype\"),\n timing=c(\"baseline\", \"day 14\", \"day 14\", \"days 1-28\"),\n purpose=c(\"inherited variation\", \"molecular response\", \"molecular response\", \"production response\"))\nplan\n\n\n          layer               measurement    timing             purpose\n1        genome           genotype dosage  baseline inherited variation\n2 transcriptome                RNA counts    day 14  molecular response\n3      proteome         protein abundance    day 14  molecular response\n4       phenome feed-efficiency phenotype days 1-28 production response\n\n\nThe table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task."
   },
   {
     "objectID": "notes/b01_foundations.html#interpretation-and-scope",
     "href": "notes/b01_foundations.html#interpretation-and-scope",
     "title": "Biological questions and omics measurements",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nAn integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nAn integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel."
   },
   {
     "objectID": "notes/b01_foundations.html#exercises",
     "href": "notes/b01_foundations.html#exercises",
     "title": "Biological questions and omics measurements",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nDefine one diet-effect question and one prediction question.\nWhich measurements would be available before a breeding decision?\nWhy is agreement between RNA and protein not proof of mediation?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nCompare average responses under allocated diets; separately predict a future phenotype in new animals.\nOnly information observed at the stated decision time is eligible.\nBoth can respond to an unmeasured common cause or changes in cell composition."
+    "section": "Exercises",
+    "text": "Exercises\n\nDefine one diet-effect question and one prediction question.\nWhich measurements would be available before a breeding decision?\nWhy is agreement between RNA and protein not proof of mediation?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nCompare average responses under allocated diets; separately predict a future phenotype in new animals.\nOnly information observed at the stated decision time is eligible.\nBoth can respond to an unmeasured common cause or changes in cell composition."
   },
   {
     "objectID": "notes/b01_foundations.html#practicals-and-course-pathways",
@@ -1865,36 +1865,36 @@
     "objectID": "notes/b02_design.html#biological-question-and-measurements",
     "href": "notes/b02_design.html#biological-question-and-measurements",
     "title": "Experimental design and biological sampling",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nFor an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.\nA multi-omics study should connect animal identity to tissue, collection time, storage, extraction, assay and batch. Collection and preservation requirements differ across molecules; a shared animal identifier does not imply that one preparation is appropriate for every assay. Predefine exclusion rules and the primary contrast. Where possible, randomise treatment allocation, blind handling and distribute biological groups across processing batches."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nFor an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.\nA multi-omics study should connect animal identity to tissue, collection time, storage, extraction, assay and batch. Collection and preservation requirements differ across molecules; a shared animal identifier does not imply that one preparation is appropriate for every assay. Predefine exclusion rules and the primary contrast. Where possible, randomise treatment allocation, blind handling and distribute biological groups across processing batches."
   },
   {
     "objectID": "notes/b02_design.html#model-and-assumptions",
     "href": "notes/b02_design.html#model-and-assumptions",
     "title": "Experimental design and biological sampling",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nA simple fixed-effect model is \\(y_i=\\beta_0+\\beta_T T_i+\\beta_B B_i+e_i\\). Its design matrix X must have independent columns to separate treatment and batch. If every control is in batch A and every treatment in batch B, the two effects are not separately identifiable. Increasing the number of observations in the same confounded arrangement does not solve this.\nBlocking balances treatments within a known nuisance factor; batch adjustment models remaining variation. Neither creates the missing comparisons in a perfectly confounded design."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nA simple fixed-effect model is \\(y_i=\\beta_0+\\beta_T T_i+\\beta_B B_i+e_i\\). Its design matrix X must have independent columns to separate treatment and batch. If every control is in batch A and every treatment in batch B, the two effects are not separately identifiable. Increasing the number of observations in the same confounded arrangement does not solve this.\nBlocking balances treatments within a known nuisance factor; batch adjustment models remaining variation. Neither creates the missing comparisons in a perfectly confounded design."
   },
   {
     "objectID": "notes/b02_design.html#worked-example",
     "href": "notes/b02_design.html#worked-example",
     "title": "Experimental design and biological sampling",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nbalanced &lt;- data.frame(treatment=factor(rep(c(\"control\",\"treated\"),4)),\n batch=factor(rep(c(\"A\",\"A\",\"B\",\"B\"),2)))\nconfounded &lt;- transform(balanced, batch=treatment)\nrank_info &lt;- function(d) {\n X &lt;- model.matrix(~ treatment + batch, d)\n c(columns=ncol(X), rank=qr(X)$rank)\n}\nrbind(balanced=rank_info(balanced), confounded=rank_info(confounded))\n\n\n           columns rank\nbalanced         3    3\nconfounded       3    2\n\n\nShow R code\nstopifnot(qr(model.matrix(~treatment+batch, balanced))$rank==3,\n          qr(model.matrix(~treatment+batch, confounded))$rank==2)\n\n\nThe balanced design supplies independent treatment and batch columns. The confounded model has three columns but only rank two: software cannot recover the absent information."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nbalanced &lt;- data.frame(treatment=factor(rep(c(\"control\",\"treated\"),4)),\n batch=factor(rep(c(\"A\",\"A\",\"B\",\"B\"),2)))\nconfounded &lt;- transform(balanced, batch=treatment)\nrank_info &lt;- function(d) {\n X &lt;- model.matrix(~ treatment + batch, d)\n c(columns=ncol(X), rank=qr(X)$rank)\n}\nrbind(balanced=rank_info(balanced), confounded=rank_info(confounded))\n\n\n           columns rank\nbalanced         3    3\nconfounded       3    2\n\n\nShow R code\nstopifnot(qr(model.matrix(~treatment+batch, balanced))$rank==3,\n          qr(model.matrix(~treatment+batch, confounded))$rank==2)\n\n\nThe balanced design supplies independent treatment and batch columns. The confounded model has three columns but only rank two: software cannot recover the absent information."
   },
   {
     "objectID": "notes/b02_design.html#interpretation-and-scope",
     "href": "notes/b02_design.html#interpretation-and-scope",
     "title": "Experimental design and biological sampling",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nRank is necessary, not sufficient, for a good experiment. Power, within-unit dependence, transport/storage effects, selection and missingness still matter. Plan biological replication using a relevant effect size and variance, not a universal sample-count rule. See the NC3Rs experimental-unit guidance for examples."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nRank is necessary, not sufficient, for a good experiment. Power, within-unit dependence, transport/storage effects, selection and missingness still matter. Plan biological replication using a relevant effect size and variance, not a universal sample-count rule. See the NC3Rs experimental-unit guidance for examples."
   },
   {
     "objectID": "notes/b02_design.html#exercises",
     "href": "notes/b02_design.html#exercises",
     "title": "Experimental design and biological sampling",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nA diet is assigned to four pens, with ten animals per pen. What is the diet experimental unit?\nCan adjustment rescue a treatment–batch confounding problem?\nWhat must a matched multi-omics sample sheet record?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe pen; ten animals provide within-pen measurements rather than ten allocations.\nNot when treatment and batch are perfectly confounded.\nAnimal, specimen, tissue, time, treatment, handling, assay and batch, plus explicit mappings between assay and biological sample identifiers."
+    "section": "Exercises",
+    "text": "Exercises\n\nA diet is assigned to four pens, with ten animals per pen. What is the diet experimental unit?\nCan adjustment rescue a treatment–batch confounding problem?\nWhat must a matched multi-omics sample sheet record?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nThe pen; ten animals provide within-pen measurements rather than ten allocations.\nNot when treatment and batch are perfectly confounded.\nAnimal, specimen, tissue, time, treatment, handling, assay and batch, plus explicit mappings between assay and biological sample identifiers."
   },
   {
     "objectID": "notes/b02_design.html#practicals-and-course-pathways",
@@ -1921,36 +1921,36 @@
     "objectID": "notes/b04_programming.html#biological-question-and-measurements",
     "href": "notes/b04_programming.html#biological-question-and-measurements",
     "title": "Programming and reproducible data handling",
-    "section": "1. Biological question and measurements",
-    "text": "1. Biological question and measurements\nA reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.\nUse stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical."
+    "section": "Biological question and measurements",
+    "text": "Biological question and measurements\nA reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.\nUse stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical."
   },
   {
     "objectID": "notes/b04_programming.html#model-and-assumptions",
     "href": "notes/b04_programming.html#model-and-assumptions",
     "title": "Programming and reproducible data handling",
-    "section": "2. Model and assumptions",
-    "text": "2. Model and assumptions\nSuppose an assay column is labelled \\(a_j\\) and metadata row i has animal ID \\(m_i\\). Alignment is the explicit index \\(j_i=\\mathrm{match}(m_i,a)\\), followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.\nA successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary."
+    "section": "Model and assumptions",
+    "text": "Model and assumptions\nSuppose an assay column is labelled \\(a_j\\) and metadata row i has animal ID \\(m_i\\). Alignment is the explicit index \\(j_i=\\mathrm{match}(m_i,a)\\), followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.\nA successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary."
   },
   {
     "objectID": "notes/b04_programming.html#worked-example",
     "href": "notes/b04_programming.html#worked-example",
     "title": "Programming and reproducible data handling",
-    "section": "3. Worked example",
-    "text": "3. Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nmetadata &lt;- data.frame(animal=c(\"a1\",\"a2\",\"a3\"), diet=c(\"C\",\"T\",\"C\"))\nassay &lt;- matrix(1:6,2,3,dimnames=list(c(\"f1\",\"f2\"),c(\"a3\",\"a1\",\"a2\")))\nstopifnot(!anyDuplicated(metadata$animal), !anyDuplicated(colnames(assay)))\nindex &lt;- match(metadata$animal,colnames(assay))\nstopifnot(!anyNA(index))\naligned &lt;- assay[,index,drop=FALSE]\nstopifnot(identical(colnames(aligned),metadata$animal))\naligned\n\n\n   a1 a2 a3\nf1  3  5  1\nf2  4  6  2\n\n\nAnimal a1 now receives its labelled measurement, not the value in the original first column. Keeping drop=FALSE preserves matrix shape when selecting a single column."
+    "section": "Worked example",
+    "text": "Worked example\nThe inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.\n\n\nShow R code\nmetadata &lt;- data.frame(animal=c(\"a1\",\"a2\",\"a3\"), diet=c(\"C\",\"T\",\"C\"))\nassay &lt;- matrix(1:6,2,3,dimnames=list(c(\"f1\",\"f2\"),c(\"a3\",\"a1\",\"a2\")))\nstopifnot(!anyDuplicated(metadata$animal), !anyDuplicated(colnames(assay)))\nindex &lt;- match(metadata$animal,colnames(assay))\nstopifnot(!anyNA(index))\naligned &lt;- assay[,index,drop=FALSE]\nstopifnot(identical(colnames(aligned),metadata$animal))\naligned\n\n\n   a1 a2 a3\nf1  3  5  1\nf2  4  6  2\n\n\nAnimal a1 now receives its labelled measurement, not the value in the original first column. Keeping drop=FALSE preserves matrix shape when selecting a single column."
   },
   {
     "objectID": "notes/b04_programming.html#interpretation-and-scope",
     "href": "notes/b04_programming.html#interpretation-and-scope",
     "title": "Programming and reproducible data handling",
-    "section": "4. Interpretation and scope",
-    "text": "4. Interpretation and scope\nChecking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen."
+    "section": "Interpretation and scope",
+    "text": "Interpretation and scope\nChecking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen."
   },
   {
     "objectID": "notes/b04_programming.html#exercises",
     "href": "notes/b04_programming.html#exercises",
     "title": "Programming and reproducible data handling",
-    "section": "5. Exercises",
-    "text": "5. Exercises\n\nWhy is cbind(metadata, t(assay)) unsafe before alignment?\nWhat does match return for an absent animal?\nWhy should raw and transformed matrices have different names?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt binds by position and can attach measurements to the wrong animals.\nNA; require an explicit missing-sample policy before continuing.\nNames preserve which units and transformations each object represents, reducing accidental reuse of a processed value as raw data."
+    "section": "Exercises",
+    "text": "Exercises\n\nWhy is cbind(metadata, t(assay)) unsafe before alignment?\nWhat does match return for an absent animal?\nWhy should raw and transformed matrices have different names?\n\n\n\n\n\n\n\nSuggested answers\n\n\n\n\n\n\nIt binds by position and can attach measurements to the wrong animals.\nNA; require an explicit missing-sample policy before continuing.\nNames preserve which units and transformations each object represents, reducing accidental reuse of a processed value as raw data."
   },
   {
     "objectID": "notes/b04_programming.html#practicals-and-course-pathways",
@@ -3407,5 +3407,173 @@
     "title": "RNA-seq counts, contrasts and uncertainty",
     "section": "Further reading",
     "text": "Further reading\nThe Harvard Introduction to Differential Gene Expression Analysis offers a complementary teaching sequence. The calculations and figures here are original hypothetical examples. Consult the DESeq2 vignette when moving to its implementation."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#define-what-an-omics-layer-contributes",
+    "href": "notes/b01_foundations.html#define-what-an-omics-layer-contributes",
+    "title": "Biological questions and omics measurements",
+    "section": "Define what an omics layer contributes",
+    "text": "Define what an omics layer contributes\nAn omics layer is a measurement system with a biological target and an observation process. Genomic dosage describes inherited alleles at measured sites. RNA, proteins and metabolites reflect tissue, time and physiological state. A microbial profile concerns organisms and their genetic potential or activity; a phenotype describes the animal or production system. These layers overlap in biological meaning but have different errors and units.\nConsider a proposed chain from genotype to RNA to protein to a production phenotype. Each arrow asks a distinct question. Does a variant alter a transcript in this tissue? Does that transcript change a protein under these conditions? Does the protein affect the phenotype, or merely accompany it? Feedback can run in the other direction: disease or diet can change molecular profiles. A cross-sectional chain of correlations does not establish that ordered process.\n\n\n\n\n\n\n\n\n\nPurpose\nTarget\nUseful evidence\nMain danger\n\n\n\n\nDescription\nWhat differs between sampled groups?\nDefined samples and measurement scale\nTreating a selected sample as the whole population\n\n\nAssociation\nWhich measurements vary together?\nReplication and adjustment with a rationale\nShared causes or reverse direction\n\n\nPrediction\nWhat will happen for new animals?\nInformation available at decision time and independent evaluation\nLeakage or a changed deployment population\n\n\nIntervention\nWhat would change under an action?\nAllocation or justified causal assumptions\nConfounding and an ill-defined action\n\n\nMechanism\nThrough what process does change occur?\nTemporal and perturbation evidence\nTreating a correlated molecular feature as a mediator"
+  },
+  {
+    "objectID": "notes/b01_foundations.html#measurement-error-and-biological-signal",
+    "href": "notes/b01_foundations.html#measurement-error-and-biological-signal",
+    "title": "Biological questions and omics measurements",
+    "section": "Measurement error and biological signal",
+    "text": "Measurement error and biological signal\nA useful introductory decomposition is \\(X=S+E\\), with biological signal \\(S\\) and measurement error \\(E\\). If the terms are independent, observed variance is the sum of their variances. More variability in a feature need not mean more biological information. A noisy assay can appear striking in an unscaled plot and still be an unreliable predictor.\nIn a hypothetical classical-error example, adding independent noise to a predictor attenuates its expected simple regression slope. This statement requires the independent-error model; systematic batch error can have a different effect.\n\n\nShow R code\nset.seed(101)\nsignal &lt;- rnorm(2000)\nresponse &lt;- 2*signal+rnorm(2000)\nnoisy &lt;- signal+rnorm(2000,sd=2)\nc(clean_slope=coef(lm(response~signal))[2],\n noisy_slope=coef(lm(response~noisy))[2],\n expected_noisy_slope=2/(1+4))\n\n\n  clean_slope.signal    noisy_slope.noisy expected_noisy_slope \n           2.0177279            0.4004118            0.4000000 \n\n\nThe observed noisy slope need not equal the expectation exactly. Recovering the biological slope requires information about measurement reliability and a suitable model; simply increasing the number of noisy columns is not a correction."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#build-a-study-argument",
+    "href": "notes/b01_foundations.html#build-a-study-argument",
+    "title": "Biological questions and omics measurements",
+    "section": "Build a study argument",
+    "text": "Build a study argument\nBegin with a target population and a decision: predicting later growth in a specified breed is different from explaining a diet response in a sampled group. State the outcome and its units, the allocation unit, measurement times and what contrast will be reported. For each assay, write the extra question it answers. If two layers provide the same information for the current decision, their acquisition cost and failure rate still matter.\nCheck feasibility before collecting data. A day-14 blood assay may be practical for monitoring but unavailable for a day-1 management decision. A liver measurement may address mechanism while being unsuitable for routine selection. Separate scientific usefulness from deployment usefulness.\n\n\n\n\n\n\nDiscussion: choose the evidence\n\n\n\n\n\nA protein predicts methane output, and the protein is associated with diet. What experiment would test whether changing the protein changes methane? A perturbation directed at the proposed mechanism, with appropriate controls and outcomes, addresses a different question from another observational association study. Changing diet alone may alter many pathways, so it need not isolate that protein’s role."
+  },
+  {
+    "objectID": "notes/b01_foundations.html#further-reading",
+    "href": "notes/b01_foundations.html#further-reading",
+    "title": "Biological questions and omics measurements",
+    "section": "Further reading",
+    "text": "Further reading\nEMBL-EBI introductory bioinformatics introduces the major resources. For a broader integration perspective, see Integrative omics for health and disease, Nature Reviews Genetics. Ask which ideas transfer to animal production and which depend on the original clinical setting."
+  },
+  {
+    "objectID": "notes/b02_design.html#plan-allocation-sampling-and-processing-separately",
+    "href": "notes/b02_design.html#plan-allocation-sampling-and-processing-separately",
+    "title": "Experimental design and biological sampling",
+    "section": "Plan allocation, sampling and processing separately",
+    "text": "Plan allocation, sampling and processing separately\nRandom allocation concerns the biological intervention. Randomized processing order concerns how samples encounter technical conditions. These operations protect different comparisons. A biologically randomized study can still have diet perfectly confounded with extraction day; randomizing extraction alone does not make an observational exposure a randomized intervention.\nBlocking forms comparisons within a known source of variation, such as farm or baseline weight class. For a balanced two-diet study, both diets should occur within the relevant block where feasible. Record the actual allocation, not just the intended schedule. Blinding helps prevent group knowledge from influencing handling or interpretation; it does not remove differences already present in a design.\nA sample sheet should connect subject, biological specimen and assay aliquot. Keep repeated times explicit. The same animal can supply several samples, and one specimen can supply several technical preparations. A missing assay is not the same as an animal excluded from the whole experiment."
+  },
+  {
+    "objectID": "notes/b02_design.html#replication-dependence-and-effective-information",
+    "href": "notes/b02_design.html#replication-dependence-and-effective-information",
+    "title": "Experimental design and biological sampling",
+    "section": "Replication, dependence and effective information",
+    "text": "Replication, dependence and effective information\nFor equal clusters with \\(m\\) animals per pen and within-pen correlation \\(\\rho\\), the variance inflation for a simple average relative to independent animals is \\(D=1+(m-1)\\rho\\). This is an illustrative equal-correlation model, not a substitute for specifying the treatment unit and fitting an appropriate analysis.\n\n\nShow R code\nm &lt;- c(1,5,10,20)\nrho &lt;- .2\ndata.frame(animals_per_pen=m,design_effect=1+(m-1)*rho,\n information_relative_to_independence=1/(1+(m-1)*rho))\n\n\n  animals_per_pen design_effect information_relative_to_independence\n1               1           1.0                            1.0000000\n2               5           1.8                            0.5555556\n3              10           2.8                            0.3571429\n4              20           4.8                            0.2083333\n\n\nWhen diet is assigned to pens, precision of its comparison depends strongly on the number of independent pens. More animals per pen can improve measurement of a pen response but cannot create new treatment allocations. The same reasoning explains why technical duplicate libraries cannot replace missing biological replicates."
+  },
+  {
+    "objectID": "notes/b02_design.html#balance-and-precision-are-different-checks",
+    "href": "notes/b02_design.html#balance-and-precision-are-different-checks",
+    "title": "Experimental design and biological sampling",
+    "section": "Balance and precision are different checks",
+    "text": "Balance and precision are different checks\nA full-rank design can be highly unbalanced. Sparse cells create uncertain comparisons even when a coefficient exists. Inspect counts within treatment-by-batch combinations, then ask whether the target contrast relies on a small subgroup.\n\n\nShow R code\nlayout &lt;- data.frame(group=factor(rep(c('C','T'),c(9,3))),\n batch=factor(c(rep('A',5),rep('B',4),'A','B','B')))\nxtabs(~group+batch,layout)\n\n\n     batch\ngroup A B\n    C 5 4\n    T 1 2\n\n\nShow R code\nX &lt;- model.matrix(~group+batch,layout)\nstopifnot(qr(X)$rank==ncol(X))\n# With independent residual variance one, diagonal entries describe\n# coefficient variances under this particular fixed design.\ndiag(solve(crossprod(X)))\n\n\n(Intercept)      groupT      batchB \n  0.1794872   0.4615385   0.3461538 \n\n\nThis calculation conditions on the supplied linear model and residual variance. It shows where design information enters uncertainty, without providing a universal recommended sample count."
+  },
+  {
+    "objectID": "notes/b02_design.html#specify-exclusions-and-missingness-before-seeing-effects",
+    "href": "notes/b02_design.html#specify-exclusions-and-missingness-before-seeing-effects",
+    "title": "Experimental design and biological sampling",
+    "section": "Specify exclusions and missingness before seeing effects",
+    "text": "Specify exclusions and missingness before seeing effects\nAn independently justified failed-assay rule is different from removing a sample because it weakens the desired contrast. Record the reason, when it was identified, affected assays and sensitivity of conclusions. If treatment changes survival or sample availability, the remaining observations may represent a selected subset rather than the original population.\nPower planning needs a biologically meaningful effect, relevant variability, allocation structure, assay reliability and a multiplicity strategy. Sensitivity calculations across plausible inputs are more informative than a single optimistic number. Pilot variance estimates can themselves be uncertain. A design decision should also consider animal welfare, collection burden and feasible independent replication.\n\n\n\n\n\n\nDesign challenge\n\n\n\n\n\nTwo farms each receive only one diet. Is farm adjustment sufficient? No: there is no within-farm treatment comparison. If each farm instead has independently allocated pens receiving both diets, the design supplies comparisons, although pen dependence and the small number of farms still matter for generalization."
+  },
+  {
+    "objectID": "notes/b02_design.html#further-reading",
+    "href": "notes/b02_design.html#further-reading",
+    "title": "Experimental design and biological sampling",
+    "section": "Further reading",
+    "text": "Further reading\nUse the NC3Rs experimental-unit guidance alongside the design practical. Compare its allocation examples with your own animal, pen and repeated-sampling hierarchy."
+  },
+  {
+    "objectID": "notes/b03_databases.html#separate-records-evidence-and-biological-entities",
+    "href": "notes/b03_databases.html#separate-records-evidence-and-biological-entities",
+    "title": "Biological databases and identifier mapping",
+    "section": "Separate records, evidence and biological entities",
+    "text": "Separate records, evidence and biological entities\nA sequence archive stores submitted measurement records; a reference resource organizes a selected assembly and annotation; a curated protein resource combines sequence with evaluated evidence. These are complementary roles. A cross-reference links records, but does not imply that all linked claims have the same evidence or review status.\nBefore querying, state the entity: a study, specimen, gene, transcript, protein product, sequence region or pathway. A gene symbol is convenient for display; an accession and version are usually better for traceable retrieval. Keep the original identifiers even after adding readable labels. Distinguish missing annotation from a measured absence of the molecule.\n\n\n\n\n\n\n\n\nMapping\nWhy several records arise\nAnalysis consequence\n\n\n\n\nGene to transcript\nAlternative transcript models\nOne gene effect can appear in several annotation rows\n\n\nPeptide to protein\nShared sequence\nProtein identity may be ambiguous\n\n\nFeature to metabolite\nCandidate chemical assignments\nPathway membership may remain uncertain\n\n\nGene to orthologue\nDuplication and evolutionary history\nCross-species transfer can be one-to-many"
+  },
+  {
+    "objectID": "notes/b03_databases.html#coordinates-are-part-of-the-identifier",
+    "href": "notes/b03_databases.html#coordinates-are-part-of-the-identifier",
+    "title": "Biological databases and identifier mapping",
+    "section": "Coordinates are part of the identifier",
+    "text": "Coordinates are part of the identifier\nA position is incomplete without chromosome, assembly and convention. One-based closed intervals include both endpoints; zero-based half-open intervals include the start and exclude the end. Thus a one-based interval 101–110 and a zero-based half-open interval 100–110 can describe the same ten bases.\n\n\nShow R code\nclosed_start &lt;- 101L;closed_end &lt;- 110L\nhalf_open_start &lt;- closed_start-1L;half_open_end &lt;- closed_end\nc(closed_length=closed_end-closed_start+1L,\n half_open_length=half_open_end-half_open_start)\n\n\n   closed_length half_open_length \n              10               10 \n\n\nShow R code\nstopifnot(closed_end-closed_start+1L==half_open_end-half_open_start)\n\n\nThe arithmetic is simple, but an unnoticed convention mismatch can shift overlap calculations. Conversion of convention is also different from transferring coordinates between assemblies. Assembly transfer requires a mapping and can leave regions unmatched or ambiguous."
+  },
+  {
+    "objectID": "notes/b03_databases.html#audit-a-mapping-before-using-it",
+    "href": "notes/b03_databases.html#audit-a-mapping-before-using-it",
+    "title": "Biological databases and identifier mapping",
+    "section": "Audit a mapping before using it",
+    "text": "Audit a mapping before using it\nReport input keys, unique matched keys, unmatched keys and row expansion. Count unique biological entities for questions about entity overlap; count annotation rows only when rows are the intended unit. Avoid silently taking the first transcript returned by a database as the biologically relevant transcript.\n\n\nShow R code\ninput &lt;- data.frame(feature=c('f1','f2','f3','f4'))\nmap &lt;- data.frame(feature=c('f1','f1','f2','f4'),\n gene=c('gA','gB','gB','gC'))\naudit &lt;- merge(input,map,all.x=TRUE)\ndata.frame(input_features=nrow(input),annotation_rows=nrow(audit),\n matched_features=length(unique(audit$feature[!is.na(audit$gene)])),\n distinct_genes=length(unique(na.omit(audit$gene))))\n\n\n  input_features annotation_rows matched_features distinct_genes\n1              4               5                3              3\n\n\nThe same gB is linked to two features, while f1 links to two genes. Deduplication cannot be solved by a universal rule: aggregation changes the measurement represented. Document the choice before enrichment or integration."
+  },
+  {
+    "objectID": "notes/b03_databases.html#search-retrieve-and-assess",
+    "href": "notes/b03_databases.html#search-retrieve-and-assess",
+    "title": "Biological databases and identifier mapping",
+    "section": "Search, retrieve and assess",
+    "text": "Search, retrieve and assess\nFor a public-study exercise, first read the experiment description and sample metadata. A downloadable expression matrix can lack the variables needed for the intended comparison. Check species, tissue, group definitions, biological replication and processing before considering its size.\nPreserve the retrieval query, file checksum, reference versions and a local processing record. A later database update may improve annotation while changing results; reproducibility and current interpretation can require both the original mapping and a documented update.\n\n\n\n\n\n\nRecord-review challenge\n\n\n\n\n\nA protein record cites experimental evidence for an enzymatic function in one species. What justifies assigning that function to a livestock gene? Evaluate the evolutionary relationship, sequence/domain evidence and experimental context. A cross-reference or similar name alone does not establish identical function."
+  },
+  {
+    "objectID": "notes/b03_databases.html#further-reading",
+    "href": "notes/b03_databases.html#further-reading",
+    "title": "Biological databases and identifier mapping",
+    "section": "Further reading",
+    "text": "Further reading\nThe EMBL-EBI introductory pathway links gene, protein and structure resources. NCBI GEO record documentation explains its record hierarchy; use it to distinguish a sample record from a study series."
+  },
+  {
+    "objectID": "notes/b04_programming.html#data-objects-should-express-the-scientific-unit",
+    "href": "notes/b04_programming.html#data-objects-should-express-the-scientific-unit",
+    "title": "Programming and reproducible data handling",
+    "section": "Data objects should express the scientific unit",
+    "text": "Data objects should express the scientific unit\nA matrix has dimensions and values, but the scientific meaning comes from labels and units. A long table with one row per animal–time–feature observation differs from metadata with one row per animal. State the key for every table. If several rows share an animal ID legitimately, joining on animal alone can multiply measurements unexpectedly.\nUse separate names for raw counts, normalized counts and log-transformed values. Transposing a matrix changes the location of the observation dimension; it does not change the biological unit. After filtering, confirm identifiers again rather than relying on the previous check."
+  },
+  {
+    "objectID": "notes/b04_programming.html#program-with-contracts-and-small-functions",
+    "href": "notes/b04_programming.html#program-with-contracts-and-small-functions",
+    "title": "Programming and reproducible data handling",
+    "section": "Program with contracts and small functions",
+    "text": "Program with contracts and small functions\nA function should state what it accepts, what it returns and what assumptions it checks. In a teaching analysis, detecting an unexpected input early is often more useful than making the program silently guess. Positive abundance is required for an ordinary logarithm; an all-missing feature cannot supply a mean or standard deviation.\n\n\nShow R code\nlog2_positive &lt;- function(x) {\n stopifnot(is.numeric(x),all(is.finite(x)),all(x&gt;0))\n log2(x)\n}\nx &lt;- c(2,4,8)\nstopifnot(max(abs(2^log2_positive(x)-x))&lt;1e-12)\n# Demonstrate rejection without stopping the teaching document.\nbad_input &lt;- tryCatch(log2_positive(c(2,0)),error=function(e) 'rejected')\nbad_input\n\n\n[1] \"rejected\"\n\n\nThis function deliberately disallows missing observations. A different function could support them, but should define their treatment. A successfully returned vector is not evidence that the input measurement was biologically valid."
+  },
+  {
+    "objectID": "notes/b04_programming.html#missing-values-carry-information-about-observation",
+    "href": "notes/b04_programming.html#missing-values-carry-information-about-observation",
+    "title": "Programming and reproducible data handling",
+    "section": "Missing values carry information about observation",
+    "text": "Missing values carry information about observation\nNA is an unknown value, while zero is an observed value on the stated scale. A missing sample, a failed protein identification and a recorded concentration below a detection threshold should not be conflated. A complete-case analysis changes the included population; mean imputation changes variability and covariance.\n\n\nShow R code\nx &lt;- c(3,5,NA,9)\nc(observed_n=sum(!is.na(x)),observed_mean=mean(x,na.rm=TRUE))\n\n\n   observed_n observed_mean \n     3.000000      5.666667 \n\n\nShow R code\nx_zero &lt;- replace(x,is.na(x),0)\nc(zero_imputed_mean=mean(x_zero),\n zero_imputed_variance=var(x_zero))\n\n\n    zero_imputed_mean zero_imputed_variance \n                 4.25                 14.25 \n\n\nThe lower imputed mean follows from a fabricated measurement, not newly acquired evidence. Choose a missingness policy using the assay and question, then report its impact."
+  },
+  {
+    "objectID": "notes/b04_programming.html#make-a-workflow-portable",
+    "href": "notes/b04_programming.html#make-a-workflow-portable",
+    "title": "Programming and reproducible data handling",
+    "section": "Make a workflow portable",
+    "text": "Make a workflow portable\nUse project-relative paths and explicit input/output locations. A clean R session exposes dependencies hidden in an interactive workspace. Functions isolate calculations from unrelated objects, while scripts record the order of operations. Record package versions and data versions; a seed only handles selected random operations.\nA command-line program receives arguments as text and should validate their meaning. Filenames containing spaces require appropriate quoting. Capture the exit status of a worker process before reading its outputs. Existing files can be stale after a failed run, so their presence alone does not prove success.\nKeep source inputs separate from derived outputs. Do not overwrite the only copy of a measurement table during a transformation. A compact analysis manifest can list each output’s input, transformation and expected row count. Temporary outputs should remain in an explicitly temporary location.\n\n\n\n\n\n\nDebugging challenge\n\n\n\n\n\nAn analysis runs interactively but fails in a clean session because normalized is missing. The original session contained an object created manually. Put its creation into the script, state its inputs and verify that the complete workflow runs from the documented starting point."
+  },
+  {
+    "objectID": "notes/b04_programming.html#further-reading",
+    "href": "notes/b04_programming.html#further-reading",
+    "title": "Programming and reproducible data handling",
+    "section": "Further reading",
+    "text": "Further reading\nData Carpentry Genomics provides complementary project-organization and command-line lessons. Computational Genomics with R is a broader reference; compare its examples with the explicit keys and units used here."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#follow-the-evidence-from-reads-to-variants",
+    "href": "notes/b05_genomics.html#follow-the-evidence-from-reads-to-variants",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Follow the evidence from reads to variants",
+    "text": "Follow the evidence from reads to variants\nA read is a sampled sequence observation with errors and biases. A reference alignment proposes where it originated; a genotype call combines evidence at a site under a model. These are successive inferences. A base with high reported quality can still map ambiguously, and a confidently mapped read can contain uncertain bases. Distinguish base quality from mapping quality.\nCoverage is the number of relevant observations at a position under a counting convention. Mean depth can hide regions with little coverage. PCR duplicates and overlapping mates can affect the amount of independent molecular evidence. Reference divergence and missing sequence can also affect alignment differently across animals.\nGenotype dosage counts a specified allele; changing the counted allele from A to B changes dosage from \\(g\\) to \\(2-g\\) at a diploid biallelic site. This reverses a regression coefficient’s sign without reversing the underlying biological comparison.\n\n\nShow R code\ngA &lt;- c(0,0,1,1,2,2)\ny &lt;- c(2,3,4,5,6,7)\na &lt;- lm(y~gA)\ngB &lt;- 2-gA;b &lt;- lm(y~gB)\nc(A_effect=coef(a)[2],B_effect=coef(b)[2])\n\n\nA_effect.gA B_effect.gB \n          2          -2 \n\n\nShow R code\nstopifnot(max(abs(fitted(a)-fitted(b)))&lt;1e-12,\n abs(coef(a)[2]+coef(b)[2])&lt;1e-12)\n\n\nRecord reference and alternate alleles, strand and assembly when joining results. Palindromic allele pairs can be particularly ambiguous without additional frequency and reference information."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#alignment-is-an-optimization-under-a-scoring-rule",
+    "href": "notes/b05_genomics.html#alignment-is-an-optimization-under-a-scoring-rule",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Alignment is an optimization under a scoring rule",
+    "text": "Alignment is an optimization under a scoring rule\nGlobal alignment compares whole supplied sequences; local alignment searches for a high-scoring region. Match rewards, mismatch costs and gap costs encode assumptions about what constitutes a useful comparison. Changing them can change the alignment and the reported identity denominator.\nA short conserved domain can give high local identity while covering little of the protein. Conversely, global alignment of distant or rearranged sequences may be misleading. Always report alignment coverage and context alongside identity. Low-complexity sequence can match often without supplying strong functional evidence.\n\n\n\n\n\n\n\n\nObservation\nWhat it supports directly\nWhat remains to investigate\n\n\n\n\nMatching aligned bases\nIdentity under this alignment\nSignificance and evolutionary relationship\n\n\nSimilar domain sequence\nA candidate domain relationship\nFull architecture and functional evidence\n\n\nShared variant association\nA statistical signal\nLD, confounding and causal allele\n\n\nSupported tree branch\nA relationship under the tree model\nAlignment/model sensitivity and gene/species histories"
+  },
+  {
+    "objectID": "notes/b05_genomics.html#distances-saturation-and-phylogenies",
+    "href": "notes/b05_genomics.html#distances-saturation-and-phylogenies",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Distances, saturation and phylogenies",
+    "text": "Distances, saturation and phylogenies\nObserved mismatches undercount substitutions when a site changes more than once. The Jukes–Cantor correction makes a restrictive equal-rate assumption; its corrected distance rises rapidly near the model boundary. That behavior is a warning about limited information, not evidence of precise very deep divergence.\n\n\nShow R code\np &lt;- seq(0,.7,length.out=80)\nplot(p,-.75*log(1-4*p/3),type='l',\n xlab='Observed mismatch fraction',ylab='JC substitutions per site')\nabline(0,1,lty=2,col='grey50')\n\n\n\n\n\n\n\n\n\nA distance tree summarizes a supplied dissimilarity matrix under an algorithm. UPGMA assumes an ultrametric structure for its evolutionary interpretation, while other methods have different models. Branch support depends on what is resampled and does not establish that an incorrect model becomes correct. Gene histories can differ from species histories through duplication, recombination and other processes."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#quality-decisions-need-denominators",
+    "href": "notes/b05_genomics.html#quality-decisions-need-denominators",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Quality decisions need denominators",
+    "text": "Quality decisions need denominators\nFor an assay summary, record the number of positions or samples assessed. A genotype call rate is the fraction called among eligible observations; a high call rate does not certify correct calls. Filtering can remove poor measurements but can also change the set of variants or animals represented.\nBefore linking a sequence result to biology, inspect reference coverage, sample quality and annotation. Confirm whether the inference concerns the observed region, the full gene or an organism relationship. A pipeline ending with a neat table still requires those distinctions.\n\n\n\n\n\n\nInterpretation challenge\n\n\n\n\n\nTwo proteins share 95% identity over 20 residues but each has 500 residues. Is their overall function established? No. Assess alignment coverage, domain architecture, complexity and biological evidence; a short region supplies a limited claim."
+  },
+  {
+    "objectID": "notes/b05_genomics.html#further-reading",
+    "href": "notes/b05_genomics.html#further-reading",
+    "title": "Genomic measurements and sequence analysis",
+    "section": "Further reading",
+    "text": "Further reading\nUse the NCBI BLAST glossary for terminology and Data Carpentry Genomics for a complete sequencing-workflow teaching context. The calculations here are original restricted demonstrations."
   }
 ]

@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4005,7 +4005,7 @@ window.Quarto = {
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,11 +4048,16 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#plan-allocation-sampling-and-processing-separately" id="toc-plan-allocation-sampling-and-processing-separately" class="nav-link" data-scroll-target="#plan-allocation-sampling-and-processing-separately">Plan allocation, sampling and processing separately</a></li>
+  <li><a href="#replication-dependence-and-effective-information" id="toc-replication-dependence-and-effective-information" class="nav-link" data-scroll-target="#replication-dependence-and-effective-information">Replication, dependence and effective information</a></li>
+  <li><a href="#balance-and-precision-are-different-checks" id="toc-balance-and-precision-are-different-checks" class="nav-link" data-scroll-target="#balance-and-precision-are-different-checks">Balance and precision are different checks</a></li>
+  <li><a href="#specify-exclusions-and-missingness-before-seeing-effects" id="toc-specify-exclusions-and-missingness-before-seeing-effects" class="nav-link" data-scroll-target="#specify-exclusions-and-missingness-before-seeing-effects">Specify exclusions and missingness before seeing effects</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,17 +4090,17 @@ window.Quarto = {
 <p>Define experimental units and independent replication; distinguish randomisation, blocking and batch adjustment; identify confounded designs and specify sample handling.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>For an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.</p>
 <p>A multi-omics study should connect animal identity to tissue, collection time, storage, extraction, assay and batch. Collection and preservation requirements differ across molecules; a shared animal identifier does not imply that one preparation is appropriate for every assay. Predefine exclusion rules and the primary contrast. Where possible, randomise treatment allocation, blind handling and distribute biological groups across processing batches.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>A simple fixed-effect model is <span class="math inline">\(y_i=\beta_0+\beta_T T_i+\beta_B B_i+e_i\)</span>. Its design matrix X must have independent columns to separate treatment and batch. If every control is in batch A and every treatment in batch B, the two effects are not separately identifiable. Increasing the number of observations in the same confounded arrangement does not solve this.</p>
 <p>Blocking balances treatments within a known nuisance factor; batch adjustment models remaining variation. Neither creates the missing comparisons in a perfectly confounded design.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4122,19 +4127,98 @@ confounded       3    2</code></pre>
 </div>
 <p>The balanced design supplies independent treatment and batch columns. The confounded model has three columns but only rank two: software cannot recover the absent information.</p>
 </section>
+<section id="plan-allocation-sampling-and-processing-separately" class="level2">
+<h2 class="anchored" data-anchor-id="plan-allocation-sampling-and-processing-separately">Plan allocation, sampling and processing separately</h2>
+<p>Random allocation concerns the biological intervention. Randomized processing order concerns how samples encounter technical conditions. These operations protect different comparisons. A biologically randomized study can still have diet perfectly confounded with extraction day; randomizing extraction alone does not make an observational exposure a randomized intervention.</p>
+<p>Blocking forms comparisons within a known source of variation, such as farm or baseline weight class. For a balanced two-diet study, both diets should occur within the relevant block where feasible. Record the actual allocation, not just the intended schedule. Blinding helps prevent group knowledge from influencing handling or interpretation; it does not remove differences already present in a design.</p>
+<p>A sample sheet should connect subject, biological specimen and assay aliquot. Keep repeated times explicit. The same animal can supply several samples, and one specimen can supply several technical preparations. A missing assay is not the same as an animal excluded from the whole experiment.</p>
+</section>
+<section id="replication-dependence-and-effective-information" class="level2">
+<h2 class="anchored" data-anchor-id="replication-dependence-and-effective-information">Replication, dependence and effective information</h2>
+<p>For equal clusters with <span class="math inline">\(m\)</span> animals per pen and within-pen correlation <span class="math inline">\(\rho\)</span>, the variance inflation for a simple average relative to independent animals is <span class="math inline">\(D=1+(m-1)\rho\)</span>. This is an illustrative equal-correlation model, not a substitute for specifying the treatment unit and fitting an appropriate analysis.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> .<span class="dv">2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">animals_per_pen=</span>m,<span class="at">design_effect=</span><span class="dv">1</span><span class="sc">+</span>(m<span class="dv">-1</span>)<span class="sc">*</span>rho,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="at">information_relative_to_independence=</span><span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>(m<span class="dv">-1</span>)<span class="sc">*</span>rho))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  animals_per_pen design_effect information_relative_to_independence
+1               1           1.0                            1.0000000
+2               5           1.8                            0.5555556
+3              10           2.8                            0.3571429
+4              20           4.8                            0.2083333</code></pre>
+</div>
+</div>
+<p>When diet is assigned to pens, precision of its comparison depends strongly on the number of independent pens. More animals per pen can improve measurement of a pen response but cannot create new treatment allocations. The same reasoning explains why technical duplicate libraries cannot replace missing biological replicates.</p>
+</section>
+<section id="balance-and-precision-are-different-checks" class="level2">
+<h2 class="anchored" data-anchor-id="balance-and-precision-are-different-checks">Balance and precision are different checks</h2>
+<p>A full-rank design can be highly unbalanced. Sparse cells create uncertain comparisons even when a coefficient exists. Inspect counts within treatment-by-batch combinations, then ask whether the target contrast relies on a small subgroup.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>layout <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&#39;C&#39;</span>,<span class="st">&#39;T&#39;</span>),<span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">3</span>))),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="at">batch=</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&#39;A&#39;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&#39;B&#39;</span>,<span class="dv">4</span>),<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;B&#39;</span>)))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>group<span class="sc">+</span>batch,layout)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     batch
+group A B
+    C 5 4
+    T 1 2</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>group<span class="sc">+</span>batch,layout)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">qr</span>(X)<span class="sc">$</span>rank<span class="sc">==</span><span class="fu">ncol</span>(X))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With independent residual variance one, diagonal entries describe</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficient variances under this particular fixed design.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">solve</span>(<span class="fu">crossprod</span>(X)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)      groupT      batchB 
+  0.1794872   0.4615385   0.3461538 </code></pre>
+</div>
+</div>
+<p>This calculation conditions on the supplied linear model and residual variance. It shows where design information enters uncertainty, without providing a universal recommended sample count.</p>
+</section>
+<section id="specify-exclusions-and-missingness-before-seeing-effects" class="level2">
+<h2 class="anchored" data-anchor-id="specify-exclusions-and-missingness-before-seeing-effects">Specify exclusions and missingness before seeing effects</h2>
+<p>An independently justified failed-assay rule is different from removing a sample because it weakens the desired contrast. Record the reason, when it was identified, affected assays and sensitivity of conclusions. If treatment changes survival or sample availability, the remaining observations may represent a selected subset rather than the original population.</p>
+<p>Power planning needs a biologically meaningful effect, relevant variability, allocation structure, assay reliability and a multiplicity strategy. Sensitivity calculations across plausible inputs are more informative than a single optimistic number. Pilot variance estimates can themselves be uncertain. A design decision should also consider animal welfare, collection burden and feasible independent replication.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Design challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Design challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Two farms each receive only one diet. Is farm adjustment sufficient? No: there is no within-farm treatment comparison. If each farm instead has independently allocated pens receiving both diets, the design supplies comparisons, although pen dependence and the small number of farms still matter for generalization.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>Rank is necessary, not sufficient, for a good experiment. Power, within-unit dependence, transport/storage effects, selection and missingness still matter. Plan biological replication using a relevant effect size and variance, not a universal sample-count rule. See the <a href="https://eda.nc3rs.org.uk/experimental-design-unit">NC3Rs experimental-unit guidance</a> for examples.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>A diet is assigned to four pens, with ten animals per pen. What is the diet experimental unit?</li>
 <li>Can adjustment rescue a treatment–batch confounding problem?</li>
 <li>What must a matched multi-omics sample sheet record?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4143,7 +4227,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The pen; ten animals provide within-pen measurements rather than ten allocations.</li>
@@ -4153,6 +4237,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>Use the <a href="https://eda.nc3rs.org.uk/experimental-design-unit">NC3Rs experimental-unit guidance</a> alongside the design practical. Compare its allocation examples with your own animal, pen and repeated-sampling hierarchy.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

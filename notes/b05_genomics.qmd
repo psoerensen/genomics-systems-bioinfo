@@ -17,7 +17,7 @@ execute:
 
 Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 Sequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.
 
@@ -25,13 +25,13 @@ A FASTA record stores a sequence with a header. FASTQ adds per-base quality info
 
 Identity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 For an aligned comparison with n comparable sites and k differences, $p=k/n$ is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, $d=-3/4\log(1-4p/3)$ estimates substitutions per site for $p<3/4$. Alignment uncertainty and saturation limit this model.
 
 For a Phred quality Q, the encoded error probability is $10^{-Q/10}$. Summing these probabilities gives an expected number of errors, without assuming the errors are independent.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -48,11 +48,67 @@ stopifnot(abs(p-2/12)<1e-12, d>p)
 
 The correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate.
 
-## 4. Interpretation and scope
+## Follow the evidence from reads to variants
+
+A read is a sampled sequence observation with errors and biases. A reference alignment proposes where it originated; a genotype call combines evidence at a site under a model. These are successive inferences. A base with high reported quality can still map ambiguously, and a confidently mapped read can contain uncertain bases. Distinguish base quality from mapping quality.
+
+Coverage is the number of relevant observations at a position under a counting convention. Mean depth can hide regions with little coverage. PCR duplicates and overlapping mates can affect the amount of independent molecular evidence. Reference divergence and missing sequence can also affect alignment differently across animals.
+
+Genotype dosage counts a specified allele; changing the counted allele from A to B changes dosage from $g$ to $2-g$ at a diploid biallelic site. This reverses a regression coefficient's sign without reversing the underlying biological comparison.
+
+```{r}
+gA <- c(0,0,1,1,2,2)
+y <- c(2,3,4,5,6,7)
+a <- lm(y~gA)
+gB <- 2-gA;b <- lm(y~gB)
+c(A_effect=coef(a)[2],B_effect=coef(b)[2])
+stopifnot(max(abs(fitted(a)-fitted(b)))<1e-12,
+ abs(coef(a)[2]+coef(b)[2])<1e-12)
+```
+
+Record reference and alternate alleles, strand and assembly when joining results. Palindromic allele pairs can be particularly ambiguous without additional frequency and reference information.
+
+## Alignment is an optimization under a scoring rule
+
+Global alignment compares whole supplied sequences; local alignment searches for a high-scoring region. Match rewards, mismatch costs and gap costs encode assumptions about what constitutes a useful comparison. Changing them can change the alignment and the reported identity denominator.
+
+A short conserved domain can give high local identity while covering little of the protein. Conversely, global alignment of distant or rearranged sequences may be misleading. Always report alignment coverage and context alongside identity. Low-complexity sequence can match often without supplying strong functional evidence.
+
+| Observation | What it supports directly | What remains to investigate |
+|---|---|---|
+| Matching aligned bases | Identity under this alignment | Significance and evolutionary relationship |
+| Similar domain sequence | A candidate domain relationship | Full architecture and functional evidence |
+| Shared variant association | A statistical signal | LD, confounding and causal allele |
+| Supported tree branch | A relationship under the tree model | Alignment/model sensitivity and gene/species histories |
+
+## Distances, saturation and phylogenies
+
+Observed mismatches undercount substitutions when a site changes more than once. The Jukes–Cantor correction makes a restrictive equal-rate assumption; its corrected distance rises rapidly near the model boundary. That behavior is a warning about limited information, not evidence of precise very deep divergence.
+
+```{r}
+p <- seq(0,.7,length.out=80)
+plot(p,-.75*log(1-4*p/3),type='l',
+ xlab='Observed mismatch fraction',ylab='JC substitutions per site')
+abline(0,1,lty=2,col='grey50')
+```
+
+A distance tree summarizes a supplied dissimilarity matrix under an algorithm. UPGMA assumes an ultrametric structure for its evolutionary interpretation, while other methods have different models. Branch support depends on what is resampled and does not establish that an incorrect model becomes correct. Gene histories can differ from species histories through duplication, recombination and other processes.
+
+## Quality decisions need denominators
+
+For an assay summary, record the number of positions or samples assessed. A genotype call rate is the fraction called among eligible observations; a high call rate does not certify correct calls. Filtering can remove poor measurements but can also change the set of variants or animals represented.
+
+Before linking a sequence result to biology, inspect reference coverage, sample quality and annotation. Confirm whether the inference concerns the observed region, the full gene or an organism relationship. A pipeline ending with a neat table still requires those distinctions.
+
+::: {.callout-note collapse="true" title="Interpretation challenge"}
+Two proteins share 95% identity over 20 residues but each has 500 residues. Is their overall function established? No. Assess alignment coverage, domain architecture, complexity and biological evidence; a short region supplies a limited claim.
+:::
+
+## Interpretation and scope
 
 Whole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review [NCBI’s BLAST glossary](https://www.ncbi.nlm.nih.gov/books/NBK62051/) for the distinction between identity and homology.
 
-## 5. Exercises
+## Exercises
 
 1. Why is the denominator comparable sites rather than all supplied characters?
 2. Why can a dosage of 2 not be interpreted before specifying the counted allele?
@@ -63,6 +119,10 @@ Whole-genome workflows need species/reference selection, coverage, mapping and c
 2. Two counts refer to a particular allele, not a universally favourable genotype.
 3. No; coverage, complexity, evolutionary relationship and functional evidence matter.
 :::
+
+## Further reading
+
+Use the [NCBI BLAST glossary](https://www.ncbi.nlm.nih.gov/books/NBK62051/) for terminology and [Data Carpentry Genomics](https://datacarpentry.github.io/genomics-workshop/) for a complete sequencing-workflow teaching context. The calculations here are original restricted demonstrations.
 
 ## Practicals and course pathways
 

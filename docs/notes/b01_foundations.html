@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4005,7 +4005,7 @@ window.Quarto = {
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,11 +4048,15 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#define-what-an-omics-layer-contributes" id="toc-define-what-an-omics-layer-contributes" class="nav-link" data-scroll-target="#define-what-an-omics-layer-contributes">Define what an omics layer contributes</a></li>
+  <li><a href="#measurement-error-and-biological-signal" id="toc-measurement-error-and-biological-signal" class="nav-link" data-scroll-target="#measurement-error-and-biological-signal">Measurement error and biological signal</a></li>
+  <li><a href="#build-a-study-argument" id="toc-build-a-study-argument" class="nav-link" data-scroll-target="#build-a-study-argument">Build a study argument</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4085,18 +4089,18 @@ window.Quarto = {
 <p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
 <p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
 <p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
 <p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4117,19 +4121,115 @@ window.Quarto = {
 </div>
 <p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
 </section>
+<section id="define-what-an-omics-layer-contributes" class="level2">
+<h2 class="anchored" data-anchor-id="define-what-an-omics-layer-contributes">Define what an omics layer contributes</h2>
+<p>An omics layer is a measurement system with a biological target and an observation process. Genomic dosage describes inherited alleles at measured sites. RNA, proteins and metabolites reflect tissue, time and physiological state. A microbial profile concerns organisms and their genetic potential or activity; a phenotype describes the animal or production system. These layers overlap in biological meaning but have different errors and units.</p>
+<p>Consider a proposed chain from genotype to RNA to protein to a production phenotype. Each arrow asks a distinct question. Does a variant alter a transcript in this tissue? Does that transcript change a protein under these conditions? Does the protein affect the phenotype, or merely accompany it? Feedback can run in the other direction: disease or diet can change molecular profiles. A cross-sectional chain of correlations does not establish that ordered process.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Purpose</th>
+<th>Target</th>
+<th>Useful evidence</th>
+<th>Main danger</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Description</td>
+<td>What differs between sampled groups?</td>
+<td>Defined samples and measurement scale</td>
+<td>Treating a selected sample as the whole population</td>
+</tr>
+<tr class="even">
+<td>Association</td>
+<td>Which measurements vary together?</td>
+<td>Replication and adjustment with a rationale</td>
+<td>Shared causes or reverse direction</td>
+</tr>
+<tr class="odd">
+<td>Prediction</td>
+<td>What will happen for new animals?</td>
+<td>Information available at decision time and independent evaluation</td>
+<td>Leakage or a changed deployment population</td>
+</tr>
+<tr class="even">
+<td>Intervention</td>
+<td>What would change under an action?</td>
+<td>Allocation or justified causal assumptions</td>
+<td>Confounding and an ill-defined action</td>
+</tr>
+<tr class="odd">
+<td>Mechanism</td>
+<td>Through what process does change occur?</td>
+<td>Temporal and perturbation evidence</td>
+<td>Treating a correlated molecular feature as a mediator</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measurement-error-and-biological-signal" class="level2">
+<h2 class="anchored" data-anchor-id="measurement-error-and-biological-signal">Measurement error and biological signal</h2>
+<p>A useful introductory decomposition is <span class="math inline">\(X=S+E\)</span>, with biological signal <span class="math inline">\(S\)</span> and measurement error <span class="math inline">\(E\)</span>. If the terms are independent, observed variance is the sum of their variances. More variability in a feature need not mean more biological information. A noisy assay can appear striking in an unscaled plot and still be an unreliable predictor.</p>
+<p>In a hypothetical classical-error example, adding independent noise to a predictor attenuates its expected simple regression slope. This statement requires the independent-error model; systematic batch error can have a different effect.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>signal <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">2000</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>signal<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">2000</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>noisy <span class="ot">&lt;-</span> signal<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">2000</span>,<span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">clean_slope=</span><span class="fu">coef</span>(<span class="fu">lm</span>(response<span class="sc">~</span>signal))[<span class="dv">2</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="at">noisy_slope=</span><span class="fu">coef</span>(<span class="fu">lm</span>(response<span class="sc">~</span>noisy))[<span class="dv">2</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a> <span class="at">expected_noisy_slope=</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  clean_slope.signal    noisy_slope.noisy expected_noisy_slope 
+           2.0177279            0.4004118            0.4000000 </code></pre>
+</div>
+</div>
+<p>The observed noisy slope need not equal the expectation exactly. Recovering the biological slope requires information about measurement reliability and a suitable model; simply increasing the number of noisy columns is not a correction.</p>
+</section>
+<section id="build-a-study-argument" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-study-argument">Build a study argument</h2>
+<p>Begin with a target population and a decision: predicting later growth in a specified breed is different from explaining a diet response in a sampled group. State the outcome and its units, the allocation unit, measurement times and what contrast will be reported. For each assay, write the extra question it answers. If two layers provide the same information for the current decision, their acquisition cost and failure rate still matter.</p>
+<p>Check feasibility before collecting data. A day-14 blood assay may be practical for monitoring but unavailable for a day-1 management decision. A liver measurement may address mechanism while being unsuitable for routine selection. Separate scientific usefulness from deployment usefulness.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Discussion: choose the evidence">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Discussion: choose the evidence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A protein predicts methane output, and the protein is associated with diet. What experiment would test whether changing the protein changes methane? A perturbation directed at the proposed mechanism, with appropriate controls and outcomes, addresses a different question from another observational association study. Changing diet alone may alter many pathways, so it need not isolate that protein’s role.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Define one diet-effect question and one prediction question.</li>
 <li>Which measurements would be available before a breeding decision?</li>
 <li>Why is agreement between RNA and protein not proof of mediation?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4138,7 +4238,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
@@ -4148,6 +4248,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p><a href="https://www.ebi.ac.uk/training/online/courses/introductory-bioinformatics-pathway/">EMBL-EBI introductory bioinformatics</a> introduces the major resources. For a broader integration perspective, see <a href="https://www.nature.com/articles/nrg.2018.4"><em>Integrative omics for health and disease</em></a>, Nature Reviews Genetics. Ask which ideas transfer to animal production and which depend on the original clinical setting.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

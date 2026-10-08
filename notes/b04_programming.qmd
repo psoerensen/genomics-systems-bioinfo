@@ -17,19 +17,19 @@ execute:
 
 Import and join tables by explicit keys; preserve feature/sample orientation; detect missing, duplicated and reordered records; distinguish source data from derived output.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 A reproducible script specifies inputs, transformations, analysis and outputs. Begin by deciding which dimension contains features and which contains samples. In this course assay matrices have features in rows and animals in columns; genotype matrices have animals in rows. Metadata has one row per animal. These choices must be checked every time an object is transformed.
 
 Use stable keys, not row position, to align data. Keep raw records separate from derived tables. Record transformations and exclusions. Relative paths within an RStudio project make examples portable; temporary files should stay in temporary directories. R is the main environment. Command-line and Python exercises introduce portable concepts without making them dependencies of every practical.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 Suppose an assay column is labelled $a_j$ and metadata row i has animal ID $m_i$. Alignment is the explicit index $j_i=\mathrm{match}(m_i,a)$, followed by reordering and an identity check. A missing index means that animal has no matching measurement. Duplicate keys make the mapping ambiguous.
 
 A successful join does not establish that labels are biologically correct. Identity tracking during collection is still necessary.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -46,11 +46,61 @@ aligned
 
 Animal a1 now receives its labelled measurement, not the value in the original first column. Keeping `drop=FALSE` preserves matrix shape when selecting a single column.
 
-## 4. Interpretation and scope
+## Data objects should express the scientific unit
+
+A matrix has dimensions and values, but the scientific meaning comes from labels and units. A long table with one row per animal–time–feature observation differs from metadata with one row per animal. State the key for every table. If several rows share an animal ID legitimately, joining on animal alone can multiply measurements unexpectedly.
+
+Use separate names for raw counts, normalized counts and log-transformed values. Transposing a matrix changes the location of the observation dimension; it does not change the biological unit. After filtering, confirm identifiers again rather than relying on the previous check.
+
+## Program with contracts and small functions
+
+A function should state what it accepts, what it returns and what assumptions it checks. In a teaching analysis, detecting an unexpected input early is often more useful than making the program silently guess. Positive abundance is required for an ordinary logarithm; an all-missing feature cannot supply a mean or standard deviation.
+
+```{r}
+log2_positive <- function(x) {
+ stopifnot(is.numeric(x),all(is.finite(x)),all(x>0))
+ log2(x)
+}
+x <- c(2,4,8)
+stopifnot(max(abs(2^log2_positive(x)-x))<1e-12)
+# Demonstrate rejection without stopping the teaching document.
+bad_input <- tryCatch(log2_positive(c(2,0)),error=function(e) 'rejected')
+bad_input
+```
+
+This function deliberately disallows missing observations. A different function could support them, but should define their treatment. A successfully returned vector is not evidence that the input measurement was biologically valid.
+
+## Missing values carry information about observation
+
+`NA` is an unknown value, while zero is an observed value on the stated scale. A missing sample, a failed protein identification and a recorded concentration below a detection threshold should not be conflated. A complete-case analysis changes the included population; mean imputation changes variability and covariance.
+
+```{r}
+x <- c(3,5,NA,9)
+c(observed_n=sum(!is.na(x)),observed_mean=mean(x,na.rm=TRUE))
+x_zero <- replace(x,is.na(x),0)
+c(zero_imputed_mean=mean(x_zero),
+ zero_imputed_variance=var(x_zero))
+```
+
+The lower imputed mean follows from a fabricated measurement, not newly acquired evidence. Choose a missingness policy using the assay and question, then report its impact.
+
+## Make a workflow portable
+
+Use project-relative paths and explicit input/output locations. A clean R session exposes dependencies hidden in an interactive workspace. Functions isolate calculations from unrelated objects, while scripts record the order of operations. Record package versions and data versions; a seed only handles selected random operations.
+
+A command-line program receives arguments as text and should validate their meaning. Filenames containing spaces require appropriate quoting. Capture the exit status of a worker process before reading its outputs. Existing files can be stale after a failed run, so their presence alone does not prove success.
+
+Keep source inputs separate from derived outputs. Do not overwrite the only copy of a measurement table during a transformation. A compact analysis manifest can list each output's input, transformation and expected row count. Temporary outputs should remain in an explicitly temporary location.
+
+::: {.callout-note collapse="true" title="Debugging challenge"}
+An analysis runs interactively but fails in a clean session because `normalized` is missing. The original session contained an object created manually. Put its creation into the script, state its inputs and verify that the complete workflow runs from the documented starting point.
+:::
+
+## Interpretation and scope
 
 Checking dimensions alone misses permutations. A seed records a simulation draw, but software versions, inputs, processing choices and model assumptions also affect reproducibility. ID checks cannot detect a correctly labelled tube containing the wrong biological specimen.
 
-## 5. Exercises
+## Exercises
 
 1. Why is `cbind(metadata, t(assay))` unsafe before alignment?
 2. What does `match` return for an absent animal?
@@ -61,6 +111,10 @@ Checking dimensions alone misses permutations. A seed records a simulation draw,
 2. NA; require an explicit missing-sample policy before continuing.
 3. Names preserve which units and transformations each object represents, reducing accidental reuse of a processed value as raw data.
 :::
+
+## Further reading
+
+[Data Carpentry Genomics](https://datacarpentry.github.io/genomics-workshop/) provides complementary project-organization and command-line lessons. [Computational Genomics with R](https://compgenomr.github.io/book/) is a broader reference; compare its examples with the explicit keys and units used here.
 
 ## Practicals and course pathways
 

@@ -3847,7 +3847,7 @@ vertical-align: -.125em;
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -3866,7 +3866,7 @@ vertical-align: -.125em;
 <span class="menu-text">Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -3909,11 +3909,16 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
+  <li><a href="#separate-records-evidence-and-biological-entities" id="toc-separate-records-evidence-and-biological-entities" class="nav-link" data-scroll-target="#separate-records-evidence-and-biological-entities">Separate records, evidence and biological entities</a></li>
+  <li><a href="#coordinates-are-part-of-the-identifier" id="toc-coordinates-are-part-of-the-identifier" class="nav-link" data-scroll-target="#coordinates-are-part-of-the-identifier">Coordinates are part of the identifier</a></li>
+  <li><a href="#audit-a-mapping-before-using-it" id="toc-audit-a-mapping-before-using-it" class="nav-link" data-scroll-target="#audit-a-mapping-before-using-it">Audit a mapping before using it</a></li>
+  <li><a href="#search-retrieve-and-assess" id="toc-search-retrieve-and-assess" class="nav-link" data-scroll-target="#search-retrieve-and-assess">Search, retrieve and assess</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -3946,17 +3951,17 @@ vertical-align: -.125em;
 <p>Distinguish accession, feature and biological-entity identifiers; document reference versions; evaluate one-to-many annotation joins.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>
 <p>A database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.</p>
 <p>In a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<h2 class="anchored" data-anchor-id="model-and-assumptions">Model and assumptions</h2>
 <p>If feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.</p>
 <p>Check key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions.</p>
 </section>
 <section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<h2 class="anchored" data-anchor-id="worked-example">Worked example</h2>
 <p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
 <div class="cell">
 <details class="code-fold">
@@ -3990,19 +3995,124 @@ vertical-align: -.125em;
 </div>
 <p>geneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge.</p>
 </section>
+<section id="separate-records-evidence-and-biological-entities" class="level2">
+<h2 class="anchored" data-anchor-id="separate-records-evidence-and-biological-entities">Separate records, evidence and biological entities</h2>
+<p>A sequence archive stores submitted measurement records; a reference resource organizes a selected assembly and annotation; a curated protein resource combines sequence with evaluated evidence. These are complementary roles. A cross-reference links records, but does not imply that all linked claims have the same evidence or review status.</p>
+<p>Before querying, state the entity: a study, specimen, gene, transcript, protein product, sequence region or pathway. A gene symbol is convenient for display; an accession and version are usually better for traceable retrieval. Keep the original identifiers even after adding readable labels. Distinguish missing annotation from a measured absence of the molecule.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mapping</th>
+<th>Why several records arise</th>
+<th>Analysis consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gene to transcript</td>
+<td>Alternative transcript models</td>
+<td>One gene effect can appear in several annotation rows</td>
+</tr>
+<tr class="even">
+<td>Peptide to protein</td>
+<td>Shared sequence</td>
+<td>Protein identity may be ambiguous</td>
+</tr>
+<tr class="odd">
+<td>Feature to metabolite</td>
+<td>Candidate chemical assignments</td>
+<td>Pathway membership may remain uncertain</td>
+</tr>
+<tr class="even">
+<td>Gene to orthologue</td>
+<td>Duplication and evolutionary history</td>
+<td>Cross-species transfer can be one-to-many</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coordinates-are-part-of-the-identifier" class="level2">
+<h2 class="anchored" data-anchor-id="coordinates-are-part-of-the-identifier">Coordinates are part of the identifier</h2>
+<p>A position is incomplete without chromosome, assembly and convention. One-based closed intervals include both endpoints; zero-based half-open intervals include the start and exclude the end. Thus a one-based interval 101–110 and a zero-based half-open interval 100–110 can describe the same ten bases.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>closed_start <span class="ot">&lt;-</span> <span class="dv">101</span>L;closed_end <span class="ot">&lt;-</span> <span class="dv">110</span>L</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>half_open_start <span class="ot">&lt;-</span> closed_start<span class="dv">-1</span>L;half_open_end <span class="ot">&lt;-</span> closed_end</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">closed_length=</span>closed_end<span class="sc">-</span>closed_start<span class="sc">+</span><span class="dv">1</span>L,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="at">half_open_length=</span>half_open_end<span class="sc">-</span>half_open_start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   closed_length half_open_length 
+              10               10 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(closed_end<span class="sc">-</span>closed_start<span class="sc">+</span><span class="dv">1</span>L<span class="sc">==</span>half_open_end<span class="sc">-</span>half_open_start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The arithmetic is simple, but an unnoticed convention mismatch can shift overlap calculations. Conversion of convention is also different from transferring coordinates between assemblies. Assembly transfer requires a mapping and can leave regions unmatched or ambiguous.</p>
+</section>
+<section id="audit-a-mapping-before-using-it" class="level2">
+<h2 class="anchored" data-anchor-id="audit-a-mapping-before-using-it">Audit a mapping before using it</h2>
+<p>Report input keys, unique matched keys, unmatched keys and row expansion. Count unique biological entities for questions about entity overlap; count annotation rows only when rows are the intended unit. Avoid silently taking the first transcript returned by a database as the biologically relevant transcript.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">feature=</span><span class="fu">c</span>(<span class="st">&#39;f1&#39;</span>,<span class="st">&#39;f2&#39;</span>,<span class="st">&#39;f3&#39;</span>,<span class="st">&#39;f4&#39;</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">feature=</span><span class="fu">c</span>(<span class="st">&#39;f1&#39;</span>,<span class="st">&#39;f1&#39;</span>,<span class="st">&#39;f2&#39;</span>,<span class="st">&#39;f4&#39;</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> <span class="at">gene=</span><span class="fu">c</span>(<span class="st">&#39;gA&#39;</span>,<span class="st">&#39;gB&#39;</span>,<span class="st">&#39;gB&#39;</span>,<span class="st">&#39;gC&#39;</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>audit <span class="ot">&lt;-</span> <span class="fu">merge</span>(input,map,<span class="at">all.x=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">input_features=</span><span class="fu">nrow</span>(input),<span class="at">annotation_rows=</span><span class="fu">nrow</span>(audit),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> <span class="at">matched_features=</span><span class="fu">length</span>(<span class="fu">unique</span>(audit<span class="sc">$</span>feature[<span class="sc">!</span><span class="fu">is.na</span>(audit<span class="sc">$</span>gene)])),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="at">distinct_genes=</span><span class="fu">length</span>(<span class="fu">unique</span>(<span class="fu">na.omit</span>(audit<span class="sc">$</span>gene))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  input_features annotation_rows matched_features distinct_genes
+1              4               5                3              3</code></pre>
+</div>
+</div>
+<p>The same gB is linked to two features, while f1 links to two genes. Deduplication cannot be solved by a universal rule: aggregation changes the measurement represented. Document the choice before enrichment or integration.</p>
+</section>
+<section id="search-retrieve-and-assess" class="level2">
+<h2 class="anchored" data-anchor-id="search-retrieve-and-assess">Search, retrieve and assess</h2>
+<p>For a public-study exercise, first read the experiment description and sample metadata. A downloadable expression matrix can lack the variables needed for the intended comparison. Check species, tissue, group definitions, biological replication and processing before considering its size.</p>
+<p>Preserve the retrieval query, file checksum, reference versions and a local processing record. A later database update may improve annotation while changing results; reproducibility and current interpretation can require both the original mapping and a documented update.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Record-review challenge">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Record-review challenge
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A protein record cites experimental evidence for an enzymatic function in one species. What justifies assigning that function to a livestock gene? Evaluate the evolutionary relationship, sequence/domain evidence and experimental context. A cross-reference or similar name alone does not establish identical function.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">Interpretation and scope</h2>
 <p>The fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the <a href="https://www.ncbi.nlm.nih.gov/geo/info/datasets.html">NCBI GEO documentation</a>.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <ol type="1">
 <li>Why did the row count increase?</li>
 <li>What happens with an inner join?</li>
 <li>Name four metadata fields needed for a genomic coordinate.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4011,7 +4121,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>geneA has a one-to-many mapping.</li>
@@ -4021,6 +4131,10 @@ Suggested answers
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>The <a href="https://www.ebi.ac.uk/training/online/courses/introductory-bioinformatics-pathway/">EMBL-EBI introductory pathway</a> links gene, protein and structure resources. <a href="https://www.ncbi.nlm.nih.gov/geo/info/datasets.html">NCBI GEO record documentation</a> explains its record hierarchy; use it to distinguish a sample record from a study series.</p>
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>

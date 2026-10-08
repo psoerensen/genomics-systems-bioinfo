@@ -17,19 +17,19 @@ execute:
 
 Distinguish accession, feature and biological-entity identifiers; document reference versions; evaluate one-to-many annotation joins.
 
-## 1. Biological question and measurements
+## Biological question and measurements
 
 A database record is not interchangeable with an organism, a sample or a gene. A study can contain many specimens, and a gene can have multiple transcripts and protein products. Sequence, expression, protein, structure and pathway resources answer different questions. Preserve species, genome assembly, accession/version, coordinate conventions and retrieval date alongside a record.
 
 In a real project, select the organism and assembly before mapping variants to genes. Check whether a downloaded table reports gene IDs, transcript IDs, symbols or probes. Symbols can change or be shared. Joining on an ambiguous display label can duplicate rows or silently lose records. GEO, for example, distinguishes sample, series and platform records; these are different levels of metadata.
 
-## 2. Model and assumptions
+## Model and assumptions
 
 If feature f maps to several transcripts, a join produces several annotation rows for the same measured value. This is a representation of a relationship, not new biological replication. An eligible pathway background should be constructed from features that could have entered the analysis, after documenting the feature-to-gene mapping.
 
 Check key uniqueness, unmatched records and row expansion before summarising. Define whether many features per gene will be combined, selected or retained; different choices answer different questions.
 
-## 3. Worked example
+## Worked example
 
 The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
 
@@ -46,11 +46,64 @@ stopifnot(nrow(joined)==4, sum(is.na(joined$transcript))==1)
 
 geneA appears twice because it has two annotation records. geneC remains present but unmatched. Neither situation should be hidden by a convenient merge.
 
-## 4. Interpretation and scope
+## Separate records, evidence and biological entities
+
+A sequence archive stores submitted measurement records; a reference resource organizes a selected assembly and annotation; a curated protein resource combines sequence with evaluated evidence. These are complementary roles. A cross-reference links records, but does not imply that all linked claims have the same evidence or review status.
+
+Before querying, state the entity: a study, specimen, gene, transcript, protein product, sequence region or pathway. A gene symbol is convenient for display; an accession and version are usually better for traceable retrieval. Keep the original identifiers even after adding readable labels. Distinguish missing annotation from a measured absence of the molecule.
+
+| Mapping | Why several records arise | Analysis consequence |
+|---|---|---|
+| Gene to transcript | Alternative transcript models | One gene effect can appear in several annotation rows |
+| Peptide to protein | Shared sequence | Protein identity may be ambiguous |
+| Feature to metabolite | Candidate chemical assignments | Pathway membership may remain uncertain |
+| Gene to orthologue | Duplication and evolutionary history | Cross-species transfer can be one-to-many |
+
+## Coordinates are part of the identifier
+
+A position is incomplete without chromosome, assembly and convention. One-based closed intervals include both endpoints; zero-based half-open intervals include the start and exclude the end. Thus a one-based interval 101–110 and a zero-based half-open interval 100–110 can describe the same ten bases.
+
+```{r}
+closed_start <- 101L;closed_end <- 110L
+half_open_start <- closed_start-1L;half_open_end <- closed_end
+c(closed_length=closed_end-closed_start+1L,
+ half_open_length=half_open_end-half_open_start)
+stopifnot(closed_end-closed_start+1L==half_open_end-half_open_start)
+```
+
+The arithmetic is simple, but an unnoticed convention mismatch can shift overlap calculations. Conversion of convention is also different from transferring coordinates between assemblies. Assembly transfer requires a mapping and can leave regions unmatched or ambiguous.
+
+## Audit a mapping before using it
+
+Report input keys, unique matched keys, unmatched keys and row expansion. Count unique biological entities for questions about entity overlap; count annotation rows only when rows are the intended unit. Avoid silently taking the first transcript returned by a database as the biologically relevant transcript.
+
+```{r}
+input <- data.frame(feature=c('f1','f2','f3','f4'))
+map <- data.frame(feature=c('f1','f1','f2','f4'),
+ gene=c('gA','gB','gB','gC'))
+audit <- merge(input,map,all.x=TRUE)
+data.frame(input_features=nrow(input),annotation_rows=nrow(audit),
+ matched_features=length(unique(audit$feature[!is.na(audit$gene)])),
+ distinct_genes=length(unique(na.omit(audit$gene))))
+```
+
+The same gB is linked to two features, while f1 links to two genes. Deduplication cannot be solved by a universal rule: aggregation changes the measurement represented. Document the choice before enrichment or integration.
+
+## Search, retrieve and assess
+
+For a public-study exercise, first read the experiment description and sample metadata. A downloadable expression matrix can lack the variables needed for the intended comparison. Check species, tissue, group definitions, biological replication and processing before considering its size.
+
+Preserve the retrieval query, file checksum, reference versions and a local processing record. A later database update may improve annotation while changing results; reproducibility and current interpretation can require both the original mapping and a documented update.
+
+::: {.callout-note collapse="true" title="Record-review challenge"}
+A protein record cites experimental evidence for an enzymatic function in one species. What justifies assigning that function to a livestock gene? Evaluate the evolutionary relationship, sequence/domain evidence and experimental context. A cross-reference or similar name alone does not establish identical function.
+:::
+
+## Interpretation and scope
 
 The fictional labels demonstrate cardinality rather than actual annotation. The same symbol in another species or assembly need not denote the same record. Biological assignment of a nearby variant to a gene is evidence to investigate, not proof of the causal gene. For actual record types, use the [NCBI GEO documentation](https://www.ncbi.nlm.nih.gov/geo/info/datasets.html).
 
-## 5. Exercises
+## Exercises
 
 1. Why did the row count increase?
 2. What happens with an inner join?
@@ -61,6 +114,10 @@ The fictional labels demonstrate cardinality rather than actual annotation. The 
 2. geneC disappears; this is an exclusion that should be reported.
 3. Species, assembly, chromosome and coordinate convention; also record the annotation/version and feature identity.
 :::
+
+## Further reading
+
+The [EMBL-EBI introductory pathway](https://www.ebi.ac.uk/training/online/courses/introductory-bioinformatics-pathway/) links gene, protein and structure resources. [NCBI GEO record documentation](https://www.ncbi.nlm.nih.gov/geo/info/datasets.html) explains its record hierarchy; use it to distinguish a sample record from a study series.
 
 ## Practicals and course pathways
 
