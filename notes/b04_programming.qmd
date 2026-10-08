@@ -64,6 +64,6 @@ Checking dimensions alone misses permutations. A seed records a simulation draw,
 
 ## Practicals and course pathways
 
-Data handling (in development), command-line workflow (in development) and reporting (in development).
+Data handling (in development), [command-line workflow](../tutorials/p03_command_line.qmd) and reporting (in development).
 
 Use the [unified map](../course_map.qmd) to locate B04 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

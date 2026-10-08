@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reusable teaching modules – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Integrating molecular layers and phenotypes – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cc63fce9873912f1bbbccf05079cc9ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc63fce9873912f1bbbccf05079cc9ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +103,44 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -78,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Genomics, Systems Biology &amp; Bioinformatics</span>
     </a>
   </div>
@@ -89,19 +162,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./course_map.html"> 
+    <a class="nav-link" href="../course_map.html"> 
 <span class="menu-text">Course map</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./modules.html" aria-current="page"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./practicals.html"> 
+    <a class="nav-link" href="../practicals.html"> 
 <span class="menu-text">Practicals</span></a>
   </li>  
   <li class="nav-item">
@@ -132,8 +205,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#available-modules" id="toc-available-modules" class="nav-link active" data-scroll-target="#available-modules">Available modules</a></li>
-  <li><a href="#development-status" id="toc-development-status" class="nav-link" data-scroll-target="#development-status">Development status</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
+  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
+  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
     </div>
@@ -142,7 +220,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reusable teaching modules</h1>
+<h1 class="title">Integrating molecular layers and phenotypes</h1>
+<p class="subtitle lead">B15: Reusable teaching module</p>
 </div>
 
 
@@ -159,33 +238,84 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Each module combines concepts, assumptions, a worked R example and exercises with suggested answers. Follow a course pathway in the <a href="./course_map.html">unified map</a>, or choose a block below.</p>
-<section id="available-modules" class="level2">
-<h2 class="anchored" data-anchor-id="available-modules">Available modules</h2>
-<ul>
-<li><a href="./notes/b01_foundations.html">B01: Biological questions and omics measurements</a></li>
-<li><a href="./notes/b02_design.html">B02: Experimental design and biological sampling</a></li>
-<li><a href="./notes/b03_databases.html">B03: Biological databases and identifier mapping</a></li>
-<li><a href="./notes/b04_programming.html">B04: Programming and reproducible data handling</a></li>
-<li><a href="./notes/b05_genomics.html">B05: Genomic measurements and sequence analysis</a></li>
-<li><a href="./notes/b06_transcriptomics.html">B06: Transcriptomics and expression analysis</a></li>
-<li><a href="./notes/b07_epigenomics.html">B07: Epigenomic measurements and regulatory interpretation</a></li>
-<li><a href="./notes/b08_proteomics.html">B08: Protein identification, abundance and structure</a></li>
-<li><a href="./notes/b09_metabolomics.html">B09: Metabolite features, identification and quantification</a></li>
-<li><a href="./notes/b10_microbiomics.html">B10: Microbial communities and host relationships</a></li>
-<li><a href="./notes/b11_phenomics.html">B11: Phenomics, sensors and measurement timing</a></li>
-<li><a href="./notes/b12_statistics.html">B12: Statistical models and honest validation</a></li>
-<li><a href="./notes/b13_association.html">B13: Association, prediction and regulatory evidence</a></li>
-<li><a href="./notes/b14_networks.html">B14: Pathway enrichment and biological networks</a></li>
-<li><a href="./notes/b15_integration.html">B15: Integrating molecular layers and phenotypes</a></li>
-<li><a href="./notes/b16_advanced.html">B16: Single-cell, spatial and emerging methods</a></li>
-<li><a href="./notes/b17_integrity.html">B17: Reproducibility, data governance and responsible research</a></li>
-<li><a href="./notes/b18_synthesis.html">B18: Animal-production questions and integrated reporting</a></li>
-</ul>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>Distinguish early, intermediate and late integration; align samples and scales; evaluate common latent patterns, missing layers and validation.</p>
 </section>
-<section id="development-status" class="level2">
-<h2 class="anchored" data-anchor-id="development-status">Development status</h2>
-<p>18 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed.</p>
+<section id="biological-question-and-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
+<p>Integration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.</p>
+<p>Verify animal identity, specimen and time before computing cross-layer associations. Samples from the same animal but different time points are not automatically interchangeable. A missing layer can depend on disease severity or technical failure, so a complete-case subset may not represent the target population. Feature scaling controls the influence of units and variance; block weighting also controls the influence of unequal feature counts.</p>
+</section>
+<section id="model-and-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
+<p>For layer matrices <span class="math inline">\(X_k\)</span> with animals in rows, a simple concatenation is <span class="math inline">\(X=[w_1 Z_1,\ldots,w_K Z_K]\)</span>, where <span class="math inline">\(Z_k\)</span> uses training-derived centering/scaling. Choosing <span class="math inline">\(w_k=1/\sqrt{p_k}\)</span> gives each standardized block the same total marginal variance p-weight in training when it has <span class="math inline">\(p_k\)</span> nonconstant features. It is a design choice, not a universally optimal integration method.</p>
+<p>Correlated layers may share biology, batch effects or repeated measurements. Cross-layer agreement is not independent replication by default.</p>
+</section>
+<section id="worked-example" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
+<p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1501</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">cbind</span>(z<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">sd=</span>.<span class="dv">2</span>), z<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">sd=</span>.<span class="dv">2</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">cbind</span>(z<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">sd=</span>.<span class="dv">3</span>), <span class="fu">rnorm</span>(<span class="dv">12</span>), <span class="fu">rnorm</span>(<span class="dv">12</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ZA <span class="ot">&lt;-</span> <span class="fu">scale</span>(A); ZB <span class="ot">&lt;-</span> <span class="fu">scale</span>(B)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ZA<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">ncol</span>(ZA)),ZB<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">ncol</span>(ZB)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(combined,<span class="at">center=</span><span class="cn">FALSE</span>,<span class="at">scale.=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">A_total_variance=</span><span class="fu">sum</span>(<span class="fu">apply</span>(ZA<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span>),<span class="dv">2</span>,var)),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="at">B_total_variance=</span><span class="fu">sum</span>(<span class="fu">apply</span>(ZB<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">3</span>),<span class="dv">2</span>,var)),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="at">PC1_fraction=</span>fit<span class="sc">$</span>sdev[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">sum</span>(fit<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A_total_variance B_total_variance     PC1_fraction 
+       1.0000000        1.0000000        0.7082201 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(<span class="fu">sum</span>(<span class="fu">apply</span>(ZA<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span>),<span class="dv">2</span>,var))<span class="sc">-</span><span class="dv">1</span>)<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Each block has total marginal variance one, but the joint PCs still depend on covariance. The common latent variable was deliberately supplied; a principal component is not a discovered mechanism.</p>
+</section>
+<section id="interpretation-and-scope" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
+<p>An integration example must specify the unit, timing, transformation, missingness policy, target and validation. The <a href="https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment_cheatsheet.html">MultiAssayExperiment documentation</a> illustrates explicit mappings between assay columns and biological subjects; these practicals implement small analogous checks with base R.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<ol type="1">
+<li>Why can a large feature block dominate concatenated PCA?</li>
+<li>Does block weighting remove batch effects?</li>
+<li>Where should scaling be estimated for prediction?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>More standardized features contribute more total variance.</li>
+<li>No; weighting changes influence, not confounding.</li>
+<li>Within each training split, then applied to held-out animals.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="practicals-and-course-pathways" class="level2">
+<h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
+<p>Integrated analysis (in development), multi-omics integration (in development) and interpretation (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B15 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

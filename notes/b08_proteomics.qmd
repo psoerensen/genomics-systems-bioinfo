@@ -65,6 +65,6 @@ The teaching protein values are supplied log2 abundances. They are not raw spect
 
 ## Practicals and course pathways
 
-Protein structure (in development) and proteomics analysis (in development) address different measurements.
+[Protein structure](../tutorials/p07_structure.qmd) and proteomics analysis (in development) address different measurements.
 
 Use the [unified map](../course_map.qmd) to locate B08 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -1,0 +1,94 @@
+---
+title: "Biological databases and sequence retrieval"
+subtitle: "Practical 1: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Identify record levels and provenance; retrieve local teaching records by explicit accession; audit one-to-many annotation.
+
+## Biological question and data
+
+Which biological records are needed to connect a measured feature to its sequence and annotation? This offline exercise uses fictional records so retrieval is reproducible and does not depend on a live service.
+
+Records are distinct objects; study, sample, gene and transcript identifiers are not interchangeable. Real retrieval needs species, assembly, version and access checks.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Inspect the resource catalogue
+
+Use the record type to determine what a query returns.
+
+```{r}
+catalogue <- data.frame(accession=c("study_demo","sample_demo1","gene_demo1","tx_demo1"),
+ type=c("study","sample","gene","transcript"),
+ parent=c(NA,"study_demo",NA,"gene_demo1"),version=c("v1","v1","v2","v1"))
+catalogue
+stopifnot(!anyDuplicated(catalogue$accession))
+```
+
+All identifiers are fictional. A sample belongs to a study; a transcript relates to a gene. Neither relationship supplies the measurement values.
+
+## 2. Retrieve and preserve records
+
+Select explicitly and round-trip a temporary CSV. This represents retrieval from a supplied snapshot, not an API call.
+
+```{r}
+selected <- catalogue[match(c("gene_demo1","tx_demo1"),catalogue$accession),]
+stopifnot(!anyNA(selected$accession))
+file <- tempfile(fileext=".csv")
+write.csv(selected,file,row.names=FALSE,na="")
+restored <- read.csv(file,na.strings="",stringsAsFactors=FALSE)
+stopifnot(identical(as.character(restored$accession),selected$accession))
+data.frame(accession=restored$accession,version=restored$version,
+ snapshot_checksum=unname(tools::md5sum(file)))
+unlink(file)
+```
+
+A checksum captures this snapshot’s bytes. The version remains separate because a checksum is not a biological accession.
+
+## 3. Audit annotation expansion
+
+A gene-to-transcript mapping can expand the rows. Count distinct biological keys after the join.
+
+```{r}
+measurement <- data.frame(gene=c("gene_demo1","gene_demo2"),value=c(8,10))
+map <- data.frame(gene=c("gene_demo1","gene_demo1"),transcript=c("tx1","tx2"))
+joined <- merge(measurement,map,all.x=TRUE)
+joined
+stopifnot(nrow(joined)==3,length(unique(joined$gene))==2)
+```
+
+Three joined rows still represent two measured genes, not three independent measurements.
+
+## Interpretation and limits
+
+For a real GEO analysis, distinguish series, samples and platforms using [NCBI’s record documentation](https://www.ncbi.nlm.nih.gov/geo/info/datasets.html). This practical does not download or validate an organism-specific annotation.
+
+## Exercises
+
+1. Add an unmatched query and require an informative check.
+2. Explain why transcript rows cannot be counted as independent gene measurements.
+3. What extra fields would a variant-annotation snapshot need?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. `match` returns NA; stop or record the exclusion before indexing.
+2. Both transcript annotations reuse the gene measurement.
+3. Species, assembly, coordinate convention, counted alleles where relevant, annotation release, source and retrieval details.
+:::
+
+## Continue learning
+
+[B03 Databases](../notes/b03_databases.qmd) and [B04 Programming](../notes/b04_programming.qmd).
+
+Continue with [sequence handling](p02_sequences.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

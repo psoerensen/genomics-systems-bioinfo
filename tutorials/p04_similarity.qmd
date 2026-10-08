@@ -1,0 +1,91 @@
+---
+title: "Sequence similarity and evidence for homology"
+subtitle: "Practical 4: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Compute aligned identity with a stated denominator; explore a composition-preserving shuffle comparison; distinguish similarity, homology and function.
+
+## Biological question and data
+
+Does a high number of matching bases provide enough evidence to claim common ancestry or shared function?
+
+Two supplied short sequences are compared at corresponding positions without gaps. A shuffle calculation conditions on one sequence’s base composition; it is a restricted teaching null, not BLAST or an evolutionary test.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Measure identity
+
+The sequences have equal length. Record both matches and denominator.
+
+```{r}
+a <- strsplit("ACGTACGTACGTACGT","")[[1]]
+b <- strsplit("ACGTACGTTCGTACGA","")[[1]]
+stopifnot(length(a)==length(b))
+observed <- sum(a==b)
+c(matches=observed,length=length(a),identity=observed/length(a))
+stopifnot(observed==14)
+```
+
+Fourteen of sixteen corresponding bases match in this supplied alignment.
+
+## 2. Compare a restricted shuffle null
+
+Shuffle the second sequence without changing composition. Include the usual plus-one Monte Carlo tail convention.
+
+```{r}
+set.seed(401)
+shuffled <- replicate(499,sum(a==sample(b)))
+p_mc <- (1+sum(shuffled>=observed))/(length(shuffled)+1)
+c(shuffle_mean=mean(shuffled),observed=observed,shuffle_tail=p_mc)
+hist(shuffled,breaks=seq(-.5,16.5,1),xlab="Matches under composition shuffle",main="Restricted teaching null")
+abline(v=observed,col="#d95f02",lwd=2)
+```
+
+This comparison shows what positional matches look like after a particular randomization. It ignores database size, local-alignment selection, substitution models and sequence dependence.
+
+## 3. Separate claims
+
+Place each claim beside the extra evidence it needs.
+
+```{r}
+claims <- data.frame(claim=c("sequence similarity","homology","shared function"),
+ evidence=c("explicit aligned comparison","ancestry inference with appropriate context",
+ "functional/domain/experimental evidence"))
+claims
+```
+
+Homology is a relationship of common ancestry, not 87.5% homology. Shared function is a further biological claim.
+
+## Interpretation and limits
+
+Use the [NCBI BLAST glossary](https://www.ncbi.nlm.nih.gov/books/NBK62051/) to distinguish identity and homology. The toy shuffle tail is not a database-search E-value and cannot be substituted for one.
+
+## Exercises
+
+1. Compare two all-A sequences. Why is high identity weak evidence here?
+2. What is ignored by positional comparison when lengths differ?
+3. Does a small shuffle tail establish function?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Low complexity makes agreement unsurprising; the composition-preserving shuffle gives the same matches.
+2. Alignment, indels and local-versus-global coverage must be specified.
+3. No; it addresses only the stated restricted null.
+:::
+
+## Continue learning
+
+[B05 Genomics](../notes/b05_genomics.qmd).
+
+Continue with [alignment](p05_alignment.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

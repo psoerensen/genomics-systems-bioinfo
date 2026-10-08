@@ -1,0 +1,95 @@
+---
+title: "Basic sequence analysis and manipulation"
+subtitle: "Practical 2: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Parse FASTA records; validate sequence symbols; calculate called-base GC content; construct a reverse complement.
+
+## Biological question and data
+
+How do file structure and unknown bases affect a sequence summary?
+
+FASTA inputs contain only A, C, G, T and N; these teaching records have no quality scores. N is unknown and is excluded from the GC denominator.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Parse explicit records
+
+Use the local teaching parser, which rejects missing headers, duplicate IDs and invalid bases.
+
+```{r}
+source("../R/sequence_helpers.R")
+sequences <- read_teaching_fasta(c(">demo1","ACGTNN","GCGC",">demo2","TTTACG"))
+sequences
+stopifnot(nchar(sequences["demo1"])==10)
+```
+
+Wrapped sequence lines are joined within their records. Sequence length includes unknown bases.
+
+## 2. Calculate called-base summaries
+
+Count unknowns separately. An all-unknown sequence has no estimable called-base GC proportion.
+
+```{r}
+summary_one <- function(s) {
+ x <- strsplit(s,"")[[1]]; called <- x%in%c("A","C","G","T")
+ c(length=length(x),called=sum(called),unknown=sum(!called),
+ GC=if(any(called))mean(x[called]%in%c("G","C")) else NA_real_)
+}
+result <- t(vapply(sequences,summary_one,numeric(4)))
+result
+stopifnot(abs(result["demo1","GC"]-6/8)<1e-12,
+ is.na(summary_one("NNN")["GC"]))
+```
+
+demo1 has ten characters but eight called bases; six called bases are G or C.
+
+## 3. Reverse-complement the sequence
+
+Reverse the base order as well as complementing each symbol. Keep unknown N as N.
+
+```{r}
+reverse_complement <- function(s) {
+ x <- rev(strsplit(s,"")[[1]])
+ paste(unname(c(A="T",C="G",G="C",T="A",N="N")[x]),collapse="")
+}
+rc <- vapply(sequences,reverse_complement,character(1))
+rc
+stopifnot(identical(unname(vapply(rc,reverse_complement,character(1))),unname(sequences)))
+```
+
+Reverse complementing twice restores the original sequence, a useful orientation check.
+
+## Interpretation and limits
+
+Called-base GC is a descriptive proportion, not sequencing quality or coding potential. Unknown bases and selected regions can make whole-record comparisons misleading. This parser is intentionally small, not a general FASTA library.
+
+## Exercises
+
+1. Recalculate GC including N in the denominator; explain the change.
+2. Add a duplicate header.
+3. Why does complementing without reversing give a different object?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It decreases to 6/10, treating unknowns as if they were called non-GC bases.
+2. The parser rejects the ambiguous identifier.
+3. A reverse complement changes strand orientation; complement alone preserves the original character order.
+:::
+
+## Continue learning
+
+[B04 Programming](../notes/b04_programming.qmd) and [B05 Genomics](../notes/b05_genomics.qmd).
+
+Continue with [sequence similarity](p04_similarity.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

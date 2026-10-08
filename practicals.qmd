@@ -7,6 +7,13 @@ Practicals use explicit assumptions, small hypothetical datasets and reproducibl
 
 ## Available practicals
 
-The first practicals are in development.
+- [Biological databases and sequence retrieval](tutorials/p01_databases.qmd)
+- [Basic sequence analysis and manipulation](tutorials/p02_sequences.qmd)
+- [Command-line bioinformatics and reproducible execution](tutorials/p03_command_line.qmd)
+- [Sequence similarity and evidence for homology](tutorials/p04_similarity.qmd)
+- [Alignment and conserved-region analysis](tutorials/p05_alignment.qmd)
+- [Distances, clustering and phylogenetic interpretation](tutorials/p06_phylogeny.qmd)
+- [Protein structure and structural bioinformatics](tutorials/p07_structure.qmd)
+- [Sequencing data quality assessment](tutorials/p08_sequence_qc.qmd)
 
 Use the [curriculum crosswalk](course_map.qmd#practical-session-coverage) to locate each session in the two original outlines. Shared practicals can have different pathway extensions.

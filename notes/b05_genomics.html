@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Animal-production questions and integrated reporting – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Genomic measurements and sequence analysis – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Animal-production questions and integrated reporting</h1>
-<p class="subtitle lead">B18: Reusable teaching module</p>
+<h1 class="title">Genomic measurements and sequence analysis</h1>
+<p class="subtitle lead">B05: Reusable teaching module</p>
 </div>
 
 
@@ -4071,17 +4071,18 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Translate a production question into design and analysis; evaluate usefulness at the intended decision time; communicate uncertainty, alternatives and follow-up.</p>
+<p>Distinguish sequence reads, assemblies, alignments and genotype calls; calculate simple quality and distance summaries; distinguish similarity from homology and association from mechanism.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>Animal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.</p>
-<p>An integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance.</p>
+<p>Sequencing produces reads from molecules, not a finished genome. Assembly reconstructs sequence relationships; alignment compares reads or sequences against a reference; variant calling estimates differences under measurement and calling assumptions. Genotyping platforms measure selected variants. Genome assembly and annotation versions define the coordinates and biological interpretation.</p>
+<p>A FASTA record stores a sequence with a header. FASTQ adds per-base quality information. A gap in an alignment represents an alignment decision about an insertion/deletion, not a fifth nucleotide. A SNP dosage of 0, 1 or 2 counts the stated allele in a diploid genotype and requires a missing-call convention.</p>
+<p>Identity describes matching aligned residues. Homology describes common ancestry; it is not a percentage. Sequence similarity is evidence to interpret alongside length, complexity, significance and biological context.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>For a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are <span class="math inline">\(e_{i0}\)</span> and <span class="math inline">\(e_{i1}\)</span>, the paired improvement in squared error is <span class="math inline">\(d_i=e_{i0}^2-e_{i1}^2\)</span>. Its mean is positive when the augmented model has smaller mean squared error in that group.</p>
-<p>One evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment.</p>
+<p>For an aligned comparison with n comparable sites and k differences, <span class="math inline">\(p=k/n\)</span> is the observed mismatch fraction. Under the Jukes–Cantor assumptions of equal base frequencies and equal substitution rates, <span class="math inline">\(d=-3/4\log(1-4p/3)\)</span> estimates substitutions per site for <span class="math inline">\(p&lt;3/4\)</span>. Alignment uncertainty and saturation limit this model.</p>
+<p>For a Phred quality Q, the encoded error probability is <span class="math inline">\(10^{-Q/10}\)</span>. Summing these probabilities gives an expected number of errors, without assuming the errors are independent.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4089,35 +4090,45 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">11</span>,<span class="dv">13</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>augmented <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.5</span>,<span class="fl">11.7</span>,<span class="fl">9.5</span>,<span class="fl">13.4</span>,<span class="fl">11.2</span>,<span class="fl">12.7</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> (observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span><span class="sc">-</span>(observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">baseline_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span>)),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">augmented_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span>)),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">paired_MSE_improvement=</span><span class="fu">mean</span>(d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Q=</span>Q,<span class="at">error_probability=</span><span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span>Q<span class="sc">/</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>         baseline_RMSE         augmented_RMSE paired_MSE_improvement 
-             1.7795130              0.4242641              2.9866667 </code></pre>
+<pre><code>   Q error_probability
+1 10             1e-01
+2 20             1e-02
+3 30             1e-03
+4 40             1e-04</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(<span class="fu">mean</span>(d)<span class="sc">-</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span><span class="fu">mean</span>((observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span>)))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="st">&quot;ACGTACGTACGT&quot;</span>,<span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="st">&quot;ACGTTCGTTCGT&quot;</span>,<span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">mean</span>(a<span class="sc">!=</span>b)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="sc">-</span>.<span class="dv">75</span><span class="sc">*</span><span class="fu">log</span>(<span class="dv">1-4</span><span class="sc">*</span>p<span class="sc">/</span><span class="dv">3</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">observed_fraction=</span>p, <span class="at">JC_distance=</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>observed_fraction       JC_distance 
+        0.1666667         0.1884858 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(p<span class="dv">-2</span><span class="sc">/</span><span class="dv">12</span>)<span class="sc">&lt;</span><span class="fl">1e-12</span>, d<span class="sc">&gt;</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize.</p>
+<p>The correction exceeds the observed difference because multiple changes can occur at a site. These short hypothetical sequences do not establish ancestry or a reliable divergence estimate.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>Follow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements.</p>
+<p>Whole-genome workflows need species/reference selection, coverage, mapping and calling diagnostics, filtering and assessment of sampling. A clustering tree from distances is not automatically a species phylogeny. Review <a href="https://www.ncbi.nlm.nih.gov/books/NBK62051/">NCBI’s BLAST glossary</a> for the distinction between identity and homology.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Why compare predictions on the same test animals?</li>
-<li>Does predictive improvement show that an assay measures a causal mediator?</li>
-<li>What belongs in a concise final report?</li>
+<li>Why is the denominator comparable sites rather than all supplied characters?</li>
+<li>Why can a dosage of 2 not be interpreted before specifying the counted allele?</li>
+<li>Can a high-identity short alignment establish function?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4132,9 +4143,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>It makes the comparison paired and avoids changing the population between models.</li>
-<li>No; proxies can predict through correlation.</li>
-<li>Question, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step.</li>
+<li>Gaps and unknown bases do not supply called nucleotide comparisons.</li>
+<li>Two counts refer to a particular allele, not a universally favourable genotype.</li>
+<li>No; coverage, complexity, evolutionary relationship and functional evidence matter.</li>
 </ol>
 </div>
 </div>
@@ -4142,8 +4153,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Trait association (in development), integrated interpretation (in development), scientific reporting (in development) and research proposal (in development).</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B18 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p><a href="../tutorials/p02_sequences.html">Sequence handling</a>, <a href="../tutorials/p04_similarity.html">similarity</a>, <a href="../tutorials/p05_alignment.html">alignment</a>, <a href="../tutorials/p06_phylogeny.html">phylogeny</a> and <a href="../tutorials/p08_sequence_qc.html">sequencing QC</a>.</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B05 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

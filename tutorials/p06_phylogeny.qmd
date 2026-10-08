@@ -1,0 +1,89 @@
+---
+title: "Distances, clustering and phylogenetic interpretation"
+subtitle: "Practical 6: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Inspect a distance matrix and the four-point relation; build an illustrative UPGMA tree; distinguish a clock-dependent clustering result from a species-history claim.
+
+## Biological question and data
+
+What assumptions turn observed sequence differences into an evolutionary tree?
+
+The supplied four-taxon distance matrix is fictional, additive and ultrametric. UPGMA is used only under this idealized equal-rate setting; it is not a general phylogenetic inference method.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Check the supplied distances
+
+For the quartet ab|cd, the within-pair sum is smaller than the equal cross-pair sums.
+
+```{r}
+D <- matrix(c(0,2,6,6,2,0,6,6,6,6,0,2,6,6,2,0),4,4,byrow=TRUE,
+ dimnames=list(c("a","b","c","d"),c("a","b","c","d")))
+stopifnot(isSymmetric(D),all(diag(D)==0),all(D>=0))
+sums <- c(ab_cd=D[1,2]+D[3,4],ac_bd=D[1,3]+D[2,4],ad_bc=D[1,4]+D[2,3])
+sums
+stopifnot(sums[2]==sums[3],sums[1]<sums[2])
+```
+
+The four-point relation supports the supplied split in an additive tree model. Exact equality is a feature of the constructed distances.
+
+## 2. Build the idealized clustering tree
+
+Average-linkage clustering is UPGMA. Tree branch heights can be interpreted with additional rate assumptions; plot heights are dissimilarities.
+
+```{r}
+fit <- hclust(as.dist(D),method="average")
+plot(fit,ylab="Supplied dissimilarity",main="Idealized UPGMA example")
+reconstructed <- as.matrix(cophenetic(fit))
+stopifnot(max(abs(reconstructed-D))<1e-12)
+fit$height
+```
+
+The ideal matrix is exactly represented by the clustering ultrametric. That exact fit is not a general property of sequence distances.
+
+## 3. Break the ideal assumption
+
+Alter one pair symmetrically and measure the mismatch to its clustering representation.
+
+```{r}
+changed <- D; changed[1,3] <- changed[3,1] <- 8
+other <- hclust(as.dist(changed),method="average")
+c(max_cophenetic_discrepancy=max(abs(as.matrix(cophenetic(other))-changed)))
+```
+
+The new distances are no longer represented exactly by that UPGMA ultrametric.
+
+## Interpretation and limits
+
+Real analyses must address sequence alignment, substitution model, rate differences, sampling and uncertainty. A gene tree can differ from population/species history through processes such as lineage sorting and recombination. Branches measured in substitutions cannot be labelled years without calibration.
+
+## Exercises
+
+1. Why does UPGMA require an equal-rate interpretation for phylogeny?
+2. Does exact reconstruction mean these fictional taxa exist?
+3. What would a bootstrap assess?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Its rooted ultrametric representation assumes equal root-to-tip evolutionary distances.
+2. No; the matrix was constructed to illustrate the model.
+3. Resampling stability conditional on the data and procedure, not proof that every evolutionary assumption holds.
+:::
+
+## Continue learning
+
+[B05 Genomics](../notes/b05_genomics.qmd); the Population Genetics [molecular-clock practical](https://psoerensen.github.io/population-genetics/tutorials/molecular_clock.html) supplies additional background.
+
+Continue with [sequencing quality](p08_sequence_qc.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

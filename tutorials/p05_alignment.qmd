@@ -1,0 +1,92 @@
+---
+title: "Alignment and conserved-region analysis"
+subtitle: "Practical 5: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Inspect a global-alignment score; distinguish gaps from nucleotide differences; calculate conservation across an explicitly supplied multiple alignment.
+
+## Biological question and data
+
+How do alignment and missingness decisions change the apparent conservation of a region?
+
+The local helper uses Needleman–Wunsch global alignment with fixed match, mismatch and linear-gap scores. The multiple alignment is supplied, not inferred by this pairwise helper.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Align two sequences under stated scores
+
+Global alignment compares the entire supplied sequences. Different scoring choices can change an optimal alignment.
+
+```{r}
+source("../R/sequence_helpers.R")
+a <- "ACGTACGT"; b <- "ACGACGT"
+fit <- global_alignment(a,b)
+fit
+stopifnot(gsub("-","",fit$a)==a,gsub("-","",fit$b)==b,
+ nchar(fit$a)==nchar(fit$b),fit$score==12)
+self <- global_alignment(a,a)
+stopifnot(self$score==2*nchar(a),self$a==a,self$b==a)
+```
+
+Seven matches and one gap produce a score of 12 under +2/−1/−2 scoring. The score is not an evolutionary distance.
+
+## 2. Inspect an existing multiple alignment
+
+A column is conservatively called conserved only when every sequence supplies a nucleotide and all those nucleotides match.
+
+```{r}
+aligned <- c(s1="ACGTACGT",s2="ACG-ACGT",s3="ACGTTCGN")
+M <- do.call(rbind,strsplit(aligned,""))
+called <- M%in%c("A","C","G","T"); dim(called) <- dim(M)
+fully_called <- colSums(called)==nrow(M)
+conserved <- apply(M,2,function(z) all(z%in%c("A","C","G","T")) && length(unique(z))==1)
+data.frame(position=seq_len(ncol(M)),fully_called,conserved)
+stopifnot(sum(fully_called)==6,sum(conserved)==5)
+```
+
+A gap and an unknown base are excluded from fully called columns; a genuine nucleotide difference breaks conservation in another column.
+
+## 3. Compare denominators
+
+Calculate both the fraction of all alignment columns and the fraction of fully called columns that are conserved.
+
+```{r}
+c(conserved_of_all=sum(conserved)/ncol(M),
+ conserved_of_fully_called=sum(conserved)/sum(fully_called))
+```
+
+These fractions answer different questions. Report the denominator and missingness rather than choosing the larger value.
+
+## Interpretation and limits
+
+The example does not identify an actual functional element. Conservation depends on alignment quality, phylogenetic diversity and evolutionary processes. Production multiple aligners and evolutionary conservation models need their own method choices and diagnostics.
+
+## Exercises
+
+1. Change the gap score and inspect the result.
+2. Why is N not evidence for a conserved base?
+3. Why does conservation alone not prove function?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Alternative alignments can become optimal, particularly where mismatch and gap alternatives compete.
+2. Its nucleotide is unknown.
+3. Context, species sampling, evolutionary constraints and biological evidence determine the interpretation.
+:::
+
+## Continue learning
+
+[B05 Genomics](../notes/b05_genomics.qmd).
+
+Continue with [phylogenetic reasoning](p06_phylogeny.qmd). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).

@@ -64,6 +64,6 @@ The fictional labels demonstrate cardinality rather than actual annotation. The 
 
 ## Practicals and course pathways
 
-Database retrieval (in development), annotation and pathways (in development) and sample handling (in development).
+[Database retrieval](../tutorials/p01_databases.qmd), annotation and pathways (in development) and sample handling (in development).
 
 Use the [unified map](../course_map.qmd) to locate B03 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

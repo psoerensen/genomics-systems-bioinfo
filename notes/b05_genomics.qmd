@@ -66,6 +66,6 @@ Whole-genome workflows need species/reference selection, coverage, mapping and c
 
 ## Practicals and course pathways
 
-Sequence handling (in development), similarity (in development), alignment (in development), phylogeny (in development) and sequencing QC (in development).
+[Sequence handling](../tutorials/p02_sequences.qmd), [similarity](../tutorials/p04_similarity.qmd), [alignment](../tutorials/p05_alignment.qmd), [phylogeny](../tutorials/p06_phylogeny.qmd) and [sequencing QC](../tutorials/p08_sequence_qc.qmd).
 
 Use the [unified map](../course_map.qmd) to locate B05 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -1,0 +1,94 @@
+---
+title: "Command-line bioinformatics and reproducible execution"
+subtitle: "Practical 3: Genomics, systems biology and multi-omics"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Pass an explicit input path to a script; inspect exit status; distinguish stdout and generated files; quote paths containing spaces.
+
+## Biological question and data
+
+Can the same file-processing task run independently of an interactive R session?
+
+This portable exercise launches the Rscript executable belonging to the current R installation. It requires no Unix shell or external bioinformatics program. It illustrates the command-line interface pattern used by larger tools.
+
+No biological download is required. Numerical inputs are hypothetical, not observed animal data. The runnable examples use base R. Count and abundance units are specified where used.
+
+## 1. Create a small input and worker script
+
+Both files live in a fresh temporary directory. The script takes exactly one input argument and validates it.
+
+```{r}
+work <- tempfile("cli-example-"); dir.create(work)
+input <- file.path(work,"sample counts.csv")
+write.csv(data.frame(sample=c("s1","s2","s3"),count=c(10,20,30)),input,row.names=FALSE)
+worker <- file.path(work,"summarise.R")
+writeLines(c('args <- commandArgs(trailingOnly=TRUE)',
+ 'stopifnot(length(args)==1L, file.exists(args[1]))',
+ 'd <- read.csv(args[1])',
+ 'stopifnot(all(c("sample","count") %in% names(d)))',
+ 'cat(sum(d$count), "\n")'),worker)
+readLines(worker)
+```
+
+Explicit arguments make the worker independent of objects in the current global environment.
+
+## 2. Run and capture the process
+
+Quote each path as a separate argument, including the intentionally spaced input filename.
+
+```{r}
+executable <- file.path(R.home("bin"),if(.Platform$OS.type=="windows") "Rscript.exe" else "Rscript")
+output <- system2(executable,args=c("--vanilla",shQuote(worker),shQuote(input)),
+ stdout=TRUE,stderr=TRUE)
+status <- attr(output,"status"); if(is.null(status)) status <- 0L
+c(status=status,total=as.numeric(tail(output,1)))
+stopifnot(status==0L,as.numeric(tail(output,1))==60)
+```
+
+The worker reports 60 and exits successfully. Locale-startup messages may appear before the final number on some systems.
+
+## 3. Describe the workflow boundary
+
+Record executable, arguments, input and expected output before applying this pattern to another tool.
+
+```{r}
+record <- data.frame(step="sum counts",executable=basename(executable),
+ input=basename(input),output="stdout total",expected_total=60)
+record
+```
+
+For a real aligner, include reference, version, options, resource requirements and the meaning of each output. A zero exit code does not certify biological correctness.
+
+## Interpretation and limits
+
+Use tool-specific documentation for real aligners or quantifiers; this example runs no alignment. Keep restricted data out of command logs and public repositories. Temporary files are left in R’s temporary directory for inspection.
+
+## Exercises
+
+1. What changes if the worker relies on an interactive variable?
+2. Why quote the filename?
+3. Which check remains necessary after a successful exit?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. A clean Rscript process does not contain that variable.
+2. Spaces must stay within one argument.
+3. Check output structure, sample/reference identity and scientific plausibility, not just process completion.
+:::
+
+## Continue learning
+
+[B04 Programming](../notes/b04_programming.qmd) and [B17 Integrity](../notes/b17_integrity.qmd).
+
+Continue with data handling (in development). Return to the [practical index](../practicals.qmd) or the [unified map](../course_map.qmd).
