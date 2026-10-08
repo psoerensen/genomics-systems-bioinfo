@@ -5,6 +5,8 @@ toc: true
 
 Each expanded module connects biological measurements to method choices, assumptions, worked R examples and interpretation challenges, with suggested answers and selected further reading. Follow a course pathway in the [unified map](course_map.qmd), or choose a block below.
 
+The [learning pathway](learning_path.qmd#depth-labels-for-every-module) labels the core, extension and advanced entry points for every block. Apply selected modules in the [real-data cases](case_studies.qmd); the [assessment crosswalk](assessment.qmd#outcome-to-evidence-crosswalk) identifies evidence of learning.
+
 ## Available modules
 
 - [B01: Biological questions and omics measurements](notes/b01_foundations.qmd)

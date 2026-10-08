@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">Composition can change relative counts</title><desc id="desc">At a fixed read budget, doubling total RNA because transcript C increases makes unchanged A and B appear to decrease in relative counts.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="440" fill="#fff"/>
+<text x="30" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#182c42">Composition can change relative counts</text>
+<rect x="30" y="90" width="350" height="95" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="131.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Absolute molecules: before</text>
+<text x="42" y="155.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">A=100   B=100   C=800</text>
+<rect x="680" y="90" width="385" height="95" rx="9" fill="#fff1d6" stroke="#557488" stroke-width="1.5"/>
+<text x="692" y="131.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Expected counts: 1,000 reads</text>
+<text x="692" y="155.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">A=100   B=100   C=800</text>
+<line x1="385" y1="138" x2="673" y2="138" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="474.0" y="128.0" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#182c42">Fixed read budget</text>
+<rect x="30" y="235" width="350" height="95" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="276.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Absolute molecules: after</text>
+<text x="42" y="300.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">A=100   B=100   C=1,800</text>
+<rect x="680" y="235" width="385" height="95" rx="9" fill="#fff1d6" stroke="#557488" stroke-width="1.5"/>
+<text x="692" y="276.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Expected counts: 1,000 reads</text>
+<text x="692" y="300.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">A=50   B=50   C=900</text>
+<line x1="385" y1="283" x2="673" y2="283" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="474.0" y="273.0" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#182c42">Fixed read budget</text>
+<text x="30" y="378" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#182c42">A and B are unchanged in molecules per cell, but their shares halve.</text>
+<text x="30" y="412" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Reference-based normalization needs stable features; absolute global shifts need extra information.</text>
+</svg>

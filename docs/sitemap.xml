@@ -70,11 +70,11 @@
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b15_integration.html</loc>
-    <lastmod>2026-10-08T21:00:55.070Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.215Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b13_association.html</loc>
-    <lastmod>2026-10-08T21:00:55.067Z</lastmod>
+    <lastmod>2026-10-08T21:49:10.724Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b11_phenomics.html</loc>
@@ -101,20 +101,52 @@
     <lastmod>2026-10-08T20:55:51.723Z</lastmod>
   </url>
   <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/tutorials/c03_cattle.html</loc>
+    <lastmod>2026-10-08T21:50:24.978Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/tutorials/c01_airway.html</loc>
+    <lastmod>2026-10-08T21:50:24.974Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/visual_guide.html</loc>
+    <lastmod>2026-10-08T21:34:52.602Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/assessment.html</loc>
+    <lastmod>2026-10-08T21:30:41.569Z</lastmod>
+  </url>
+  <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/practicals.html</loc>
-    <lastmod>2026-10-08T21:06:29.492Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.192Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/course_map.html</loc>
-    <lastmod>2026-10-08T20:24:24.207Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.201Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/index.html</loc>
-    <lastmod>2026-10-08T20:35:41.960Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.189Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/modules.html</loc>
-    <lastmod>2026-10-08T21:06:29.487Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.193Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/learning_path.html</loc>
+    <lastmod>2026-10-08T21:41:22.705Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/case_studies.html</loc>
+    <lastmod>2026-10-08T21:48:47.440Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/media.html</loc>
+    <lastmod>2026-10-08T21:34:52.603Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/tutorials/c02_proteomics.html</loc>
+    <lastmod>2026-10-08T21:55:38.583Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/slides/introduction_genomics_systems_bioinfo.html</loc>
@@ -122,7 +154,7 @@
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b02_design.html</loc>
-    <lastmod>2026-10-08T20:55:51.723Z</lastmod>
+    <lastmod>2026-10-08T21:49:10.721Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b04_programming.html</loc>
@@ -130,11 +162,11 @@
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b06_transcriptomics.html</loc>
-    <lastmod>2026-10-08T20:49:49.644Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.213Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b08_proteomics.html</loc>
-    <lastmod>2026-10-08T20:58:02.026Z</lastmod>
+    <lastmod>2026-10-08T21:42:15.217Z</lastmod>
   </url>
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/notes/b10_microbiomics.html</loc>
@@ -215,5 +247,9 @@
   <url>
     <loc>https://psoerensen.github.io/genomics-systems-bioinfo/tutorials/p30_epigenomics.html</loc>
     <lastmod>2026-10-08T21:05:20.195Z</lastmod>
+  </url>
+  <url>
+    <loc>https://psoerensen.github.io/genomics-systems-bioinfo/case_data.html</loc>
+    <lastmod>2026-10-08T21:52:11.041Z</lastmod>
   </url>
 </urlset>

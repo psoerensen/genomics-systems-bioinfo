@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">Fit preprocessing inside the training data</title><desc id="desc">Split by the intended independent unit. Training data fit preprocessing and model choices; test observations receive frozen transformations and are evaluated once.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="440" fill="#fff"/>
+<text x="30" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#182c42">Fit preprocessing inside the training data</text>
+<rect x="30" y="160" width="210" height="95" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="201.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Raw observations</text>
+<text x="42" y="225.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Animal / family / farm</text>
+<rect x="340" y="80" width="240" height="95" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="352" y="121.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Training observations</text>
+<text x="352" y="145.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Fit scaling + selection</text>
+<rect x="340" y="265" width="240" height="95" rx="9" fill="#fff1d6" stroke="#557488" stroke-width="1.5"/>
+<text x="352" y="306.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Test observations</text>
+<text x="352" y="330.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Keep outcomes held out</text>
+<line x1="243" y1="207" x2="336" y2="127" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="243" y1="207" x2="336" y2="312" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="715" y="80" width="330" height="95" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="727" y="121.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Tune within training folds</text>
+<text x="727" y="145.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Then refit chosen model</text>
+<rect x="715" y="265" width="330" height="95" rx="9" fill="#fff1d6" stroke="#557488" stroke-width="1.5"/>
+<text x="727" y="306.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Apply frozen choices</text>
+<text x="727" y="330.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Evaluate held-out outcome</text>
+<line x1="583" y1="127" x2="711" y2="127" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="583" y1="312" x2="711" y2="312" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="880" y1="177" x2="880" y2="260" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="905" y="220" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#182c42">Freeze choices</text>
+<text x="30" y="415" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#182c42">For prediction, selecting features on all outcomes before the split leaks test information.</text>
+</svg>

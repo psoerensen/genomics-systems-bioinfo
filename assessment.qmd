@@ -1,0 +1,86 @@
+---
+title: "Learning outcomes and assessment"
+toc: true
+---
+
+An assessment should reveal whether you can choose and defend an analysis, not only reproduce code. This guide connects the shared modules to observable evidence of learning. Its assignments and rubrics are **suggested teaching resources**; the formal component weights in the [course map](course_map.qmd#learning-outcomes-and-assessment) remain unchanged.
+
+## Outcome-to-evidence crosswalk
+
+| Modules | Competence to demonstrate | Practice | Assessed evidence |
+|---|---|---|---|
+| B01/B02 | Translate a biological question into an estimand, sampling plan and experimental unit | P15, P26 | Design diagram and justification of replication, timing and confounding |
+| B03/B04 | Track provenance and join observations using valid identifiers | P01, P03, P14 | Audited import/join with exclusions and software/data versions |
+| B05 | Explain reference-dependent sequence/variant evidence | P02, P04–P06, P08 | Alignment or QC interpretation, including an alternative explanation |
+| B06 | Fit and interpret a count-model contrast | P09; Case 1 | Paired design, normalization diagnostic, effect size and FDR interpretation |
+| B07 | Distinguish regulatory measurements from evidence of a mechanism | P30 | Comparison of methylation/accessibility evidence and a proposed perturbation |
+| B08 | Distinguish protein identification, enrichment and abundance | P07, P18; Case 2 | Missingness audit and an explicitly bounded protein comparison |
+| B09 | Distinguish a metabolite feature from a confidently identified compound | P17; Case 3 | Transformation, annotation limitations and sensitivity analysis |
+| B10 | Interpret a compositional microbial measurement | P27 | Explanation of denominator choice and absolute-abundance uncertainty |
+| B11 | Handle measurement timing and repeated phenotypes | P28 | Observation hierarchy and decision-time justification |
+| B12 | Choose models, report uncertainty and validate honestly | P12, P19, P20 | Defined contrast, diagnostic and validation split that matches deployment |
+| B13 | Separate association, prediction and regulatory/causal evidence | P22, P29 | Confounder diagram and comparison of competing claims |
+| B14 | Define eligible pathway backgrounds and the meaning of network edges | P10, P11, P24 | Background sensitivity and evidence-qualified network interpretation |
+| B15 | Justify an integration strategy for matched assays | P21, P23; Case 3 | Sample matching, scaling and a comparison with single-layer evidence |
+| B16 | Evaluate single-cell/spatial methods and their replication limits | P31 | Identification of the biological unit and a defensible analysis outline |
+| B17 | Produce an auditable, responsible analysis | P13, P14 | Re-runnable script, provenance, exclusions and disclosure of assistance |
+| B18 | Interpret evidence for an animal-production decision | P25, P26 | Bounded conclusion and feasible follow-up study |
+
+Find the linked P-number in the [practical index](practicals.qmd), or open a [real-data case](case_studies.qmd). A lecturer can select rows for an assignment rather than assessing the entire crosswalk at once.
+
+## Three case assignments
+
+### Case 1: A paired transcriptomic response
+
+Use the [airway case](tutorials/c01_airway.qmd). Submit a 1,000-word report, two figures and the analysis script. State the treated-minus-untreated contrast. Explain why cell line belongs in the design. Report effect sizes and adjusted p-values for a prespecified gene and an exploratory top-ranked gene. Compare the paired model with an unpaired sensitivity analysis; interpret any disagreement in light of the design. Explain what the experiment cannot establish about patient response.
+
+**Suggested reasoning:** removing the cell-line term changes the residual variation and the comparison model; it does not manufacture four extra independent donors. A small adjusted p-value supports a response under the model, while transfer to patients needs separate evidence. A missing adjusted p-value is not an estimate of no effect.
+
+### Case 2: What does an absent protein intensity mean?
+
+Use the [proteomics case](tutorials/c02_proteomics.qmd). Submit a missingness display, the Ubi4-versus-control result table and a 750-word interpretation. Compare the primary observed-value analysis with its stricter complete-case sensitivity analysis. Explain why a protein found only in enriched samples is excluded from that primary contrast. Propose a follow-up measurement without treating imputed intensities as observed values.
+
+**Suggested reasoning:** a detection pattern can be biologically interesting but cannot supply an observed mean and sampling variance in a group with no measurements. Filtering changes the population of proteins being assessed. An independent enrichment assay or targeted measurement can address that gap; claiming absence from cells would exceed an affinity-enrichment experiment.
+
+### Case 3: Disease-associated layers in cattle
+
+Use the [cattle case](tutorials/c03_cattle.qmd). Submit an identity audit, a covariate balance table, three exploratory figures and a 1,250-word report. Compare pooled and disease-adjusted cross-layer relationships, and unadjusted versus covariate-adjusted metabolite associations. Define exactly which animals and features contribute. Finish with a sampling plan for a prospective study.
+
+**Suggested reasoning:** a pooled RNA–metabolite correlation can be created by both assays differing between disease groups. Adjustment may weaken it without showing that the pooled calculation was numerically wrong. Concurrent case-control measurements can identify disease-associated patterns but do not establish a marker available before illness or a transferable prediction threshold.
+
+## Synthesis assignment
+
+**Question:** An animal-production team wants to use molecular measurements to improve a health or production decision. What can the present evidence support, and what should the team measure next?
+
+Choose one real case as your empirical anchor. Use the other cases or existing hypothetical practicals to compare methods, explicitly identifying their different designs and scales. Do not merge observations from unrelated studies into a purported matched multi-omics dataset.
+
+Submit a report of approximately 2,000 words, an executable script, a sample/measurement diagram and no more than four main figures. Include:
+
+1. A question and intended decision time, with the target population and estimand.
+2. A sample identity/QC audit, including every exclusion and its consequence.
+3. A justified primary method and one reasonable alternative or sensitivity analysis.
+4. A result that combines effect sizes, uncertainty and biological measurement limits.
+5. At least one apparent disagreement: between methods, layers, or pooled and adjusted evidence. Explain plausible reasons and what would discriminate between them.
+6. A practical follow-up plan, specifying sampling, replication, assay choice and independent validation.
+
+For the **GSB pathway**, emphasize computational choices, diagnostics and model comparison. For **Multi-Omics**, emphasize technology, sampling/preservation and the production decision. Both must demonstrate the shared core; these extensions do not alter the original formal assessment weights.
+
+### Suggested 100-point rubric
+
+| Criterion | Points | Strong evidence | A limitation that reduces credit |
+|---|---:|---|---|
+| Question and design | 15 | Explicit estimand, units, timing and target population | A vague question or wrong replication unit |
+| Identity and measurement quality | 20 | Auditable joins, units, exclusions and assay limits | Joining by row order; unexplained exclusions |
+| Method choice and assumptions | 20 | Justified contrast/model, diagnostic and alternative | Software named without explaining its assumptions |
+| Evidence and disagreement | 20 | Effect sizes, uncertainty, multiplicity and reasoned sensitivity | Ranking by p-value alone or ignoring conflicting evidence |
+| Interpretation and follow-up | 15 | Bounded biological conclusion and feasible discriminating study | Causal/predictive claim beyond the design |
+| Reproducibility and communication | 10 | Script runs, provenance/version record, clear figures | Missing inputs, undocumented manual edits or unreadable plots |
+| **Total** | **100** | | |
+
+Suggested performance bands: **excellent** work makes the reasoning auditable and investigates an alternative; **sound** work gives a correct bounded analysis but a limited sensitivity investigation; **developing** work reproduces calculations with weak justifications; **insufficient** work has a material identity/design error or an unsupported central conclusion. Institutions should apply their own grading scale.
+
+## A reusable feedback protocol
+
+Before submission, exchange the one-page analysis record with a peer. Ask the peer to identify the observation unit, explain the contrast without reading the code, and locate the strongest unsupported sentence. Revise that sentence or supply the missing evidence. After receiving feedback, record one analysis decision you changed and why.
+
+For instructors, return feedback against the criteria above, distinguishing an incorrect calculation from a defensible alternative method. Keep suggested answers hidden during initial work. If AI assistance is permitted, require a short record of its role and the checks the student performed; polished prose is not evidence that the student can defend the analysis.

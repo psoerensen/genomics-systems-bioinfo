@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">Three places to combine molecular layers</title><desc id="desc">Early integration combines features, intermediate integration learns representations, and late integration combines separate model outputs. All need matched targets and validation.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="440" fill="#fff"/>
+<text x="30" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#182c42">Three places to combine molecular layers</text>
+<rect x="30" y="75" width="260" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="114.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Early</text>
+<text x="42" y="138.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">RNA + protein features</text>
+<rect x="385" y="75" width="330" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="397" y="114.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">One joined feature matrix</text>
+<text x="397" y="138.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Scale and block balance</text>
+<rect x="800" y="75" width="270" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="812" y="114.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Joint model</text>
+<text x="812" y="138.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Interpret feature contributions</text>
+<line x1="293" y1="120" x2="381" y2="120" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="718" y1="120" x2="796" y2="120" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="185" width="260" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="224.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Intermediate</text>
+<text x="42" y="248.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">RNA and protein blocks</text>
+<rect x="385" y="185" width="330" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="397" y="224.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Shared / layer-specific factors</text>
+<text x="397" y="248.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Representation assumptions</text>
+<rect x="800" y="185" width="270" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="812" y="224.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Joint model</text>
+<text x="812" y="248.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Interpret latent factors</text>
+<line x1="293" y1="230" x2="381" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="718" y1="230" x2="796" y2="230" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="295" width="260" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="334.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Late</text>
+<text x="42" y="358.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Separate layer models</text>
+<rect x="385" y="295" width="330" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="397" y="334.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">RNA output + protein output</text>
+<text x="397" y="358.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Comparable target and validation</text>
+<rect x="800" y="295" width="270" height="90" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="812" y="334.0" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Combined output</text>
+<text x="812" y="358.0" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Test added information</text>
+<line x1="293" y1="340" x2="381" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="718" y1="340" x2="796" y2="340" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="30" y="423" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">The layer that helps explain biology need not improve prediction at the intended decision time.</text>
+</svg>

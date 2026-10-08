@@ -17,6 +17,12 @@ execute:
 
 Distinguish early, intermediate and late integration; align samples and scales; evaluate common latent patterns, missing layers and validation.
 
+## Visualize integration strategies
+
+![Concept diagram; detailed explanation and suggested reasoning are in the visual guide.](../images/concepts/integration.svg)
+
+Use the [visual guide](../visual_guide.qmd) to explain the assumptions in this diagram. Explore [actual matched cattle assays](../tutorials/c03_cattle.qmd), including identity and confounding audits.
+
 ## Biological question and measurements
 
 Integration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.

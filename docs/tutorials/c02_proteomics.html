@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Protein enrichment and missing intensities – Genomics, Systems Biology &amp; Bioinformatics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc63fce9873912f1bbbccf05079cc9ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Genomics &amp; Multi-Omics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../course_map.html"> 
+<span class="menu-text">Course map</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="../learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../modules.html"> 
+<span class="menu-text">Modules</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../practicals.html"> 
+<span class="menu-text">Practicals</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-related-courses" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Related courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-related-courses">    
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/quantitative-genetics/">
+ <span class="dropdown-text">Quantitative Genetics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/population-genetics/">
+ <span class="dropdown-text">Population Genetics</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://psoerensen.github.io/gteach/"> 
+<span class="menu-text">gteach</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question-and-learning-outcomes" id="toc-question-and-learning-outcomes" class="nav-link active" data-scroll-target="#question-and-learning-outcomes">Question and learning outcomes</a></li>
+  <li><a href="#what-the-public-table-contains" id="toc-what-the-public-table-contains" class="nav-link" data-scroll-target="#what-the-public-table-contains">What the public table contains</a></li>
+  <li><a href="#setup-and-identity-checks" id="toc-setup-and-identity-checks" class="nav-link" data-scroll-target="#setup-and-identity-checks">Setup and identity checks</a></li>
+  <li><a href="#filter-flags-before-interpreting-detection" id="toc-filter-flags-before-interpreting-detection" class="nav-link" data-scroll-target="#filter-flags-before-interpreting-detection">Filter flags before interpreting detection</a></li>
+  <li><a href="#audit-missingness-before-taking-logarithms" id="toc-audit-missingness-before-taking-logarithms" class="nav-link" data-scroll-target="#audit-missingness-before-taking-logarithms">Audit missingness before taking logarithms</a></li>
+  <li><a href="#define-a-comparison-supported-by-observations" id="toc-define-a-comparison-supported-by-observations" class="nav-link" data-scroll-target="#define-a-comparison-supported-by-observations">Define a comparison supported by observations</a></li>
+  <li><a href="#fit-a-moderated-linear-model-contrast" id="toc-fit-a-moderated-linear-model-contrast" class="nav-link" data-scroll-target="#fit-a-moderated-linear-model-contrast">Fit a moderated linear-model contrast</a></li>
+  <li><a href="#sensitivity-require-all-six-values" id="toc-sensitivity-require-all-six-values" class="nav-link" data-scroll-target="#sensitivity-require-all-six-values">Sensitivity: require all six values</a></li>
+  <li><a href="#exercises-and-suggested-reasoning" id="toc-exercises-and-suggested-reasoning" class="nav-link" data-scroll-target="#exercises-and-suggested-reasoning">Exercises and suggested reasoning</a></li>
+  <li><a href="#report-and-reproduce" id="toc-report-and-reproduce" class="nav-link" data-scroll-target="#report-and-reproduce">Report and reproduce</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Protein enrichment and missing intensities</h1>
+<p class="subtitle lead">Case 2: Real LFQ measurements and limma</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="question-and-learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="question-and-learning-outcomes">Question and learning outcomes</h2>
+<p>Which protein groups are more strongly enriched with a four-unit ubiquitin bait than with the control in this experiment? This is an <strong>affinity-enrichment</strong> comparison, not a comparison of whole-cell protein concentrations. The distinction changes the biological interpretation of every result.</p>
+<p>You will audit protein-group flags, interpret zero LFQ values as unquantified observations, compare groups using observed intensities, and assess sensitivity to missingness restrictions. Allow <strong>2–3 hours</strong>, after B08/B12 and <a href="../tutorials/p18_proteomics.html">P18</a>.</p>
+</section>
+<section id="what-the-public-table-contains" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-public-table-contains">What the public table contains</h2>
+<p>The <strong>UbiLength</strong> example distributed with <a href="https://github.com/arnesmits/DEP">DEP</a> contains 3,006 protein groups and twelve label-free quantification (LFQ) columns: control, Ubi1, Ubi4 and Ubi6, each with three replicate labels. The experiment investigates ubiquitin-chain interaction enrichment, described in the <a href="https://bioconductor.org/packages/devel/bioc/vignettes/DEP/inst/doc/DEP.html">DEP workflow</a> with its source reference to <a href="https://doi.org/10.1016/j.molcel.2017.01.004">Zhang et al.</a>.</p>
+<p>The local CSV is a documented format/column extract of the pinned DEP data files. It preserves original LFQ values, gene names and exclusion flags. The original MaxQuant measurements have already undergone upstream identification and LFQ processing. This lesson does not repeat spectrum identification, peptide-level uncertainty modelling or the complete DEP workflow. Read the <a href="../case_data.html">data notes and licence</a> for attribution and preparation.</p>
+<p>The labels are enrichment-experiment replicates; they are not independent animal cohorts. Treat the reported precision as repeatability within the labelled enrichment experiment; this table alone does not establish biological sampling across independent cell cultures. A protein group can contain several compatible identifiers. Retain that group identity rather than silently selecting a gene symbol and claiming unique identification. Mechanistic binding claims need evidence beyond this processed abundance table.</p>
+</section>
+<section id="setup-and-identity-checks" class="level2">
+<h2 class="anchored" data-anchor-id="setup-and-identity-checks">Setup and identity checks</h2>
+<p>Install <strong>limma</strong> once using the Bioconductor release appropriate to your R version:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"limma"</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">update =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The example was checked with R 4.4.1 and limma 3.62.2. Inputs are stored locally; neither installation nor downloading occurs during rendering.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>helper_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">"R"</span>)) <span class="st">"R"</span> <span class="cf">else</span> <span class="st">"../R"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(helper_dir, <span class="st">"case_helpers.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"limma"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Install limma with BiocManager before running Case 2."</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"ubiquitin_lfq.csv.gz"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"ubiquitin_samples.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>intensity_cols <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"LFQ.intensity."</span>, meta<span class="sc">$</span>label)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(meta<span class="sc">$</span>label), <span class="fu">all</span>(intensity_cols <span class="sc">%in%</span> <span class="fu">names</span>(raw)))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>lfq <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(raw[, intensity_cols])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(lfq) <span class="ot">&lt;-</span> raw<span class="sc">$</span>feature_id</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(lfq) <span class="ot">&lt;-</span> meta<span class="sc">$</span>label</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(lfq <span class="sc">&gt;=</span> <span class="dv">0</span>), <span class="sc">!</span><span class="fu">anyNA</span>(lfq))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(meta, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">label</th>
+<th style="text-align: left;">condition</th>
+<th style="text-align: right;">replicate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ubi4_1</td>
+<td style="text-align: left;">Ubi4</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubi4_2</td>
+<td style="text-align: left;">Ubi4</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ubi4_3</td>
+<td style="text-align: left;">Ubi4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubi6_1</td>
+<td style="text-align: left;">Ubi6</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ubi6_2</td>
+<td style="text-align: left;">Ubi6</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubi6_3</td>
+<td style="text-align: left;">Ubi6</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ctrl_1</td>
+<td style="text-align: left;">Ctrl</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ctrl_2</td>
+<td style="text-align: left;">Ctrl</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ctrl_3</td>
+<td style="text-align: left;">Ctrl</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubi1_1</td>
+<td style="text-align: left;">Ubi1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ubi1_2</td>
+<td style="text-align: left;">Ubi1</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubi1_3</td>
+<td style="text-align: left;">Ubi1</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="filter-flags-before-interpreting-detection" class="level2">
+<h2 class="anchored" data-anchor-id="filter-flags-before-interpreting-detection">Filter flags before interpreting detection</h2>
+<p>Remove decoy matches, potential contaminants and groups identified only by site. This last exclusion is a stated conservative teaching choice. Record how many groups each step removes. It changes the eligible population, so it belongs in the methods.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>eligible <span class="ot">&lt;-</span> raw<span class="sc">$</span>Reverse <span class="sc">!=</span> <span class="st">"+"</span> <span class="sc">&amp;</span> raw<span class="sc">$</span>Potential.contaminant <span class="sc">!=</span> <span class="st">"+"</span> <span class="sc">&amp;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            raw<span class="sc">$</span>Only.identified.by.site <span class="sc">!=</span> <span class="st">"+"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">total =</span> <span class="fu">nrow</span>(raw), <span class="at">decoy =</span> <span class="fu">sum</span>(raw<span class="sc">$</span>Reverse <span class="sc">==</span> <span class="st">"+"</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">contaminant =</span> <span class="fu">sum</span>(raw<span class="sc">$</span>Potential.contaminant <span class="sc">==</span> <span class="st">"+"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">site_only =</span> <span class="fu">sum</span>(raw<span class="sc">$</span>Only.identified.by.site <span class="sc">==</span> <span class="st">"+"</span>), <span class="at">retained =</span> <span class="fu">sum</span>(eligible))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  total decoy contaminant site_only retained
+1  3006    31          34        40     2907</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lfq <span class="ot">&lt;-</span> lfq[eligible, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> raw[eligible, <span class="fu">c</span>(<span class="st">"feature_id"</span>, <span class="st">"Protein.IDs"</span>, <span class="st">"Gene.names"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Flags can overlap; summing exclusion counts is not necessarily the number of removed groups. A contaminant flag describes the analytical classification, not proof that a protein cannot exist in the studied biology.</p>
+</section>
+<section id="audit-missingness-before-taking-logarithms" class="level2">
+<h2 class="anchored" data-anchor-id="audit-missingness-before-taking-logarithms">Audit missingness before taking logarithms</h2>
+<p>In this LFQ table, a zero means no quantified intensity, not a measured absence of protein. Convert it to <code>NA</code> before logarithms. Do not add 1 and treat a collection of zeros as precise low-abundance observations.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>loglfq <span class="ot">&lt;-</span> lfq</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>loglfq[loglfq <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="cn">NA_real_</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>loglfq <span class="ot">&lt;-</span> <span class="fu">log2</span>(loglfq)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>missing_by_sample <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(<span class="fu">is.na</span>(loglfq))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(missing_by_sample, <span class="at">las =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Fraction unquantified"</span>, <span class="at">col =</span> <span class="st">"#2878a1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c02_proteomics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed." width="672"></p>
+<figcaption>Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">as.data.frame</span>(loglfq), <span class="at">las =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">"Observed log2 LFQ intensity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c02_proteomics_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" alt="Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed." width="672"></p>
+<figcaption>Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The boxplot summarizes observed values only. A shift in the boxplot can reflect enrichment, processing or a change in which proteins were detected. LFQ is already an upstream quantification procedure; blindly centering every sample could remove an enrichment shift of interest. The primary analysis uses the provided log2 LFQ scale without another global centering step.</p>
+</section>
+<section id="define-a-comparison-supported-by-observations" class="level2">
+<h2 class="anchored" data-anchor-id="define-a-comparison-supported-by-observations">Define a comparison supported by observations</h2>
+<p>We focus on <strong>Ubi4 versus control</strong>, retaining a group only if at least two of three intensities are observed in <strong>each</strong> condition. Other bait conditions remain available for later exploration but do not enter this contrast. This filter deliberately excludes some potentially strong all-or-none enrichments: an absent control group cannot provide its own observed mean and variance.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>use <span class="ot">&lt;-</span> meta<span class="sc">$</span>condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Ctrl"</span>, <span class="st">"Ubi4"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> meta[use, ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> loglfq[, use, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>m<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(m<span class="sc">$</span>condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Ctrl"</span>, <span class="st">"Ubi4"</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">levels</span>(m<span class="sc">$</span>condition), <span class="cf">function</span>(g)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(<span class="sc">!</span><span class="fu">is.na</span>(y[, m<span class="sc">$</span>condition <span class="sc">==</span> g, <span class="at">drop =</span> <span class="cn">FALSE</span>])))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(observed <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">==</span> <span class="dv">2</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>detection_patterns <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">Ctrl =</span> observed[, <span class="st">"Ctrl"</span>], <span class="at">Ubi4 =</span> observed[, <span class="st">"Ubi4"</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>detection_patterns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Ubi4
+Ctrl    0    1    2    3
+   0  626   88   61   96
+   1  240    3    0   10
+   2  109   11   19   28
+   3  248   59  112 1197</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">eligible_groups =</span> <span class="fu">nrow</span>(y), <span class="at">primary_groups =</span> <span class="fu">sum</span>(keep),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">all_six_observed =</span> <span class="fu">sum</span>(<span class="fu">rowSums</span>(<span class="fu">is.na</span>(y)) <span class="sc">==</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  eligible_groups primary_groups all_six_observed
+1            2907           1356             1197</code></pre>
+</div>
+</div>
+<p>The detection table is part of the result, not merely a hurdle before testing. A Ubi4-only pattern can motivate a targeted validation assay, but cannot be interpreted by a test that assumes six observed values. Missingness may depend on abundance and condition; observed-value inference is conditional on the selected measurable subset and does not solve that selection problem.</p>
+</section>
+<section id="fit-a-moderated-linear-model-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-moderated-linear-model-contrast">Fit a moderated linear-model contrast</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> condition, m)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">qr</span>(design)<span class="sc">$</span>rank <span class="sc">==</span> <span class="fu">ncol</span>(design), <span class="fu">identical</span>(<span class="fu">colnames</span>(y), m<span class="sc">$</span>label))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> limma<span class="sc">::</span><span class="fu">lmFit</span>(y[keep, ], design)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> limma<span class="sc">::</span><span class="fu">eBayes</span>(fit, <span class="at">trend =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> limma<span class="sc">::</span><span class="fu">topTable</span>(fit, <span class="at">coef =</span> <span class="st">"conditionUbi4"</span>, <span class="at">number =</span> <span class="cn">Inf</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">adjust.method =</span> <span class="st">"BH"</span>, <span class="at">sort.by =</span> <span class="st">"P"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>ans<span class="sc">$</span>feature_id <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ans)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>ans<span class="sc">$</span>protein_ids <span class="ot">&lt;-</span> info<span class="sc">$</span>Protein.IDs[<span class="fu">match</span>(ans<span class="sc">$</span>feature_id, info<span class="sc">$</span>feature_id)]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ans<span class="sc">$</span>gene_names <span class="ot">&lt;-</span> info<span class="sc">$</span>Gene.names[<span class="fu">match</span>(ans<span class="sc">$</span>feature_id, info<span class="sc">$</span>feature_id)]</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ans[, <span class="fu">c</span>(<span class="st">"feature_id"</span>, <span class="st">"gene_names"</span>, <span class="st">"logFC"</span>, <span class="st">"AveExpr"</span>, <span class="st">"adj.P.Val"</span>)], <span class="dv">10</span>),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">feature_id</th>
+<th style="text-align: left;">gene_names</th>
+<th style="text-align: right;">logFC</th>
+<th style="text-align: right;">AveExpr</th>
+<th style="text-align: right;">adj.P.Val</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PG1669</td>
+<td style="text-align: left;">RPS27A</td>
+<td style="text-align: right;">6.888</td>
+<td style="text-align: right;">31.853</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PG2166</td>
+<td style="text-align: left;">HUWE1</td>
+<td style="text-align: right;">5.308</td>
+<td style="text-align: right;">28.478</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PG1843</td>
+<td style="text-align: left;">SQSTM1</td>
+<td style="text-align: right;">4.440</td>
+<td style="text-align: right;">28.136</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PG0503</td>
+<td style="text-align: left;">PIK3C2B</td>
+<td style="text-align: right;">3.603</td>
+<td style="text-align: right;">27.243</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PG2320</td>
+<td style="text-align: left;">TBC1D15</td>
+<td style="text-align: right;">3.079</td>
+<td style="text-align: right;">26.776</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PG2514</td>
+<td style="text-align: left;">WRNIP1</td>
+<td style="text-align: right;">4.156</td>
+<td style="text-align: right;">26.630</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PG0449</td>
+<td style="text-align: left;">ZNF451</td>
+<td style="text-align: right;">2.237</td>
+<td style="text-align: right;">26.670</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PG0866</td>
+<td style="text-align: left;">PSMD11</td>
+<td style="text-align: right;">2.681</td>
+<td style="text-align: right;">25.252</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PG0950</td>
+<td style="text-align: left;">PSMD3</td>
+<td style="text-align: right;">1.775</td>
+<td style="text-align: right;">25.683</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PG1402</td>
+<td style="text-align: left;">PSMC2</td>
+<td style="text-align: right;">1.903</td>
+<td style="text-align: right;">25.738</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+</tbody>
+</table>
+<p>Limma mean–variance diagnostic for protein groups with at least two observed Ubi4 and two observed control intensities.</p>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotSA</span>(fit, <span class="at">main =</span> <span class="st">"Mean–variance diagnostic for eligible protein groups"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c02_proteomics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="Limma mean–variance diagnostic for protein groups with at least two observed Ubi4 and two observed control intensities." width="672"></p>
+<figcaption>Limma mean–variance diagnostic for protein groups with at least two observed Ubi4 and two observed control intensities.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The coefficient is Ubi4 minus control in log2 intensity. Limma moderates variances by borrowing information across eligible protein groups; <code>trend = TRUE</code> allows the prior variance to depend on average intensity. This increases stability with small replicate numbers, but cannot reconstruct missing observations or guarantee that intensity-dependent selection is ignorable. Inspect the diagnostic and the original six values for any highlighted group.</p>
+</section>
+<section id="sensitivity-require-all-six-values" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-require-all-six-values">Sensitivity: require all six values</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>complete <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">is.na</span>(y)) <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>strict_fit <span class="ot">&lt;-</span> limma<span class="sc">::</span><span class="fu">eBayes</span>(limma<span class="sc">::</span><span class="fu">lmFit</span>(y[complete, ], design), <span class="at">trend =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>strict <span class="ot">&lt;-</span> limma<span class="sc">::</span><span class="fu">topTable</span>(strict_fit, <span class="at">coef =</span> <span class="st">"conditionUbi4"</span>, <span class="at">number =</span> <span class="cn">Inf</span>, <span class="at">sort.by =</span> <span class="st">"none"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>shared <span class="ot">&lt;-</span> <span class="fu">intersect</span>(<span class="fu">rownames</span>(ans), <span class="fu">rownames</span>(strict))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ia <span class="ot">&lt;-</span> <span class="fu">match</span>(shared, <span class="fu">rownames</span>(ans)); ib <span class="ot">&lt;-</span> <span class="fu">match</span>(shared, <span class="fu">rownames</span>(strict))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">primary_tested =</span> <span class="fu">nrow</span>(ans), <span class="at">strict_tested =</span> <span class="fu">nrow</span>(strict), <span class="at">shared =</span> <span class="fu">length</span>(shared),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">effect_correlation =</span> <span class="fu">cor</span>(ans<span class="sc">$</span>logFC[ia], strict<span class="sc">$</span>logFC[ib]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  primary_tested strict_tested shared effect_correlation
+1           1356          1197   1197                  1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ans<span class="sc">$</span>adj.P.Val[ia], strict<span class="sc">$</span>adj.P.Val[ib], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Primary adjusted p-value"</span>, <span class="at">ylab =</span> <span class="st">"Complete-case adjusted p-value"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#c55a11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c02_proteomics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" alt="Adjusted p-values for shared groups under observed-value and complete-case analyses. Changes reflect both variance moderation and the testing universe." width="672"></p>
+<figcaption>Adjusted p-values for shared groups under observed-value and complete-case analyses. Changes reflect both variance moderation and the testing universe.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For groups observed in all six samples, the fitted group means can agree closely while moderated uncertainty and adjustment differ: the variance prior and testing universe changed. The stricter analysis also favors readily quantified proteins. Neither analysis establishes that missing groups have no response. Report the eligible universe with the effect estimates.</p>
+</section>
+<section id="exercises-and-suggested-reasoning" class="level2">
+<h2 class="anchored" data-anchor-id="exercises-and-suggested-reasoning">Exercises and suggested reasoning</h2>
+<ol type="1">
+<li>For one highlighted group, print its six original LFQ values and all protein identifiers. Explain what a protein group is and what the effect measures.</li>
+<li>Find a group observed in three Ubi4 samples and no controls. Write a bounded statement about its detection pattern and propose a validation measurement.</li>
+<li>Repeat the observed-value comparison for Ubi6 versus control, restating the eligible filter. Explain why comparing discovery counts alone does not prove a stronger biological interaction.</li>
+<li>As an extension, median-center observed log intensities and compare effect estimates. Which assumption about global enrichment does centering impose?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The estimated effect concerns affinity enrichment and a group of compatible protein identities. All-or-none detection is not a measured zero mean in controls. A targeted measurement, an orthogonal pull-down or an independent binding experiment can test different parts of the hypothesis. Changing bait or missingness filters changes the comparison universe. Median centering assumes comparable global locations after processing; if a genuine widespread enrichment shift is present, it can absorb part of that shift. State this assumption before treating centered results as preferable.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="report-and-reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="report-and-reproduce">Report and reproduce</h2>
+<p>Use the <a href="../assessment.html#case-2-what-does-an-absent-protein-intensity-mean">Case 2 assignment</a> and include the flag counts, detection table, primary contrast, selected universe and complete-case sensitivity. Record that zero-to-NA recoding is a representation of the supplied quantification convention, not an imputation procedure.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_session</span>(<span class="st">"limma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      component version
+              R   4.4.1
+limma     limma  3.62.2</code></pre>
+</div>
+</div>
+<p>Consult the <a href="https://bioconductor.org/packages/release/bioc/html/limma.html">limma documentation</a> for model details. Continue to <a href="../tutorials/c03_cattle.html">Case 3</a> for actual animal metadata and matched assays.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/psoerensen\.github\.io\/genomics-systems-bioinfo\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -11,7 +11,9 @@ The focus is on understanding how genetic and environmental variation influence 
 
 The course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.
 
-Use the [unified course map](course_map.qmd) to explore the reusable teaching blocks and the two pathways through them.
+Start with the [learning pathway](learning_path.qmd) for core work, prerequisites and suggested study time. Use the [unified course map](course_map.qmd) to explore the reusable teaching blocks and the two course pathways.
+
+Apply the methods in [three real-data case studies](case_studies.qmd), then use the [assessment guide](assessment.qmd) to build a defensible report. The [visual guide](visual_guide.qmd) and [videos and animations](media.qmd) explain recurring concepts.
 
 ---
 
@@ -92,7 +94,7 @@ Each module and practical connects:
 - Executable R code
 - Visualizations and case studies
 
-The initial collection includes 18 modules and 31 practicals, covering both harmonized outlines through shared sources. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers.
+The collection includes 18 modules, 31 hypothetical practicals and three real-data case studies, covering both harmonized outlines through shared sources. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers.
 
 ---
 

@@ -3,11 +3,22 @@ project:
   output-dir: docs
   resources:
     - .nojekyll
+    - data/cases/
+    - images/concepts/
   render:
     - index.qmd
     - course_map.qmd
     - modules.qmd
     - practicals.qmd
+    - learning_path.qmd
+    - assessment.qmd
+    - case_studies.qmd
+    - case_data.qmd
+    - visual_guide.qmd
+    - media.qmd
+    - tutorials/c01_airway.qmd
+    - tutorials/c02_proteomics.qmd
+    - tutorials/c03_cattle.qmd
     - slides/introduction_genomics_systems_bioinfo.qmd
     - notes/b01_foundations.qmd
     - notes/b02_design.qmd
@@ -70,8 +81,20 @@ website:
         href: index.html
       - text: "Course map"
         href: course_map.html
-      - text: "Slides"
-        href: slides/introduction_genomics_systems_bioinfo.html
+      - text: "Learning"
+        menu:
+          - text: "Learning pathway"
+            href: learning_path.html
+          - text: "Real-data cases"
+            href: case_studies.html
+          - text: "Assessment guide"
+            href: assessment.html
+          - text: "Visual guide"
+            href: visual_guide.html
+          - text: "Videos and animations"
+            href: media.html
+          - text: "Lecture slides"
+            href: slides/introduction_genomics_systems_bioinfo.html
       - text: "Modules"
         href: modules.html
       - text: "Practicals"

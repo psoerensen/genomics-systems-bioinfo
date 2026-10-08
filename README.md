@@ -35,9 +35,15 @@ The overview is migrated from gteach. The expanded teaching collection contains 
 
 The repository is the unified home for both outlines. All 26 original practical sessions are linked to 24 shared practicals; seven additional practicals cover supporting and advanced topics. Browse [modules](modules.qmd), [practicals](practicals.qmd) and [slides](slides/introduction_genomics_systems_bioinfo.qmd). Maintain shared resources once and link them into each pathway.
 
+## Learning and real-data resources
+
+[Learning pathway](learning_path.qmd): core/extension/advanced labels, prerequisites, study-time estimates and readiness checks. [Assessment](assessment.qmd): crosswalk, three case assignments and a synthesis rubric preserving formal component weights. [Visual guide](visual_guide.qmd): six original accessible SVG concepts. [Media](media.qmd): checked provider links and viewing prompts.
+
+[Case studies](case_studies.qmd): paired airway RNA-seq, ubiquitin interaction proteomics and observational feedlot cattle RNA/metabolites. Local teaching extracts and complete provenance are in [data notes](data/cases/README.md). Rebuild only explicitly with `scripts/prepare_case_data.R`; raw sources and installation libraries stay outside the repository.
+
 ## Requirements and rendering
 
-Install Quarto and R, with knitr/rmarkdown available for Quarto execution. The numerical examples use base R and the small teaching helpers in `R/`; they require no biological downloads or extra analysis packages. All generated data are hypothetical, documented in `data/README.md`.
+Install Quarto and R, with knitr/rmarkdown available for Quarto execution. The original module/P01–P31 examples use base R and small teaching helpers in `R/`; they require no biological downloads or extra analysis packages. The P01–P31 generated data are hypothetical, documented in `data/README.md`. Three additional real-data cases use local public extracts in `data/cases/`, with checksums, source versions, licences and explicit preparation rules. Case 1 needs DESeq2 and Case 2 needs limma; their pages provide one-time Bioconductor setup instructions. Case 3 uses base R. No installation or download occurs during rendering.
 
 Open the RStudio project and render the overview:
 

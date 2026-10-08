@@ -17,6 +17,12 @@ execute:
 
 Define marker dosage and phenotype contrasts; identify confounding and linkage disequilibrium; distinguish GWAS, eQTL, TWAS, fine-mapping and prediction.
 
+## Visualize candidate regulatory relationships
+
+![Concept diagram; detailed explanation and suggested reasoning are in the visual guide.](../images/concepts/regulation.svg)
+
+Use the [visual guide](../visual_guide.qmd) to explain the assumptions in this diagram.
+
 ## Biological question and measurements
 
 GWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.

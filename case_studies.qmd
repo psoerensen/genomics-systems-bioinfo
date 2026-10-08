@@ -1,0 +1,24 @@
+---
+title: "Real-data case studies"
+toc: true
+---
+
+Move from the transparent hypothetical examples in P01–P31 to actual public measurements. These three cases teach different design and measurement problems. They start from processed public tables; raw read alignment, spectrum identification and NMR processing remain outside the implemented scope.
+
+| Case | Biological question | Main lesson | Software | Suggested time |
+|---|---|---|---|---|
+| [1. Airway RNA-seq](tutorials/c01_airway.qmd) | What is the dexamethasone response within four cell lines? | Paired count-model design, normalization, uncertainty and FDR | DESeq2 | 3–4 h |
+| [2. Ubiquitin interaction proteomics](tutorials/c02_proteomics.qmd) | Which protein groups are enriched with Ubi4 versus control? | Identification flags, missingness and the eligible contrast | limma | 2–3 h |
+| [3. Feedlot cattle RNA and metabolites](tutorials/c03_cattle.qmd) | How do concurrent disease-associated layers relate? | Sample identity, confounding, block scaling and bounded interpretation | Base R | 3–4 h |
+
+## Prepare to work
+
+Complete the relevant stages in the [learning pathway](learning_path.qmd), then clone/download the course repository. Open the RStudio project or start R in the project root or `tutorials/`. The teaching extracts and checksum manifest are local in `data/cases/`; examples require no biological downloads. Quarto uses knitr/rmarkdown. The first two cases need their named Bioconductor packages, with one-time installation instructions in the lessons.
+
+Read the [data notes](case_data.qmd) for study provenance, licence, extraction rules and source checksums. Preparation is separate from rendering. The cattle gene panel is selected without disease labels and is limited to exploration; full-gene totals are preserved for its denominator. The available matched cohort differs from the original study because public files do not have identical coverage.
+
+## What to compare across cases
+
+In Case 1, the design deliberately pairs a perturbation within cell lines. In Case 2, an unquantified group is not a measured zero and enrichment is not whole-cell abundance. In Case 3, shared disease status, sampling and missing pen identifiers constrain association claims. The strongest conclusion depends on the design and the measurement, even when the same statistical language appears in several cases.
+
+Keep a one-page analysis record and use the [case assignments and rubric](assessment.qmd). Explain one result that changes under a reasonable sensitivity analysis. The [visual guide](visual_guide.qmd) and [media guide](media.qmd) provide optional conceptual support.

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">From a biological sample to an analysis table</title><desc id="desc">RNA sequencing, mass spectrometry and NMR each have a measurement and processing chain. Their tables represent different quantities.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="440" fill="#fff"/>
+<text x="30" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#182c42">From a biological sample to an analysis table</text>
+<rect x="30" y="80" width="260" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="116.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Tissue / cells</text>
+<text x="42" y="140.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">RNA extraction</text>
+<rect x="390" y="80" width="300" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="402" y="116.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Library → sequence reads</text>
+<text x="402" y="140.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Reference + counting</text>
+<rect x="790" y="80" width="280" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="802" y="116.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Gene counts</text>
+<text x="802" y="140.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Sampling and composition</text>
+<line x1="292" y1="122" x2="387" y2="122" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="692" y1="122" x2="787" y2="122" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="190" width="260" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="226.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Lysate / enrichment</text>
+<text x="42" y="250.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Protein preparation</text>
+<rect x="390" y="190" width="300" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="402" y="226.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Peptides → MS spectra</text>
+<text x="402" y="250.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Identification + LFQ</text>
+<rect x="790" y="190" width="280" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="802" y="226.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Protein-group intensities</text>
+<text x="802" y="250.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Identification and missingness</text>
+<line x1="292" y1="232" x2="387" y2="232" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="692" y1="232" x2="787" y2="232" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="300" width="260" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="336.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Plasma / tissue</text>
+<text x="42" y="360.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Metabolite extraction</text>
+<rect x="390" y="300" width="300" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="402" y="336.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">NMR / MS signals</text>
+<text x="402" y="360.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Annotation + quantification</text>
+<rect x="790" y="300" width="280" height="85" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="802" y="336.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Metabolite measurements</text>
+<text x="802" y="360.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Units and identification</text>
+<line x1="292" y1="342" x2="387" y2="342" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="692" y1="342" x2="787" y2="342" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="30" y="420" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Keep sampling time, processing batch, reference/annotation and units with the table.</text>
+</svg>

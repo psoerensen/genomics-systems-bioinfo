@@ -1,0 +1,20 @@
+---
+title: "Case data and provenance"
+toc: true
+---
+
+## Download the inputs
+
+The complete project supplies the helpers and all files. Individual inputs are also available below; preserve the matching metadata and manifests when reusing them.
+
+| Case | Measurements | Metadata |
+|---|---|---|
+| Airway | [Gene counts](data/cases/airway_counts.csv.gz) | [Paired samples](data/cases/airway_samples.csv) |
+| Proteomics | [LFQ values and flags](data/cases/ubiquitin_lfq.csv.gz) | [Enrichment design](data/cases/ubiquitin_samples.csv) |
+| Cattle | [RNA panel](data/cases/cattle_rna_panel.csv.gz), [metabolites](data/cases/cattle_metabolites.csv) | [Animal covariates](data/cases/cattle_samples.csv), [RNA totals](data/cases/cattle_rna_samples.csv) |
+
+[Teaching-input checksums](data/cases/manifest.csv) · [Source checksums](data/cases/source_checksums.csv) · [Cattle identity audit](data/cases/cattle_identity_audit.csv) · [Cattle coding audit](data/cases/cattle_coding_audit.csv).
+
+Licence texts: [DEP Artistic 2.0](data/cases/DEP-Artistic-2.0.txt), [airway LGPL 2.1](data/cases/airway-LGPL-2.1.txt), [LGPL 3](data/cases/airway-LGPL-3.txt) and [incorporated GPL 3](data/cases/airway-GPL-3.txt).
+
+{{< include data/cases/README.md >}}

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Disease-associated multi-omics in feedlot cattle – Genomics, Systems Biology &amp; Bioinformatics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc63fce9873912f1bbbccf05079cc9ea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Genomics &amp; Multi-Omics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../course_map.html"> 
+<span class="menu-text">Course map</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="../learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../modules.html"> 
+<span class="menu-text">Modules</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../practicals.html"> 
+<span class="menu-text">Practicals</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-related-courses" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Related courses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-related-courses">    
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/quantitative-genetics/">
+ <span class="dropdown-text">Quantitative Genetics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://psoerensen.github.io/population-genetics/">
+ <span class="dropdown-text">Population Genetics</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://psoerensen.github.io/gteach/"> 
+<span class="menu-text">gteach</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question-and-learning-outcomes" id="toc-question-and-learning-outcomes" class="nav-link active" data-scroll-target="#question-and-learning-outcomes">Question and learning outcomes</a></li>
+  <li><a href="#study-sampling-and-limits" id="toc-study-sampling-and-limits" class="nav-link" data-scroll-target="#study-sampling-and-limits">Study, sampling and limits</a></li>
+  <li><a href="#load-and-audit-identities" id="toc-load-and-audit-identities" class="nav-link" data-scroll-target="#load-and-audit-identities">Load and audit identities</a></li>
+  <li><a href="#transform-each-measurement-on-its-own-scale" id="toc-transform-each-measurement-on-its-own-scale" class="nav-link" data-scroll-target="#transform-each-measurement-on-its-own-scale">Transform each measurement on its own scale</a></li>
+  <li><a href="#compare-pooled-and-conditional-cross-layer-relationships" id="toc-compare-pooled-and-conditional-cross-layer-relationships" class="nav-link" data-scroll-target="#compare-pooled-and-conditional-cross-layer-relationships">Compare pooled and conditional cross-layer relationships</a></li>
+  <li><a href="#a-balanced-early-integration-display" id="toc-a-balanced-early-integration-display" class="nav-link" data-scroll-target="#a-balanced-early-integration-display">A balanced early-integration display</a></li>
+  <li><a href="#compare-metabolite-associations-under-two-models" id="toc-compare-metabolite-associations-under-two-models" class="nav-link" data-scroll-target="#compare-metabolite-associations-under-two-models">Compare metabolite associations under two models</a></li>
+  <li><a href="#sensitivity-exclude-the-four-unresolved-labels" id="toc-sensitivity-exclude-the-four-unresolved-labels" class="nav-link" data-scroll-target="#sensitivity-exclude-the-four-unresolved-labels">Sensitivity: exclude the four unresolved labels</a></li>
+  <li><a href="#exercises-and-suggested-reasoning" id="toc-exercises-and-suggested-reasoning" class="nav-link" data-scroll-target="#exercises-and-suggested-reasoning">Exercises and suggested reasoning</a></li>
+  <li><a href="#report-and-reproduce" id="toc-report-and-reproduce" class="nav-link" data-scroll-target="#report-and-reproduce">Report and reproduce</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Disease-associated multi-omics in feedlot cattle</h1>
+<p class="subtitle lead">Case 3: Matched animal records, integration and confounding</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="question-and-learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="question-and-learning-outcomes">Question and learning outcomes</h2>
+<p>How do concurrent blood RNA and plasma-metabolite measurements differ between cattle with and without bovine respiratory disease (BRD), and what happens to cross-layer relationships when shared disease status and recorded covariates are considered?</p>
+<p>This real animal-production case emphasizes identity, confounding and interpretation. You will audit unmatched assays, normalize a compact RNA panel using full-library totals, examine separate and combined representations, and compare pooled with adjusted relationships. Allow <strong>3–4 hours</strong>, after B02/B09/B12/B15 and <a href="../tutorials/p14_data_handling.html">P14</a>, <a href="../tutorials/p19_exploration.html">P19</a>, <a href="../tutorials/p21_integration.html">P21</a>. It uses base R plus knitr for displayed tables.</p>
+</section>
+<section id="study-sampling-and-limits" class="level2">
+<h2 class="anchored" data-anchor-id="study-sampling-and-limits">Study, sampling and limits</h2>
+<p><a href="https://doi.org/10.3389/fgene.2022.1046192">Li et al.&nbsp;(2022)</a> investigated BRD in 143 crossbred feedlot cattle, including 80 cases and 63 controls. Controls were sampled from affected pens. Blood measurements were collected at the disease assessment, before the case animals’ subsequent treatment. This is observational disease-associated evidence; its measurements do not automatically identify pre-illness risk markers.</p>
+<p>The local inputs derive from <a href="https://doi.org/10.5683/SP3/ZETWNY">Borealis dataset version 1.0</a> and <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE217317">GEO GSE217317</a>. They have unequal assay/metadata coverage. We use phenotype-table covariates and the intersection with metabolite and RNA observations; we do <strong>not</strong> invent missing metadata to reconstruct all 143 animals. The gene panel comprises the 300 highest mean-CPM genes across available RNA libraries, selected without disease labels. It is a compact exploratory panel, not a transcriptome-wide differential-expression screen.</p>
+<p>The supplied phenotype and metabolite tables encode male animals differently (0 versus 2); this recoding is audited in preparation. GEO’s <code>P4647</code> title is mapped to <code>P4687</code> following the documented correction in the <a href="https://github.com/Plant-Food-Research-Open/moiraine/blob/8c8367777941fae068015d98a82f0b7d76f2be7c/data-raw/example_dataset_li2022.R">public preparation source</a>. The source audit also finds <strong>four conflicting disease labels</strong>: U6623, U6450, U6325 and Y3551 are controls in the phenotype/metabolite tables and have <code>_NB</code> count titles, but their GEO characteristics say BRD. The primary analysis explicitly uses phenotype-table status; a sensitivity analysis below excludes these four animals. Agreement between tables is not proof that a label is correct, so resolution with the data producers would be needed before substantive deployment. All mappings, conflicting source labels and checksums are retained in the <a href="../case_data.html">data notes</a>.</p>
+<p><strong>Important design constraint:</strong> the public tables used here do not contain pen or matched-set identifiers. Adjusting for feedlot and other recorded variables cannot recover pen matching. Treat p-values below as exploratory under an independent-animal working model; they may overstate precision if residual within-pen dependence remains. Whole-blood cell composition and disease-related physiological changes can influence both layers.</p>
+</section>
+<section id="load-and-audit-identities" class="level2">
+<h2 class="anchored" data-anchor-id="load-and-audit-identities">Load and audit identities</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>helper_dir <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">dir.exists</span>(<span class="st">"R"</span>)) <span class="st">"R"</span> <span class="cf">else</span> <span class="st">"../R"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(helper_dir, <span class="st">"case_helpers.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"cattle_samples.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>metabo <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"cattle_metabolites.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">case_matrix</span>(<span class="fu">case_read</span>(<span class="st">"cattle_rna_panel.csv.gz"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rna_meta <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"cattle_rna_samples.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>identity_audit <span class="ot">&lt;-</span> <span class="fu">case_read</span>(<span class="st">"cattle_identity_audit.csv"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(identity_audit[identity_audit<span class="sc">$</span>status_conflict, ], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">source_title</th>
+<th style="text-align: left;">sample_id</th>
+<th style="text-align: left;">geo_status</th>
+<th style="text-align: left;">phenotype_status</th>
+<th style="text-align: left;">status_conflict</th>
+<th style="text-align: left;">phenotype_available</th>
+<th style="text-align: left;">metabolite_available</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">U6325_NB</td>
+<td style="text-align: left;">U6325</td>
+<td style="text-align: left;">BRD</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">U6450_NB</td>
+<td style="text-align: left;">U6450</td>
+<td style="text-align: left;">BRD</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">U6623_NB</td>
+<td style="text-align: left;">U6623</td>
+<td style="text-align: left;">BRD</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Y3551_NB</td>
+<td style="text-align: left;">Y3551</td>
+<td style="text-align: left;">BRD</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(meta<span class="sc">$</span>sample_id), <span class="sc">!</span><span class="fu">anyDuplicated</span>(metabo<span class="sc">$</span>sample_id),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>          <span class="sc">!</span><span class="fu">anyDuplicated</span>(rna_meta<span class="sc">$</span>sample_id))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(intersect, <span class="fu">list</span>(meta<span class="sc">$</span>sample_id, metabo<span class="sc">$</span>sample_id, <span class="fu">colnames</span>(rna)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>audit <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">source =</span> <span class="fu">c</span>(<span class="st">"Phenotype metadata"</span>, <span class="st">"Metabolites"</span>, <span class="st">"RNA"</span>, <span class="st">"Matched intersection"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">animals =</span> <span class="fu">c</span>(<span class="fu">nrow</span>(meta), <span class="fu">nrow</span>(metabo), <span class="fu">ncol</span>(rna), <span class="fu">length</span>(ids)))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(audit, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">source</th>
+<th style="text-align: right;">animals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Phenotype metadata</td>
+<td style="text-align: right;">138</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Metabolites</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RNA</td>
+<td style="text-align: right;">143</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Matched intersection</td>
+<td style="text-align: right;">135</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">metadata_without_metabolites =</span> <span class="fu">setdiff</span>(meta<span class="sc">$</span>sample_id, metabo<span class="sc">$</span>sample_id),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">rna_without_metadata =</span> <span class="fu">setdiff</span>(<span class="fu">colnames</span>(rna), meta<span class="sc">$</span>sample_id),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">metabolites_without_metadata =</span> <span class="fu">setdiff</span>(metabo<span class="sc">$</span>sample_id, meta<span class="sc">$</span>sample_id))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$metadata_without_metabolites
+[1] "Y3005" "P4687" "Y9816"
+
+$rna_without_metadata
+[1] "R9518" "R9909" "P4744" "P4772" "R8953" "U5416"
+
+$metabolites_without_metadata
+[1] "P4744" "P4772" "R8953" "U5416"</code></pre>
+</div>
+</div>
+<p>This audit is a biological result of data availability. It changes the population represented by integration. A table of 143 RNA libraries does not imply 143 animals with every required covariate and assay.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> meta[<span class="fu">match</span>(ids, meta<span class="sc">$</span>sample_id), ]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">case_matrix</span>(metabo[<span class="fu">match</span>(ids, metabo<span class="sc">$</span>sample_id), ])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">t</span>(rna[, ids, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>library_total <span class="ot">&lt;-</span> rna_meta<span class="sc">$</span>library_total[<span class="fu">match</span>(ids, rna_meta<span class="sc">$</span>sample_id)]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">rownames</span>(R), meta<span class="sc">$</span>sample_id), <span class="fu">identical</span>(<span class="fu">rownames</span>(M), meta<span class="sc">$</span>sample_id),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>          <span class="sc">!</span><span class="fu">anyNA</span>(library_total), <span class="fu">all</span>(library_total <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>status <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>status, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"BRD"</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>feedlot <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>feedlot)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>sex)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>rna_batch <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>rna_batch)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">with</span>(meta, <span class="fu">table</span>(feedlot, status)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Control</th>
+<th style="text-align: right;">BRD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F2</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F3</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">with</span>(meta, <span class="fu">table</span>(rna_batch, status)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Control</th>
+<th style="text-align: right;">BRD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">B1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B2</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">53</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">with</span>(meta, <span class="fu">table</span>(sex, status)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Control</th>
+<th style="text-align: right;">BRD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">43</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Look for unbalanced covariates before interpreting assay separation. RNA-sequencing batch is specific to that assay; it is not evidence that plasma was processed in the same batch. A covariate may change an association without proving a causal role for the covariate.</p>
+</section>
+<section id="transform-each-measurement-on-its-own-scale" class="level2">
+<h2 class="anchored" data-anchor-id="transform-each-measurement-on-its-own-scale">Transform each measurement on its own scale</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>qc <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer =</span> <span class="fu">c</span>(<span class="st">"RNA panel"</span>, <span class="st">"Metabolites"</span>), <span class="at">features =</span> <span class="fu">c</span>(<span class="fu">ncol</span>(R), <span class="fu">ncol</span>(M)),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">missing =</span> <span class="fu">c</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(R)), <span class="fu">sum</span>(<span class="fu">is.na</span>(M))),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nonpositive =</span> <span class="fu">c</span>(<span class="fu">sum</span>(R <span class="sc">&lt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">sum</span>(M <span class="sc">&lt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(qc, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">layer</th>
+<th style="text-align: right;">features</th>
+<th style="text-align: right;">missing</th>
+<th style="text-align: right;">nonpositive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">RNA panel</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Metabolites</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">588</td>
+<td style="text-align: right;">91</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyNA</span>(R))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>positive <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(M) <span class="sc">&amp;</span> M <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>feature_audit <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">feature =</span> <span class="fu">colnames</span>(M), <span class="at">positive_observations =</span> <span class="fu">colSums</span>(positive),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">missing =</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(M)),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">nonpositive =</span> <span class="fu">colSums</span>(M <span class="sc">&lt;=</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(feature_audit[feature_audit<span class="sc">$</span>positive_observations <span class="sc">&lt;</span> <span class="fu">nrow</span>(M), ], <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">feature</th>
+<th style="text-align: right;">positive_observations</th>
+<th style="text-align: right;">missing</th>
+<th style="text-align: right;">nonpositive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HMDB00001</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00060</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00094</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00157</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00167</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00177</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00187</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00191</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00214</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00254</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00271</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00294</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00407</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00452</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00491</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00517</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00695</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00754</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB01881</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preserve all 135 matched animals; limit PCA to complete positive features.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>complete_feature <span class="ot">&lt;-</span> <span class="fu">colSums</span>(positive) <span class="sc">==</span> <span class="fu">nrow</span>(M)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>logR <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="fu">sweep</span>(R, <span class="dv">1</span>, library_total <span class="sc">/</span> <span class="fl">1e6</span>, <span class="st">"/"</span>) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>logM_all <span class="ot">&lt;-</span> M</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>logM_all[<span class="sc">!</span>positive] <span class="ot">&lt;-</span> <span class="cn">NA_real_</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>logM_all <span class="ot">&lt;-</span> <span class="fu">log2</span>(logM_all)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>logM <span class="ot">&lt;-</span> logM_all[, complete_feature, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">supplied_metabolites =</span> <span class="fu">ncol</span>(M), <span class="at">complete_positive_for_PCA =</span> <span class="fu">ncol</span>(logM))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  supplied_metabolites complete_positive_for_PCA
+1                   55                        36</code></pre>
+</div>
+</div>
+<p>RNA is converted to CPM using the <strong>full-gene library totals</strong>, not the sum of the selected 300 genes. <code>+1</code> stabilizes the exploratory log display and is not a count-model offset. For exploratory PCA, we retain the <strong>36 metabolite features with positive measurements in all 135 matched animals</strong> and log-transform them. The original extract has 55 HMDB-labelled columns (the publication describes 54 metabolites); we preserve the supplied columns rather than silently reconcile this discrepancy. Missing and zero values in the other 19 columns remain visible in the audit. A zero is not replaced by an invented small concentration: it is excluded from logarithmic observed-value analysis. This complete-feature display favors consistently quantified features and is not representative of the entire metabolome. HMDB identifiers retain the source’s feature names; this lesson does not revalidate spectral assignments or infer a concentration unit absent from the extract’s column labels. State the supplied scale, and consult the study’s quantification protocol before translating a coefficient into absolute units.</p>
+<p>For exploration we standardize features within each layer. This makes unit variance features comparable but can give a noisy low-abundance feature as much initial weight as a precise feature. Selection and scaling here describe the available dataset; they must be fitted in training folds if a later task estimates predictive performance.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(<span class="fu">apply</span>(logR, <span class="dv">2</span>, sd) <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="fu">all</span>(<span class="fu">apply</span>(logM, <span class="dv">2</span>, sd) <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ZR <span class="ot">&lt;-</span> <span class="fu">scale</span>(logR); ZM <span class="ot">&lt;-</span> <span class="fu">scale</span>(logM)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>pcR <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(ZR, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pcM <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(ZM, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Control =</span> <span class="st">"#2878a1"</span>, <span class="at">BRD =</span> <span class="st">"#c55a11"</span>)[<span class="fu">as.character</span>(meta<span class="sc">$</span>status)]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>oldpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcR<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> color, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">xlab =</span> <span class="st">"RNA PC1"</span>, <span class="at">ylab =</span> <span class="st">"RNA PC2"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcM<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> color, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">xlab =</span> <span class="st">"Metabolite PC1"</span>, <span class="at">ylab =</span> <span class="st">"Metabolite PC2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c03_cattle_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" alt="Separate RNA-panel and complete-metabolite PCA displays for 135 cattle. Blue: control; orange: BRD. Features are standardized within layers." width="672"></p>
+<figcaption>Separate RNA-panel and complete-metabolite PCA displays for 135 cattle. Blue: control; orange: BRD. Features are standardized within layers.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(oldpar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Color the same plots by feedlot and RNA batch as an exercise. Group separation in PCA can motivate analysis but does not tell you whether disease, breed composition, technical variation or cell composition drives it.</p>
+</section>
+<section id="compare-pooled-and-conditional-cross-layer-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="compare-pooled-and-conditional-cross-layer-relationships">Compare pooled and conditional cross-layer relationships</h2>
+<p>Use the first principal component of each block as a compact descriptive representation. PC signs are arbitrary; interpret association strength and the loadings, not the sign as a universal biological direction.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>covariates <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> status <span class="sc">+</span> feedlot <span class="sc">+</span> sex <span class="sc">+</span> rna_batch <span class="sc">+</span> day_on_feed <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                          breed1 <span class="sc">+</span> breed2 <span class="sc">+</span> breed3, meta)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(covariates) <span class="sc">==</span> <span class="fu">nrow</span>(meta), <span class="fu">qr</span>(covariates)<span class="sc">$</span>rank <span class="sc">==</span> <span class="fu">ncol</span>(covariates))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>rna_pc1 <span class="ot">&lt;-</span> pcR<span class="sc">$</span>x[, <span class="dv">1</span>]; met_pc1 <span class="ot">&lt;-</span> pcM<span class="sc">$</span>x[, <span class="dv">1</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>rna_resid <span class="ot">&lt;-</span> <span class="fu">lm.fit</span>(covariates, rna_pc1)<span class="sc">$</span>residuals</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>met_resid <span class="ot">&lt;-</span> <span class="fu">lm.fit</span>(covariates, met_pc1)<span class="sc">$</span>residuals</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">comparison =</span> <span class="fu">c</span>(<span class="st">"Pooled PC1 correlation"</span>, <span class="st">"Recorded-covariate adjusted"</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">correlation =</span> <span class="fu">c</span>(<span class="fu">cor</span>(rna_pc1, met_pc1), <span class="fu">cor</span>(rna_resid, met_resid)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   comparison correlation
+1      Pooled PC1 correlation  -0.6889209
+2 Recorded-covariate adjusted  -0.3888399</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>oldpar <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rna_pc1, met_pc1, <span class="at">col =</span> color, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">xlab =</span> <span class="st">"RNA PC1"</span>, <span class="at">ylab =</span> <span class="st">"Metabolite PC1"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rna_resid, met_resid, <span class="at">col =</span> color, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"RNA PC1 residual"</span>, <span class="at">ylab =</span> <span class="st">"Metabolite PC1 residual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c03_cattle_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="Pooled and recorded-covariate-adjusted relationships between layer PC1 scores. Blue: control; orange: BRD. Signs of PC scores are arbitrary." width="672"></p>
+<figcaption>Pooled and recorded-covariate-adjusted relationships between layer PC1 scores. Blue: control; orange: BRD. Signs of PC scores are arbitrary.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(oldpar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A pooled relationship can partly reflect a shared disease-group difference. Residualization asks about variation not linearly explained by the recorded covariates, including disease status. It changes the question; it does not prove that a biological relationship has disappeared or that the adjusted result is causal. This demonstration includes RNA batch in the common adjustment to compare the same conditional observations; do not assume it is a metabolomics processing variable. Unrecorded pen and cell-composition effects remain.</p>
+</section>
+<section id="a-balanced-early-integration-display" class="level2">
+<h2 class="anchored" data-anchor-id="a-balanced-early-integration-display">A balanced early-integration display</h2>
+<p>Simply concatenating 300 standardized RNA genes with 36 complete metabolite features gives the RNA block greater total initial variance. Here each block is divided by the square root of its number of features so its average feature variance has comparable block weight.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>joint <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ZR <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">ncol</span>(ZR)), ZM <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">ncol</span>(ZM)))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pj <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(joint, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>frac <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pj<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pj<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pj<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> color, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">sprintf</span>(<span class="st">"Joint PC1 (%.1f%%)"</span>, frac[<span class="dv">1</span>]),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="fu">sprintf</span>(<span class="st">"Joint PC2 (%.1f%%)"</span>, frac[<span class="dv">2</span>]))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"BRD"</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#2878a1"</span>, <span class="st">"#c55a11"</span>), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c03_cattle_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" alt="Early-integration PCA with equal total initial variance for the RNA and complete-metabolite blocks. Blue: control; orange: BRD." width="672"></p>
+<figcaption>Early-integration PCA with equal total initial variance for the RNA and complete-metabolite blocks. Blue: control; orange: BRD.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Equal total block variance is a transparent weighting choice, not a claim of equal biological information or measurement quality. Compare with an unweighted concatenation and explain which layer drives the first component. This is an exploratory integration display; it is not an evaluated diagnostic or prospective prediction model.</p>
+</section>
+<section id="compare-metabolite-associations-under-two-models" class="level2">
+<h2 class="anchored" data-anchor-id="compare-metabolite-associations-under-two-models">Compare metabolite associations under two models</h2>
+<p>For each metabolite, compare a disease-only model with a model including recorded feedlot, sex, days on feed and three breed-composition covariates. We omit RNA batch from this assay-specific model. Both start with the same matched cohort and use the same positive observed animals <strong>within each feature</strong>. The eligible sample count can therefore differ across metabolites. Require at least 20 observed animals in each disease group for this teaching comparison, and report those counts. The disease coefficient is a difference in expected <strong>log2 supplied metabolite measurement</strong>, not proof of a disease-causing metabolic process.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>association <span class="ot">&lt;-</span> <span class="cf">function</span>(values, <span class="at">adjusted =</span> <span class="cn">FALSE</span>, <span class="at">exclude_conflicts =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  observed <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(values)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (exclude_conflicts) observed <span class="ot">&lt;-</span> observed <span class="sc">&amp;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span>(meta<span class="sc">$</span>sample_id <span class="sc">%in%</span> identity_audit<span class="sc">$</span>sample_id[identity_audit<span class="sc">$</span>status_conflict])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> meta[observed, ]; d<span class="sc">$</span>value <span class="ot">&lt;-</span> values[observed]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  sizes <span class="ot">&lt;-</span> <span class="fu">table</span>(d<span class="sc">$</span>status)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  empty <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">effect =</span> <span class="cn">NA_real_</span>, <span class="at">se =</span> <span class="cn">NA_real_</span>, <span class="at">p =</span> <span class="cn">NA_real_</span>, <span class="at">n =</span> <span class="fu">nrow</span>(d),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">controls =</span> <span class="fu">unname</span>(sizes[<span class="st">"Control"</span>]), <span class="at">cases =</span> <span class="fu">unname</span>(sizes[<span class="st">"BRD"</span>]))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(sizes <span class="sc">&lt;</span> <span class="dv">20</span>)) <span class="fu">return</span>(empty)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="cf">if</span> (adjusted) value <span class="sc">~</span> status <span class="sc">+</span> feedlot <span class="sc">+</span> sex <span class="sc">+</span> day_on_feed <span class="sc">+</span> breed1 <span class="sc">+</span> breed2 <span class="sc">+</span> breed3</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>           <span class="cf">else</span> value <span class="sc">~</span> status</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(model, d)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">qr</span>(X)<span class="sc">$</span>rank <span class="sc">&lt;</span> <span class="fu">ncol</span>(X)) <span class="fu">return</span>(empty)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  cf <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(model, <span class="at">data =</span> d)))[<span class="st">"statusBRD"</span>, ]</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">effect =</span> <span class="fu">unname</span>(cf[<span class="dv">1</span>]), <span class="at">se =</span> <span class="fu">unname</span>(cf[<span class="dv">2</span>]), <span class="at">p =</span> <span class="fu">unname</span>(cf[<span class="dv">4</span>]),</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">nrow</span>(d), <span class="at">controls =</span> <span class="fu">unname</span>(sizes[<span class="st">"Control"</span>]), <span class="at">cases =</span> <span class="fu">unname</span>(sizes[<span class="st">"BRD"</span>]))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>raw_assoc <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(logM_all, <span class="dv">2</span>, association))</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>adj_assoc <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(logM_all, <span class="dv">2</span>, association, <span class="at">adjusted =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>at <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">feature =</span> <span class="fu">colnames</span>(logM_all),</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_n =</span> adj_assoc[, <span class="st">"n"</span>], <span class="at">controls =</span> adj_assoc[, <span class="st">"controls"</span>], <span class="at">cases =</span> adj_assoc[, <span class="st">"cases"</span>],</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">unadjusted_effect =</span> raw_assoc[, <span class="st">"effect"</span>], <span class="at">adjusted_effect =</span> adj_assoc[, <span class="st">"effect"</span>],</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjusted_se =</span> adj_assoc[, <span class="st">"se"</span>], <span class="at">adjusted_p =</span> adj_assoc[, <span class="st">"p"</span>],</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjusted_fdr =</span> <span class="fu">p.adjust</span>(adj_assoc[, <span class="st">"p"</span>], <span class="st">"BH"</span>))</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>at <span class="ot">&lt;-</span> at[<span class="fu">order</span>(at<span class="sc">$</span>adjusted_fdr), ]</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(at, <span class="dv">10</span>), <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">feature</th>
+<th style="text-align: right;">observed_n</th>
+<th style="text-align: right;">controls</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">unadjusted_effect</th>
+<th style="text-align: right;">adjusted_effect</th>
+<th style="text-align: right;">adjusted_se</th>
+<th style="text-align: right;">adjusted_p</th>
+<th style="text-align: right;">adjusted_fdr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HMDB00094</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">-2.627</td>
+<td style="text-align: right;">-2.576</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00042</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-1.384</td>
+<td style="text-align: right;">-1.238</td>
+<td style="text-align: right;">0.121</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00169</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">1.008</td>
+<td style="text-align: right;">1.002</td>
+<td style="text-align: right;">0.099</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB01873</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-0.686</td>
+<td style="text-align: right;">-0.572</td>
+<td style="text-align: right;">0.063</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00148</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-0.826</td>
+<td style="text-align: right;">-0.841</td>
+<td style="text-align: right;">0.105</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00159</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">0.597</td>
+<td style="text-align: right;">0.563</td>
+<td style="text-align: right;">0.072</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00357</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-1.318</td>
+<td style="text-align: right;">-1.214</td>
+<td style="text-align: right;">0.158</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00641</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-0.659</td>
+<td style="text-align: right;">-0.570</td>
+<td style="text-align: right;">0.079</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HMDB00043</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-0.724</td>
+<td style="text-align: right;">-0.768</td>
+<td style="text-align: right;">0.116</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HMDB00158</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">-0.556</td>
+<td style="text-align: right;">-0.465</td>
+<td style="text-align: right;">0.070</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p>Disease-only versus recorded-covariate-adjusted log2 metabolite associations. Each feature uses its eligible positive observed animals; the diagonal marks equality.</p>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(raw_assoc[, <span class="st">"effect"</span>], adj_assoc[, <span class="st">"effect"</span>], <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Unadjusted disease coefficient"</span>, <span class="at">ylab =</span> <span class="st">"Adjusted disease coefficient"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#c55a11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c03_cattle_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" alt="Disease-only versus recorded-covariate-adjusted log2 metabolite associations. Each feature uses its eligible positive observed animals; the diagonal marks equality." width="672"></p>
+<figcaption>Disease-only versus recorded-covariate-adjusted log2 metabolite associations. Each feature uses its eligible positive observed animals; the diagonal marks equality.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These working-model tests adjust multiplicity across the 55 supplied columns, conservatively retaining that family size even if a feature is ineligible (its result remains <code>NA</code>). The group-wise observation rule and rank check can leave a column untested. Observed-value analysis does not solve informative missingness, so compare missingness by disease group before interpreting its coefficient. They do not address unobserved pen dependence or selection into a case-control sample. They need not reproduce the paper’s analysis, which used different feature processing, covariate handling and assay-specific samples. The goal is to inspect how choices change evidence, not tune the pipeline until published discovery counts reappear.</p>
+</section>
+<section id="sensitivity-exclude-the-four-unresolved-labels" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-exclude-the-four-unresolved-labels">Sensitivity: exclude the four unresolved labels</h2>
+<p>Keep the primary feature definitions and model, but remove the four disputed control records. This comparison describes sensitivity to a plausible source-data problem; it does not establish which original label is correct.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>no_conflict <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(logM_all, <span class="dv">2</span>, association, <span class="at">adjusted =</span> <span class="cn">TRUE</span>, <span class="at">exclude_conflicts =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ok <span class="ot">&lt;-</span> <span class="fu">is.finite</span>(adj_assoc[, <span class="st">"effect"</span>]) <span class="sc">&amp;</span> <span class="fu">is.finite</span>(no_conflict[, <span class="st">"effect"</span>])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">primary_cohort =</span> <span class="fu">nrow</span>(meta),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">sensitivity_cohort =</span> <span class="fu">sum</span>(<span class="sc">!</span>(meta<span class="sc">$</span>sample_id <span class="sc">%in%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>             identity_audit<span class="sc">$</span>sample_id[identity_audit<span class="sc">$</span>status_conflict])),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">comparable_features =</span> <span class="fu">sum</span>(ok),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">median_absolute_effect_change =</span> <span class="fu">median</span>(<span class="fu">abs</span>(adj_assoc[ok, <span class="st">"effect"</span>] <span class="sc">-</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                                                      no_conflict[ok, <span class="st">"effect"</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  primary_cohort sensitivity_cohort comparable_features
+1            135                131                  54
+  median_absolute_effect_change
+1                    0.01229677</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adj_assoc[ok, <span class="st">"effect"</span>], no_conflict[ok, <span class="st">"effect"</span>], <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Primary adjusted coefficient"</span>, <span class="at">ylab =</span> <span class="st">"Exclude-conflicts coefficient"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#c55a11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c03_cattle_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" alt="Sensitivity of adjusted metabolite coefficients to excluding four records with conflicting public disease labels. The diagonal marks equality." width="672"></p>
+<figcaption>Sensitivity of adjusted metabolite coefficients to excluding four records with conflicting public disease labels. The diagonal marks equality.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Inspect both large and small changes. Even stable coefficients do not make unresolved source labels acceptable for a deployed diagnostic. A proper data-query log would record the discrepancy, the working decision and the response from the data owner.</p>
+</section>
+<section id="exercises-and-suggested-reasoning" class="level2">
+<h2 class="anchored" data-anchor-id="exercises-and-suggested-reasoning">Exercises and suggested reasoning</h2>
+<ol type="1">
+<li>Explain why the matched intersection is smaller than 143. List exclusions by source rather than writing “missing data removed.”</li>
+<li>Tabulate positive observations by disease group for an incomplete metabolite. Could its missingness alter the selected population? Then compare pooled, disease-only residualized and fully residualized PC correlations. Which question does each answer?</li>
+<li>Change the relative RNA-block weight by factors of 0.5 and 2 in the joint display. Assess sample coordinates and loadings. What did you learn about integration assumptions?</li>
+<li>For one metabolite, compare its coefficient with and without days on feed. Discuss whether that variable could precede disease, reflect disease-associated management, or proxy another process.</li>
+<li>Design a study to test an early BRD marker. State the measurement time, independent validation population and how to handle pen/farm clustering. Which variables would be unavailable at the intended decision time?</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only animals with all selected assay and phenotype records enter this integration; unavailable observations must not be filled from an assumed group average. Disease-only residualization removes the pooled group mean difference, while the larger adjustment also removes variation explained by recorded covariates. Neither identifies a causal chain. Block weighting changes the representation because integration is a modelling choice. Covariate timing and a causal diagram help distinguish confounders from possible consequences. A prospective marker study collects measurements before onset, records allocation/nesting and validates on new animals or farms appropriate to deployment.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="report-and-reproduce" class="level2">
+<h2 class="anchored" data-anchor-id="report-and-reproduce">Report and reproduce</h2>
+<p>Follow the <a href="../assessment.html#case-3-disease-associated-layers-in-cattle">Case 3 assignment</a>. Include identity and conflicting-label audits, cohort counts, measurement scales, panel selection, covariate balance, primary/sensitivity methods and the unavailable pen identifiers. Do not claim a causal mechanism, genome-wide screen or validated pre-illness predictor from this case.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_session</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  component version
+1         R   4.4.1</code></pre>
+</div>
+</div>
+<p>Return to the <a href="../case_studies.html">case index</a>, or develop the <a href="../assessment.html#synthesis-assignment">synthesis assignment</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/psoerensen\.github\.io\/genomics-systems-bioinfo\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

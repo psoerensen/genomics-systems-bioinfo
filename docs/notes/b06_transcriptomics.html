@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4000,12 +4000,39 @@ window.Quarto = {
     <a class="nav-link" href="../course_map.html"> 
 <span class="menu-text">Course map</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../slides/introduction_genomics_systems_bioinfo.html"> 
-<span class="menu-text">Slides</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="../learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,6 +4075,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#visualize-the-composition-problem" id="toc-visualize-the-composition-problem" class="nav-link" data-scroll-target="#visualize-the-composition-problem">Visualize the composition problem</a></li>
   <li><a href="#start-with-the-biological-comparison" id="toc-start-with-the-biological-comparison" class="nav-link" data-scroll-target="#start-with-the-biological-comparison">1. Start with the biological comparison</a></li>
   <li><a href="#from-tissue-to-count-matrix" id="toc-from-tissue-to-count-matrix" class="nav-link" data-scroll-target="#from-tissue-to-count-matrix">2. From tissue to count matrix</a></li>
   <li><a href="#depth-and-composition-are-different-problems" id="toc-depth-and-composition-are-different-problems" class="nav-link" data-scroll-target="#depth-and-composition-are-different-problems">3. Depth and composition are different problems</a>
@@ -4101,6 +4129,16 @@ window.Quarto = {
 <li>Use exploratory plots and diagnostics to ask questions about sample quality.</li>
 <li>Report differential-expression evidence without equating significance with biological importance or causality.</li>
 </ul>
+</section>
+<section id="visualize-the-composition-problem" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-the-composition-problem">Visualize the composition problem</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img role="img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTAwIDQ0MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPgo8dGl0bGUgaWQ9InRpdGxlIj5Db21wb3NpdGlvbiBjYW4gY2hhbmdlIHJlbGF0aXZlIGNvdW50czwvdGl0bGU+PGRlc2MgaWQ9ImRlc2MiPkF0IGEgZml4ZWQgcmVhZCBidWRnZXQsIGRvdWJsaW5nIHRvdGFsIFJOQSBiZWNhdXNlIHRyYW5zY3JpcHQgQyBpbmNyZWFzZXMgbWFrZXMgdW5jaGFuZ2VkIEEgYW5kIEIgYXBwZWFyIHRvIGRlY3JlYXNlIGluIHJlbGF0aXZlIGNvdW50cy48L2Rlc2M+CjxkZWZzPjxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTAiIG1hcmtlckhlaWdodD0iMTAiIHJlZlg9IjgiIHJlZlk9IjMiIG9yaWVudD0iYXV0byI+PHBhdGggZD0iTTAsMCBMMCw2IEw4LDMgeiIgZmlsbD0iIzMzNDE1NSIvPjwvbWFya2VyPjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjExMDAiIGhlaWdodD0iNDQwIiBmaWxsPSIjZmZmIi8+Cjx0ZXh0IHg9IjMwIiB5PSIzNiIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPkNvbXBvc2l0aW9uIGNhbiBjaGFuZ2UgcmVsYXRpdmUgY291bnRzPC90ZXh0Pgo8cmVjdCB4PSIzMCIgeT0iOTAiIHdpZHRoPSIzNTAiIGhlaWdodD0iOTUiIHJ4PSI5IiBmaWxsPSIjZTVmMmY1IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjQyIiB5PSIxMzEuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPkFic29sdXRlIG1vbGVjdWxlczogYmVmb3JlPC90ZXh0Pgo8dGV4dCB4PSI0MiIgeT0iMTU1LjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5BPTEwMCAgIEI9MTAwICAgQz04MDA8L3RleHQ+CjxyZWN0IHg9IjY4MCIgeT0iOTAiIHdpZHRoPSIzODUiIGhlaWdodD0iOTUiIHJ4PSI5IiBmaWxsPSIjZmZmMWQ2IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjY5MiIgeT0iMTMxLjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5FeHBlY3RlZCBjb3VudHM6IDEsMDAwIHJlYWRzPC90ZXh0Pgo8dGV4dCB4PSI2OTIiIHk9IjE1NS41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+QT0xMDAgICBCPTEwMCAgIEM9ODAwPC90ZXh0Pgo8bGluZSB4MT0iMzg1IiB5MT0iMTM4IiB4Mj0iNjczIiB5Mj0iMTM4IiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPHRleHQgeD0iNDc0LjAiIHk9IjEyOC4wIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+Rml4ZWQgcmVhZCBidWRnZXQ8L3RleHQ+CjxyZWN0IHg9IjMwIiB5PSIyMzUiIHdpZHRoPSIzNTAiIGhlaWdodD0iOTUiIHJ4PSI5IiBmaWxsPSIjZTVmMmY1IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjQyIiB5PSIyNzYuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPkFic29sdXRlIG1vbGVjdWxlczogYWZ0ZXI8L3RleHQ+Cjx0ZXh0IHg9IjQyIiB5PSIzMDAuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPkE9MTAwICAgQj0xMDAgICBDPTEsODAwPC90ZXh0Pgo8cmVjdCB4PSI2ODAiIHk9IjIzNSIgd2lkdGg9IjM4NSIgaGVpZ2h0PSI5NSIgcng9IjkiIGZpbGw9IiNmZmYxZDYiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iNjkyIiB5PSIyNzYuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPkV4cGVjdGVkIGNvdW50czogMSwwMDAgcmVhZHM8L3RleHQ+Cjx0ZXh0IHg9IjY5MiIgeT0iMzAwLjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5BPTUwICAgQj01MCAgIEM9OTAwPC90ZXh0Pgo8bGluZSB4MT0iMzg1IiB5MT0iMjgzIiB4Mj0iNjczIiB5Mj0iMjgzIiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPHRleHQgeD0iNDc0LjAiIHk9IjI3My4wIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+Rml4ZWQgcmVhZCBidWRnZXQ8L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSIzNzgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5BIGFuZCBCIGFyZSB1bmNoYW5nZWQgaW4gbW9sZWN1bGVzIHBlciBjZWxsLCBidXQgdGhlaXIgc2hhcmVzIGhhbHZlLjwvdGV4dD4KPHRleHQgeD0iMzAiIHk9IjQxMiIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPlJlZmVyZW5jZS1iYXNlZCBub3JtYWxpemF0aW9uIG5lZWRzIHN0YWJsZSBmZWF0dXJlczsgYWJzb2x1dGUgZ2xvYmFsIHNoaWZ0cyBuZWVkIGV4dHJhIGluZm9ybWF0aW9uLjwvdGV4dD4KPC9zdmc+" class="img-fluid figure-img"></p>
+<figcaption>Concept diagram; detailed explanation and suggested reasoning are in the visual guide.</figcaption>
+</figure>
+</div>
+<p>Use the <a href="../visual_guide.html">visual guide</a> to explain the assumptions in this diagram. Apply the model to <a href="../tutorials/c01_airway.html">actual paired RNA-seq counts</a>.</p>
 </section>
 <section id="start-with-the-biological-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="start-with-the-biological-comparison">1. Start with the biological comparison</h2>

@@ -1,0 +1,79 @@
+---
+title: "Your learning pathway"
+toc: true
+---
+
+Start with a biological question, establish what was measured, and only then choose the analysis. This guide identifies a manageable shared core and shows where the two courses branch. The [course map](course_map.qmd) retains the full curriculum and formal assessment schemes.
+
+## Before you start
+
+You should be able to explain DNA → RNA → protein, distinguish a sample from a biological replicate, interpret a mean and confidence interval, and import a table in R. You do not need to know every assay or analysis package.
+
+| Readiness check | If you need a refresher |
+|---|---|
+| Describe what a molecular measurement represents | [B01: Questions and measurements](notes/b01_foundations.qmd) |
+| Read a CSV, select columns and join by an identifier | [B04](notes/b04_programming.qmd), then [P14: Data handling](tutorials/p14_data_handling.qmd) |
+| Explain a linear-model coefficient and uncertainty | [B12: Statistics](notes/b12_statistics.qmd); optional [Bayesian linear regression background](https://psoerensen.github.io/bayesian-linear-regression/) |
+| Identify the independently allocated treatment unit | [B02: Design](notes/b02_design.qmd), then [P15](tutorials/p15_experimental_design.qmd) |
+
+Try the linked practical before deciding you are ready. A script that runs is only one part of readiness: explain its rows, units and comparison in words.
+
+## Shared core: six stages
+
+The estimates below are **suggested student study time**, including reading and exercises. They are planning estimates, not contact hours or credit allocations. Beginners may need longer. Completing all six stages takes about **24–32 hours**, before pathway branches and real-data cases.
+
+| Stage | Essential reading and work | Time | Evidence that you are ready to move on |
+|---|---|---|---|
+| 1. Question and design | B01/B02; [P15](tutorials/p15_experimental_design.qmd) | 3–4 h | State the question, treatment/observation unit, sampling time and confounders |
+| 2. Identity and provenance | B03/B04; [P14](tutorials/p14_data_handling.qmd) | 3–4 h | Join two shuffled tables by identifiers and explain unmatched samples |
+| 3. Measurement and quality | B05/B06 plus the assay you need; [P08](tutorials/p08_sequence_qc.qmd), [P16](tutorials/p16_multiomics_qc.qmd) | 5–6 h | Distinguish raw measurement, transformed value and biological abundance |
+| 4. Model and contrast | B12; [P09](tutorials/p09_rnaseq.qmd), [P19](tutorials/p19_exploration.qmd) | 5–7 h | Write the design and contrast; explain normalization, uncertainty and multiplicity |
+| 5. Integration and evidence | B14/B15; [P10](tutorials/p10_pathways.qmd), [P21](tutorials/p21_integration.qmd) | 5–7 h | Justify sample matching, scaling, eligible background and an integration strategy |
+| 6. Interpretation and report | B17/B18; [P25](tutorials/p25_interpretation.qmd), [P13](tutorials/p13_reporting.qmd) | 3–4 h | Separate observation, inference, causal claim and next validation step |
+
+Keep a one-page analysis record throughout: question; observations and units; source; exclusion rules; model; diagnostic; conclusion; limitation. Carry that record into a [real-data case](case_studies.qmd) and the [synthesis assignment](assessment.qmd#synthesis-assignment).
+
+## Depth labels for every module
+
+**Core** means the named part is essential to the shared pathway. **Extension** means a course branch or question may require it. **Advanced** means it assumes the core and is not a hidden prerequisite. A core module can still contain optional mathematical or computational sections.
+
+| Block | Shared entry level | Prerequisites | Suggested first pass |
+|---|---|---|---|
+| [B01](notes/b01_foundations.qmd): Foundations | Core | Molecular biology | 1 h: question, layers, measurement |
+| [B02](notes/b02_design.qmd): Design | Core | B01, introductory statistics | 1.5 h: allocation, sampling, confounding |
+| [B03](notes/b03_databases.qmd): Databases | Core | B01 | 1 h: identifiers, versions, provenance |
+| [B04](notes/b04_programming.qmd): Programming | Core | Basic R | 1.5 h: import, join, reproducibility |
+| [B05](notes/b05_genomics.qmd): Genomics | Core survey; sequence-method extension | B03/B04 | 1.5 h: reads, variants and reference dependence |
+| [B06](notes/b06_transcriptomics.qmd): Transcriptomics | Core | B02/B04; B12 for models | 2 h: counts, normalization and contrasts |
+| [B07](notes/b07_epigenomics.qmd): Epigenomics | Extension; core survey for Multi-Omics | B02/B05/B06 | 1 h: assay evidence and regulatory limits |
+| [B08](notes/b08_proteomics.qmd): Proteomics | Extension; core survey for Multi-Omics | B02/B03/B04 | 1.5 h: identification, abundance, missingness |
+| [B09](notes/b09_metabolomics.qmd): Metabolomics | Extension; core survey for Multi-Omics | B02/B04 | 1.5 h: features, annotation and quantification |
+| [B10](notes/b10_microbiomics.qmd): Microbiomics | Extension; core survey for Multi-Omics | B02/B05/B12 | 1 h: composition and host associations |
+| [B11](notes/b11_phenomics.qmd): Phenomics | Extension; core survey for Multi-Omics | B02/B04 | 1 h: repeated measurements and decision time |
+| [B12](notes/b12_statistics.qmd): Statistics | Core | Introductory statistics, B02/B04 | 2 h: contrasts, uncertainty and validation |
+| [B13](notes/b13_association.qmd): Association | Extension; core for GSB association branch | B05/B12 | 1.5 h: structure, prediction and regulatory evidence |
+| [B14](notes/b14_networks.qmd): Networks | Core interpretation; dynamic models advanced | B03/B06/B12 | 1.5 h: backgrounds, edges and evidence |
+| [B15](notes/b15_integration.qmd): Integration | Core | B02/B04/B12 and two assay modules | 2 h: matching, scaling and strategy |
+| [B16](notes/b16_advanced.qmd): Emerging methods | Advanced | B02/B06/B12/B15 | 1.5 h: single-cell/spatial assumptions |
+| [B17](notes/b17_integrity.qmd): Integrity | Core throughout | None beyond the current task | 1 h: provenance, reporting and responsible reuse |
+| [B18](notes/b18_synthesis.qmd): Synthesis | Core | Shared stages 1–5 | 1.5 h: production question and defensible conclusion |
+
+These labels guide navigation; they do not remove material from either supplied outline. The original module mapping remains in the [course map](course_map.qmd).
+
+## Choose your course branch
+
+### Genomics, Systems Biology and Bioinformatics
+
+After stages 1–2, follow the sequence branch through [P01–P06](practicals.qmd#genomics-systems-biology-and-bioinformatics-pathway) and B05. Allow 6–9 additional hours for retrieval, similarity, alignment and phylogeny. Add [P07: Structure](tutorials/p07_structure.qmd) if protein structure is part of your question. Return to stages 3–5, develop B13 with [P29](tutorials/p29_association.qmd), and compare networks with [P11](tutorials/p11_networks.qmd).
+
+Use [Case 1](tutorials/c01_airway.qmd) for a real count-model analysis. For a computational project, extend [P20](tutorials/p20_prediction.qmd) or [P23](tutorials/p23_integrated_analysis.qmd) with a justified validation design. Dynamic networks and B16 are advanced choices after the essential analysis has been explained.
+
+### Multi-Omics Technology in Animal Production
+
+At stage 3, survey B05–B11 and complete [P17: Metabolomics](tutorials/p17_metabolomics.qmd), [P18: Proteomics](tutorials/p18_proteomics.qmd) and the relevant [P27/P28](practicals.qmd#complete-practical-library). Allow 7–10 additional hours for assay comparisons and exercises. The aim is to choose technologies and sampling, not to master every specialized software pipeline.
+
+Use [Case 2](tutorials/c02_proteomics.qmd) to reason about missing protein measurements, then [Case 3](tutorials/c03_cattle.qmd) to join actual cattle assays and examine confounding. Finish with [P26: Research proposal](tutorials/p26_research_proposal.qmd), explaining what a new study would need to distinguish disease consequences from prospective risk markers.
+
+## Use the supporting resources
+
+The [visual guide](visual_guide.qmd) explains six concepts that recur across modules. The [media guide](media.qmd) provides optional viewing with a question to answer afterwards. The [assessment guide](assessment.qmd) shows what a successful piece of work demonstrates. Attempt the exercises before revealing suggested answers; a different justified method can be acceptable when its assumptions match the question.

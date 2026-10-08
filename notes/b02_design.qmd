@@ -17,6 +17,12 @@ execute:
 
 Define experimental units and independent replication; distinguish randomisation, blocking and batch adjustment; identify confounded designs and specify sample handling.
 
+## Visualize the allocation unit
+
+![Concept diagram; detailed explanation and suggested reasoning are in the visual guide.](../images/concepts/replication.svg)
+
+Use the [visual guide](../visual_guide.qmd) to explain the assumptions in this diagram.
+
 ## Biological question and measurements
 
 For an individually allocated diet, the animal can be the experimental unit. If a diet is allocated to pens, animals within a pen are not independent diet allocations: the pen is the unit for the intervention. Sequencing lanes, aliquots and repeated measurements are technical or within-unit observations, not additional biological replicates.

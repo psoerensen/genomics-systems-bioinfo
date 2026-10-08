@@ -1,0 +1,3 @@
+# Preserve public teaching-input bytes so checksums survive Git checkouts.
+/data/cases/** -text
+/docs/data/cases/** -text

@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4000,12 +4000,39 @@ window.Quarto = {
     <a class="nav-link" href="../course_map.html"> 
 <span class="menu-text">Course map</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../slides/introduction_genomics_systems_bioinfo.html"> 
-<span class="menu-text">Slides</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="../learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,6 +4075,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#visualize-candidate-regulatory-relationships" id="toc-visualize-candidate-regulatory-relationships" class="nav-link" data-scroll-target="#visualize-candidate-regulatory-relationships">Visualize candidate regulatory relationships</a></li>
   <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
   <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
   <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
@@ -4089,6 +4117,16 @@ window.Quarto = {
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <p>Define marker dosage and phenotype contrasts; identify confounding and linkage disequilibrium; distinguish GWAS, eQTL, TWAS, fine-mapping and prediction.</p>
+</section>
+<section id="visualize-candidate-regulatory-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-candidate-regulatory-relationships">Visualize candidate regulatory relationships</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img role="img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTAwIDQ0MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPgo8dGl0bGUgaWQ9InRpdGxlIj5BIHJlZ3VsYXRvcnkgc3RvcnkgbmVlZHMgbW9yZSB0aGFuIGNvcnJlbGF0ZWQgbGF5ZXJzPC90aXRsZT48ZGVzYyBpZD0iZGVzYyI+R2Vub3R5cGUgbWF5IGluZmx1ZW5jZSBSTkEsIHByb3RlaW4gYW5kIHBoZW5vdHlwZS4gRW52aXJvbm1lbnQgYW5kIGNlbGwgY29tcG9zaXRpb24gY2FuIGluZmx1ZW5jZSBtdWx0aXBsZSBsYXllcnMsIHNvIGNvcnJlbGF0aW9uIGFsb25lIGRvZXMgbm90IGlkZW50aWZ5IGEgY2F1c2FsIGNoYWluLjwvZGVzYz4KPGRlZnM+PG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSIxMCIgbWFya2VySGVpZ2h0PSIxMCIgcmVmWD0iOCIgcmVmWT0iMyIgb3JpZW50PSJhdXRvIj48cGF0aCBkPSJNMCwwIEwwLDYgTDgsMyB6IiBmaWxsPSIjMzM0MTU1Ii8+PC9tYXJrZXI+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMTEwMCIgaGVpZ2h0PSI0NDAiIGZpbGw9IiNmZmYiLz4KPHRleHQgeD0iMzAiIHk9IjM2IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+QSByZWd1bGF0b3J5IHN0b3J5IG5lZWRzIG1vcmUgdGhhbiBjb3JyZWxhdGVkIGxheWVyczwvdGV4dD4KPHJlY3QgeD0iMzAiIHk9IjIyMCIgd2lkdGg9IjIyNSIgaGVpZ2h0PSI3NSIgcng9IjkiIGZpbGw9IiNlNWYyZjUiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iNDIiIHk9IjI2My41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+R2Vub3R5cGU8L3RleHQ+CjxyZWN0IHg9IjMwMCIgeT0iMjIwIiB3aWR0aD0iMjI1IiBoZWlnaHQ9Ijc1IiByeD0iOSIgZmlsbD0iI2U1ZjJmNSIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSIzMTIiIHk9IjI2My41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+Uk5BPC90ZXh0Pgo8cmVjdCB4PSI1NzAiIHk9IjIyMCIgd2lkdGg9IjIyNSIgaGVpZ2h0PSI3NSIgcng9IjkiIGZpbGw9IiNlNWYyZjUiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iNTgyIiB5PSIyNjMuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPlByb3RlaW48L3RleHQ+CjxyZWN0IHg9Ijg0MCIgeT0iMjIwIiB3aWR0aD0iMjI1IiBoZWlnaHQ9Ijc1IiByeD0iOSIgZmlsbD0iI2U1ZjJmNSIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSI4NTIiIHk9IjI2My41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+UGhlbm90eXBlPC90ZXh0Pgo8bGluZSB4MT0iMjU1IiB5MT0iMjU3IiB4Mj0iMjk1IiB5Mj0iMjU3IiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPGxpbmUgeDE9IjUyNSIgeTE9IjI1NyIgeDI9IjU2NSIgeTI9IjI1NyIgc3Ryb2tlPSIjMzM0MTU1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CjxsaW5lIHgxPSI3OTUiIHkxPSIyNTciIHgyPSI4MzUiIHkyPSIyNTciIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgo8cmVjdCB4PSIzNDAiIHk9Ijc1IiB3aWR0aD0iNDUwIiBoZWlnaHQ9Ijc1IiByeD0iOSIgZmlsbD0iI2ZmZjFkNiIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSIzNTIiIHk9IjEwNi41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+RW52aXJvbm1lbnQgLyBjZWxsIGNvbXBvc2l0aW9uPC90ZXh0Pgo8dGV4dCB4PSIzNTIiIHk9IjEzMC41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+UG90ZW50aWFsIHNoYXJlZCBjYXVzZXM8L3RleHQ+CjxsaW5lIHgxPSI0MDAiIHkxPSIxNTIiIHgyPSI0MTAiIHkyPSIyMTUiIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgo8bGluZSB4MT0iNTYwIiB5MT0iMTUyIiB4Mj0iNjgwIiB5Mj0iMjE1IiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPGxpbmUgeDE9Ijc0NSIgeTE9IjE1MiIgeDI9Ijk1MCIgeTI9IjIxNSIgc3Ryb2tlPSIjMzM0MTU1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+Cjx0ZXh0IHg9IjMwIiB5PSIzNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5BcnJvd3MgYXJlIGNhbmRpZGF0ZSBtZWNoYW5pc21zLCBub3QgY29uY2x1c2lvbnMgZnJvbSBhbiBhc3NvY2lhdGlvbiB0YWJsZS48L3RleHQ+Cjx0ZXh0IHg9IjMwIiB5PSI0MDIiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5UaW1pbmcsIHBlcnR1cmJhdGlvbiwgbG9jYWxpemF0aW9uIGFuZCBpbmRlcGVuZGVudCByZXBsaWNhdGlvbiBjYW4gZGlzdGluZ3Vpc2ggZXhwbGFuYXRpb25zLjwvdGV4dD4KPC9zdmc+" class="img-fluid figure-img"></p>
+<figcaption>Concept diagram; detailed explanation and suggested reasoning are in the visual guide.</figcaption>
+</figure>
+</div>
+<p>Use the <a href="../visual_guide.html">visual guide</a> to explain the assumptions in this diagram.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>

@@ -17,6 +17,12 @@ execute:
 
 Distinguish peptide evidence, protein-group inference and abundance; evaluate missing values and transformations; interpret structural information without overclaiming function.
 
+## Visualize the measurement chain
+
+![Concept diagram; detailed explanation and suggested reasoning are in the visual guide.](../images/concepts/measurement.svg)
+
+Use the [visual guide](../visual_guide.qmd) to explain the assumptions in this diagram. Analyze [actual protein-enrichment intensities](../tutorials/c02_proteomics.qmd) and investigate missingness.
+
 ## Biological question and measurements
 
 Proteomics can quantify molecular evidence from peptides or proteins using platforms such as mass spectrometry. A measured peptide may be shared by multiple proteins; assigning it to a unique gene product is an inference problem. Identification confidence and abundance uncertainty are separate. Sample preparation, digestion, instrument response and batch effects influence measured values.

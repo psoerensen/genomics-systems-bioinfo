@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img" aria-labelledby="title desc">
+<title id="title">A regulatory story needs more than correlated layers</title><desc id="desc">Genotype may influence RNA, protein and phenotype. Environment and cell composition can influence multiple layers, so correlation alone does not identify a causal chain.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#334155"/></marker></defs>
+<rect width="1100" height="440" fill="#fff"/>
+<text x="30" y="36" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#182c42">A regulatory story needs more than correlated layers</text>
+<rect x="30" y="220" width="225" height="75" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="42" y="263.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Genotype</text>
+<rect x="300" y="220" width="225" height="75" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="312" y="263.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">RNA</text>
+<rect x="570" y="220" width="225" height="75" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="582" y="263.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Protein</text>
+<rect x="840" y="220" width="225" height="75" rx="9" fill="#e5f2f5" stroke="#557488" stroke-width="1.5"/>
+<text x="852" y="263.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Phenotype</text>
+<line x1="255" y1="257" x2="295" y2="257" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="525" y1="257" x2="565" y2="257" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="795" y1="257" x2="835" y2="257" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="75" width="450" height="75" rx="9" fill="#fff1d6" stroke="#557488" stroke-width="1.5"/>
+<text x="352" y="106.5" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#182c42">Environment / cell composition</text>
+<text x="352" y="130.5" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Potential shared causes</text>
+<line x1="400" y1="152" x2="410" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="560" y1="152" x2="680" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="745" y1="152" x2="950" y2="215" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="30" y="360" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#182c42">Arrows are candidate mechanisms, not conclusions from an association table.</text>
+<text x="30" y="402" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#182c42">Timing, perturbation, localization and independent replication can distinguish explanations.</text>
+</svg>

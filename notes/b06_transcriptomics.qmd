@@ -24,6 +24,12 @@ After working through this module and its practical, you should be able to:
 - Use exploratory plots and diagnostics to ask questions about sample quality.
 - Report differential-expression evidence without equating significance with biological importance or causality.
 
+## Visualize the composition problem
+
+![Concept diagram; detailed explanation and suggested reasoning are in the visual guide.](../images/concepts/composition.svg)
+
+Use the [visual guide](../visual_guide.qmd) to explain the assumptions in this diagram. Apply the model to [actual paired RNA-seq counts](../tutorials/c01_airway.qmd).
+
 ## 1. Start with the biological comparison
 
 Imagine a feeding experiment asking whether a supplement changes transcription in liver tissue. The question must identify the animals, tissue, collection time and comparison. A sample collected after a meal may answer a different question from a fasting sample. Differences between tissues can be much larger than the treatment effect of interest.

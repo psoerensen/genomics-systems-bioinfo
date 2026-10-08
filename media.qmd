@@ -1,0 +1,40 @@
+---
+title: "Videos and animations for the course"
+toc: true
+---
+
+These optional resources connect moving molecular processes and systems models to the course's analytical questions. Open the provider's page to watch; use the written lesson as the primary reference. Links and availability were checked on 8 October 2026. The viewing prompts below are original course activities.
+
+## Start with a short molecular animation
+
+[The Central Dogma of Biology — CSHL DNA Learning Center](https://dnalc.cshl.edu/resources/3d/central-dogma.html) is a 2 minute 51 second animation of transcription, RNA processing and translation. The provider page includes a written explanation. Use it before [B01](notes/b01_foundations.qmd) or [B06](notes/b06_transcriptomics.qmd).
+
+**Before viewing:** sketch the objects measured by RNA-seq and by proteomics. **After viewing:** name two processes between RNA abundance and protein abundance. Explain why the animation's molecular mechanism does not imply a one-to-one correlation in a bulk tissue dataset. Translation and degradation are part of that explanation; cell composition and measurement timing are also relevant to a real comparison.
+
+## Connect RNA-seq technology to the design
+
+[Introduction to RNA-seq and functional interpretation — EMBL-EBI](https://www.ebi.ac.uk/training/materials/introduction-to-rna-seq-materials/) provides recorded teaching with slides and practical material. Choose the relevant topic from its [contents](https://www.ebi.ac.uk/training/materials/introduction-to-rna-seq-materials/course-content/), rather than assigning the entire collection. Use it alongside B02/B06 and [Case 1](tutorials/c01_airway.qmd).
+
+**Viewing task:** trace the measurement chain from tissue to gene-count matrix. Mark where batch, reference annotation and counting choices enter. Then explain which of these are represented in the airway metadata and which cannot be checked from the processed table. For a written design alternative, use [Functional genomics I](https://www.ebi.ac.uk/training/online/courses/functional-genomics-i-introduction-and-design/).
+
+## Move from abundance to dynamics
+
+[Input Function, Michaelis-Menten kinetics, and Cooperativity — MIT OpenCourseWare](https://ocw.mit.edu/courses/8-591j-systems-biology-fall-2014/resources/input-function-michaelis-menten-kinetics-and-cooperativity/) connects biochemical response functions with systems modelling. Pair it with the production–degradation example in [B14](notes/b14_networks.qmd). This is an extension for students comfortable reading functions and rate equations.
+
+**Viewing task:** distinguish an input–output curve from a time trajectory. Predict how doubling a degradation rate changes the equilibrium and the response speed in the course model. State what biological process the single effective rate summarizes.
+
+## Understand feedback before naming a network mechanism
+
+[Autoregulation, Feedback and Bistability — MIT OpenCourseWare](https://ocw.mit.edu/courses/8-591j-systems-biology-fall-2014/resources/autoregulation-feedback-and-bistability/) discusses gene-expression feedback; its page provides an English transcript. Use it after the basic dynamic example, with B14 and the regulatory-evidence diagram in the [visual guide](visual_guide.qmd).
+
+**Viewing task:** draw one negative-feedback and one positive-feedback loop. Explain which observation would distinguish a feedback mechanism from a correlation network. Advanced challenge: why is positive feedback alone not sufficient evidence of bistability?
+
+## Connect network shape to the meaning of an edge
+
+[Graph Properties of Transcription Networks — MIT OpenCourseWare](https://ocw.mit.edu/courses/8-591j-systems-biology-fall-2014/resources/graph-properties-of-transcription-networks/) is an optional extension after [P11](tutorials/p11_networks.qmd).
+
+**Viewing task:** compare a directed regulatory edge with an undirected correlation edge. Explain why changing an edge threshold in a correlation network may change degree rankings without establishing a change in biological control. Record the evidence that would be needed to justify direction.
+
+## How to use external media
+
+Pause to make a prediction, inspect the explanation, then write a short answer using the course example. Reading the written explanation or transcript is an equally valid route; do not infer that every external player supplies accurate captions. Access and accessibility features may change. Keep provider attribution and licensing attached if adapting their material. This site links to the original resources and does not redistribute their videos or artwork.

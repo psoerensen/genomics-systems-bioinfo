@@ -3986,7 +3986,7 @@ window.Quarto = {
     <span class="navbar-title">Genomics &amp; Multi-Omics</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
+            <div id="quarto-search" class title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -4000,12 +4000,39 @@ window.Quarto = {
     <a class="nav-link" href="../course_map.html"> 
 <span class="menu-text">Course map</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../slides/introduction_genomics_systems_bioinfo.html"> 
-<span class="menu-text">Slides</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="../learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="../modules.html"> 
+    <a class="nav-link" href="../modules.html"> 
 <span class="menu-text">Modules</span></a>
   </li>  
   <li class="nav-item">
@@ -4048,6 +4075,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#visualize-the-measurement-chain" id="toc-visualize-the-measurement-chain" class="nav-link" data-scroll-target="#visualize-the-measurement-chain">Visualize the measurement chain</a></li>
   <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">Biological question and measurements</a></li>
   <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">Model and assumptions</a></li>
   <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">Worked example</a></li>
@@ -4088,6 +4116,16 @@ window.Quarto = {
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <p>Distinguish peptide evidence, protein-group inference and abundance; evaluate missing values and transformations; interpret structural information without overclaiming function.</p>
+</section>
+<section id="visualize-the-measurement-chain" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-the-measurement-chain">Visualize the measurement chain</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img role="img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMTAwIDQ0MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPgo8dGl0bGUgaWQ9InRpdGxlIj5Gcm9tIGEgYmlvbG9naWNhbCBzYW1wbGUgdG8gYW4gYW5hbHlzaXMgdGFibGU8L3RpdGxlPjxkZXNjIGlkPSJkZXNjIj5STkEgc2VxdWVuY2luZywgbWFzcyBzcGVjdHJvbWV0cnkgYW5kIE5NUiBlYWNoIGhhdmUgYSBtZWFzdXJlbWVudCBhbmQgcHJvY2Vzc2luZyBjaGFpbi4gVGhlaXIgdGFibGVzIHJlcHJlc2VudCBkaWZmZXJlbnQgcXVhbnRpdGllcy48L2Rlc2M+CjxkZWZzPjxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTAiIG1hcmtlckhlaWdodD0iMTAiIHJlZlg9IjgiIHJlZlk9IjMiIG9yaWVudD0iYXV0byI+PHBhdGggZD0iTTAsMCBMMCw2IEw4LDMgeiIgZmlsbD0iIzMzNDE1NSIvPjwvbWFya2VyPjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjExMDAiIGhlaWdodD0iNDQwIiBmaWxsPSIjZmZmIi8+Cjx0ZXh0IHg9IjMwIiB5PSIzNiIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjUiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPkZyb20gYSBiaW9sb2dpY2FsIHNhbXBsZSB0byBhbiBhbmFseXNpcyB0YWJsZTwvdGV4dD4KPHJlY3QgeD0iMzAiIHk9IjgwIiB3aWR0aD0iMjYwIiBoZWlnaHQ9Ijg1IiByeD0iOSIgZmlsbD0iI2U1ZjJmNSIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSI0MiIgeT0iMTE2LjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5UaXNzdWUgLyBjZWxsczwvdGV4dD4KPHRleHQgeD0iNDIiIHk9IjE0MC41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+Uk5BIGV4dHJhY3Rpb248L3RleHQ+CjxyZWN0IHg9IjM5MCIgeT0iODAiIHdpZHRoPSIzMDAiIGhlaWdodD0iODUiIHJ4PSI5IiBmaWxsPSIjZTVmMmY1IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjQwMiIgeT0iMTE2LjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5MaWJyYXJ5IOKGkiBzZXF1ZW5jZSByZWFkczwvdGV4dD4KPHRleHQgeD0iNDAyIiB5PSIxNDAuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPlJlZmVyZW5jZSArIGNvdW50aW5nPC90ZXh0Pgo8cmVjdCB4PSI3OTAiIHk9IjgwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijg1IiByeD0iOSIgZmlsbD0iI2U1ZjJmNSIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSI4MDIiIHk9IjExNi41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+R2VuZSBjb3VudHM8L3RleHQ+Cjx0ZXh0IHg9IjgwMiIgeT0iMTQwLjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5TYW1wbGluZyBhbmQgY29tcG9zaXRpb248L3RleHQ+CjxsaW5lIHgxPSIyOTIiIHkxPSIxMjIiIHgyPSIzODciIHkyPSIxMjIiIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgo8bGluZSB4MT0iNjkyIiB5MT0iMTIyIiB4Mj0iNzg3IiB5Mj0iMTIyIiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPHJlY3QgeD0iMzAiIHk9IjE5MCIgd2lkdGg9IjI2MCIgaGVpZ2h0PSI4NSIgcng9IjkiIGZpbGw9IiNlNWYyZjUiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iNDIiIHk9IjIyNi41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+THlzYXRlIC8gZW5yaWNobWVudDwvdGV4dD4KPHRleHQgeD0iNDIiIHk9IjI1MC41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+UHJvdGVpbiBwcmVwYXJhdGlvbjwvdGV4dD4KPHJlY3QgeD0iMzkwIiB5PSIxOTAiIHdpZHRoPSIzMDAiIGhlaWdodD0iODUiIHJ4PSI5IiBmaWxsPSIjZTVmMmY1IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjQwMiIgeT0iMjI2LjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5QZXB0aWRlcyDihpIgTVMgc3BlY3RyYTwvdGV4dD4KPHRleHQgeD0iNDAyIiB5PSIyNTAuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPklkZW50aWZpY2F0aW9uICsgTEZRPC90ZXh0Pgo8cmVjdCB4PSI3OTAiIHk9IjE5MCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI4NSIgcng9IjkiIGZpbGw9IiNlNWYyZjUiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iODAyIiB5PSIyMjYuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxODJjNDIiPlByb3RlaW4tZ3JvdXAgaW50ZW5zaXRpZXM8L3RleHQ+Cjx0ZXh0IHg9IjgwMiIgeT0iMjUwLjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5JZGVudGlmaWNhdGlvbiBhbmQgbWlzc2luZ25lc3M8L3RleHQ+CjxsaW5lIHgxPSIyOTIiIHkxPSIyMzIiIHgyPSIzODciIHkyPSIyMzIiIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgo8bGluZSB4MT0iNjkyIiB5MT0iMjMyIiB4Mj0iNzg3IiB5Mj0iMjMyIiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KPHJlY3QgeD0iMzAiIHk9IjMwMCIgd2lkdGg9IjI2MCIgaGVpZ2h0PSI4NSIgcng9IjkiIGZpbGw9IiNlNWYyZjUiIHN0cm9rZT0iIzU1NzQ4OCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iNDIiIHk9IjMzNi41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+UGxhc21hIC8gdGlzc3VlPC90ZXh0Pgo8dGV4dCB4PSI0MiIgeT0iMzYwLjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjMTgyYzQyIj5NZXRhYm9saXRlIGV4dHJhY3Rpb248L3RleHQ+CjxyZWN0IHg9IjM5MCIgeT0iMzAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9Ijg1IiByeD0iOSIgZmlsbD0iI2U1ZjJmNSIgc3Ryb2tlPSIjNTU3NDg4IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8dGV4dCB4PSI0MDIiIHk9IjMzNi41IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzE4MmM0MiI+Tk1SIC8gTVMgc2lnbmFsczwvdGV4dD4KPHRleHQgeD0iNDAyIiB5PSIzNjAuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPkFubm90YXRpb24gKyBxdWFudGlmaWNhdGlvbjwvdGV4dD4KPHJlY3QgeD0iNzkwIiB5PSIzMDAiIHdpZHRoPSIyODAiIGhlaWdodD0iODUiIHJ4PSI5IiBmaWxsPSIjZTVmMmY1IiBzdHJva2U9IiM1NTc0ODgiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjgwMiIgeT0iMzM2LjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTgyYzQyIj5NZXRhYm9saXRlIG1lYXN1cmVtZW50czwvdGV4dD4KPHRleHQgeD0iODAyIiB5PSIzNjAuNSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiMxODJjNDIiPlVuaXRzIGFuZCBpZGVudGlmaWNhdGlvbjwvdGV4dD4KPGxpbmUgeDE9IjI5MiIgeTE9IjM0MiIgeDI9IjM4NyIgeTI9IjM0MiIgc3Ryb2tlPSIjMzM0MTU1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CjxsaW5lIHgxPSI2OTIiIHkxPSIzNDIiIHgyPSI3ODciIHkyPSIzNDIiIHN0cm9rZT0iIzMzNDE1NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgo8dGV4dCB4PSIzMCIgeT0iNDIwIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzE4MmM0MiI+S2VlcCBzYW1wbGluZyB0aW1lLCBwcm9jZXNzaW5nIGJhdGNoLCByZWZlcmVuY2UvYW5ub3RhdGlvbiBhbmQgdW5pdHMgd2l0aCB0aGUgdGFibGUuPC90ZXh0Pgo8L3N2Zz4=" class="img-fluid figure-img"></p>
+<figcaption>Concept diagram; detailed explanation and suggested reasoning are in the visual guide.</figcaption>
+</figure>
+</div>
+<p>Use the <a href="../visual_guide.html">visual guide</a> to explain the assumptions in this diagram. Analyze <a href="../tutorials/c02_proteomics.html">actual protein-enrichment intensities</a> and investigate missingness.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">Biological question and measurements</h2>

@@ -3,9 +3,11 @@ title: "Practicals and exercises"
 toc: true
 ---
 
-The 31 practicals provide a complete initial teaching collection for both harmonized outlines. Each includes a biological question, assumptions, runnable examples, interpretation, exercises and suggested answers. All numerical inputs are hypothetical; no biological downloads or additional analysis packages are required. The examples teach the methods and their limits rather than claiming production-pipeline qualification.
+The 31 practicals provide a complete initial teaching collection for both harmonized outlines. Each includes a biological question, assumptions, runnable examples, interpretation, exercises and suggested answers. The P01–P31 numerical inputs are hypothetical; they require no biological downloads or additional analysis packages. The separate [three real-data cases](case_studies.qmd) use local public extracts; Cases 1–2 require DESeq2/limma as documented. The examples teach the methods and their limits rather than claiming production-pipeline qualification.
 
 The 26 original sessions map to 24 shared practicals. Seven additional practicals strengthen sample identity, regularized prediction, microbiomics, phenomics, association, epigenomics and advanced-method reasoning.
+
+Follow the [learning pathway](learning_path.qmd) to select essential work, use the [visual guide](visual_guide.qmd) for recurring concepts, and consult the [assessment guide](assessment.qmd) for case assignments and a shared rubric.
 
 ## Work through a practical
 

@@ -89,17 +89,44 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./course_map.html"> 
 <span class="menu-text">Course map</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./slides/introduction_genomics_systems_bioinfo.html"> 
-<span class="menu-text">Slides</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learning">    
+        <li>
+    <a class="dropdown-item" href="./learning_path.html">
+ <span class="dropdown-text">Learning pathway</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./case_studies.html">
+ <span class="dropdown-text">Real-data cases</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./assessment.html">
+ <span class="dropdown-text">Assessment guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./visual_guide.html">
+ <span class="dropdown-text">Visual guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./media.html">
+ <span class="dropdown-text">Videos and animations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./slides/introduction_genomics_systems_bioinfo.html">
+ <span class="dropdown-text">Lecture slides</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./modules.html"> 
 <span class="menu-text">Modules</span></a>
@@ -167,7 +194,8 @@ ul.task-list li input[type="checkbox"] {
 <p>This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.</p>
 <p>The focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.</p>
 <p>The course integrates biological interpretation, statistical methodology, and practical implementation in R. It is a unified framework spanning the harmonized Genomics, Systems Biology and Bioinformatics and Multi-Omics Technology in Animal Production outlines.</p>
-<p>Use the <a href="./course_map.html">unified course map</a> to explore the reusable teaching blocks and the two pathways through them.</p>
+<p>Start with the <a href="./learning_path.html">learning pathway</a> for core work, prerequisites and suggested study time. Use the <a href="./course_map.html">unified course map</a> to explore the reusable teaching blocks and the two course pathways.</p>
+<p>Apply the methods in <a href="./case_studies.html">three real-data case studies</a>, then use the <a href="./assessment.html">assessment guide</a> to build a defensible report. The <a href="./visual_guide.html">visual guide</a> and <a href="./media.html">videos and animations</a> explain recurring concepts.</p>
 <hr>
 </section>
 <section id="core-themes" class="level2">
@@ -253,7 +281,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Executable R code</li>
 <li>Visualizations and case studies</li>
 </ul>
-<p>The initial collection includes 18 modules and 31 practicals, covering both harmonized outlines through shared sources. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers.</p>
+<p>The collection includes 18 modules, 31 hypothetical practicals and three real-data case studies, covering both harmonized outlines through shared sources. Reproduce a worked example, predict the effect of changing a parameter, and attempt the exercises before opening the suggested answers.</p>
 <hr>
 </section>
 <section id="prerequisites" class="level2">

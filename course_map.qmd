@@ -177,9 +177,11 @@ The original assessment weights are preserved:
 
 Shared practicals can use a common core rubric: correct sample/variable definitions, justified methods, reproducibility and interpretation. Pathway extensions assess additional competencies. A GSB computational report can emphasise method evaluation; a Multi-Omics proposal can emphasise sampling, technology choice and integration design. Neither project form replaces the original assessment scheme without agreement.
 
+The [assessment guide](assessment.qmd) adds an outcome-to-evidence crosswalk, case assignments and a suggested synthesis rubric while retaining these formal weights.
+
 ## Suggested pathways through the framework
 
-These are teaching sequences, not allocations of credit hours. Each course can select a subset appropriate to its available time.
+The [learning pathway](learning_path.qmd) now identifies core/extension/advanced entry points, prerequisites and suggested study time; [real-data cases](case_studies.qmd) extend the hypothetical practicals. These are teaching sequences, not allocations of credit hours. Each course can select a subset appropriate to its available time.
 
 **Unified course:** introduce B01, B02, B04 and B17; survey B05–B11 alongside B03; build the analytical foundation in B12; develop B13, B14 and B15; finish with B18 and selected B16 extensions. Animal-production examples recur throughout.
 

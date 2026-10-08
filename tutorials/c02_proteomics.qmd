@@ -1,0 +1,173 @@
+---
+title: "Protein enrichment and missing intensities"
+subtitle: "Case 2: Real LFQ measurements and limma"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+execute:
+  error: false
+  warning: true
+  message: false
+---
+
+## Question and learning outcomes
+
+Which protein groups are more strongly enriched with a four-unit ubiquitin bait than with the control in this experiment? This is an **affinity-enrichment** comparison, not a comparison of whole-cell protein concentrations. The distinction changes the biological interpretation of every result.
+
+You will audit protein-group flags, interpret zero LFQ values as unquantified observations, compare groups using observed intensities, and assess sensitivity to missingness restrictions. Allow **2–3 hours**, after B08/B12 and [P18](p18_proteomics.qmd).
+
+## What the public table contains
+
+The **UbiLength** example distributed with [DEP](https://github.com/arnesmits/DEP) contains 3,006 protein groups and twelve label-free quantification (LFQ) columns: control, Ubi1, Ubi4 and Ubi6, each with three replicate labels. The experiment investigates ubiquitin-chain interaction enrichment, described in the [DEP workflow](https://bioconductor.org/packages/devel/bioc/vignettes/DEP/inst/doc/DEP.html) with its source reference to [Zhang et al.](https://doi.org/10.1016/j.molcel.2017.01.004).
+
+The local CSV is a documented format/column extract of the pinned DEP data files. It preserves original LFQ values, gene names and exclusion flags. The original MaxQuant measurements have already undergone upstream identification and LFQ processing. This lesson does not repeat spectrum identification, peptide-level uncertainty modelling or the complete DEP workflow. Read the [data notes and licence](../case_data.qmd) for attribution and preparation.
+
+The labels are enrichment-experiment replicates; they are not independent animal cohorts. Treat the reported precision as repeatability within the labelled enrichment experiment; this table alone does not establish biological sampling across independent cell cultures. A protein group can contain several compatible identifiers. Retain that group identity rather than silently selecting a gene symbol and claiming unique identification. Mechanistic binding claims need evidence beyond this processed abundance table.
+
+## Setup and identity checks
+
+Install **limma** once using the Bioconductor release appropriate to your R version:
+
+```r
+install.packages("BiocManager")
+BiocManager::install("limma", ask = FALSE, update = FALSE)
+```
+
+The example was checked with R 4.4.1 and limma 3.62.2. Inputs are stored locally; neither installation nor downloading occurs during rendering.
+
+```{r}
+helper_dir <- if (dir.exists("R")) "R" else "../R"
+source(file.path(helper_dir, "case_helpers.R"))
+```
+
+
+```{r}
+if (!requireNamespace("limma", quietly = TRUE))
+  stop("Install limma with BiocManager before running Case 2.")
+raw <- case_read("ubiquitin_lfq.csv.gz")
+meta <- case_read("ubiquitin_samples.csv")
+intensity_cols <- paste0("LFQ.intensity.", meta$label)
+stopifnot(!anyDuplicated(meta$label), all(intensity_cols %in% names(raw)))
+lfq <- as.matrix(raw[, intensity_cols])
+rownames(lfq) <- raw$feature_id
+colnames(lfq) <- meta$label
+stopifnot(all(lfq >= 0), !anyNA(lfq))
+knitr::kable(meta, row.names = FALSE)
+```
+
+## Filter flags before interpreting detection
+
+Remove decoy matches, potential contaminants and groups identified only by site. This last exclusion is a stated conservative teaching choice. Record how many groups each step removes. It changes the eligible population, so it belongs in the methods.
+
+```{r}
+eligible <- raw$Reverse != "+" & raw$Potential.contaminant != "+" &
+            raw$Only.identified.by.site != "+"
+data.frame(total = nrow(raw), decoy = sum(raw$Reverse == "+"),
+           contaminant = sum(raw$Potential.contaminant == "+"),
+           site_only = sum(raw$Only.identified.by.site == "+"), retained = sum(eligible))
+lfq <- lfq[eligible, , drop = FALSE]
+info <- raw[eligible, c("feature_id", "Protein.IDs", "Gene.names")]
+```
+
+Flags can overlap; summing exclusion counts is not necessarily the number of removed groups. A contaminant flag describes the analytical classification, not proof that a protein cannot exist in the studied biology.
+
+## Audit missingness before taking logarithms
+
+In this LFQ table, a zero means no quantified intensity, not a measured absence of protein. Convert it to `NA` before logarithms. Do not add 1 and treat a collection of zeros as precise low-abundance observations.
+
+```{r}
+#| fig-cap: "Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed."
+#| fig-alt: "Eligible protein groups: unquantified fractions and distributions of observed log2 LFQ intensities. No missing values are imputed."
+loglfq <- lfq
+loglfq[loglfq == 0] <- NA_real_
+loglfq <- log2(loglfq)
+missing_by_sample <- colMeans(is.na(loglfq))
+barplot(missing_by_sample, las = 2, ylim = c(0, 1),
+        ylab = "Fraction unquantified", col = "#2878a1")
+boxplot(as.data.frame(loglfq), las = 2, ylab = "Observed log2 LFQ intensity")
+```
+
+The boxplot summarizes observed values only. A shift in the boxplot can reflect enrichment, processing or a change in which proteins were detected. LFQ is already an upstream quantification procedure; blindly centering every sample could remove an enrichment shift of interest. The primary analysis uses the provided log2 LFQ scale without another global centering step.
+
+## Define a comparison supported by observations
+
+We focus on **Ubi4 versus control**, retaining a group only if at least two of three intensities are observed in **each** condition. Other bait conditions remain available for later exploration but do not enter this contrast. This filter deliberately excludes some potentially strong all-or-none enrichments: an absent control group cannot provide its own observed mean and variance.
+
+```{r}
+use <- meta$condition %in% c("Ctrl", "Ubi4")
+m <- meta[use, ]
+y <- loglfq[, use, drop = FALSE]
+m$condition <- factor(m$condition, levels = c("Ctrl", "Ubi4"))
+observed <- sapply(levels(m$condition), function(g)
+  rowSums(!is.na(y[, m$condition == g, drop = FALSE])))
+keep <- rowSums(observed >= 2) == 2
+detection_patterns <- table(Ctrl = observed[, "Ctrl"], Ubi4 = observed[, "Ubi4"])
+detection_patterns
+data.frame(eligible_groups = nrow(y), primary_groups = sum(keep),
+           all_six_observed = sum(rowSums(is.na(y)) == 0))
+```
+
+The detection table is part of the result, not merely a hurdle before testing. A Ubi4-only pattern can motivate a targeted validation assay, but cannot be interpreted by a test that assumes six observed values. Missingness may depend on abundance and condition; observed-value inference is conditional on the selected measurable subset and does not solve that selection problem.
+
+## Fit a moderated linear-model contrast
+
+```{r}
+#| fig-cap: "Limma mean–variance diagnostic for protein groups with at least two observed Ubi4 and two observed control intensities."
+#| fig-alt: "Limma mean–variance diagnostic for protein groups with at least two observed Ubi4 and two observed control intensities."
+design <- model.matrix(~ condition, m)
+stopifnot(qr(design)$rank == ncol(design), identical(colnames(y), m$label))
+fit <- limma::lmFit(y[keep, ], design)
+fit <- limma::eBayes(fit, trend = TRUE)
+ans <- limma::topTable(fit, coef = "conditionUbi4", number = Inf,
+                      adjust.method = "BH", sort.by = "P")
+ans$feature_id <- rownames(ans)
+ans$protein_ids <- info$Protein.IDs[match(ans$feature_id, info$feature_id)]
+ans$gene_names <- info$Gene.names[match(ans$feature_id, info$feature_id)]
+knitr::kable(head(ans[, c("feature_id", "gene_names", "logFC", "AveExpr", "adj.P.Val")], 10),
+             digits = 3, row.names = FALSE)
+limma::plotSA(fit, main = "Mean–variance diagnostic for eligible protein groups")
+```
+
+The coefficient is Ubi4 minus control in log2 intensity. Limma moderates variances by borrowing information across eligible protein groups; `trend = TRUE` allows the prior variance to depend on average intensity. This increases stability with small replicate numbers, but cannot reconstruct missing observations or guarantee that intensity-dependent selection is ignorable. Inspect the diagnostic and the original six values for any highlighted group.
+
+## Sensitivity: require all six values
+
+```{r}
+#| fig-cap: "Adjusted p-values for shared groups under observed-value and complete-case analyses. Changes reflect both variance moderation and the testing universe."
+#| fig-alt: "Adjusted p-values for shared groups under observed-value and complete-case analyses. Changes reflect both variance moderation and the testing universe."
+complete <- rowSums(is.na(y)) == 0
+strict_fit <- limma::eBayes(limma::lmFit(y[complete, ], design), trend = TRUE)
+strict <- limma::topTable(strict_fit, coef = "conditionUbi4", number = Inf, sort.by = "none")
+shared <- intersect(rownames(ans), rownames(strict))
+ia <- match(shared, rownames(ans)); ib <- match(shared, rownames(strict))
+data.frame(primary_tested = nrow(ans), strict_tested = nrow(strict), shared = length(shared),
+           effect_correlation = cor(ans$logFC[ia], strict$logFC[ib]))
+plot(ans$adj.P.Val[ia], strict$adj.P.Val[ib], pch = 16, cex = 0.5,
+     xlab = "Primary adjusted p-value", ylab = "Complete-case adjusted p-value")
+abline(0, 1, col = "#c55a11")
+```
+
+For groups observed in all six samples, the fitted group means can agree closely while moderated uncertainty and adjustment differ: the variance prior and testing universe changed. The stricter analysis also favors readily quantified proteins. Neither analysis establishes that missing groups have no response. Report the eligible universe with the effect estimates.
+
+## Exercises and suggested reasoning
+
+1. For one highlighted group, print its six original LFQ values and all protein identifiers. Explain what a protein group is and what the effect measures.
+2. Find a group observed in three Ubi4 samples and no controls. Write a bounded statement about its detection pattern and propose a validation measurement.
+3. Repeat the observed-value comparison for Ubi6 versus control, restating the eligible filter. Explain why comparing discovery counts alone does not prove a stronger biological interaction.
+4. As an extension, median-center observed log intensities and compare effect estimates. Which assumption about global enrichment does centering impose?
+
+::: {.callout-tip collapse="true" title="Suggested reasoning"}
+The estimated effect concerns affinity enrichment and a group of compatible protein identities. All-or-none detection is not a measured zero mean in controls. A targeted measurement, an orthogonal pull-down or an independent binding experiment can test different parts of the hypothesis. Changing bait or missingness filters changes the comparison universe. Median centering assumes comparable global locations after processing; if a genuine widespread enrichment shift is present, it can absorb part of that shift. State this assumption before treating centered results as preferable.
+:::
+
+## Report and reproduce
+
+Use the [Case 2 assignment](../assessment.qmd#case-2-what-does-an-absent-protein-intensity-mean) and include the flag counts, detection table, primary contrast, selected universe and complete-case sensitivity. Record that zero-to-NA recoding is a representation of the supplied quantification convention, not an imputation procedure.
+
+```{r}
+case_session("limma")
+```
+
+Consult the [limma documentation](https://bioconductor.org/packages/release/bioc/html/limma.html) for model details. Continue to [Case 3](c03_cattle.qmd) for actual animal metadata and matched assays.
