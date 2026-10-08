@@ -4048,11 +4048,21 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#biological-question-and-measurements" id="toc-biological-question-and-measurements" class="nav-link" data-scroll-target="#biological-question-and-measurements">1. Biological question and measurements</a></li>
-  <li><a href="#model-and-assumptions" id="toc-model-and-assumptions" class="nav-link" data-scroll-target="#model-and-assumptions">2. Model and assumptions</a></li>
-  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example">3. Worked example</a></li>
-  <li><a href="#interpretation-and-scope" id="toc-interpretation-and-scope" class="nav-link" data-scroll-target="#interpretation-and-scope">4. Interpretation and scope</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">5. Exercises</a></li>
+  <li><a href="#start-with-the-biological-comparison" id="toc-start-with-the-biological-comparison" class="nav-link" data-scroll-target="#start-with-the-biological-comparison">1. Start with the biological comparison</a></li>
+  <li><a href="#from-tissue-to-count-matrix" id="toc-from-tissue-to-count-matrix" class="nav-link" data-scroll-target="#from-tissue-to-count-matrix">2. From tissue to count matrix</a></li>
+  <li><a href="#depth-and-composition-are-different-problems" id="toc-depth-and-composition-are-different-problems" class="nav-link" data-scroll-target="#depth-and-composition-are-different-problems">3. Depth and composition are different problems</a>
+  <ul class="collapse">
+  <li><a href="#known-exposure" id="toc-known-exposure" class="nav-link" data-scroll-target="#known-exposure">Known exposure</a></li>
+  <li><a href="#composition" id="toc-composition" class="nav-link" data-scroll-target="#composition">Composition</a></li>
+  <li><a href="#choose-the-scale-for-the-question" id="toc-choose-the-scale-for-the-question" class="nav-link" data-scroll-target="#choose-the-scale-for-the-question">Choose the scale for the question</a></li>
+  </ul></li>
+  <li><a href="#count-models-and-biological-variation" id="toc-count-models-and-biological-variation" class="nav-link" data-scroll-target="#count-models-and-biological-variation">4. Count models and biological variation</a></li>
+  <li><a href="#design-offsets-and-contrasts" id="toc-design-offsets-and-contrasts" class="nav-link" data-scroll-target="#design-offsets-and-contrasts">5. Design, offsets and contrasts</a></li>
+  <li><a href="#explore-samples-before-interpreting-tests" id="toc-explore-samples-before-interpreting-tests" class="nav-link" data-scroll-target="#explore-samples-before-interpreting-tests">6. Explore samples before interpreting tests</a></li>
+  <li><a href="#effects-uncertainty-and-multiple-testing" id="toc-effects-uncertainty-and-multiple-testing" class="nav-link" data-scroll-target="#effects-uncertainty-and-multiple-testing">7. Effects, uncertainty and multiple testing</a></li>
+  <li><a href="#from-a-teaching-model-to-a-full-workflow" id="toc-from-a-teaching-model-to-a-full-workflow" class="nav-link" data-scroll-target="#from-a-teaching-model-to-a-full-workflow">8. From a teaching model to a full workflow</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">9. Exercises</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
   <li><a href="#practicals-and-course-pathways" id="toc-practicals-and-course-pathways" class="nav-link" data-scroll-target="#practicals-and-course-pathways">Practicals and course pathways</a></li>
   </ul>
 </nav>
@@ -4082,64 +4092,279 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Connect RNA counts to biological samples and library exposure; distinguish normalization, visualization and differential-expression inference; interpret model contrasts and dispersion.</p>
+<p>After working through this module and its practical, you should be able to:</p>
+<ul>
+<li>Explain what bulk RNA-seq measures and how cell composition affects interpretation.</li>
+<li>Follow the route from sampled tissue to a gene-by-sample count matrix.</li>
+<li>Distinguish sequencing depth, composition normalization and adjustment for batch.</li>
+<li>Interpret a count-model offset, dispersion, treatment contrast and confidence interval.</li>
+<li>Use exploratory plots and diagnostics to ask questions about sample quality.</li>
+<li>Report differential-expression evidence without equating significance with biological importance or causality.</li>
+</ul>
 </section>
-<section id="biological-question-and-measurements" class="level2">
-<h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>Bulk RNA-seq measures RNA from a mixture of cells in a sampled tissue. Read counts depend on abundance, sequencing depth, transcript properties and processing. A difference can arise from expression within a cell type, a change in cell composition, technical effects or combinations of these. Biological replicates are independent experimental units, not reads or genes.</p>
-<p>Prepare count matrices and sample metadata with matching IDs. Inspect library sizes and count distributions, define low-information filters independently of a desired direction, and specify the biological contrast and adjustment factors before testing. Expression transformations for visualization are not substitutes for an inferential count model.</p>
+<section id="start-with-the-biological-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="start-with-the-biological-comparison">1. Start with the biological comparison</h2>
+<p>Imagine a feeding experiment asking whether a supplement changes transcription in liver tissue. The question must identify the animals, tissue, collection time and comparison. A sample collected after a meal may answer a different question from a fasting sample. Differences between tissues can be much larger than the treatment effect of interest.</p>
+<p>Bulk RNA-seq pools RNA from the cells present in a sample. Higher abundance of an immune-cell transcript could reflect more immune cells, more transcription per immune cell, or both. Even an accurately estimated tissue-level difference does not distinguish these explanations by itself. RNA abundance also need not predict protein abundance: translation, degradation and collection timing intervene between the two measurements.</p>
+<p>The experimental unit follows treatment allocation. If diet is independently assigned to animals, animals provide biological replication. If diet is assigned to pens, animals within a pen share the treatment unit; treating all animals as independent treatment replicates can exaggerate precision. More sequencing reads improve measurement of a library, but do not create additional animals or pens. Repeated tissues from one animal require their dependence to be considered.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Define the target before analysing">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Define the target before analysing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write a sentence such as: “Compare liver transcript abundance between supplemented and control animals at the specified collection time, accounting for processing batch.” Then ask whether the allocation, sampling and metadata support that sentence.</p>
+</div>
+</div>
 </section>
-<section id="model-and-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>A negative-binomial model can write <span class="math inline">\(K_{gj}\sim NB(\mu_{gj},\alpha_g)\)</span> with <span class="math inline">\(E[K]=\mu\)</span> and <span class="math inline">\(\mathrm{Var}(K)=\mu+\alpha_g \mu^2\)</span>. A known exposure <span class="math inline">\(s_j\)</span> enters through <span class="math inline">\(\mu_{gj}=s_j q_{gj}\)</span>. Gene-level models describe <span class="math inline">\(q\)</span> using treatment and other design terms. Dispersion describes extra variation beyond a Poisson model.</p>
-<p>The worked calculation uses supplied exposure, not an estimated RNA-seq normalization method. On real data, composition-aware normalization, dispersion estimation, model design and multiplicity require an appropriate workflow.</p>
+<section id="from-tissue-to-count-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="from-tissue-to-count-matrix">2. From tissue to count matrix</h2>
+<p>The measurement passes through several stages. At each stage, retain the information needed to explain the resulting counts.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>What happens</th>
+<th>What can change interpretation?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sampling</td>
+<td>Tissue is collected and stored</td>
+<td>Time, tissue region, cell mixture, RNA degradation</td>
+</tr>
+<tr class="even">
+<td>Library preparation</td>
+<td>RNA is selected and converted into a sequencing library</td>
+<td>Selection protocol, strandedness, preparation batch</td>
+</tr>
+<tr class="odd">
+<td>Sequencing</td>
+<td>Fragments are represented by sequence reads</td>
+<td>Depth, base quality, contamination</td>
+</tr>
+<tr class="even">
+<td>Alignment or quantification</td>
+<td>Reads are related to a reference</td>
+<td>Reference assembly, annotation version, ambiguous mapping</td>
+</tr>
+<tr class="odd">
+<td>Feature summarization</td>
+<td>Evidence is assigned to genes or transcripts</td>
+<td>Counting rules, overlapping features, transcript aggregation</td>
+</tr>
+<tr class="even">
+<td>Statistical analysis</td>
+<td>Replicated samples are compared</td>
+<td>Design, normalization, dispersion and contrast</td>
+</tr>
+</tbody>
+</table>
+<p>For paired-end data, the two reads usually describe the ends of one fragment. The counting convention should make clear whether the output counts fragments or reads. Gene-level summarization combines evidence from transcripts, so a change in isoform usage may be obscured by an unchanged total gene count. A count matrix is therefore already a processed measurement, not a direct census of RNA molecules.</p>
+<p>Rows should have stable feature identifiers and columns should have unique sample identifiers. Match sample names explicitly to metadata. Keep the reference and annotation versions: changing annotation can alter which reads are assigned to a gene even if the biological samples are unchanged.</p>
 </section>
-<section id="worked-example" class="level2">
-<h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
-<p>The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.</p>
+<section id="depth-and-composition-are-different-problems" class="level2">
+<h2 class="anchored" data-anchor-id="depth-and-composition-are-different-problems">3. Depth and composition are different problems</h2>
+<section id="known-exposure" class="level3">
+<h3 class="anchored" data-anchor-id="known-exposure">Known exposure</h3>
+<p>A convenient teaching model is that expected count equals exposure times abundance:</p>
+<p><span class="math display">\[\mu_{gj}=s_j q_{gj}.\]</span></p>
+<p>Here <span class="math inline">\(g\)</span> indexes genes, <span class="math inline">\(j\)</span> indexes samples, <span class="math inline">\(s_j\)</span> describes relative exposure and <span class="math inline">\(q_{gj}\)</span> is the expected count at unit exposure. If exposure doubles while abundance is unchanged, expected count doubles. Dividing counts by known exposure gives a useful descriptive comparison, although the counts still have sampling variation.</p>
+<p>The following hypothetical calculation isolates this relationship:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">mean=</span>mu,<span class="at">Poisson_variance=</span>mu,<span class="at">NB_variance=</span>mu<span class="sc">+</span>alpha<span class="sc">*</span>mu<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">120</span>,<span class="dv">160</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">8</span>,<span class="fl">1.2</span>,<span class="fl">1.6</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(counts,exposure,<span class="at">adjusted=</span>counts<span class="sc">/</span>exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>  mean Poisson_variance NB_variance
-1   10               10          20
-2  100              100        1100
-3 1000             1000      101000</code></pre>
+<pre><code>  counts exposure adjusted
+1     80      0.8      100
+2    120      1.2      100
+3    160      1.6      100</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">120</span>,<span class="dv">160</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">8</span>,<span class="fl">1.2</span>,<span class="fl">1.6</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">&lt;-</span> counts<span class="sc">/</span>exposure</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>normalized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 100 100 100</code></pre>
-</div>
-<details class="code-fold">
-<summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(normalized<span class="sc">==</span><span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(counts<span class="sc">/</span>exposure<span class="sc">==</span><span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Equal normalized counts can arise from different read depths. At high mean, the overdispersion term dominates Poisson variance; treating biological count data as Poisson can underestimate uncertainty.</p>
 </section>
-<section id="interpretation-and-scope" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>CPM and log2(count+1) are useful teaching transformations but have composition and low-count limitations. The <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a> describes a full gene-level count-model workflow. Our base-R practical explores supplied exposure and a restricted quasi-Poisson model; it is not a replacement for its dispersion and normalization framework.</p>
+<section id="composition" class="level3">
+<h3 class="anchored" data-anchor-id="composition">Composition</h3>
+<p>Actual libraries are sampled from a mixture of transcripts. If a few transcripts occupy much more of a library, other transcripts can receive a smaller fraction of reads even when their abundance per cell is unchanged. Scaling by the total count cannot establish an absolute abundance scale.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothetical molecule abundances; only gene A changes.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>molecules <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">control=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">100</span>,<span class="at">B=</span><span class="dv">100</span>,<span class="at">C=</span><span class="dv">100</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">supplement=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">400</span>,<span class="at">B=</span><span class="dv">100</span>,<span class="at">C=</span><span class="dv">100</span>))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fractions <span class="ot">&lt;-</span> <span class="fu">sweep</span>(molecules,<span class="dv">2</span>,<span class="fu">colSums</span>(molecules),<span class="st">&quot;/&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>expected_counts <span class="ot">&lt;-</span> <span class="dv">600</span><span class="sc">*</span>fractions</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(expected_counts,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  control supplement
+A     200        400
+B     200        100
+C     200        100</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">gene=</span><span class="fu">rownames</span>(molecules),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> <span class="at">true_ratio=</span>molecules[,<span class="dv">2</span>]<span class="sc">/</span>molecules[,<span class="dv">1</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="at">observed_fraction_ratio=</span>fractions[,<span class="dv">2</span>]<span class="sc">/</span>fractions[,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  gene true_ratio observed_fraction_ratio
+A    A          4                     2.0
+B    B          1                     0.5
+C    C          1                     0.5</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(molecules[<span class="st">&quot;B&quot;</span>,<span class="dv">2</span>]<span class="sc">==</span>molecules[<span class="st">&quot;B&quot;</span>,<span class="dv">1</span>],</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          fractions[<span class="st">&quot;B&quot;</span>,<span class="dv">2</span>]<span class="sc">&lt;</span>fractions[<span class="st">&quot;B&quot;</span>,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Gene B appears reduced on the fraction scale despite unchanged molecule abundance. This deliberately extreme example shows why the normalization reference matters. Methods based on a set of relatively stable genes require assumptions about that reference. External controls can help address some questions, but their interpretation depends on when and how they were added. A control added per mass of extracted RNA does not automatically provide RNA abundance per cell.</p>
+</section>
+<section id="choose-the-scale-for-the-question" class="level3">
+<h3 class="anchored" data-anchor-id="choose-the-scale-for-the-question">Choose the scale for the question</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Useful question</th>
+<th>Main limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raw counts</td>
+<td>How much evidence was assigned to a feature?</td>
+<td>Exposure differs between samples</td>
+</tr>
+<tr class="even">
+<td>CPM</td>
+<td>What share of counted evidence belongs to a feature?</td>
+<td>Sensitive to library composition</td>
+</tr>
+<tr class="odd">
+<td>TPM</td>
+<td>How is length-adjusted abundance distributed within a sample?</td>
+<td>Relative scale; not direct input to a standard raw-count model</td>
+</tr>
+<tr class="even">
+<td>Normalized counts</td>
+<td>How does a gene compare across samples under a normalization reference?</td>
+<td>Depends on the normalization assumptions</td>
+</tr>
+<tr class="odd">
+<td>Transformed expression</td>
+<td>How do samples or expression patterns relate descriptively?</td>
+<td>Transformation is not itself a differential-expression test</td>
+</tr>
+</tbody>
+</table>
+<p>Gene length matters when comparing different genes’ abundance. For the same gene across samples, a fixed length alone does not explain a treatment difference. Transcript usage and sample-specific effective length can complicate that simplification.</p>
+</section>
+</section>
+<section id="count-models-and-biological-variation" class="level2">
+<h2 class="anchored" data-anchor-id="count-models-and-biological-variation">4. Count models and biological variation</h2>
+<p>A Poisson model assumes variance equals the mean. Independent biological samples often vary more than that. A negative-binomial model allows:</p>
+<p><span class="math display">\[K_{gj}\sim NB(\mu_{gj},\alpha_g),\qquad
+\mathrm{Var}(K_{gj})=\mu_{gj}+\alpha_g \mu_{gj}^2.\]</span></p>
+<p>The dispersion <span class="math inline">\(\alpha_g\)</span> controls the additional variation. Under this parameterization, the squared coefficient of variation is <span class="math inline">\(1/\mu+\alpha\)</span>. At high abundance, additional reads reduce the first term, while the dispersion term remains. This explains why sequencing deeper cannot substitute indefinitely for biological replication.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">mean=</span>mu,<span class="at">Poisson_variance=</span>mu,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> <span class="at">NB_variance=</span>mu<span class="sc">+</span>alpha<span class="sc">*</span>mu<span class="sc">^</span><span class="dv">2</span>,<span class="at">NB_CV=</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>mu<span class="sc">+</span>alpha))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean Poisson_variance NB_variance     NB_CV
+1   10               10          20 0.4472136
+2  100              100        1100 0.3316625
+3 1000             1000      101000 0.3178050</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>x<span class="sc">+</span>alpha),<span class="at">from=</span><span class="dv">1</span>,<span class="at">to=</span><span class="dv">1000</span>,<span class="at">log=</span><span class="st">&quot;x&quot;</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="at">xlab=</span><span class="st">&quot;Expected count&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Coefficient of variation&quot;</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a> <span class="at">main=</span><span class="st">&quot;Hypothetical negative-binomial variation&quot;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">sqrt</span>(alpha),<span class="at">lty=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">&quot;#A65334&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img role="img" src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dispersion estimation is especially difficult with few samples. RNA-seq methods can share information across features to stabilize estimation. An unusually variable gene still requires scrutiny; sharing information is not a reason to ignore sample quality or experimental design.</p>
+<p>The base-R practical uses quasi-Poisson regression with <span class="math inline">\(\mathrm{Var}(K)=\phi_g \mu\)</span>. That lets us inspect the mean model and estimated uncertainty with minimal dependencies, but its variance function differs from the negative-binomial generator. It supplies an approximate teaching analysis, whose calibration is not established by a successful fit.</p>
+</section>
+<section id="design-offsets-and-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="design-offsets-and-contrasts">5. Design, offsets and contrasts</h2>
+<p>For a binary treatment and batch indicator, consider:</p>
+<p><span class="math display">\[\log(\mu_{gj})=\log(s_j)+\beta_{0g}
++\beta_{Dg}D_j+\beta_{Bg}B_j.\]</span></p>
+<p>An offset is a predictor whose coefficient is fixed to one: the model uses the supplied exposure rather than estimating an exposure effect. With control as the treatment reference, <span class="math inline">\(\beta_{Dg}\)</span> compares supplement with control at the same batch. The abundance ratio is <span class="math inline">\(\exp(\beta_{Dg})\)</span> and the log2 fold change is <span class="math inline">\(\beta_{Dg}/\log(2)\)</span>. A log2 fold change of 1 means a doubling; -1 means a halving.</p>
+<p>Batch adjustment and normalization serve different purposes. Normalization addresses a measurement scale. Including batch describes systematic differences associated with a recorded processing factor. Normalized counts can still show batch structure, and adding batch cannot rescue an unidentified treatment comparison.</p>
+<p>If all control samples are processed in batch A and all supplemented samples in batch B, treatment and batch columns convey the same information. The data cannot separate their effects. More reads from those same samples do not change that fact. Crossed allocation, with both diets represented in each batch, provides the within-batch comparisons needed for separation.</p>
+<p>An additive model assumes the diet ratio is the same across batches. An interaction permits it to differ, changing what each coefficient means and increasing the information required. Covariates also need a biological rationale: adjusting for a variable affected by treatment can change the target from the overall treatment effect to a conditional comparison.</p>
+</section>
+<section id="explore-samples-before-interpreting-tests" class="level2">
+<h2 class="anchored" data-anchor-id="explore-samples-before-interpreting-tests">6. Explore samples before interpreting tests</h2>
+<p>Inspect sample identifiers, metadata, count distributions and quality records together. A sample with a small total could reflect shallow sequencing or a failed preparation. A distribution alone seldom identifies the cause. For a small selected panel, its column sum is only a panel total, not a whole-library depth measure.</p>
+<p>PCA summarizes dominant variation in a transformed expression matrix. Colour samples by treatment and use a second visual encoding for batch. Separation by treatment is compatible with a treatment response, but also with confounding. An isolated point is a prompt to inspect records, not automatic permission to delete the animal.</p>
+<p>PCA depends on the transformation and scaling. Scaling every gene to unit variance gives low-variance genes more influence than an unscaled analysis. A plot of 24 teaching genes cannot represent the full complexity of a transcriptome. For real data, select the transformation and feature set deliberately and document them.</p>
+</section>
+<section id="effects-uncertainty-and-multiple-testing" class="level2">
+<h2 class="anchored" data-anchor-id="effects-uncertainty-and-multiple-testing">7. Effects, uncertainty and multiple testing</h2>
+<p>An estimated effect answers how large the fitted comparison is. Its standard error describes uncertainty under the model. A confidence interval makes that uncertainty visible; a small p-value alone does not tell us whether the difference matters for production or health.</p>
+<p>Testing many genes creates opportunities for false discoveries. Benjamini-Hochberg adjustment targets false discovery rate under its applicable assumptions. An adjusted p-value is not the probability that a particular gene’s null hypothesis is true. An FDR threshold also does not guarantee an exact false-discovery proportion in one dataset.</p>
+<p>Feature filtering should be specified without selecting genes because they support the desired result. Low-information filtering and independent filtering used by RNA-seq methods require consideration of their relationship to the test statistic under the null. Report the tested feature universe, particularly before pathway analysis.</p>
+<p>Use an effect-size plot alongside a results table. A large uncertain estimate deserves a different description from a modest precisely estimated effect. Pointwise 95% intervals shown for many genes are not simultaneous 95% coverage intervals. Shrinkage can stabilize noisy effect estimates for ranking and display, but must be labelled so readers understand which estimator is reported.</p>
+</section>
+<section id="from-a-teaching-model-to-a-full-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-teaching-model-to-a-full-workflow">8. From a teaching model to a full workflow</h2>
+<p>The practical exposes the calculations using hypothetical counts. A real analysis additionally needs assay quality records, a documented reference, appropriate count import, justified normalization, dispersion estimation, diagnostics and a specified contrast. The <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a> is the technical reference for its negative-binomial implementation.</p>
+<p>The natural follow-on practical would use a small, openly available real count matrix with documented biological replication and a tested Bioconductor environment. It should ask students to compare an exploratory impression with a fitted contrast, investigate a diagnostic concern and write a biological conclusion. Real gene names would allow pathway interpretation, while the sampling design would determine what claims are supported.</p>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
+<h2 class="anchored" data-anchor-id="exercises">9. Exercises</h2>
 <ol type="1">
-<li>Why are genes not independent biological replicates of a treatment?</li>
-<li>What happens to raw counts when exposure doubles but abundance is unchanged?</li>
-<li>Can a log-count plot prove differential expression?</li>
+<li>A supplement doubles an immune marker in bulk liver tissue. Give two biological explanations and an additional measurement that could distinguish them.</li>
+<li>Why do 30 million reads from one animal not give 30 million biological replicates?</li>
+<li>In the composition example, what changes if gene A rises to 900 while B and C stay at 100?</li>
+<li>With <span class="math inline">\(\alpha=.1\)</span>, what happens to the coefficient of variation as expected count becomes very large?</li>
+<li>Why does a treatment coefficient of .65 correspond to about .94 log2 units rather than .65?</li>
+<li>Can a PCA plot establish that batch adjustment has removed every technical effect?</li>
+<li>Explain why a gene with adjusted p-value .04 should not be described as having a 4% probability of being a false result.</li>
+<li>Draft a two-sentence result that gives direction, effect size, uncertainty and the tissue-level scope of interpretation.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4148,20 +4373,30 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Treatment was assigned to animals or other experimental units, not separately to genes.</li>
-<li>Their expected counts double.</li>
-<li>No; inference needs a specified model, replication, uncertainty and appropriate multiple-testing treatment.</li>
+<li>More immune cells or more RNA per immune cell could produce the difference. Cell-type measurements or a suitably designed cell-resolved assay would add evidence.</li>
+<li>Reads measure one sample; they do not reproduce the treatment allocation or biological variation between animals.</li>
+<li>B’s fraction falls from 1/3 to 1/11, although its absolute abundance is unchanged.</li>
+<li>It approaches <span class="math inline">\(\sqrt{.1}\)</span>, about .316. The dispersion component remains.</li>
+<li>The fitted log link uses natural logarithms; conversion divides by <span class="math inline">\(\log(2)\)</span>.</li>
+<li>No. PCA is descriptive and emphasizes dominant variation; unrecorded effects may remain.</li>
+<li>FDR concerns a discovery procedure across tests, not a posterior probability for that individual hypothesis.</li>
+<li>For example: “The fitted supplemented-versus-control abundance ratio for this liver transcript was 1.8, with a model-based 95% interval from 1.2 to 2.7 after batch adjustment. This tissue-level association does not distinguish changes in cell mixture from changes within cells.” The numbers here are illustrative.</li>
 </ol>
 </div>
 </div>
 </div>
 </section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>For biological breadth, read Stark, Grzelak and Hadfield (2019), <a href="https://www.nature.com/articles/s41576-019-0150-2"><em>RNA sequencing: the teenage years</em></a>, <strong>Nature Reviews Genetics</strong>. This is optional reading; access to the full text may depend on your institution. Discussion prompt: choose one RNA-seq application beyond bulk gene-level expression and explain how its measurement and biological question differ from this practical.</p>
+<p><a href="https://hbctraining.github.io/Intro-to-DGE/">Harvard Chan Bioinformatics Core: Introduction to Differential Gene Expression Analysis</a> provides a complementary practical teaching sequence. Use the <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 vignette</a> for implementation details. The explanations, calculations and figures on this page were written for this course; external figures or lesson text have not been reproduced.</p>
+</section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p><a href="../tutorials/p09_rnaseq.html">RNA-seq practical</a> is shared by both outlines. <a href="../tutorials/p16_multiomics_qc.html">Multi-omics QC</a> connects count data to other measurement scales.</p>
+<p>Work through <a href="../tutorials/p09_rnaseq.html">RNA-seq counts, contrasts and uncertainty</a>, shared by both outlines. <a href="../tutorials/p16_multiomics_qc.html">Multi-omics QC</a> connects expression to other measurement scales, while <a href="../tutorials/p10_pathways.html">pathway interpretation</a> explores what a gene list can support.</p>
 <p>Use the <a href="../course_map.html">unified map</a> to locate B06 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 

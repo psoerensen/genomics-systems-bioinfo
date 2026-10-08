@@ -73,13 +73,121 @@ fit_gene <- function(y) {
 }
 result <- as.data.frame(t(apply(counts,1,fit_gene)))
 result$BH <- p.adjust(result$p_value,"BH")
-result$lower <- result$log2_effect-qt(.975,nrow(meta)-3)*result$SE_log2
-result$upper <- result$log2_effect+qt(.975,nrow(meta)-3)*result$SE_log2
+model_df <- nrow(meta)-qr(model.matrix(~diet+batch,meta))$rank
+result$lower <- result$log2_effect-qt(.975,model_df)*result$SE_log2
+result$upper <- result$log2_effect+qt(.975,model_df)*result$SE_log2
 result[1:8,]
 stopifnot(all(is.finite(as.matrix(result))),all(result$BH>=result$p_value-1e-12))
 ```
 
 The intervals and p-values are conditional on this restricted working model. Genotype variation for gene01 remains unmodelled here. A fitted association and an approximate p-value are not a causal-mechanism claim.
+
+## 4. Ask what the design can estimate
+
+Check the model matrix before interpreting a coefficient. In this hypothetical design, both diets occur in each batch. Construct a deliberately confounded alternative and compare its rank.
+
+```{r}
+X <- model.matrix(~diet+batch,meta)
+confounded <- meta
+confounded$batch <- factor(ifelse(confounded$diet=="control","A","B"))
+X_bad <- model.matrix(~diet+batch,confounded)
+data.frame(design=c("crossed","confounded"),
+ columns=c(ncol(X),ncol(X_bad)),rank=c(qr(X)$rank,qr(X_bad)$rank))
+stopifnot(qr(X)$rank==ncol(X),qr(X_bad)$rank<ncol(X_bad))
+```
+
+The second design cannot separate diet from batch. Do not solve that biological ambiguity by dropping batch and then calling the remaining coefficient a treatment effect. A simpler model can produce a number while the ambiguity persists.
+
+## 5. Explore samples on a descriptive scale
+
+PCA uses animals as observations and genes as variables. Here we use log2 exposure-adjusted counts with a pseudocount of one and centre each gene without scaling it to unit variance. This is a teaching transformation rather than a fitted variance-stabilizing transformation.
+
+```{r}
+log_expression <- log2(normalized+1)
+pc <- prcomp(t(log_expression),center=TRUE,scale.=FALSE)
+percent <- 100*pc$sdev^2/sum(pc$sdev^2)
+diet_colour <- c(control="#267A67",supplement="#B85E32")
+batch_shape <- c(A=16,B=17)
+plot(pc$x[,1:2],col=diet_colour[as.character(meta$diet)],
+ pch=batch_shape[as.character(meta$batch)],
+ xlab=sprintf("PC1 (%.1f%%)",percent[1]),
+ ylab=sprintf("PC2 (%.1f%%)",percent[2]))
+legend("topright",legend=names(diet_colour),col=diet_colour,pch=16,bty="n")
+legend("bottomright",legend=paste("Batch",names(batch_shape)),
+ pch=batch_shape,bty="n")
+```
+
+Describe what you see before inspecting p-values. Do the diets overlap? Does batch appear related to either axis? Neither clustering nor separation provides a test of the fitted diet contrast. Known exposure adjustment does not remove the simulated batch effect.
+
+## 6. Inspect a fitted gene
+
+Fit gene01 again and examine its fitted means and Pearson residuals. A residual is a discrepancy between an observation and its fitted expectation. We plot residuals rather than silently excluding an unusual animal.
+
+```{r}
+gene1 <- glm(counts["gene01",]~diet+batch+offset(log(exposure)),
+             data=meta,family=quasipoisson())
+fit_mean <- fitted(gene1)
+pearson <- residuals(gene1,type="pearson")
+plot(fit_mean,pearson,col=diet_colour[as.character(meta$diet)],
+ pch=16,xlab="Fitted expected count",ylab="Pearson residual")
+abline(h=0,lty=2)
+ord <- order(abs(pearson),decreasing=TRUE)
+head(data.frame(animal=meta$animal[ord],observed=counts["gene01",ord],
+ fitted=fit_mean[ord],residual=pearson[ord]),4)
+stopifnot(df.residual(gene1)==model_df)
+```
+
+Look for systematic changes in residual spread or isolated discrepancies. The quasi-Poisson variance is proportional to the mean, while the generator also contains a squared-mean term. A visually acceptable plot does not establish correct p-value calibration. Gene01 additionally has an omitted genotype effect; the model should be assessed against the biological question rather than only the plot.
+
+For comparison, fit a Poisson model to the same mean structure. Its standard error assumes less biological variation. Both fits use the same observations and mean model, so this comparison isolates the variance assumption.
+
+```{r}
+poisson1 <- update(gene1,family=poisson())
+se_comparison <- c(Poisson=coef(summary(poisson1))["dietsupplement","Std. Error"],
+ Quasi_Poisson=coef(summary(gene1))["dietsupplement","Std. Error"])/log(2)
+se_comparison
+c(estimated_variance_multiplier=summary(gene1)$dispersion)
+```
+
+The ratio of these standard errors is the square root of the estimated quasi-Poisson variance multiplier. It need not exceed one for every conceivable dataset; compare the displayed values for this realization.
+
+## 7. Report effects alongside uncertainty
+
+Plot all genes, maintaining the feature order. These are approximate pointwise intervals from the restricted working model. They are not simultaneous intervals across all 24 genes.
+
+```{r}
+plot(result$log2_effect,seq_len(nrow(result)),pch=16,
+ xlim=range(c(result$lower,result$upper)),yaxt="n",
+ xlab="Supplement versus control: fitted log2 abundance ratio",ylab="Gene")
+segments(result$lower,seq_len(nrow(result)),
+         result$upper,seq_len(nrow(result)))
+axis(2,at=seq_len(nrow(result)),labels=rownames(result),las=2,cex.axis=.65)
+abline(v=0,lty=2,col="grey50")
+result$abundance_ratio <- 2^result$log2_effect
+result$ratio_lower <- 2^result$lower
+result$ratio_upper <- 2^result$upper
+result[1:4,c("abundance_ratio","ratio_lower","ratio_upper","p_value","BH")]
+```
+
+A negative effect denotes lower fitted abundance under supplement; a positive effect denotes higher abundance. An interval crossing zero on the log2 scale crosses one on the ratio scale. Failure to pass a threshold does not prove identical expression.
+
+For this fixture we know the generating diet effects, which is unusual in real data. Compare estimates with that supplied truth without judging the method from one simulation alone.
+
+```{r}
+truth <- c(rep(.65/log(2),4),rep(0,20))
+comparison <- data.frame(gene=rownames(result),truth=truth,
+ estimate=result$log2_effect,selected=result$BH<.05)
+comparison
+with(comparison,table(supplied_effect=truth!=0,selected))
+```
+
+Sampling variation, the omitted genotype term and the working variance model all matter. A method-validation study would require repeated simulations spanning relevant designs, with bias, coverage and error rates evaluated explicitly. Counting discoveries in this single panel is an interpretation exercise.
+
+## 8. Write the analysis record
+
+For your report, state the experimental unit, sample numbers, tested features, supplied exposure, design formula, contrast direction, variance model and multiplicity procedure. Report one effect with its interval and distinguish the fitted tissue-level comparison from a mechanism claim. Record `sessionInfo()` when reproducing the practical.
+
+A full real-data extension should retain this reporting discipline while replacing the simplified analysis with an appropriate documented RNA-seq workflow. Keep raw-count input, descriptive transformations and normalized displays conceptually separate.
 
 ## Interpretation and limits
 
@@ -91,13 +199,25 @@ This practical teaches design, exposure, contrasts and uncertainty; it is not a 
 2. Why is Poisson variance too restrictive for these generated counts?
 3. Change the seed and explain why estimates and adjusted p-values change.
 4. What would a complete treatment–batch confounding problem prevent?
+5. Why might normalized counts still show batch separation in PCA?
+6. Convert the gene01 estimate and interval to abundance ratios and write a result sentence.
+7. Does selecting a gene at BH < .05 establish a 95% probability that its diet effect is real?
+8. Why should an unusual residual trigger inspection of records before exclusion?
 
 ::: {.callout-note collapse="true" title="Suggested answers"}
 1. `.65/log(2)`, about .94; a finite-sample estimate need not equal it.
 2. The generating variance is mu + mu squared/12, greater than mu.
 3. Sampling realization changes, while the generating parameters remain the same.
 4. Separate estimation of diet and batch effects.
+5. Exposure adjustment changes the count scale; it does not remove systematic batch differences.
+6. Use `2^estimate`, `2^lower` and `2^upper`; describe the supplement-versus-control tissue-level comparison conditional on batch and the working model.
+7. No. The BH procedure addresses false discovery rate across a family of tests under its assumptions, not an individual posterior probability.
+8. An unusual observation may be biological, technical or a model discrepancy. Exclusion needs an independently justified reason and a sensitivity assessment.
 :::
+
+## Further reading
+
+The [Harvard Introduction to Differential Gene Expression Analysis](https://hbctraining.github.io/Intro-to-DGE/) offers a complementary teaching sequence. The calculations and figures here are original hypothetical examples. Consult the [DESeq2 vignette](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) when moving to its implementation.
 
 ## Continue learning
 
