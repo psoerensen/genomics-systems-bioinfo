@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "",
+    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R."
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "",
+    "text": "This course provides a conceptual and computational framework for analyzing molecular data across biological scales, from genome to transcriptome to systems-level organization.\nThe focus is on understanding how genetic and environmental variation influence molecular phenotypes and complex traits through modern high-throughput technologies and statistical modeling.\nThe course integrates biological interpretation, statistical methodology, and practical implementation in R."
+  },
+  {
+    "objectID": "index.html#core-themes",
+    "href": "index.html#core-themes",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Core Themes",
+    "text": "Core Themes\nThe material is organized around five interconnected themes:\n\nMolecular Technologies\n\nDNA sequencing technologies\n\nGenotyping platforms\n\nRNA-seq and transcriptomics\n\nEpigenomic and multi-omics profiling\n\nGenomic Association and Mapping\n\nGWAS principles\n\nPopulation structure and confounding\n\nFine-mapping\n\nFunctional annotation\n\nMulti-Omics Integration\n\nTranscriptome-wide association\n\neQTL and regulatory variation\n\nIntegrative modeling across data layers\n\nSystems-Level Modeling\n\nGene regulatory networks\n\nPathway analysis\n\nNetwork-based interpretation\n\nCausal modeling concepts\n\nComputational and Statistical Methods\n\nHigh-dimensional regression\n\nRegularization and shrinkage\n\nMachine learning approaches\n\nReproducible workflows in R"
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nAfter completing the course, students should be able to:\n\nExplain how sequencing technologies generate molecular data\n\nEvaluate appropriate statistical models for genomic data\n\nAnalyze high-dimensional datasets using R\n\nInterpret GWAS and fine-mapping results\n\nIntegrate multi-omics datasets conceptually and computationally\n\nConnect molecular variation to complex phenotypes"
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Course Materials",
+    "text": "Course Materials\nThe course progresses from molecular data generation to systems-level interpretation.\nAs the course is developed, chapters and practicals will include:\n\nConceptual background\n\nStatistical framework\n\nApplied examples\n\nExecutable R code\n\nVisualizations and case studies\n\nThe overview is currently available. Slides, notes and practicals will be added in the folders described in the repository README. Students will be encouraged to reproduce worked examples and explore parameter choices as those materials become available."
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nStudents are expected to have:\n\nBasic molecular biology knowledge\n\nIntroductory statistics\n\nFamiliarity with R\n\nPrior exposure to linear models and quantitative genetics is beneficial but not required."
+  },
+  {
+    "objectID": "index.html#recommended-use",
+    "href": "index.html#recommended-use",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Recommended Use",
+    "text": "Recommended Use\nThis material is designed to support:\n\nLecture-based instruction\n\nComputational lab sessions\n\nProject-based learning\n\nIndependent exploration of genomic datasets\n\nEmphasis is placed on connecting biological mechanisms with statistical modeling in a reproducible framework."
+  },
+  {
+    "objectID": "index.html#course-hub",
+    "href": "index.html#course-hub",
+    "title": "Genomics, Systems Biology & Bioinformatics",
+    "section": "Course Hub",
+    "text": "Course Hub\nReturn to the gteach teaching-materials hub."
+  }
+]

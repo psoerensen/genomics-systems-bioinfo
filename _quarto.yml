@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+
+website:
+  title: "Genomics, Systems Biology & Bioinformatics"
+  site-url: https://psoerensen.github.io/genomics-systems-bioinfo/
+  repo-url: https://github.com/psoerensen/genomics-systems-bioinfo
+  navbar:
+    left:
+      - text: "Home"
+        href: index.html
+      - text: "Quantitative Genetics"
+        href: https://psoerensen.github.io/quantitative-genetics/
+      - text: "Population Genetics"
+        href: https://psoerensen.github.io/population-genetics/
+      - text: "gteach"
+        href: https://psoerensen.github.io/gteach/
+
+format:
+  html:
+    theme: flatly
