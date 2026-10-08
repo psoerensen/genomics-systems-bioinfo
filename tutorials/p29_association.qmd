@@ -74,6 +74,33 @@ stopifnot(length(candidate)==48)
 
 A correlated candidate can inherit association. Two conditional models here do not calculate a fine-mapping posterior or identify a causal allele.
 
+## 4. Verify the allele-coding equivalence
+
+A simple linear comparison shows that opposite counted alleles reverse the effect sign while preserving fitted values. This isolated illustration does not replace the expression count model above.
+
+```{r}
+dosage_A <- c(0,0,1,1,2,2)
+phenotype <- c(2,3,4,5,6,7)
+dosage_B <- 2-dosage_A
+fit_A <- lm(phenotype~dosage_A);fit_B <- lm(phenotype~dosage_B)
+c(A_slope=coef(fit_A)[2],B_slope=coef(fit_B)[2])
+stopifnot(max(abs(fitted(fit_A)-fitted(fit_B)))<1e-12)
+```
+
+## 5. State what candidate evidence leaves unresolved
+
+Correlated markers can tag the same signal. A nearest-gene assignment, eQTL association and trait association do not jointly establish expression mediation. Check assembly, alleles, tissue, LD population and variant coverage before integrating results.
+
+Fine-mapping and colocalization are additional model-based analyses, not interpretations automatically available from the toy fit. Related livestock observations require an appropriate dependence model. A predictive model also needs independent evaluation rather than a ranking by association p-value.
+
+## Interpretation challenge
+
+A marker has a positive effect in one report and a negative effect in another. What should be checked before declaring a biological contradiction?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Counted allele, strand, assembly, phenotype direction, tissue and model. Opposite allele coding can reverse a sign for the same fitted comparison.
+:::
+
 ## Interpretation and limits
 
 Real studies need allele/reference alignment, genotype and expression QC, relatedness/structure treatment, adequate replication, cis/trans definitions, multiple testing and model diagnostics. A TWAS association is not automatically evidence that expression mediates the variant–trait effect. Fine-mapping requires an explicit candidate/model/LD framework.

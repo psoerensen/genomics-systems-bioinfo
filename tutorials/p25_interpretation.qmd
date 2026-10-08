@@ -69,6 +69,33 @@ follow_up
 
 More omics layers may strengthen a description without resolving the key uncertainty. A targeted experiment can be more informative than another correlated panel.
 
+## 4. Demonstrate an ambiguous equilibrium result
+
+A final abundance can arise from different dynamic processes. Under constant production and first-order loss, equilibrium is production divided by loss.
+
+```{r}
+mechanism <- data.frame(explanation=c('baseline','production_increase','loss_decrease'),
+ production=c(4,8,4),loss=c(1,1,.5))
+mechanism$equilibrium <- with(mechanism,production/loss)
+mechanism
+```
+
+Two different changes double the equilibrium. A single endpoint cannot distinguish them in this model. Time-resolved data or a suitable turnover measurement can provide additional information.
+
+## 5. Build a competing-explanations table
+
+For each cross-layer association, list a direct biological path, a common driver, technical structure and reverse direction where plausible. Then choose a follow-up whose expected outcomes differ between explanations.
+
+A replication cohort addresses repeatability and transfer. A targeted perturbation addresses a proposed causal role. Better identifier or chemical evidence addresses what was measured. These follow-ups should be selected for the uncertainty present rather than treated as interchangeable confirmations.
+
+## Interpretation challenge
+
+Why does agreement between RNA, protein and phenotype not provide three independent causal demonstrations?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+The layers can share a treatment, cell-composition or technical driver. They are paired observations from the same units and may reflect correlated consequences rather than a demonstrated causal chain.
+:::
+
 ## Interpretation and limits
 
 Conditional correlations do not rule out unmeasured confounding, measurement error, reverse causation or selection. A mediation claim needs temporal ordering and justified assumptions, not simply a smaller diet coefficient after adding a molecular covariate.

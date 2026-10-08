@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#build-a-matched-sample-sheet" id="toc-build-a-matched-sample-sheet" class="nav-link" data-scroll-target="#build-a-matched-sample-sheet">1. Build a matched sample sheet</a></li>
   <li><a href="#check-estimability" id="toc-check-estimability" class="nav-link" data-scroll-target="#check-estimability">2. Check estimability</a></li>
   <li><a href="#plan-decision-timing-and-missingness" id="toc-plan-decision-timing-and-missingness" class="nav-link" data-scroll-target="#plan-decision-timing-and-missingness">3. Plan decision timing and missingness</a></li>
+  <li><a href="#compare-allocation-with-observation-count" id="toc-compare-allocation-with-observation-count" class="nav-link" data-scroll-target="#compare-allocation-with-observation-count">4. Compare allocation with observation count</a></li>
+  <li><a href="#plan-a-design-audit" id="toc-plan-a-design-audit" class="nav-link" data-scroll-target="#plan-a-design-audit">5. Plan a design audit</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4042,6 +4045,59 @@ confounded       3    2</code></pre>
 </div>
 <p>The future outcome can evaluate a day14 prediction; it cannot be included as input to that prediction. Predefine how absent assays and failed QC affect the analysis population.</p>
 </section>
+<section id="compare-allocation-with-observation-count" class="level2">
+<h2 class="anchored" data-anchor-id="compare-allocation-with-observation-count">4. Compare allocation with observation count</h2>
+<p>A pen-allocated experiment has fewer independent treatment units than animal rows. Construct a hypothetical design with four pens and record both levels.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pen_plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pen=</span><span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">&#39;pen&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">each=</span><span class="dv">5</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="at">diet=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&#39;C&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;T&#39;</span>,<span class="st">&#39;T&#39;</span>),<span class="at">each=</span><span class="dv">5</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pen_plan<span class="sc">$</span>animal <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;animal&#39;</span>,<span class="fu">seq_len</span>(<span class="fu">nrow</span>(pen_plan)))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">animal_observations=</span><span class="fu">nrow</span>(pen_plan),<span class="at">allocation_units=</span><span class="fu">length</span>(<span class="fu">unique</span>(pen_plan<span class="sc">$</span>pen)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>animal_observations    allocation_units 
+                 20                   4 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(pen_plan[<span class="fu">c</span>(<span class="st">&#39;pen&#39;</span>,<span class="st">&#39;diet&#39;</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    pen diet
+1  pen1    C
+6  pen2    C
+11 pen3    T
+16 pen4    T</code></pre>
+</div>
+</div>
+</section>
+<section id="plan-a-design-audit" class="level2">
+<h2 class="anchored" data-anchor-id="plan-a-design-audit">5. Plan a design audit</h2>
+<p>Check allocation unit, group counts within processing batches, specimen timing and missing-assay contingencies before collecting data. A full-rank fixed design is one useful check but does not assess pen dependence or generalization across farms.</p>
+<p>Predefine a primary contrast and relevant exclusion rules. Biological allocation, blinded handling and randomized processing order protect different aspects of the study. A variance and effect-size sensitivity analysis can support planning, but does not replace a clear unit and sampling hierarchy.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>Would sequencing each animal twice double the diet replication in the four-pen design?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No. Duplicate libraries add technical evidence for the same specimens; there are still four independently allocated pens. The analysis must respect that hierarchy.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Randomization and blocking, tissue/time, sex, farm, batch, handling and exclusion rules need a justified study-specific plan. Technical aliquots are not independent animals. Use <a href="https://nc3rs.org.uk/3rs-resources/key-elements-well-designed-experiment">NC3Rs design guidance</a> for the design principles; the invented sheet is not a laboratory sampling instruction.</p>
@@ -4054,7 +4110,7 @@ confounded       3    2</code></pre>
 <li>What must be decided before selecting an integration method?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4063,7 +4119,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Pen-level allocation and dependence become central; sufficient independent pens are needed.</li>

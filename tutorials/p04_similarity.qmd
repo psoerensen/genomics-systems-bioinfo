@@ -68,6 +68,33 @@ claims
 
 Homology is a relationship of common ancestry, not 87.5% homology. Shared function is a further biological claim.
 
+## 4. Compare complexity as well as identity
+
+A composition-preserving shuffle of an all-A sequence always produces the same sequence. High identity in that case supplies no unusual positional agreement under this restricted null.
+
+```{r}
+low_complexity <- rep('A',16)
+set.seed(404)
+null_matches <- replicate(100,sum(low_complexity==sample(low_complexity)))
+c(identity=1,null_mean=mean(null_matches),
+ tail=(1+sum(null_matches>=16))/(length(null_matches)+1))
+stopifnot(all(null_matches==16))
+```
+
+## 5. Recognize search selection
+
+The earlier comparison used one supplied alignment. A database search selects promising local regions from many candidates. Its significance calculation must account for its scoring and search setting; the toy shuffle tail omits that selection. Changing sequence length, complexity or database size can change the meaning of the same identity percentage.
+
+A useful result description gives matches, comparable positions, coverage and comparison context. A functional claim additionally needs domain, evolutionary and experimental evidence. Do not replace that evidence with the word homology expressed as a percentage.
+
+## Interpretation challenge
+
+Would increasing the number of shuffles make the toy tail a BLAST E-value?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. More draws improve Monte Carlo resolution for the same restricted null. They do not add the database-search scoring and selection model needed for an E-value.
+:::
+
 ## Interpretation and limits
 
 Use the [NCBI BLAST glossary](https://www.ncbi.nlm.nih.gov/books/NBK62051/) to distinguish identity and homology. The toy shuffle tail is not a database-search E-value and cannot be substituted for one.

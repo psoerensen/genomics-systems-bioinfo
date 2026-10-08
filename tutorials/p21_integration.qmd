@@ -71,6 +71,35 @@ c(cross_layer_correlation=cor(P[,1],M[,1]))
 
 The panels can agree because they share the same generating driver. In actual data, biological and technical common causes both need examination.
 
+## 4. Demonstrate redundant feature influence
+
+Duplicating a feature changes an unweighted joint representation without adding another biological observation. Use an independent small matrix to isolate the effect.
+
+```{r}
+set.seed(2102)
+small <- cbind(shared=rnorm(30),other=rnorm(30))
+duplicated <- cbind(small,small[,1],small[,1])
+fraction <- function(x) {
+ fit <- prcomp(x,scale.=TRUE)
+ fit$sdev[1]^2/sum(fit$sdev^2)
+}
+c(original_PC1=fraction(small),duplicated_PC1=fraction(duplicated))
+```
+
+## 5. Assess the biological representation
+
+A joint component describes covariance under the selected features, transformations and weights. Inspect its loadings, score relationships with design factors and sensitivity to leaving out one layer. A shared pattern can reflect common biology or batch.
+
+Before using the representation for prediction, fit scaling and representation within training and apply it to test observations. Missing whole assays require an explicit strategy; using only complete animals changes the represented population. More layers are helpful when they add relevant information, not because concatenation itself creates independent confirmation.
+
+## Interpretation challenge
+
+Does equal total block variance guarantee equal biological contribution?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It balances a numerical quantity. Reliability, redundancy, covariance and relevance to the task can differ substantially between blocks.
+:::
+
 ## Interpretation and limits
 
 Concatenation is one integration strategy, not a universal method. Unmatched samples, incompatible timing, missing layers and leakage need explicit handling. Do not interpret joint PCs as mechanisms or use full-sample scaling for an untouched predictive test.

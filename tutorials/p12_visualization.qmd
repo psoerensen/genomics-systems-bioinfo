@@ -71,6 +71,35 @@ legend("topleft",levels(meta$diet),col=1:2,pch=19,bty="n")
 
 Colour reveals whether pooled association might combine group shifts and within-group variation.
 
+## 4. Show observations as well as summaries
+
+A group mean can conceal heterogeneity and a small denominator. For these hypothetical values, display every observation beside the group summaries.
+
+```{r}
+plot_data <- data.frame(group=factor(rep(c('C','T'),each=5)),
+ value=c(8,9,10,11,12,9,10,11,12,20))
+boxplot(value~group,plot_data,outline=FALSE,ylim=range(plot_data$value),
+ xlab='Group',ylab='Hypothetical response')
+stripchart(value~group,plot_data,vertical=TRUE,method='jitter',
+ add=TRUE,pch=16,col='#267A67')
+```
+
+The extreme observation is visible rather than compressed into a bar. Its presence should prompt investigation of records and the model, not automatic exclusion.
+
+## 5. Make comparisons interpretable
+
+Axes should identify units and transformations. A log2 abundance difference, original-scale ratio and raw count describe different quantities. Consistent axes support direct visual comparisons; truncated axes and unequal scales can exaggerate differences.
+
+Use point/interval plots for estimates and uncertainty, sample-level plots for distributions and paired plots when the same animals provide both measurements. Avoid connecting unrelated animals as though they were paired. A figure caption should state the sample unit, subset, transformation and question answered.
+
+## Interpretation challenge
+
+A bar plot shows a strong mean difference but gives no sample counts or uncertainty. What would improve it?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Show observations and group denominators, add a justified uncertainty display and identify the units/design. Explain whether the figure is descriptive or displays a fitted contrast.
+:::
+
 ## Interpretation and limits
 
 Plots diagnose patterns; they do not replace a model or prove an effect. Avoid using different transformations without labelling them, selectively hiding outliers or interpreting one unusual point before checking its identity and processing.

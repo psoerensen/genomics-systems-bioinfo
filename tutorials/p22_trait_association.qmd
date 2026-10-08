@@ -77,6 +77,33 @@ plot(z$feature,z$response,pch=19,col=as.integer(z$diet),
 
 Adjustment changes the estimand; it is not an automatic guarantee that every nuisance variable has been removed.
 
+## 4. Check how units change a coefficient
+
+Rescaling a predictor changes its slope and standard error in inverse proportion, while fitted values and its test statistic remain equivalent in this simple model.
+
+```{r}
+set.seed(2202)
+x_unit <- rnorm(40);response_unit <- 1+.6*x_unit+rnorm(40)
+a_unit <- lm(response_unit~x_unit)
+x_ten <- 10*x_unit;b_unit <- lm(response_unit~x_ten)
+c(original_slope=coef(a_unit)[2],rescaled_slope=coef(b_unit)[2])
+stopifnot(max(abs(fitted(a_unit)-fitted(b_unit)))<1e-12)
+```
+
+## 5. Specify adjustment before interpreting direction
+
+A conditional coefficient compares animals at the same values of included covariates under the model. Adding a covariate can change the target as well as the estimate. A variable affected by exposure should not automatically be called a confounder.
+
+Report feature units, tissue/time, sample subset, covariates, uncertainty and multiplicity. Check influential observations and residual patterns before interpreting a ranking. A feature associated after adjustment is not automatically a validated predictor, and predictive value is not proof of a causal role.
+
+## Interpretation challenge
+
+Two feature slopes have different magnitudes because one predictor is in log2 units and another in standardized units. Can their raw magnitudes be ranked as biological importance?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Slopes depend on scale and the conditional model. Explain a meaningful contrast or standardized comparison and retain uncertainty and measurement context.
+:::
+
 ## Interpretation and limits
 
 Marker relatedness, repeated animals, nonlinear associations, measurement error and selection require suitable analysis in real data. A feature selected on all outcomes cannot then be evaluated on those same animals as an independently validated predictor.

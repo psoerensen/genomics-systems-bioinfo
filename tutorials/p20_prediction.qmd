@@ -78,6 +78,60 @@ abline(0,1,col="#d95f02")
 
 One split shows the evaluation procedure. The generating model makes useful molecular association plausible, but the test score does not establish practical value in a real livestock population.
 
+## 4. Tune only within the training animals
+
+For demonstration, partition the original training group into fitting and internal validation subsets. Every candidate model re-estimates preprocessing from its fitting subset. The final test set remains outside this selection.
+
+```{r}
+source(file.path(helper_dir,'prediction_helpers.R'))
+# Inspect the helper interface before replacing the transparent calculation above.
+args(fit_teaching_ridge)
+```
+
+The complete internal-selection exercise below is written transparently to preserve the penalty convention.
+
+```{r}
+inner_fit <- 1:24;inner_valid <- 25:32
+candidate_lambda <- c(.5,4,20)
+inner_center <- colMeans(X[inner_fit,,drop=FALSE])
+inner_scale <- apply(X[inner_fit,,drop=FALSE],2,sd)
+inner_Z <- scale(X,inner_center,inner_scale)
+inner_mean <- mean(y[inner_fit])
+validation_rmse <- sapply(candidate_lambda,function(penalty) {
+ b <- solve(crossprod(inner_Z[inner_fit,,drop=FALSE])+penalty*diag(ncol(X)),
+ crossprod(inner_Z[inner_fit,,drop=FALSE],y[inner_fit]-inner_mean))
+ prediction <- as.vector(inner_mean+inner_Z[inner_valid,,drop=FALSE]%*%b)
+ sqrt(mean((y[inner_valid]-prediction)^2))
+})
+data.frame(lambda=candidate_lambda,internal_RMSE=validation_rmse)
+```
+
+## 5. Refit the selected procedure and evaluate
+
+Choose the penalty from internal validation only, refit on all original training animals and apply the training transformation to the original test group.
+
+```{r}
+selected_lambda <- candidate_lambda[which.min(validation_rmse)]
+selected_model <- fit_teaching_ridge(X[train,,drop=FALSE],y[train],lambda=selected_lambda)
+selected_prediction <- predict_teaching_ridge(selected_model,X[test,,drop=FALSE])
+c(internally_selected_lambda=selected_lambda,
+ selected_test_RMSE=rmse(y[test],selected_prediction))
+```
+
+This score evaluates the supplied selection procedure on this realization. Do not use it to reconsider the chosen penalty.
+
+## 6. Distinguish selection from final evaluation
+
+After choosing a penalty internally, refit preprocessing and coefficients using all original training animals, then evaluate the selected procedure once on the test group. The small contiguous internal split is only a supplied illustration; its farm composition and uncertainty still matter. More candidate penalties create more selection opportunity, not more independent evaluation evidence.
+
+## Interpretation challenge
+
+Can the original held-out test score be used to override the internally selected penalty?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Doing so uses the test set for selection. Its score would no longer assess an untouched selected procedure. Use a new evaluation set or an appropriate nested design.
+:::
+
 ## Interpretation and limits
 
 Feature selection, scaling, imputation and lambda tuning must occur inside training-only validation. If lambda is optimized on these test animals, they become a tuning set. For real prediction, use a grouping/time split matching deployment and quantify uncertainty across independent units.

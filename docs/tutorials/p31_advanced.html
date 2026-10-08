@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#generate-nested-measurements" id="toc-generate-nested-measurements" class="nav-link" data-scroll-target="#generate-nested-measurements">1. Generate nested measurements</a></li>
   <li><a href="#compare-uncertainty-at-different-units" id="toc-compare-uncertainty-at-different-units" class="nav-link" data-scroll-target="#compare-uncertainty-at-different-units">2. Compare uncertainty at different units</a></li>
   <li><a href="#critique-additional-advanced-claims" id="toc-critique-additional-advanced-claims" class="nav-link" data-scroll-target="#critique-additional-advanced-claims">3. Critique additional advanced claims</a></li>
+  <li><a href="#unequal-cell-recovery-changes-a-pooled-comparison" id="toc-unequal-cell-recovery-changes-a-pooled-comparison" class="nav-link" data-scroll-target="#unequal-cell-recovery-changes-a-pooled-comparison">4. Unequal cell recovery changes a pooled comparison</a></li>
+  <li><a href="#review-a-method-at-its-resolution-and-unit" id="toc-review-a-method-at-its-resolution-and-unit" class="nav-link" data-scroll-target="#review-a-method-at-its-resolution-and-unit">5. Review a method at its resolution and unit</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4027,6 +4030,48 @@ vertical-align: -.125em;
 </div>
 <p>These are hypothetical critique prompts. Co-location, prediction and molecular contact describe different kinds of evidence.</p>
 </section>
+<section id="unequal-cell-recovery-changes-a-pooled-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="unequal-cell-recovery-changes-a-pooled-comparison">4. Unequal cell recovery changes a pooled comparison</h2>
+<p>Animal means give each animal equal weight; pooling cells gives more weight to animals with more recovered cells. Demonstrate the difference using supplied animal means and recovery counts.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>animal_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">animal=</span><span class="fu">c</span>(<span class="st">&#39;a1&#39;</span>,<span class="st">&#39;a2&#39;</span>,<span class="st">&#39;a3&#39;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="at">mean=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>),<span class="at">cells=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">100</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">equal_animal_mean=</span><span class="fu">mean</span>(animal_summary<span class="sc">$</span>mean),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="at">cell_weighted_mean=</span><span class="fu">weighted.mean</span>(animal_summary<span class="sc">$</span>mean,animal_summary<span class="sc">$</span>cells))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> equal_animal_mean cell_weighted_mean 
+          5.000000           7.076923 </code></pre>
+</div>
+</div>
+</section>
+<section id="review-a-method-at-its-resolution-and-unit" class="level2">
+<h2 class="anchored" data-anchor-id="review-a-method-at-its-resolution-and-unit">5. Review a method at its resolution and unit</h2>
+<p>Single-cell clusters, spatial spots and inferred trajectories answer different questions. A cluster depends on features and algorithm choices; a spot can mix cells; a snapshot trajectory does not directly observe longitudinal movement.</p>
+<p>For an animal-level contrast, preserve specimen identity and replication through cell-type analysis or an appropriate hierarchical approach. For new-animal AI prediction, keep animals separated and fit the full preprocessing/selection procedure inside training. Review recovery, QC and annotation before interpreting a missing or shifted cell type.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>If treated animals yield more cells of a type, is the recovered cell fraction necessarily the true tissue fraction?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No. Recovery and processing can differ by group or cell state. The measured fraction needs assay and sampling context, and independent biological replication remains necessary.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>The example is not a single-cell/spatial software pipeline. Pseudobulk or hierarchical methods must reflect the assay and animal/specimen design. Advanced technology and AI do not remove the need for independent replication, provenance and appropriate validation.</p>
@@ -4039,7 +4084,7 @@ vertical-align: -.125em;
 <li>What should a critical paper review report?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4048,7 +4093,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Every animal has equal cell counts, so the treatment contrast averages the same animal-level values.</li>

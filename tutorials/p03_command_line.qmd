@@ -71,6 +71,35 @@ record
 
 For a real aligner, include reference, version, options, resource requirements and the meaning of each output. A zero exit code does not certify biological correctness.
 
+## 4. Validate a worker boundary
+
+Command-line arguments are text. A worker should check required arguments, input existence and expected columns before producing a result. An output left from a previous run can remain present after a new run fails; checking only its presence is insufficient.
+
+```{r}
+validate_table <- function(tab) {
+ stopifnot(all(c('animal','value') %in% names(tab)),
+ !anyDuplicated(tab$animal),is.numeric(tab$value),all(is.finite(tab$value)))
+ TRUE
+}
+validate_table(data.frame(animal=c('a1','a2'),value=c(2,4)))
+tryCatch(validate_table(data.frame(animal=c('a1','a1'),value=c(2,4))),
+ error=function(e) 'duplicate key rejected')
+```
+
+## 5. Explain the reproducibility boundary
+
+Record the exact command, worker version, input checksum and exit status. Capture errors separately from scientific output. A return status of zero indicates successful process completion under the program's rules; it does not certify a valid biological analysis. Run an independent small calculation to verify the worker's result, then investigate discrepancies before extending it to more files.
+
+On real projects, use project-relative paths and preserve source inputs. Arguments containing spaces need shell-appropriate quoting; operating-system conventions should be documented for students.
+
+## Interpretation challenge
+
+The output CSV exists, but the latest worker returned a nonzero status. Can it be used as the new result?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It could be stale or incomplete. Inspect the error, correct the failed run and verify that the expected output belongs to the successful invocation.
+:::
+
 ## Interpretation and limits
 
 Use tool-specific documentation for real aligners or quantifiers; this example runs no alignment. Keep restricted data out of command logs and public repositories. Temporary files are left in R’s temporary directory for inspection.

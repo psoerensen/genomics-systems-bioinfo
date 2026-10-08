@@ -74,6 +74,32 @@ stopifnot(identical(unname(vapply(rc,reverse_complement,character(1))),unname(se
 
 Reverse complementing twice restores the original sequence, a useful orientation check.
 
+## 4. Make the denominator visible
+
+Unknown bases change what can be calculated. Compare GC fractions using all supplied characters and only called bases in a hypothetical sequence.
+
+```{r}
+seq_chars <- strsplit('GCGCNNNNAT','')[[1]]
+called <- seq_chars %in% c('A','C','G','T')
+c(all_character_GC=mean(seq_chars %in% c('G','C')),
+ called_base_GC=mean(seq_chars[called] %in% c('G','C')),
+ called_fraction=mean(called))
+```
+
+These summaries answer different questions. Excluding unknown positions gives a called-base composition; it does not recover the composition of unobserved positions. Report the unknown fraction alongside it.
+
+## 5. Preserve orientation and record context
+
+Reverse complementation changes orientation, while reversing alone does not complement bases. A double reverse complement should recover a valid input sequence under the supported alphabet. Before comparing records, check whether each represents a complete sequence or a region, what the header identifies and whether ambiguous symbols are supported by the parser. Restricting to A/C/G/T/N is a teaching contract, not the complete vocabulary of all biological sequence files.
+
+## Interpretation challenge
+
+Two sequences have identical called-base GC fractions but one has 40% unknown bases. Are their measurement qualities equivalent?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. The fraction describes only called positions. Unknown coverage, sequence length and the observation process must accompany the composition statistic.
+:::
+
 ## Interpretation and limits
 
 Called-base GC is a descriptive proportion, not sequencing quality or coding potential. Unknown bases and selected regions can make whole-record comparisons misleading. This parser is intentionally small, not a general FASTA library.

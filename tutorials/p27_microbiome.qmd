@@ -71,6 +71,34 @@ data.frame(pseudocount,log_ratio=log((zero_case["A"]+pseudocount)/(zero_case["B"
 
 The zero-case ratio depends materially on the pseudocount. A host correlation in this panel is a descriptive association, not a microbial intervention result.
 
+## 4. Contrast richness and evenness
+
+Calculate Shannon entropy for two fictional profiles with the same observed richness.
+
+```{r}
+community <- rbind(even=c(.25,.25,.25,.25),
+ dominated=c(.85,.05,.05,.05))
+H <- function(p) -sum(p[p>0]*log(p[p>0]))
+data.frame(profile=rownames(community),richness=rowSums(community>0),
+ entropy=apply(community,1,H))
+```
+
+The statistic summarizes the supplied composition. It does not establish community function or a universally favorable state. Apparent richness also depends on detection and feature definition.
+
+## 5. Connect a host association to the measurement
+
+Taxon fractions, microbial load, gene content, transcription and metabolites are different measurements. A DNA profile supplies potential rather than direct activity. Collection site and timing determine the community represented.
+
+For a host trait, inspect diet, management and repeated sampling as possible shared drivers. A validated association may motivate a pathway or perturbation study, but changing a relative fraction does not demonstrate changed total activity. Independent farms and explicit prediction timing are needed for a deployment claim.
+
+## Interpretation challenge
+
+A community has higher entropy after treatment. Can it be called healthier from that statistic alone?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Entropy describes diversity/evenness under the measured categories. Health or production benefit requires relevant outcomes, design and biological evidence.
+:::
+
 ## Interpretation and limits
 
 Distinguish amplicon/shotgun methods, site, time, diet, contaminants, compositionality and load. The fixture does not model a real rumen community. Cross-layer network or methane claims require identified measurements and suitable designs.

@@ -75,6 +75,31 @@ review
 
 These are hypothetical critique prompts. Co-location, prediction and molecular contact describe different kinds of evidence.
 
+## 4. Unequal cell recovery changes a pooled comparison
+
+Animal means give each animal equal weight; pooling cells gives more weight to animals with more recovered cells. Demonstrate the difference using supplied animal means and recovery counts.
+
+```{r}
+animal_summary <- data.frame(animal=c('a1','a2','a3'),
+ mean=c(2,5,8),cells=c(10,20,100))
+c(equal_animal_mean=mean(animal_summary$mean),
+ cell_weighted_mean=weighted.mean(animal_summary$mean,animal_summary$cells))
+```
+
+## 5. Review a method at its resolution and unit
+
+Single-cell clusters, spatial spots and inferred trajectories answer different questions. A cluster depends on features and algorithm choices; a spot can mix cells; a snapshot trajectory does not directly observe longitudinal movement.
+
+For an animal-level contrast, preserve specimen identity and replication through cell-type analysis or an appropriate hierarchical approach. For new-animal AI prediction, keep animals separated and fit the full preprocessing/selection procedure inside training. Review recovery, QC and annotation before interpreting a missing or shifted cell type.
+
+## Interpretation challenge
+
+If treated animals yield more cells of a type, is the recovered cell fraction necessarily the true tissue fraction?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Recovery and processing can differ by group or cell state. The measured fraction needs assay and sampling context, and independent biological replication remains necessary.
+:::
+
 ## Interpretation and limits
 
 The example is not a single-cell/spatial software pipeline. Pseudobulk or hierarchical methods must reflect the assay and animal/specimen design. Advanced technology and AI do not remove the need for independent replication, provenance and appropriate validation.

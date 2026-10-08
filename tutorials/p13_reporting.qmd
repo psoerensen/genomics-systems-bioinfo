@@ -68,6 +68,32 @@ cat(sprintf("Among %d fictional animals, the adjusted diet contrast is %.2f arbi
 
 Add the allocation, covariates, model assumptions and absence of external validation. An interval alone is not a complete report.
 
+## 4. Separate fitted evidence from the claim
+
+A results table needs direction, units, uncertainty and adjustment factors. A generic statement that a treatment is significant omits most of that information. Use an explicit contrast label and distinguish pointwise confidence intervals from multiplicity-adjusted inference.
+
+```{r}
+claim_record <- data.frame(field=c('comparison','unit','model','interpretation'),
+ value=c('supplement minus control','independent animal',
+ 'specified response model with batch',
+ 'conditional group contrast; mechanism not established'))
+claim_record
+```
+
+## 5. Record deviations and provenance
+
+List exclusion reasons and counts by group. Preserve a clean-session command, input/version information and the processing steps. The fixture checksum can identify the generator source; the seed identifies a realization. Neither verifies real-world performance.
+
+Write limitations close to the result they qualify. A biological conclusion should say which tissue, period and population were measured. A proposed follow-up should resolve an identified uncertainty, such as replication across farms or a targeted mechanistic perturbation. A polished report cannot compensate for missing replication or confounded allocation.
+
+## Interpretation challenge
+
+How should a report handle a null result with a wide interval?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+State the estimate and interval, explain the imprecision and avoid claiming equivalence. A meaningful absence claim needs an appropriately defined equivalence target and analysis.
+:::
+
 ## Interpretation and limits
 
 A real report needs species/population, measurement units, design, permissions, assay processing, software, missingness, diagnostics, validation and uncertainty. Tables and plots should allow readers to assess the conclusion without relying on an unexplained significant/not-significant label.

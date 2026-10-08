@@ -66,6 +66,34 @@ c(max_cophenetic_discrepancy=max(abs(as.matrix(cophenetic(other))-changed)))
 
 The new distances are no longer represented exactly by that UPGMA ultrametric.
 
+## 4. Inspect the clock assumption directly
+
+In an ultrametric distance matrix, the largest two pairwise distances within each triple agree. Examine a constructed triple and then a perturbed version.
+
+```{r}
+triple <- c(A_B=2,A_C=6,B_C=6)
+perturbed <- c(A_B=2,A_C=6,B_C=8)
+clock_gap <- function(v) diff(sort(v)[2:3])
+c(ideal_largest_gap=clock_gap(triple),
+ perturbed_largest_gap=clock_gap(perturbed))
+```
+
+This necessary ultrametric pattern is separate from the four-point relationship for an additive quartet. A distance matrix can be tree-additive without satisfying a molecular-clock assumption.
+
+## 5. Separate clustering from evolutionary inference
+
+UPGMA produces a hierarchical representation even when its evolutionary assumptions fail. A neat dendrogram does not demonstrate a clock. Real phylogenetic work also needs an appropriate alignment, substitution model and assessment of uncertainty. Gene duplication and recombination can complicate a species-history interpretation.
+
+A bootstrap proportion describes repeatability under a resampling scheme and method. It is not automatically the posterior probability that a branch is correct. Record what was resampled and what the tree represents.
+
+## Interpretation challenge
+
+If a perturbation changes the dendrogram, should the original matrix be retained because it looks cleaner?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. The perturbation reveals sensitivity. Investigate the measurement/model basis of the distances and report uncertainty rather than selecting a more attractive representation.
+:::
+
 ## Interpretation and limits
 
 Real analyses must address sequence alignment, substitution model, rate differences, sampling and uncertainty. A gene tree can differ from population/species history through processes such as lineage sorting and recombination. Branches measured in substitutions cannot be labelled years without calibration.

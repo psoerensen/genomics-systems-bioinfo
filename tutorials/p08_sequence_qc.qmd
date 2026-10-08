@@ -67,6 +67,33 @@ stopifnot(sum(qc$keep)==1)
 
 The third read meets the encoded-error rule but fails the unknown-base rule. Report the exclusions and their reason.
 
+## 4. Compare average quality with expected errors
+
+The Phred transformation is nonlinear. Transforming mean quality to an error probability is different from averaging per-base error probabilities.
+
+```{r}
+quality <- c(10,40)
+c(error_from_mean_Q=10^(-mean(quality)/10),
+ mean_error_probability=mean(10^(-quality/10)),
+ expected_errors=sum(10^(-quality/10)))
+```
+
+The low-quality base contributes most of the expected errors. Expected error sums use linearity of expectation and do not require independent errors; the probability of no errors would require additional dependence assumptions.
+
+## 5. Evaluate consequences of filtering
+
+A stricter threshold can improve retained-read summaries while discarding evidence unevenly between samples. Report retained counts and proportions per library, not only the pooled fraction. Quality filtering is one part of a workflow: mapping, duplicate evidence, contamination and biological sample integrity still need checks.
+
+The small quality strings demonstrate encoding and decisions. They do not characterize an instrument run or establish the best threshold for real sequencing data. Choose a rule based on the intended downstream use and inspect its effect on group balance.
+
+## Interpretation challenge
+
+Two libraries retain 90% of reads overall, but one treatment group loses twice as many reads. What should be inspected?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Group-specific quality and processing, library sizes, acquisition/batch structure and downstream exposure. The pooled retention fraction can hide an imbalanced measurement process.
+:::
+
 ## Interpretation and limits
 
 Quality encoding, adapter content, length distributions, contaminants, mapping, coverage and sample identity matter in a complete sequencing workflow. A threshold chosen after looking at a desired result can bias downstream analysis. More retained reads do not create more biological replicates.

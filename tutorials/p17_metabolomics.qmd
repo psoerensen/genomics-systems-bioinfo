@@ -73,6 +73,32 @@ c(log2_mean_difference=mean(M[1,d$metadata$diet=="supplement"])-
 
 The difference describes the hypothetical panel. A mass-spectrometry feature cannot be assigned to a pathway merely because its group contrast is large.
 
+## 4. Inspect a calibration range
+
+A hypothetical linear standard curve can convert a signal to concentration only under its assumptions. Show whether an unknown lies inside the supplied range.
+
+```{r}
+standard_curve <- data.frame(C=c(0,1,2,4),signal=c(2,12,22,42))
+fit_cal <- lm(signal~C,standard_curve)
+unknown <- c(17,62)
+conc <- (unknown-coef(fit_cal)[1])/coef(fit_cal)[2]
+data.frame(signal=unknown,estimated_C=conc,in_range=conc>=0 & conc<=4)
+```
+
+## 5. Connect quantification and identity
+
+A correct drift ratio does not identify the compound. Conversely, a confirmed identity does not make an arbitrary signal an absolute concentration. Keep calibration, internal-standard assumptions and identification confidence as separate fields.
+
+Use blanks to investigate background and pooled QC to investigate acquisition drift. These controls address technical variation, while independent animals address biological variation. If acquisition order follows treatment, correction can be difficult to distinguish from removing the biological comparison.
+
+## Interpretation challenge
+
+An estimate outside the highest standard looks numerically precise. Is it a validated concentration?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It is an extrapolation under the fitted model. Assess the assay range, matrix effects, uncertainty and additional standards before treating it as validated quantification.
+:::
+
 ## Interpretation and limits
 
 Real workflows need blanks, technical QC, drift and batch assessment, detection/identification confidence and justified normalization. The [EMBL-EBI metabolite-identification material](https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/) explains why chemical assignment is separate from signal detection.

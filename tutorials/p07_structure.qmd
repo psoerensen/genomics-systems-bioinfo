@@ -67,6 +67,32 @@ data.frame(cutoff_A=cutoffs,contacts=vapply(cutoffs,function(cut)
 
 A contact list changes when its operational definition changes.
 
+## 4. Verify units before defining contacts
+
+The same geometry expressed in angstroms or nanometres requires a correspondingly changed cutoff. A factor-of-ten unit mismatch can drastically alter the adjacency matrix.
+
+```{r}
+xyz_A <- rbind(c(0,0,0),c(3,0,0),c(0,4,0))
+d_A <- as.matrix(dist(xyz_A));d_nm <- as.matrix(dist(xyz_A/10))
+stopifnot(max(abs(d_A/10-d_nm))<1e-12,
+ identical(d_A<4.5,d_nm<.45))
+d_A
+```
+
+## 5. Interpret a structural representation
+
+A C-alpha contact uses one backbone representative per residue. An all-atom interaction, hydrogen bond or ligand contact has a different definition. Chain identity, missing residues and structural confidence can affect interpretation. A contact threshold is an analysis rule, not a universal biological boundary.
+
+Connect a candidate residue to sequence position carefully, especially when the structural record contains missing segments or a processed chain. A variant near a contact can motivate a hypothesis, but functional evidence and the relevant physiological conformation are needed to support it.
+
+## Interpretation challenge
+
+Would proximity in a predicted structure prove that changing a residue alters animal performance?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Structural proximity is limited model evidence. Prediction confidence, biochemical function, organism context and an appropriate perturbation or variant study are separate requirements.
+:::
+
 ## Interpretation and limits
 
 For an actual structure, record accession, model, chain, residue numbering, units, experimental/predicted status and structural uncertainty. A C-alpha cutoff is an abstraction; side chains, ligands, solvent and conformational dynamics affect biological interpretation.

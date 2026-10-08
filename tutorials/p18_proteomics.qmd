@@ -72,6 +72,32 @@ boxplot(y~diet,xlab="Diet",ylab="Observed log2 abundance",col="#E5A66B")
 
 Zero on the log2 scale means original-scale abundance one. It does not represent a valid generic non-observation rule.
 
+## 4. Model abundance-dependent observation
+
+Use a hypothetical censoring mechanism to see why the mean of observed values can differ from the full-population mean.
+
+```{r}
+set.seed(1803)
+complete_values <- rnorm(500,8,1)
+detected <- complete_values;detected[detected<7.5] <- NA
+c(full_mean=mean(complete_values),detected_mean=mean(detected,na.rm=TRUE),
+ observation_rate=mean(!is.na(detected)))
+```
+
+## 5. Explain the protein-level claim
+
+In an actual assay, missingness can also reflect interference, preparation or identification failure. This construction demonstrates one mechanism and does not justify applying a censoring model to all missing values.
+
+For a protein comparison, report the observation count in each group, abundance scale, peptide-to-protein assignment and missingness policy. A protein group supported by shared peptides does not provide independent evidence for every member. Identification uncertainty and differential-abundance uncertainty are separate.
+
+## Interpretation challenge
+
+Why can both complete-case means and low-value imputation be misleading?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+The observed subset can be selected by abundance, while imputation can manufacture group differences and understate uncertainty. Use assay evidence, a justified missingness model and sensitivity analysis.
+:::
+
 ## Interpretation and limits
 
 Different missing mechanisms require different strategies and sensitivity analyses. Selected complete observations may be biased if detection depends on abundance. Batch adjustment, identification uncertainty, multiple testing and validation are needed for real protein analyses.

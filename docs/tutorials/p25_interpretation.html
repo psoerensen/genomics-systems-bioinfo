@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#state-the-evidence-at-its-measurement-level" id="toc-state-the-evidence-at-its-measurement-level" class="nav-link" data-scroll-target="#state-the-evidence-at-its-measurement-level">1. State the evidence at its measurement level</a></li>
   <li><a href="#account-for-supplied-measured-covariates" id="toc-account-for-supplied-measured-covariates" class="nav-link" data-scroll-target="#account-for-supplied-measured-covariates">2. Account for supplied measured covariates</a></li>
   <li><a href="#connect-claims-to-a-suitable-next-study" id="toc-connect-claims-to-a-suitable-next-study" class="nav-link" data-scroll-target="#connect-claims-to-a-suitable-next-study">3. Connect claims to a suitable next study</a></li>
+  <li><a href="#demonstrate-an-ambiguous-equilibrium-result" id="toc-demonstrate-an-ambiguous-equilibrium-result" class="nav-link" data-scroll-target="#demonstrate-an-ambiguous-equilibrium-result">4. Demonstrate an ambiguous equilibrium result</a></li>
+  <li><a href="#build-a-competing-explanations-table" id="toc-build-a-competing-explanations-table" class="nav-link" data-scroll-target="#build-a-competing-explanations-table">5. Build a competing-explanations table</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4022,6 +4025,51 @@ response      0.16       0.21     1.00</code></pre>
 </div>
 <p>More omics layers may strengthen a description without resolving the key uncertainty. A targeted experiment can be more informative than another correlated panel.</p>
 </section>
+<section id="demonstrate-an-ambiguous-equilibrium-result" class="level2">
+<h2 class="anchored" data-anchor-id="demonstrate-an-ambiguous-equilibrium-result">4. Demonstrate an ambiguous equilibrium result</h2>
+<p>A final abundance can arise from different dynamic processes. Under constant production and first-order loss, equilibrium is production divided by loss.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mechanism <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">explanation=</span><span class="fu">c</span>(<span class="st">&#39;baseline&#39;</span>,<span class="st">&#39;production_increase&#39;</span>,<span class="st">&#39;loss_decrease&#39;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="at">production=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">4</span>),<span class="at">loss=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,.<span class="dv">5</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mechanism<span class="sc">$</span>equilibrium <span class="ot">&lt;-</span> <span class="fu">with</span>(mechanism,production<span class="sc">/</span>loss)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mechanism</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          explanation production loss equilibrium
+1            baseline          4  1.0           4
+2 production_increase          8  1.0           8
+3       loss_decrease          4  0.5           8</code></pre>
+</div>
+</div>
+<p>Two different changes double the equilibrium. A single endpoint cannot distinguish them in this model. Time-resolved data or a suitable turnover measurement can provide additional information.</p>
+</section>
+<section id="build-a-competing-explanations-table" class="level2">
+<h2 class="anchored" data-anchor-id="build-a-competing-explanations-table">5. Build a competing-explanations table</h2>
+<p>For each cross-layer association, list a direct biological path, a common driver, technical structure and reverse direction where plausible. Then choose a follow-up whose expected outcomes differ between explanations.</p>
+<p>A replication cohort addresses repeatability and transfer. A targeted perturbation addresses a proposed causal role. Better identifier or chemical evidence addresses what was measured. These follow-ups should be selected for the uncertainty present rather than treated as interchangeable confirmations.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>Why does agreement between RNA, protein and phenotype not provide three independent causal demonstrations?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The layers can share a treatment, cell-composition or technical driver. They are paired observations from the same units and may reflect correlated consequences rather than a demonstrated causal chain.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Conditional correlations do not rule out unmeasured confounding, measurement error, reverse causation or selection. A mediation claim needs temporal ordering and justified assumptions, not simply a smaller diet coefficient after adding a molecular covariate.</p>
@@ -4034,7 +4082,7 @@ response      0.16       0.21     1.00</code></pre>
 <li>What should a null or inconsistent layer result contribute?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4043,7 +4091,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The same animals and deliberately common generating driver supply both measurements.</li>

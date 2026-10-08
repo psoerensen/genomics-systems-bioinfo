@@ -115,6 +115,6 @@ Evaluate cell-type annotation, recovery, doublets, QC, spatial scale and biologi
 
 ## Practicals and course pathways
 
-[Study design](../tutorials/p15_experimental_design.qmd), [network interpretation](../tutorials/p24_biomarkers.qmd) and [reporting](../tutorials/p13_reporting.qmd) supply the prerequisites for a critical paper-review exercise.
+[Single-cell and spatial evidence](../tutorials/p31_advanced.qmd), [study design](../tutorials/p15_experimental_design.qmd), [network interpretation](../tutorials/p24_biomarkers.qmd) and [reporting](../tutorials/p13_reporting.qmd) supply the prerequisites for a critical paper-review exercise.
 
 Use the [unified map](../course_map.qmd) to locate B16 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

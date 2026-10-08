@@ -71,6 +71,31 @@ stopifnot(max(records$day[eligible_predictor])==3)
 
 Counting thirty rows as thirty independently allocated animals would overstate replication.
 
+## 4. Compare observed and target-window means
+
+Missing high-value days can shift a recorded mean. Use a small constructed time window to expose the issue.
+
+```{r}
+period <- c(8,9,12,13,8)
+recorded <- period;recorded[c(3,4)] <- NA
+c(full_window_mean=mean(period),observed_mean=mean(recorded,na.rm=TRUE),
+ fraction_observed=mean(!is.na(recorded)))
+```
+
+## 5. Include result availability in the timeline
+
+Collection date and result availability are different. A baseline specimen processed after the decision cannot supply a real-time feature for that decision. Record assay turnaround as well as sensor windows.
+
+Repeated measurements can improve an animal summary while retaining animal-level dependence. For irregular intervals, a simple arithmetic mean may weight densely sampled periods more heavily. Document the summary and coverage policy and examine whether missingness depends on illness or device behavior. Future-window observations belong to the outcome or a different task, not a retrospective predictor at an earlier time.
+
+## Interpretation challenge
+
+Could a day-20 sample with a day-40 result be used for a day-30 management prediction?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Only if that information would actually be available by day 30. Collection before the decision alone is insufficient; redefine the task or use eligible information.
+:::
+
 ## Interpretation and limits
 
 Actual sensor pipelines need calibration, physical units, time zones/time stamps, unequal observation windows, serial dependence and missingness investigation. Repeated records may need mixed or longitudinal models; this practical illustrates grouping and timing rather than fitting such a model.

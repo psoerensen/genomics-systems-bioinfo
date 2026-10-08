@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#define-and-fit-the-analysis" id="toc-define-and-fit-the-analysis" class="nav-link" data-scroll-target="#define-and-fit-the-analysis">1. Define and fit the analysis</a></li>
   <li><a href="#create-a-compact-evidence-record" id="toc-create-a-compact-evidence-record" class="nav-link" data-scroll-target="#create-a-compact-evidence-record">2. Create a compact evidence record</a></li>
   <li><a href="#write-the-interpretation-at-the-level-supported" id="toc-write-the-interpretation-at-the-level-supported" class="nav-link" data-scroll-target="#write-the-interpretation-at-the-level-supported">3. Write the interpretation at the level supported</a></li>
+  <li><a href="#separate-fitted-evidence-from-the-claim" id="toc-separate-fitted-evidence-from-the-claim" class="nav-link" data-scroll-target="#separate-fitted-evidence-from-the-claim">4. Separate fitted evidence from the claim</a></li>
+  <li><a href="#record-deviations-and-provenance" id="toc-record-deviations-and-provenance" class="nav-link" data-scroll-target="#record-deviations-and-provenance">5. Record deviations and provenance</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4017,6 +4020,52 @@ dosage         0.9720046  0.2109408  4.607950 3.477886e-05</code></pre>
 </div>
 <p>Add the allocation, covariates, model assumptions and absence of external validation. An interval alone is not a complete report.</p>
 </section>
+<section id="separate-fitted-evidence-from-the-claim" class="level2">
+<h2 class="anchored" data-anchor-id="separate-fitted-evidence-from-the-claim">4. Separate fitted evidence from the claim</h2>
+<p>A results table needs direction, units, uncertainty and adjustment factors. A generic statement that a treatment is significant omits most of that information. Use an explicit contrast label and distinguish pointwise confidence intervals from multiplicity-adjusted inference.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>claim_record <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">field=</span><span class="fu">c</span>(<span class="st">&#39;comparison&#39;</span>,<span class="st">&#39;unit&#39;</span>,<span class="st">&#39;model&#39;</span>,<span class="st">&#39;interpretation&#39;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="at">value=</span><span class="fu">c</span>(<span class="st">&#39;supplement minus control&#39;</span>,<span class="st">&#39;independent animal&#39;</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;specified response model with batch&#39;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="st">&#39;conditional group contrast; mechanism not established&#39;</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>claim_record</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           field                                                 value
+1     comparison                              supplement minus control
+2           unit                                    independent animal
+3          model                   specified response model with batch
+4 interpretation conditional group contrast; mechanism not established</code></pre>
+</div>
+</div>
+</section>
+<section id="record-deviations-and-provenance" class="level2">
+<h2 class="anchored" data-anchor-id="record-deviations-and-provenance">5. Record deviations and provenance</h2>
+<p>List exclusion reasons and counts by group. Preserve a clean-session command, input/version information and the processing steps. The fixture checksum can identify the generator source; the seed identifies a realization. Neither verifies real-world performance.</p>
+<p>Write limitations close to the result they qualify. A biological conclusion should say which tissue, period and population were measured. A proposed follow-up should resolve an identified uncertainty, such as replication across farms or a targeted mechanistic perturbation. A polished report cannot compensate for missing replication or confounded allocation.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>How should a report handle a null result with a wide interval?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>State the estimate and interval, explain the imprecision and avoid claiming equivalence. A meaningful absence claim needs an appropriately defined equivalence target and analysis.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>A real report needs species/population, measurement units, design, permissions, assay processing, software, missingness, diagnostics, validation and uncertainty. Tables and plots should allow readers to assess the conclusion without relying on an unexplained significant/not-significant label.</p>
@@ -4029,7 +4078,7 @@ dosage         0.9720046  0.2109408  4.607950 3.477886e-05</code></pre>
 <li>Which parts of a report remain useful when data cannot be public?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4038,7 +4087,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>A specific molecular mechanism or a dependable effect in another farm/population.</li>

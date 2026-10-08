@@ -74,6 +74,33 @@ stopifnot(max(abs(abs(cor(fit$x[,1],scaled_pca$x[,1]))-1))<1e-10)
 
 Positive unit rescaling is cancelled by standardization, while covariance PCA can become dominated by the rescaled feature.
 
+## 4. Check that PCA sign is arbitrary
+
+A principal-component axis and its negative represent the same geometry. Flipping a score axis does not change distances or variance explained.
+
+```{r}
+set.seed(1902)
+example_X <- matrix(rnorm(60),20,3)
+example_pc <- prcomp(example_X)
+score <- example_pc$x[,1:2]
+flipped <- score;flipped[,1] <- -flipped[,1]
+stopifnot(max(abs(as.matrix(dist(score))-as.matrix(dist(flipped))))<1e-12)
+```
+
+## 5. Interpret scores with loadings and design
+
+Sample scores describe where observations lie; loadings describe which features contribute to an axis. A diet-associated axis can also reflect batch or a common driver. Colour by relevant metadata and inspect the retained feature set.
+
+Variance explained is relative to the matrix and scaling analysed. It cannot be compared blindly between raw, standardized and differently filtered matrices. A high first-PC fraction can arise from redundant features, not necessarily a more coherent biological mechanism. Do not select exclusions solely to produce clearer clusters.
+
+## Interpretation challenge
+
+A new software run reverses PC1 but shows the same sample geometry. Did the biological result reverse?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. The sign of a component is arbitrary when scores and loadings are changed consistently. Interpret relative positions, loadings and the stated transformation.
+:::
+
 ## Interpretation and limits
 
 PCA is an exploratory linear representation, not an independent test of treatment or a causal network. For prediction, fit scaling and PCA on training animals and project test animals using those parameters. Select the interpretation after considering batch, biological covariates and sampling.

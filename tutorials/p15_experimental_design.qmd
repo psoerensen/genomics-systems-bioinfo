@@ -71,6 +71,32 @@ stopifnot(all(decisions$available_day[decisions$role=="candidate day14 predictor
 
 The future outcome can evaluate a day14 prediction; it cannot be included as input to that prediction. Predefine how absent assays and failed QC affect the analysis population.
 
+## 4. Compare allocation with observation count
+
+A pen-allocated experiment has fewer independent treatment units than animal rows. Construct a hypothetical design with four pens and record both levels.
+
+```{r}
+pen_plan <- data.frame(pen=rep(paste0('pen',1:4),each=5),
+ diet=rep(c('C','C','T','T'),each=5))
+pen_plan$animal <- paste0('animal',seq_len(nrow(pen_plan)))
+c(animal_observations=nrow(pen_plan),allocation_units=length(unique(pen_plan$pen)))
+unique(pen_plan[c('pen','diet')])
+```
+
+## 5. Plan a design audit
+
+Check allocation unit, group counts within processing batches, specimen timing and missing-assay contingencies before collecting data. A full-rank fixed design is one useful check but does not assess pen dependence or generalization across farms.
+
+Predefine a primary contrast and relevant exclusion rules. Biological allocation, blinded handling and randomized processing order protect different aspects of the study. A variance and effect-size sensitivity analysis can support planning, but does not replace a clear unit and sampling hierarchy.
+
+## Interpretation challenge
+
+Would sequencing each animal twice double the diet replication in the four-pen design?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Duplicate libraries add technical evidence for the same specimens; there are still four independently allocated pens. The analysis must respect that hierarchy.
+:::
+
 ## Interpretation and limits
 
 Randomization and blocking, tissue/time, sex, farm, batch, handling and exclusion rules need a justified study-specific plan. Technical aliquots are not independent animals. Use [NC3Rs design guidance](https://nc3rs.org.uk/3rs-resources/key-elements-well-designed-experiment) for the design principles; the invented sheet is not a laboratory sampling instruction.

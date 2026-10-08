@@ -75,6 +75,31 @@ stopifnot(nrow(complete)==6,!anyNA(complete),all(is.finite(count_log)))
 
 Protein values are already log2; logging them again would change their interpretation. The count transformation is descriptive, not a differential-expression model.
 
+## 4. Expose selection by completeness
+
+Complete-case integration can exclude a disproportionate part of one group. In this hypothetical example, only the treated group loses assay observations.
+
+```{r}
+qc_example <- data.frame(group=rep(c('C','T'),each=4),
+ layer1=1:8,layer2=c(1:4,5,NA,NA,NA))
+qc_example$complete <- complete.cases(qc_example[c('layer1','layer2')])
+with(qc_example,table(group,complete))
+```
+
+## 5. State what each QC rule protects
+
+A sample-level exclusion changes the subject set; feature filtering changes the measurement universe. An RNA count filter, protein observation-rate filter and metabolite blank threshold address different processes. Keep the rule and its justification tied to the assay rather than forcing all layers through one numerical threshold.
+
+Report before/after counts, group balance, units and transformations. For prediction, estimate imputation and scaling within training splits. For descriptive integration, explain the subset represented and investigate whether missingness depends on health, treatment or processing.
+
+## Interpretation challenge
+
+Does complete-case analysis guarantee an unbiased integrated dataset?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. Completeness can depend on the phenotype or treatment. The retained subset may differ systematically from the original population, even if the resulting matrix contains no missing values.
+:::
+
 ## Interpretation and limits
 
 Complete-feature selection excludes signals with missingness and can change the biological question. Imputation and filtering should be justified and fitted within training splits for prediction. Panel counts are not true total sequencing depth, and an abundance profile cannot replace identification/platform QC.

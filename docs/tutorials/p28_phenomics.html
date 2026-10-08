@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#create-and-inspect-the-repeated-data" id="toc-create-and-inspect-the-repeated-data" class="nav-link" data-scroll-target="#create-and-inspect-the-repeated-data">1. Create and inspect the repeated data</a></li>
   <li><a href="#define-pre-sampling-and-future-windows" id="toc-define-pre-sampling-and-future-windows" class="nav-link" data-scroll-target="#define-pre-sampling-and-future-windows">2. Define pre-sampling and future windows</a></li>
   <li><a href="#check-the-eligible-prediction-information" id="toc-check-the-eligible-prediction-information" class="nav-link" data-scroll-target="#check-the-eligible-prediction-information">3. Check the eligible prediction information</a></li>
+  <li><a href="#compare-observed-and-target-window-means" id="toc-compare-observed-and-target-window-means" class="nav-link" data-scroll-target="#compare-observed-and-target-window-means">4. Compare observed and target-window means</a></li>
+  <li><a href="#include-result-availability-in-the-timeline" id="toc-include-result-availability-in-the-timeline" class="nav-link" data-scroll-target="#include-result-availability-in-the-timeline">5. Include result availability in the timeline</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4033,6 +4036,48 @@ vertical-align: -.125em;
 </div>
 <p>Counting thirty rows as thirty independently allocated animals would overstate replication.</p>
 </section>
+<section id="compare-observed-and-target-window-means" class="level2">
+<h2 class="anchored" data-anchor-id="compare-observed-and-target-window-means">4. Compare observed and target-window means</h2>
+<p>Missing high-value days can shift a recorded mean. Use a small constructed time window to expose the issue.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>period <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">8</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>recorded <span class="ot">&lt;-</span> period;recorded[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">full_window_mean=</span><span class="fu">mean</span>(period),<span class="at">observed_mean=</span><span class="fu">mean</span>(recorded,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> <span class="at">fraction_observed=</span><span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(recorded)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> full_window_mean     observed_mean fraction_observed 
+        10.000000          8.333333          0.600000 </code></pre>
+</div>
+</div>
+</section>
+<section id="include-result-availability-in-the-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="include-result-availability-in-the-timeline">5. Include result availability in the timeline</h2>
+<p>Collection date and result availability are different. A baseline specimen processed after the decision cannot supply a real-time feature for that decision. Record assay turnaround as well as sensor windows.</p>
+<p>Repeated measurements can improve an animal summary while retaining animal-level dependence. For irregular intervals, a simple arithmetic mean may weight densely sampled periods more heavily. Document the summary and coverage policy and examine whether missingness depends on illness or device behavior. Future-window observations belong to the outcome or a different task, not a retrospective predictor at an earlier time.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>Could a day-20 sample with a day-40 result be used for a day-30 management prediction?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only if that information would actually be available by day 30. Collection before the decision alone is insufficient; redefine the task or use eligible information.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Actual sensor pipelines need calibration, physical units, time zones/time stamps, unequal observation windows, serial dependence and missingness investigation. Repeated records may need mixed or longitudinal models; this practical illustrates grouping and timing rather than fitting such a model.</p>
@@ -4045,7 +4090,7 @@ vertical-align: -.125em;
 <li>What changes when animals share a pen-level intervention?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4054,7 +4099,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Animals with different observation windows may have non-comparable summaries.</li>

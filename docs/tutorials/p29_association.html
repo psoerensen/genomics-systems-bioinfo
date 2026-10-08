@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#align-the-counted-allele-and-expression" id="toc-align-the-counted-allele-and-expression" class="nav-link" data-scroll-target="#align-the-counted-allele-and-expression">1. Align the counted allele and expression</a></li>
   <li><a href="#fit-the-supplied-expression-association-model" id="toc-fit-the-supplied-expression-association-model" class="nav-link" data-scroll-target="#fit-the-supplied-expression-association-model">2. Fit the supplied expression-association model</a></li>
   <li><a href="#create-a-correlated-candidate-and-examine-ambiguity" id="toc-create-a-correlated-candidate-and-examine-ambiguity" class="nav-link" data-scroll-target="#create-a-correlated-candidate-and-examine-ambiguity">3. Create a correlated candidate and examine ambiguity</a></li>
+  <li><a href="#verify-the-allele-coding-equivalence" id="toc-verify-the-allele-coding-equivalence" class="nav-link" data-scroll-target="#verify-the-allele-coding-equivalence">4. Verify the allele-coding equivalence</a></li>
+  <li><a href="#state-what-candidate-evidence-leaves-unresolved" id="toc-state-what-candidate-evidence-leaves-unresolved" class="nav-link" data-scroll-target="#state-what-candidate-evidence-leaves-unresolved">5. State what candidate evidence leaves unresolved</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4039,6 +4042,53 @@ dosage         0.2904990 0.05306185  5.474724 1.983275e-06</code></pre>
 </div>
 <p>A correlated candidate can inherit association. Two conditional models here do not calculate a fine-mapping posterior or identify a causal allele.</p>
 </section>
+<section id="verify-the-allele-coding-equivalence" class="level2">
+<h2 class="anchored" data-anchor-id="verify-the-allele-coding-equivalence">4. Verify the allele-coding equivalence</h2>
+<p>A simple linear comparison shows that opposite counted alleles reverse the effect sign while preserving fitted values. This isolated illustration does not replace the expression count model above.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dosage_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>phenotype <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>dosage_B <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">-</span>dosage_A</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fit_A <span class="ot">&lt;-</span> <span class="fu">lm</span>(phenotype<span class="sc">~</span>dosage_A);fit_B <span class="ot">&lt;-</span> <span class="fu">lm</span>(phenotype<span class="sc">~</span>dosage_B)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">A_slope=</span><span class="fu">coef</span>(fit_A)[<span class="dv">2</span>],<span class="at">B_slope=</span><span class="fu">coef</span>(fit_B)[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A_slope.dosage_A B_slope.dosage_B 
+               2               -2 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">fitted</span>(fit_A)<span class="sc">-</span><span class="fu">fitted</span>(fit_B)))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="state-what-candidate-evidence-leaves-unresolved" class="level2">
+<h2 class="anchored" data-anchor-id="state-what-candidate-evidence-leaves-unresolved">5. State what candidate evidence leaves unresolved</h2>
+<p>Correlated markers can tag the same signal. A nearest-gene assignment, eQTL association and trait association do not jointly establish expression mediation. Check assembly, alleles, tissue, LD population and variant coverage before integrating results.</p>
+<p>Fine-mapping and colocalization are additional model-based analyses, not interpretations automatically available from the toy fit. Related livestock observations require an appropriate dependence model. A predictive model also needs independent evaluation rather than a ranking by association p-value.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>A marker has a positive effect in one report and a negative effect in another. What should be checked before declaring a biological contradiction?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Counted allele, strand, assembly, phenotype direction, tissue and model. Opposite allele coding can reverse a sign for the same fitted comparison.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Real studies need allele/reference alignment, genotype and expression QC, relatedness/structure treatment, adequate replication, cis/trans definitions, multiple testing and model diagnostics. A TWAS association is not automatically evidence that expression mediates the variant–trait effect. Fine-mapping requires an explicit candidate/model/LD framework.</p>
@@ -4051,7 +4101,7 @@ dosage         0.2904990 0.05306185  5.474724 1.983275e-06</code></pre>
 <li>What would an expression-mediation claim additionally require?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4060,7 +4110,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>exp(.3), about 1.35, conditional on the supplied model.</li>

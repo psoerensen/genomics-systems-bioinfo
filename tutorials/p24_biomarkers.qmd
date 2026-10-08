@@ -77,6 +77,35 @@ use
 
 These tasks have different evidentiary requirements. A feature discovered using all outcomes has not received an independent prediction test.
 
+## 4. Distinguish discrimination from a decision threshold
+
+For a fictional status marker, calculate sensitivity and specificity at several supplied cutoffs. A threshold changes the action implied by the same measurements.
+
+```{r}
+status <- c(0,0,0,0,1,1,1,1)
+marker <- c(.1,.3,.4,.7,.2,.6,.8,.9)
+threshold_result <- t(sapply(c(.3,.5,.7),function(cut) {
+ positive <- marker>=cut
+ c(sensitivity=mean(positive[status==1]),
+ specificity=mean(!positive[status==0]))
+}))
+data.frame(cutoff=c(.3,.5,.7),threshold_result)
+```
+
+## 5. Validate the intended biomarker use
+
+A threshold for screening favors different errors from one used for a costly intervention. Predictive values also depend on prevalence in the target population. Choosing a threshold and estimating its performance on the same observations is a selection procedure, not independent validation.
+
+Network stability, assay reproducibility, predictive discrimination and decision utility are different properties. A stable edge does not validate a biomarker assay or a causal intervention target. Specify the task, collection timing, target population and required follow-up before declaring a candidate useful.
+
+## Interpretation challenge
+
+Why might a marker that discriminates well in a case-enriched study have different positive predictive value in routine screening?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+The target prevalence and sampling differ. Positive predictive value depends on prevalence as well as sensitivity and specificity, so the screening context needs evaluation.
+:::
+
 ## Interpretation and limits
 
 Bootstrap stability is conditional on the current sample and analysis rule. It does not address all external shifts or verify identification. Predictive markers need complete training-only selection and independent evaluation; causal targets require stronger evidence.

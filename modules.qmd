@@ -3,7 +3,7 @@ title: "Reusable teaching modules"
 toc: true
 ---
 
-Each module combines concepts, assumptions, a worked R example and exercises with suggested answers. Follow a course pathway in the [unified map](course_map.qmd), or choose a block below.
+Each expanded module connects biological measurements to method choices, assumptions, worked R examples and interpretation challenges, with suggested answers and selected further reading. Follow a course pathway in the [unified map](course_map.qmd), or choose a block below.
 
 ## Available modules
 

@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#test-an-ideal-measurement-correction" id="toc-test-an-ideal-measurement-correction" class="nav-link" data-scroll-target="#test-an-ideal-measurement-correction">1. Test an ideal measurement correction</a></li>
   <li><a href="#break-the-standard-assumption" id="toc-break-the-standard-assumption" class="nav-link" data-scroll-target="#break-the-standard-assumption">2. Break the standard assumption</a></li>
   <li><a href="#explore-a-separate-log2-feature-panel" id="toc-explore-a-separate-log2-feature-panel" class="nav-link" data-scroll-target="#explore-a-separate-log2-feature-panel">3. Explore a separate log2 feature panel</a></li>
+  <li><a href="#inspect-a-calibration-range" id="toc-inspect-a-calibration-range" class="nav-link" data-scroll-target="#inspect-a-calibration-range">4. Inspect a calibration range</a></li>
+  <li><a href="#connect-quantification-and-identity" id="toc-connect-quantification-and-identity" class="nav-link" data-scroll-target="#connect-quantification-and-identity">5. Connect quantification and identity</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4050,6 +4053,50 @@ vertical-align: -.125em;
 </div>
 <p>The difference describes the hypothetical panel. A mass-spectrometry feature cannot be assigned to a pathway merely because its group contrast is large.</p>
 </section>
+<section id="inspect-a-calibration-range" class="level2">
+<h2 class="anchored" data-anchor-id="inspect-a-calibration-range">4. Inspect a calibration range</h2>
+<p>A hypothetical linear standard curve can convert a signal to concentration only under its assumptions. Show whether an unknown lies inside the supplied range.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>standard_curve <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">C=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>),<span class="at">signal=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">12</span>,<span class="dv">22</span>,<span class="dv">42</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fit_cal <span class="ot">&lt;-</span> <span class="fu">lm</span>(signal<span class="sc">~</span>C,standard_curve)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>unknown <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">62</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>conc <span class="ot">&lt;-</span> (unknown<span class="sc">-</span><span class="fu">coef</span>(fit_cal)[<span class="dv">1</span>])<span class="sc">/</span><span class="fu">coef</span>(fit_cal)[<span class="dv">2</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">signal=</span>unknown,<span class="at">estimated_C=</span>conc,<span class="at">in_range=</span>conc<span class="sc">&gt;=</span><span class="dv">0</span> <span class="sc">&amp;</span> conc<span class="sc">&lt;=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  signal estimated_C in_range
+1     17         1.5     TRUE
+2     62         6.0    FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="connect-quantification-and-identity" class="level2">
+<h2 class="anchored" data-anchor-id="connect-quantification-and-identity">5. Connect quantification and identity</h2>
+<p>A correct drift ratio does not identify the compound. Conversely, a confirmed identity does not make an arbitrary signal an absolute concentration. Keep calibration, internal-standard assumptions and identification confidence as separate fields.</p>
+<p>Use blanks to investigate background and pooled QC to investigate acquisition drift. These controls address technical variation, while independent animals address biological variation. If acquisition order follows treatment, correction can be difficult to distinguish from removing the biological comparison.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>An estimate outside the highest standard looks numerically precise. Is it a validated concentration?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No. It is an extrapolation under the fitted model. Assess the assay range, matrix effects, uncertainty and additional standards before treating it as validated quantification.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Real workflows need blanks, technical QC, drift and batch assessment, detection/identification confidence and justified normalization. The <a href="https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/">EMBL-EBI metabolite-identification material</a> explains why chemical assignment is separate from signal detection.</p>
@@ -4062,7 +4109,7 @@ vertical-align: -.125em;
 <li>Can an unresolved feature support a named pathway claim?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4071,7 +4118,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>The standard did not share the same response factor as the analyte.</li>

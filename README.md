@@ -27,7 +27,7 @@ genomics-systems-bioinfo/
   docs/
 ```
 
-The overview is migrated from gteach. The initial complete teaching version contains 18 reusable modules, 31 practicals and a lecture overview. Both harmonized outlines use the same maintained sources through pathway-specific links.
+The overview is migrated from gteach. The expanded teaching collection contains 18 reusable modules, 31 practicals and a lecture overview. Modules include biological context, method assumptions, original worked examples, interpretation challenges and selected readings. Practicals include sensitivity/diagnostic extensions and suggested reasoning. Both harmonized outlines use the same maintained sources through pathway-specific links.
 
 ## Unified curriculum map
 

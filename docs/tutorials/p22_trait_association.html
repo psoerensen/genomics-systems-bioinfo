@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#prepare-matched-measurements-and-the-design" id="toc-prepare-matched-measurements-and-the-design" class="nav-link" data-scroll-target="#prepare-matched-measurements-and-the-design">1. Prepare matched measurements and the design</a></li>
   <li><a href="#fit-a-prespecified-conditional-model-per-feature" id="toc-fit-a-prespecified-conditional-model-per-feature" class="nav-link" data-scroll-target="#fit-a-prespecified-conditional-model-per-feature">2. Fit a prespecified conditional model per feature</a></li>
   <li><a href="#compare-an-unadjusted-and-conditional-relationship" id="toc-compare-an-unadjusted-and-conditional-relationship" class="nav-link" data-scroll-target="#compare-an-unadjusted-and-conditional-relationship">3. Compare an unadjusted and conditional relationship</a></li>
+  <li><a href="#check-how-units-change-a-coefficient" id="toc-check-how-units-change-a-coefficient" class="nav-link" data-scroll-target="#check-how-units-change-a-coefficient">4. Check how units change a coefficient</a></li>
+  <li><a href="#specify-adjustment-before-interpreting-direction" id="toc-specify-adjustment-before-interpreting-direction" class="nav-link" data-scroll-target="#specify-adjustment-before-interpreting-direction">5. Specify adjustment before interpreting direction</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4054,6 +4057,53 @@ feature01 0.05167415 0.2879219 8.583904e-01 0.8583904429</code></pre>
 </div>
 <p>Adjustment changes the estimand; it is not an automatic guarantee that every nuisance variable has been removed.</p>
 </section>
+<section id="check-how-units-change-a-coefficient" class="level2">
+<h2 class="anchored" data-anchor-id="check-how-units-change-a-coefficient">4. Check how units change a coefficient</h2>
+<p>Rescaling a predictor changes its slope and standard error in inverse proportion, while fitted values and its test statistic remain equivalent in this simple model.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2202</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x_unit <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">40</span>);response_unit <span class="ot">&lt;-</span> <span class="dv">1</span><span class="fl">+.6</span><span class="sc">*</span>x_unit<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">40</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>a_unit <span class="ot">&lt;-</span> <span class="fu">lm</span>(response_unit<span class="sc">~</span>x_unit)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>x_ten <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x_unit;b_unit <span class="ot">&lt;-</span> <span class="fu">lm</span>(response_unit<span class="sc">~</span>x_ten)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">original_slope=</span><span class="fu">coef</span>(a_unit)[<span class="dv">2</span>],<span class="at">rescaled_slope=</span><span class="fu">coef</span>(b_unit)[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>original_slope.x_unit  rescaled_slope.x_ten 
+           0.78490807            0.07849081 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">fitted</span>(a_unit)<span class="sc">-</span><span class="fu">fitted</span>(b_unit)))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="specify-adjustment-before-interpreting-direction" class="level2">
+<h2 class="anchored" data-anchor-id="specify-adjustment-before-interpreting-direction">5. Specify adjustment before interpreting direction</h2>
+<p>A conditional coefficient compares animals at the same values of included covariates under the model. Adding a covariate can change the target as well as the estimate. A variable affected by exposure should not automatically be called a confounder.</p>
+<p>Report feature units, tissue/time, sample subset, covariates, uncertainty and multiplicity. Check influential observations and residual patterns before interpreting a ranking. A feature associated after adjustment is not automatically a validated predictor, and predictive value is not proof of a causal role.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>Two feature slopes have different magnitudes because one predictor is in log2 units and another in standardized units. Can their raw magnitudes be ranked as biological importance?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No. Slopes depend on scale and the conditional model. Explain a meaningful contrast or standardized comparison and retain uncertainty and measurement context.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Marker relatedness, repeated animals, nonlinear associations, measurement error and selection require suitable analysis in real data. A feature selected on all outcomes cannot then be evaluated on those same animals as an independently validated predictor.</p>
@@ -4066,7 +4116,7 @@ feature01 0.05167415 0.2879219 8.583904e-01 0.8583904429</code></pre>
 <li>Where should feature selection occur in a prediction workflow?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4075,7 +4125,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Arbitrary response units per one log2 unit of the supplied abundance.</li>

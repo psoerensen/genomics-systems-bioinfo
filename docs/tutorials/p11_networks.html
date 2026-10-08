@@ -3913,6 +3913,9 @@ vertical-align: -.125em;
   <li><a href="#align-and-calculate-associations" id="toc-align-and-calculate-associations" class="nav-link" data-scroll-target="#align-and-calculate-associations">1. Align and calculate associations</a></li>
   <li><a href="#define-edges-and-calculate-degree" id="toc-define-edges-and-calculate-degree" class="nav-link" data-scroll-target="#define-edges-and-calculate-degree">2. Define edges and calculate degree</a></li>
   <li><a href="#examine-threshold-dependence" id="toc-examine-threshold-dependence" class="nav-link" data-scroll-target="#examine-threshold-dependence">3. Examine threshold dependence</a></li>
+  <li><a href="#generate-a-common-driver-graph" id="toc-generate-a-common-driver-graph" class="nav-link" data-scroll-target="#generate-a-common-driver-graph">4. Generate a common-driver graph</a></li>
+  <li><a href="#describe-edge-meaning-and-stability" id="toc-describe-edge-meaning-and-stability" class="nav-link" data-scroll-target="#describe-edge-meaning-and-stability">5. Describe edge meaning and stability</a></li>
+  <li><a href="#interpretation-challenge" id="toc-interpretation-challenge" class="nav-link" data-scroll-target="#interpretation-challenge">Interpretation challenge</a></li>
   <li><a href="#interpretation-and-limits" id="toc-interpretation-and-limits" class="nav-link" data-scroll-target="#interpretation-and-limits">Interpretation and limits</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
@@ -4059,6 +4062,52 @@ protein08 protein08      6</code></pre>
 </div>
 <p>Connectivity changes with the chosen threshold; a hub designation should state that dependence.</p>
 </section>
+<section id="generate-a-common-driver-graph" class="level2">
+<h2 class="anchored" data-anchor-id="generate-a-common-driver-graph">4. Generate a common-driver graph</h2>
+<p>Two features can correlate because both respond to a third variable. The following hypothetical example contains no direct connection between the two features.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1103</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>common <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>feature_A <span class="ot">&lt;-</span> common<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">200</span>,<span class="at">sd=</span>.<span class="dv">3</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>feature_B <span class="ot">&lt;-</span> common<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">200</span>,<span class="at">sd=</span>.<span class="dv">3</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">marginal=</span><span class="fu">cor</span>(feature_A,feature_B),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> <span class="at">after_common_adjustment=</span><span class="fu">cor</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(feature_A<span class="sc">~</span>common)),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">residuals</span>(<span class="fu">lm</span>(feature_B<span class="sc">~</span>common))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               marginal after_common_adjustment 
+             0.91972604              0.02861018 </code></pre>
+</div>
+</div>
+<p>The residual association need not be exactly zero. Adjustment here uses the known generator; in real data the relevant common drivers may be unobserved or measured with error.</p>
+</section>
+<section id="describe-edge-meaning-and-stability" class="level2">
+<h2 class="anchored" data-anchor-id="describe-edge-meaning-and-stability">5. Describe edge meaning and stability</h2>
+<p>Record the correlation measure, feature transformation, animal subset, threshold and missingness policy. A graph made from pairwise complete observations can have edges estimated from different animal subsets. That can change comparability.</p>
+<p>Assess sampling sensitivity by resampling independent animals, then inspect threshold sensitivity separately. A stable edge remains an association under the stated procedure. It does not establish regulatory direction or rule out a stable batch effect.</p>
+</section>
+<section id="interpretation-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-challenge">Interpretation challenge</h2>
+<p>Why can a node linked to every other feature be a poor intervention target?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Suggested reasoning">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Suggested reasoning
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Its degree may reflect a shared driver, technical structure or duplicated measurements. Connectivity under a correlation rule is not evidence that perturbing the node changes the others.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="interpretation-and-limits" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-limits">Interpretation and limits</h2>
 <p>Correlation can reflect diet, genotype, tissue mixture, batch or other common drivers. A network inferred from abundance is not equivalent to a curated interaction database. The threshold is supplied rather than selected to optimize a biological story; stability is assessed in the biomarker practical.</p>
@@ -4071,7 +4120,7 @@ protein08 protein08      6</code></pre>
 <li>Why is the sum of degrees twice the edge count?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -4080,7 +4129,7 @@ Suggested answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>A feature’s self-correlation is not an inter-feature relationship.</li>

@@ -7,6 +7,10 @@ The 31 practicals provide a complete initial teaching collection for both harmon
 
 The 26 original sessions map to 24 shared practicals. Seven additional practicals strengthen sample identity, regularized prediction, microbiomics, phenomics, association, epigenomics and advanced-method reasoning.
 
+## Work through a practical
+
+Start by stating the biological question and the observation unit. Predict the result of the worked calculation before running it, then investigate the sensitivity or diagnostic extension. Use the interpretation challenge to distinguish the numerical evidence from the biological claim. Keep a short analysis record with units, denominators, assumptions and the follow-up needed.
+
 ## Run the practicals
 
 Download or clone the [course repository](https://github.com/psoerensen/genomics-systems-bioinfo) and open `genomics-systems-bioinfo.Rproj`. Quarto uses R with knitr/rmarkdown to render the practicals. In the RStudio Terminal, for example:

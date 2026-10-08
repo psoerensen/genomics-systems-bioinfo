@@ -78,6 +78,34 @@ abline(0,1,col="#d95f02")
 
 Positive improvement means smaller squared error for early integration than the protein model. The sign can differ across animals and seeds.
 
+## 4. Quantify conditional paired uncertainty
+
+Resample the held-out animal error differences, keeping the strategy comparison paired. This evaluates variability of mean improvement for the supplied fitted predictions; it does not retrain models.
+
+```{r}
+set.seed(2302)
+paired_boot <- replicate(500,mean(sample(improvement,replace=TRUE)))
+c(estimated_improvement=mean(improvement),
+ quantile(paired_boot,c(.025,.975)))
+hist(paired_boot,xlab='Mean paired MSE improvement',
+ main='Conditional animal-resampling illustration')
+abline(v=0,lty=2)
+```
+
+## 5. Separate this uncertainty from deployment uncertainty
+
+The split changes farm composition, and these test animals are not a universal population. Correlated evaluation units may require grouped resampling. Retraining and tuning variation are also omitted from the displayed bootstrap.
+
+Evaluate calibration, availability and assay cost alongside predictive loss. A strategy using an unavailable molecular layer cannot support the same decision as an available baseline. Late weights chosen from these test outcomes would consume the evaluation set; legitimate selection must be internal to training.
+
+## Interpretation challenge
+
+Can an interval favoring early integration establish improvement on every future farm?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It is conditional on this sample, split, models and resampling assumptions. External transfer, fitting uncertainty and operational feasibility need separate evidence.
+:::
+
 ## Interpretation and limits
 
 The source contains a restricted educational ridge helper, not a general modelling package. One farm-composition split cannot qualify an operational predictor. Nested tuning, independent cohorts, calibration, measurement availability and costs belong in a real comparison.

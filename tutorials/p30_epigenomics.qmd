@@ -74,6 +74,33 @@ boxplot(observed~group,xlab="Group",ylab="Observed methylated-read fraction",col
 
 Pooling reads gives deeper samples more weight. It is not automatically the correct estimator of an average-animal contrast.
 
+## 4. Inspect boundary proportions
+
+With zero methylated reads, the observed proportion is zero but the underlying proportion need not be exactly zero. An exact binomial interval under independent conditional read sampling remains positive above the boundary.
+
+```{r}
+intervals <- t(sapply(c(10,100),function(depth) {
+ binom.test(0,depth)$conf.int
+}))
+data.frame(depth=c(10,100),lower=intervals[,1],upper=intervals[,2])
+```
+
+These intervals describe a conditional read model, not uncertainty in a treatment effect across animals. Conversion, mapping and read dependence can require additional modeling.
+
+## 5. Retain the biological hierarchy
+
+Read-weighted and equal-animal summaries differ when depth is unequal. Pooling all reads can let a deeply sequenced animal dominate. Use animal-level design and an assay-appropriate model for group inference.
+
+A bulk methylation shift can reflect changed cell composition. To distinguish it from within-cell changes, consider cell-type information and matched timing. A regulatory claim also requires sequence context and evidence linking the measured region to the proposed gene or phenotype.
+
+## Interpretation challenge
+
+Does observing zero methylated reads establish a universally unmethylated site?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It describes the sampled evidence under an assay. Read depth, conditional uncertainty, technical limitations and biological variation across animals still matter.
+:::
+
 ## Interpretation and limits
 
 Coverage, conversion efficiency, mapping, tissue/cell composition and assay specificity must be evaluated in actual studies. A group contrast in bulk methylation does not establish a within-cell regulatory mechanism or phenotypic mediation.

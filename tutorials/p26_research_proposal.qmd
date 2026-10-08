@@ -72,6 +72,34 @@ deliverable
 
 Assess a proposal for coherence: the methods should answer the stated question with measurements available at the right time.
 
+## 4. Make competing design priorities explicit
+
+A fixed fictional budget can trade assay coverage against independent replication. Compare costed alternatives without assuming the most assays give the most information.
+
+```{r}
+options <- data.frame(plan=c('more_animals','more_layers'),
+ animals=c(40,20),cost_per_animal=c(2,4),layers=c(2,4))
+options$total_cost <- with(options,animals*cost_per_animal)
+options
+stopifnot(length(unique(options$total_cost))==1)
+```
+
+These are arbitrary teaching costs. Real planning requires relevant variance, effect-size sensitivity, allocation structure, missingness and assay feasibility.
+
+## 5. Write a falsifiable proposal
+
+Specify the primary estimand, phenotype units, target population, allocation unit, sampling schedule, processing design and analysis. For every assay, state the extra uncertainty it addresses. Include a validation strategy and a reporting plan for null or inconsistent results.
+
+A mechanistic proposal should give predicted outcomes under competing explanations. A prediction proposal should define decision-time information and deployment groups. Keep exploratory discovery separate from an independently evaluated procedure. Budget and governance plans should reflect the actual project context rather than the hypothetical numbers here.
+
+## Interpretation challenge
+
+How should you justify dropping a proposed omics layer?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Explain whether its measurement is redundant, unavailable at the decision time or unlikely to resolve the primary uncertainty, and what information is lost. The justification follows the scientific target and feasible design.
+:::
+
 ## Interpretation and limits
 
 Formal sample size, actual assay protocols, permits, data agreements, model qualification and collaboration-specific assessment rubrics are outside this invented proposal. The original course assessment weights remain in the curriculum map.

@@ -71,6 +71,32 @@ stopifnot(nrow(joined)==3,length(unique(joined$gene))==2)
 
 Three joined rows still represent two measured genes, not three independent measurements.
 
+## 4. Compare records at the right level
+
+A public study may have several samples, several files per sample and several annotations per feature. Count each level separately. The following fictional retrieval result includes two files from one biological sample; treating files as animals would inflate replication.
+
+```{r}
+retrieval <- data.frame(study=rep('studyA',4),
+ sample=c('sample1','sample1','sample2','sample3'),
+ file=c('read1','read2','read3','read4'))
+c(files=nrow(retrieval),samples=length(unique(retrieval$sample)),
+ studies=length(unique(retrieval$study)))
+```
+
+Keep a record of species, tissue, treatment, collection time and processing before selecting a dataset. A large matrix without the relevant metadata may not answer the proposed question.
+
+## 5. Assess an update rather than silently replacing it
+
+An annotation update can add or remove mappings while leaving the measured feature unchanged. Preserve the original mapping, compare unmatched keys and document which results change. A checksum identifies a retrieved file's bytes; it does not evaluate a record's biological correctness. For a real retrieval, use the database documentation to distinguish accession levels and retain the retrieval query and version.
+
+## Interpretation challenge
+
+A study lists 12 sequence files but only six samples. What evidence is needed before claiming six independent animals?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Establish how files map to samples, specimens and animals, and how treatment was allocated. Multiple libraries, tissues or times from the same animal are not independent allocations.
+:::
+
 ## Interpretation and limits
 
 For a real GEO analysis, distinguish series, samples and platforms using [NCBI’s record documentation](https://www.ncbi.nlm.nih.gov/geo/info/datasets.html). This practical does not download or validate an organism-specific annotation.

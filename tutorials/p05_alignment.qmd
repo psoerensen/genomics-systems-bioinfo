@@ -71,6 +71,33 @@ c(conserved_of_all=sum(conserved)/ncol(M),
 
 These fractions answer different questions. Report the denominator and missingness rather than choosing the larger value.
 
+## 4. Inspect scoring sensitivity
+
+Different gap costs can favor a mismatch or an insertion/deletion explanation. Compare the score contributions of two hypothetical candidate alignments under two rules. These are supplied candidate counts, not new optimal alignments.
+
+```{r}
+candidates <- data.frame(alignment=c('no_gap','two_gaps'),
+ matches=c(6,7),mismatches=c(2,0),gap_columns=c(0,2))
+score <- function(gap_cost) with(candidates,2*matches-mismatches-gap_cost*gap_columns)
+data.frame(candidates,score_gap1=score(1),score_gap4=score(4))
+```
+
+The preferred supplied candidate can change with the cost. The existing alignment helper uses a simple gap rule; affine-gap methods distinguish opening and extending gaps and address a different scoring model.
+
+## 5. Connect an alignment to downstream claims
+
+Conservation depends on which positions and sequences are comparable. A gap can reflect evolutionary change, incomplete sequence or alignment uncertainty. Filtering uncertain columns changes the denominator for identity and distance. For downstream phylogeny or structure mapping, preserve the relationship between aligned positions and original residue identifiers.
+
+Assess whether sequences are comparable homologous regions before calculating evolutionary distances. A mathematically optimal score is optimal under the supplied scoring rule, not a certificate of true history.
+
+## Interpretation challenge
+
+Why should the highest-scoring alignment not automatically be described as the true evolutionary alignment?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+The score encodes limited assumptions. Repeats, rearrangements, sequence errors and evolutionary processes can admit multiple plausible alignments. Biological context and sensitivity are needed.
+:::
+
 ## Interpretation and limits
 
 The example does not identify an actual functional element. Conservation depends on alignment quality, phylogenetic diversity and evolutionary processes. Production multiple aligners and evolutionary conservation models need their own method choices and diagnostics.

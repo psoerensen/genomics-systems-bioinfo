@@ -77,6 +77,34 @@ data.frame(background=c("eligible panel","inflated universe"),
 
 Adding many nonmembers makes the same overlap appear more surprising. That is a change in assumptions, not more biological evidence.
 
+## 4. Distinguish pathway size from evidence strength
+
+The overlap count should be compared with its null expectation. A pathway containing many eligible genes can have a large overlap without unusual representation. Compare two fictional pathways using the same selected-list size.
+
+```{r}
+pathway_check <- data.frame(pathway=c('small','large'),
+ eligible_total=100,pathway_size=c(10,60),selected_total=10,overlap=c(4,7))
+pathway_check$expected <- with(pathway_check,selected_total*pathway_size/eligible_total)
+pathway_check$tail <- with(pathway_check,
+ phyper(overlap-1,pathway_size,eligible_total-pathway_size,selected_total,lower.tail=FALSE))
+pathway_check$BH <- p.adjust(pathway_check$tail,'BH')
+pathway_check
+```
+
+## 5. Report the tested universe
+
+The eligible universe, mapping and selection rule define the test. Overlapping pathways can share most of their selected genes, so several discoveries need not mean several independent processes. Inspect the actual genes driving each overlap.
+
+A binary selected list also discards effect direction and ranking. Ranked-set methods address different questions and assumptions; they should not be described as the same hypergeometric calculation. Neither type directly measures biochemical pathway activity.
+
+## Interpretation challenge
+
+Can the smallest enrichment p-value identify the pathway with the largest physiological change?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. It describes representation under the supplied selection null. Pathway size, background, mapping, overlap and biological measurements must be considered separately.
+:::
+
 ## Interpretation and limits
 
 Hypergeometric enrichment assumes an appropriate equal-selection null. Expression level, feature length, detectability, correlation and annotation overlap can require a more suitable method. Document mapping, set version, selection rule, background and multiplicity.

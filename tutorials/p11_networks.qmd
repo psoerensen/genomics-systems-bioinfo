@@ -79,6 +79,36 @@ data.frame(threshold,edges=vapply(threshold,function(t)
 
 Connectivity changes with the chosen threshold; a hub designation should state that dependence.
 
+## 4. Generate a common-driver graph
+
+Two features can correlate because both respond to a third variable. The following hypothetical example contains no direct connection between the two features.
+
+```{r}
+set.seed(1103)
+common <- rnorm(200)
+feature_A <- common+rnorm(200,sd=.3)
+feature_B <- common+rnorm(200,sd=.3)
+c(marginal=cor(feature_A,feature_B),
+ after_common_adjustment=cor(residuals(lm(feature_A~common)),
+ residuals(lm(feature_B~common))))
+```
+
+The residual association need not be exactly zero. Adjustment here uses the known generator; in real data the relevant common drivers may be unobserved or measured with error.
+
+## 5. Describe edge meaning and stability
+
+Record the correlation measure, feature transformation, animal subset, threshold and missingness policy. A graph made from pairwise complete observations can have edges estimated from different animal subsets. That can change comparability.
+
+Assess sampling sensitivity by resampling independent animals, then inspect threshold sensitivity separately. A stable edge remains an association under the stated procedure. It does not establish regulatory direction or rule out a stable batch effect.
+
+## Interpretation challenge
+
+Why can a node linked to every other feature be a poor intervention target?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+Its degree may reflect a shared driver, technical structure or duplicated measurements. Connectivity under a correlation rule is not evidence that perturbing the node changes the others.
+:::
+
 ## Interpretation and limits
 
 Correlation can reflect diet, genotype, tissue mixture, batch or other common drivers. A network inferred from abundance is not equivalent to a curated interaction database. The threshold is supplied rather than selected to optimize a biological story; stability is assessed in the biomarker practical.

@@ -73,6 +73,33 @@ stopifnot(sum(is.na(index))==1,sum(is.na(d$protein_missing))==11)
 
 An absent assay and an unobserved protein value need different handling and reporting. Neither is a measured zero.
 
+## 4. Audit a many-to-many join
+
+Assay metadata can have several specimens per animal. Joining two such tables on animal alone can create combinations that never represented matched specimens.
+
+```{r}
+left <- data.frame(animal=c('a1','a1'),time=c(1,2),RNA=c(5,8))
+right <- data.frame(animal=c('a1','a1'),time=c(1,2),protein=c(2,4))
+wrong <- merge(left,right,by='animal')
+right_join <- merge(left,right,by=c('animal','time'))
+c(animal_only_rows=nrow(wrong),animal_time_rows=nrow(right_join))
+stopifnot(nrow(wrong)==4,nrow(right_join)==2)
+```
+
+## 5. Define the biological matching key
+
+Animal identity alone may be insufficient when tissue, collection time or specimen differs. Define the key for the intended comparison and preserve mappings to assay-specific identifiers. Count unmatched records separately from feature-level missing values.
+
+If an assay was not collected, do not manufacture a zero-valued column. If the same label appears twice, investigate whether it is a technical replicate, repeated specimen or a data error. The solution depends on the scientific meaning rather than a blanket duplicate-removal command.
+
+## Interpretation challenge
+
+Two layers have matching animal names but one was measured at baseline and the other after treatment. Are they concurrent matched measurements?
+
+::: {.callout-note collapse="true" title="Suggested reasoning"}
+No. They are linked longitudinal measurements. Keep timing explicit and define whether the analysis concerns baseline prediction, response or another temporal relationship.
+:::
+
 ## Interpretation and limits
 
 ID matching preserves supplied labels but cannot detect a mislabeled specimen collected in the field. Use collection records and appropriate sample-identity checks for real data. Avoid silent complete-case deletion when missing assays relate to treatment or health.
