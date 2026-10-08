@@ -1,0 +1,68 @@
+---
+title: "Pathway enrichment and biological networks"
+subtitle: "B14: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define eligible backgrounds and selection rules; calculate enrichment under a supplied null; construct and interpret networks with explicit edge definitions.
+
+## 1. Biological question and measurements
+
+A pathway analysis asks whether selected features are represented in a gene set more than expected under a specified model. Define the eligible background from genes that could have been selected, not every annotated gene regardless of assay coverage. Selection can depend on abundance, length, missingness or mapping, which can violate equal-selection assumptions.
+
+A network represents entities as nodes and a defined relationship as edges. A correlation network, protein-interaction database and curated metabolic network have different edge meanings. A dense cluster can reflect a common driver, duplicated measurements or technical structure. Gene regulation involves direction and mechanism; undirected correlation alone supplies neither.
+
+## 2. Model and assumptions
+
+With N eligible genes, K in a pathway and n selected genes, the hypergeometric null assumes a uniformly selected subset of size n. For overlap x, the enrichment tail is $P(X\ge x)$ under $X\sim Hypergeometric(N,K,n)$. If pathway tests are numerous, address multiplicity.
+
+For a binary undirected adjacency matrix A with zero diagonal, degree is $d_i=\sum_j A_{ij}$. It describes connectivity under the selected definition and threshold, not an intrinsic universal importance of the gene.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+N <- 100; K <- 20; n <- 10; x <- 5
+p <- phyper(x-1,K,N-K,n,lower.tail=FALSE)
+c(expected_overlap=n*K/N,observed_overlap=x,enrichment_p=p)
+A <- matrix(c(0,1,1,0,1,0,1,0,1,1,0,1,0,0,1,0),4,4,byrow=TRUE)
+dimnames(A) <- list(paste0("g",1:4),paste0("g",1:4))
+stopifnot(isSymmetric(A),all(diag(A)==0),sum(A)==2*4)
+rowSums(A)
+```
+
+The expected overlap is two under the supplied background and sampling rule. Degree depends on the four chosen nodes and their edges. These are fictional pathways and networks.
+
+## 4. Interpretation and scope
+
+Overlapping gene sets and correlated gene statistics complicate enrichment inference. Report membership/version, mapping, background, selection rule and adjustment. Network robustness requires resampling or independent validation; causality requires stronger design or assumptions than correlation.
+
+## 5. Exercises
+
+1. Why can a genome-wide background be inappropriate for a protein assay?
+2. Does an enrichment p-value measure pathway activity?
+3. What changes when a correlation threshold is raised?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Many genes could not have been observed or selected.
+2. No; it concerns representation under a null, not direct activity.
+3. Edges and node degrees can change, showing their dependence on the supplied rule.
+:::
+
+## Practicals and course pathways
+
+Annotation and pathways (in development), networks (in development) and network and biomarker validation (in development).
+
+Use the [unified map](../course_map.qmd) to locate B14 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -1,0 +1,70 @@
+---
+title: "Protein identification, abundance and structure"
+subtitle: "B08: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish peptide evidence, protein-group inference and abundance; evaluate missing values and transformations; interpret structural information without overclaiming function.
+
+## 1. Biological question and measurements
+
+Proteomics can quantify molecular evidence from peptides or proteins using platforms such as mass spectrometry. A measured peptide may be shared by multiple proteins; assigning it to a unique gene product is an inference problem. Identification confidence and abundance uncertainty are separate. Sample preparation, digestion, instrument response and batch effects influence measured values.
+
+A protein table can contain missing values because abundance is low, a feature was not identified or processing failed. These mechanisms imply different analysis choices. Replacing every missing value by zero treats non-observation as a known measurement and can introduce artificial group differences. On a log scale, zero is not an absence: it represents an original-scale value of one.
+
+Structural records describe coordinates of a measured or predicted molecular model. A geometrical contact suggests spatial proximity within that model; it does not alone establish biochemical interaction or functional importance.
+
+## 2. Model and assumptions
+
+If $z=\log_2(x)$ for positive abundance x, a difference $z_T-z_C$ corresponds to a ratio $2^{z_T-z_C}$. The example compares arithmetic means of log2 measurements, so the ratio corresponds to geometric means on the original scale.
+
+Complete-case comparisons require recording which values remain in each group. They can be biased when observation depends on abundance or group.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+z <- c(8,8.5,NA,9,9.2,NA)
+group <- factor(c("C","C","C","T","T","T"))
+means <- tapply(z,group,mean,na.rm=TRUE)
+observed <- tapply(!is.na(z),group,sum)
+data.frame(group=names(means),observed=as.vector(observed),mean_log2=as.vector(means))
+c(log2_difference=means["T"]-means["C"],
+ geometric_mean_ratio=2^(means["T"]-means["C"]))
+```
+
+Both groups retain two measurements. The numerical ratio describes the observed log2 values, not a verified biological treatment effect.
+
+## 4. Interpretation and scope
+
+The teaching protein values are supplied log2 abundances. They are not raw spectra and do not implement peptide identification or protein inference. Report platform, processing, quantification scale, identification thresholds and missingness. Protein structure and abundance answer different questions.
+
+## 5. Exercises
+
+1. What ratio corresponds to a log2 difference of one?
+2. Why might low-value imputation strengthen a spurious difference?
+3. Does a close residue pair establish an interaction in a living animal?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. Two.
+2. If one group has more missing values, the imputation can manufacture a lower group mean; its assumptions need justification.
+3. No; context, structural uncertainty and biological evidence are required.
+:::
+
+## Practicals and course pathways
+
+Protein structure (in development) and proteomics analysis (in development) address different measurements.
+
+Use the [unified map](../course_map.qmd) to locate B08 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

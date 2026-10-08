@@ -1,0 +1,69 @@
+---
+title: "Animal-production questions and integrated reporting"
+subtitle: "B18: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Translate a production question into design and analysis; evaluate usefulness at the intended decision time; communicate uncertainty, alternatives and follow-up.
+
+## 1. Biological question and measurements
+
+Animal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.
+
+An integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance.
+
+## 2. Model and assumptions
+
+For a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are $e_{i0}$ and $e_{i1}$, the paired improvement in squared error is $d_i=e_{i0}^2-e_{i1}^2$. Its mean is positive when the augmented model has smaller mean squared error in that group.
+
+One evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+observed <- c(10,12,9,14,11,13)
+baseline <- c(11,11,11,11,11,11)
+augmented <- c(10.5,11.7,9.5,13.4,11.2,12.7)
+d <- (observed-baseline)^2-(observed-augmented)^2
+c(baseline_RMSE=sqrt(mean((observed-baseline)^2)),
+ augmented_RMSE=sqrt(mean((observed-augmented)^2)),
+ paired_MSE_improvement=mean(d))
+stopifnot(abs(mean(d)-(mean((observed-baseline)^2)-mean((observed-augmented)^2)))<1e-12)
+```
+
+The supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize.
+
+## 4. Interpretation and scope
+
+Follow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements.
+
+## 5. Exercises
+
+1. Why compare predictions on the same test animals?
+2. Does predictive improvement show that an assay measures a causal mediator?
+3. What belongs in a concise final report?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It makes the comparison paired and avoids changing the population between models.
+2. No; proxies can predict through correlation.
+3. Question, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step.
+:::
+
+## Practicals and course pathways
+
+Trait association (in development), integrated interpretation (in development), scientific reporting (in development) and research proposal (in development).
+
+Use the [unified map](../course_map.qmd) to locate B18 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

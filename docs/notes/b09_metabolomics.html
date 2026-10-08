@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Biological questions and omics measurements – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Metabolite features, identification and quantification – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biological questions and omics measurements</h1>
-<p class="subtitle lead">B01: Reusable teaching module</p>
+<h1 class="title">Metabolite features, identification and quantification</h1>
+<p class="subtitle lead">B09: Reusable teaching module</p>
 </div>
 
 
@@ -4071,18 +4071,17 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
+<p>Distinguish analytical features from confirmed metabolites; evaluate internal standards and scaling; separate concentration changes from relative signal differences.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
-<p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
-<p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
+<p>Metabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.</p>
+<p>Targeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
-<p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
+<p>If the observed signal is <span class="math inline">\(x_{ij}=a_j c_{ij}\)</span> and an internal standard has known concentration <span class="math inline">\(c_s\)</span> and the same multiplicative factor <span class="math inline">\(a_j\)</span>, the ratio <span class="math inline">\(x_{ij}/s_j\)</span> cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.</p>
+<p>Scaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4090,32 +4089,36 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer=</span><span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, <span class="st">&quot;transcriptome&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;phenome&quot;</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="at">measurement=</span><span class="fu">c</span>(<span class="st">&quot;genotype dosage&quot;</span>, <span class="st">&quot;RNA counts&quot;</span>, <span class="st">&quot;protein abundance&quot;</span>, <span class="st">&quot;feed-efficiency phenotype&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">timing=</span><span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;days 1-28&quot;</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">purpose=</span><span class="fu">c</span>(<span class="st">&quot;inherited variation&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;production response&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>concentration <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>drift <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">8</span>,<span class="fl">1.1</span>,<span class="fl">1.4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>signal <span class="ot">&lt;-</span> concentration<span class="sc">*</span>drift</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>standard <span class="ot">&lt;-</span> <span class="dv">5</span><span class="sc">*</span>drift</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ratio <span class="ot">&lt;-</span> signal<span class="sc">/</span>standard</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(concentration,signal,standard,ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          layer               measurement    timing             purpose
-1        genome           genotype dosage  baseline inherited variation
-2 transcriptome                RNA counts    day 14  molecular response
-3      proteome         protein abundance    day 14  molecular response
-4       phenome feed-efficiency phenotype days 1-28 production response</code></pre>
+<pre><code>  concentration signal standard ratio
+1             2    1.6      4.0   0.4
+2             3    3.3      5.5   0.6
+3             4    5.6      7.0   0.8</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="dv">5</span><span class="sc">*</span>ratio<span class="sc">-</span>concentration))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
+<p>The common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
+<p>Chemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the <a href="https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/">EMBL-EBI metabolite-identification lesson</a> for the distinction between a detected signal and an assigned compound.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Define one diet-effect question and one prediction question.</li>
-<li>Which measurements would be available before a breeding decision?</li>
-<li>Why is agreement between RNA and protein not proof of mediation?</li>
+<li>Why is a feature ID insufficient for a pathway claim?</li>
+<li>Under what assumption does the standard correction work?</li>
+<li>Why can unit-variance scaling amplify noisy features?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4130,9 +4133,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
-<li>Only information observed at the stated decision time is eligible.</li>
-<li>Both can respond to an unmeasured common cause or changes in cell composition.</li>
+<li>The compound may not be established; mass, retention and additional chemical evidence need evaluation.</li>
+<li>Analyte and standard share the specified multiplicative response.</li>
+<li>Each retained feature is given similar variance weight, even when its original variation reflects measurement noise.</li>
 </ol>
 </div>
 </div>
@@ -4140,8 +4143,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B01 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p>Metabolomics processing (in development), exploratory analysis (in development) and integration (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B09 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Biological questions and omics measurements – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Statistical models and honest validation – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biological questions and omics measurements</h1>
-<p class="subtitle lead">B01: Reusable teaching module</p>
+<h1 class="title">Statistical models and honest validation</h1>
+<p class="subtitle lead">B12: Reusable teaching module</p>
 </div>
 
 
@@ -4071,18 +4071,17 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
+<p>Distinguish inference and prediction; evaluate multiple testing, regularization and dimensionality reduction; prevent preprocessing and repeated-animal leakage.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
-<p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
-<p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
+<p>High-dimensional assays contain correlated features, different scales and substantial measurement variation. More variables can improve a model, but can also overfit a small sample. Regression requires a stated response, experimental unit, design and assumptions. Clustering and principal components describe patterns; they do not prove biological mechanisms.</p>
+<p>Inference estimates an effect and its uncertainty under a model. Prediction evaluates performance for the intended new population. A split between rows can be inadequate if records from the same animal, family, farm or time series appear in both sets. The validation group should represent the deployment task, and preprocessing must be fitted using training data only.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
-<p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
+<p>For standardised training features X and centred response y, ridge regression minimises <span class="math inline">\(\|y-X\beta\|^2+\lambda \|\beta\|^2\)</span>, giving <span class="math inline">\(\widehat\beta=(X^T X+\lambda I)^{-1}X^Ty\)</span>. A positive lambda shrinks coefficients; choose it using training-only validation, not test outcomes. The intercept is handled separately.</p>
+<p>Benjamini–Hochberg adjustment addresses false-discovery-rate control under its applicable dependence conditions. An adjusted p-value is not the probability that an individual hypothesis is false.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4090,32 +4089,43 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer=</span><span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, <span class="st">&quot;transcriptome&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;phenome&quot;</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="at">measurement=</span><span class="fu">c</span>(<span class="st">&quot;genotype dosage&quot;</span>, <span class="st">&quot;RNA counts&quot;</span>, <span class="st">&quot;protein abundance&quot;</span>, <span class="st">&quot;feed-efficiency phenotype&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">timing=</span><span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;days 1-28&quot;</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">purpose=</span><span class="fu">c</span>(<span class="st">&quot;inherited variation&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;production response&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1201</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">30</span><span class="sc">*</span><span class="dv">4</span>),<span class="dv">30</span>,<span class="dv">4</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">+</span>X[,<span class="dv">1</span>]<span class="sc">-</span>.<span class="dv">5</span><span class="sc">*</span>X[,<span class="dv">2</span>]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>; test <span class="ot">&lt;-</span> <span class="dv">21</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>center <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X[train,]); scale_train <span class="ot">&lt;-</span> <span class="fu">apply</span>(X[train,],<span class="dv">2</span>,sd)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Ztrain <span class="ot">&lt;-</span> <span class="fu">scale</span>(X[train,],center,scale_train)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Ztest <span class="ot">&lt;-</span> <span class="fu">scale</span>(X[test,],center,scale_train)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y[train]); lambda <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Supplied, not tuned on the test set.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(Ztrain)<span class="sc">+</span>lambda<span class="sc">*</span><span class="fu">diag</span>(<span class="dv">4</span>),<span class="fu">crossprod</span>(Ztrain,y[train]<span class="sc">-</span>ybar))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(ybar<span class="sc">+</span>Ztest<span class="sc">%*%</span>beta)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">test_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((y[test]<span class="sc">-</span>prediction)<span class="sc">^</span><span class="dv">2</span>)),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="at">baseline_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((y[test]<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          layer               measurement    timing             purpose
-1        genome           genotype dosage  baseline inherited variation
-2 transcriptome                RNA counts    day 14  molecular response
-3      proteome         protein abundance    day 14  molecular response
-4       phenome feed-efficiency phenotype days 1-28 production response</code></pre>
+<pre><code>    test_RMSE baseline_RMSE 
+     1.055431      1.539884 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(<span class="fu">c</span>(.<span class="dv">001</span>,.<span class="dv">02</span>,.<span class="dv">04</span>,.<span class="dv">4</span>),<span class="at">method=</span><span class="st">&quot;BH&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.00400000 0.04000000 0.05333333 0.40000000</code></pre>
 </div>
 </div>
-<p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
+<p>The test rows affect neither scaling nor coefficients. One split illustrates the process; its performance is not a stable estimate for a livestock population.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
+<p>Use appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The association practical (in development) distinguishes marker evidence from validated prediction.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Define one diet-effect question and one prediction question.</li>
-<li>Which measurements would be available before a breeding decision?</li>
-<li>Why is agreement between RNA and protein not proof of mediation?</li>
+<li>Why reuse training means for test scaling?</li>
+<li>Can test RMSE be used to choose lambda and still be an untouched test score?</li>
+<li>Does a PCA cluster establish a treatment effect?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4130,9 +4140,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
-<li>Only information observed at the stated decision time is eligible.</li>
-<li>Both can respond to an unmeasured common cause or changes in cell composition.</li>
+<li>The deployment transformation must not depend on the new group’s distribution.</li>
+<li>No; use a separate validation procedure within training, then evaluate once on test data.</li>
+<li>No; batches, other covariates and sampling can also create clusters.</li>
 </ol>
 </div>
 </div>
@@ -4140,8 +4150,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B01 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p>Exploratory analysis (in development), regularized prediction (in development) and trait association (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B12 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Biological questions and omics measurements – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Animal-production questions and integrated reporting – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biological questions and omics measurements</h1>
-<p class="subtitle lead">B01: Reusable teaching module</p>
+<h1 class="title">Animal-production questions and integrated reporting</h1>
+<p class="subtitle lead">B18: Reusable teaching module</p>
 </div>
 
 
@@ -4071,18 +4071,17 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
+<p>Translate a production question into design and analysis; evaluate usefulness at the intended decision time; communicate uncertainty, alternatives and follow-up.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
-<p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
-<p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
+<p>Animal-production applications include growth, feed efficiency, meat/milk quantity and quality, reproductive performance, health, environmental adaptation and methane. A molecular profile is useful only in relation to a defined question, decision, population and measurement cost. A statistically associated feature may add little predictive value; a predictor may work without identifying a causal mechanism.</p>
+<p>An integrated study should specify the primary phenotype and units, experimental unit, target population, exposure, tissue/time, eligible assays, covariates, data processing, missingness and validation. Explain why each molecular layer is needed. A diet-intervention study and a breeding-value prediction study involve different causal and genetic objectives even if both record performance.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
-<p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
+<p>For a prediction comparison, calculate the same loss on the same held-out animals for a baseline and an augmented model. If errors are <span class="math inline">\(e_{i0}\)</span> and <span class="math inline">\(e_{i1}\)</span>, the paired improvement in squared error is <span class="math inline">\(d_i=e_{i0}^2-e_{i1}^2\)</span>. Its mean is positive when the augmented model has smaller mean squared error in that group.</p>
+<p>One evaluation set gives conditional evidence, not a universal benefit. Costs, feasibility, calibration, independent replication and relevance to selection or management still need assessment.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4090,32 +4089,35 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer=</span><span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, <span class="st">&quot;transcriptome&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;phenome&quot;</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="at">measurement=</span><span class="fu">c</span>(<span class="st">&quot;genotype dosage&quot;</span>, <span class="st">&quot;RNA counts&quot;</span>, <span class="st">&quot;protein abundance&quot;</span>, <span class="st">&quot;feed-efficiency phenotype&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">timing=</span><span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;days 1-28&quot;</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">purpose=</span><span class="fu">c</span>(<span class="st">&quot;inherited variation&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;production response&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">9</span>,<span class="dv">14</span>,<span class="dv">11</span>,<span class="dv">13</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>augmented <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.5</span>,<span class="fl">11.7</span>,<span class="fl">9.5</span>,<span class="fl">13.4</span>,<span class="fl">11.2</span>,<span class="fl">12.7</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> (observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span><span class="sc">-</span>(observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">baseline_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">augmented_RMSE=</span><span class="fu">sqrt</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span>)),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">paired_MSE_improvement=</span><span class="fu">mean</span>(d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          layer               measurement    timing             purpose
-1        genome           genotype dosage  baseline inherited variation
-2 transcriptome                RNA counts    day 14  molecular response
-3      proteome         protein abundance    day 14  molecular response
-4       phenome feed-efficiency phenotype days 1-28 production response</code></pre>
+<pre><code>         baseline_RMSE         augmented_RMSE paired_MSE_improvement 
+             1.7795130              0.4242641              2.9866667 </code></pre>
 </div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(<span class="fu">mean</span>(d)<span class="sc">-</span>(<span class="fu">mean</span>((observed<span class="sc">-</span>baseline)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span><span class="fu">mean</span>((observed<span class="sc">-</span>augmented)<span class="sc">^</span><span class="dv">2</span>)))<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
+<p>The supplied predictions improve squared-error loss for these six fictional animals. The calculation says nothing about how those predictions were trained or whether they generalize.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
+<p>Follow-up can include replication in a new farm, time, breed or management setting; a targeted assay or perturbation can address a mechanistic question. Choose follow-up to resolve the uncertainty actually present, not merely to generate more molecular measurements.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Define one diet-effect question and one prediction question.</li>
-<li>Which measurements would be available before a breeding decision?</li>
-<li>Why is agreement between RNA and protein not proof of mediation?</li>
+<li>Why compare predictions on the same test animals?</li>
+<li>Does predictive improvement show that an assay measures a causal mediator?</li>
+<li>What belongs in a concise final report?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4130,9 +4132,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
-<li>Only information observed at the stated decision time is eligible.</li>
-<li>Both can respond to an unmeasured common cause or changes in cell composition.</li>
+<li>It makes the comparison paired and avoids changing the population between models.</li>
+<li>No; proxies can predict through correlation.</li>
+<li>Question, design, data and exclusions, model, validation, numerical evidence, limitations and justified next step.</li>
 </ol>
 </div>
 </div>
@@ -4140,8 +4142,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B01 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p>Trait association (in development), integrated interpretation (in development), scientific reporting (in development) and research proposal (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B18 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

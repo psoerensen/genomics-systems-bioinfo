@@ -12,6 +12,18 @@ project:
     - notes/b04_programming.qmd
     - notes/b05_genomics.qmd
     - notes/b06_transcriptomics.qmd
+    - notes/b07_epigenomics.qmd
+    - notes/b08_proteomics.qmd
+    - notes/b09_metabolomics.qmd
+    - notes/b10_microbiomics.qmd
+    - notes/b11_phenomics.qmd
+    - notes/b12_statistics.qmd
+    - notes/b13_association.qmd
+    - notes/b14_networks.qmd
+    - notes/b15_integration.qmd
+    - notes/b16_advanced.qmd
+    - notes/b17_integrity.qmd
+    - notes/b18_synthesis.qmd
 
 website:
   title: "Genomics, Systems Biology & Bioinformatics"

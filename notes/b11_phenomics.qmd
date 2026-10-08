@@ -1,0 +1,69 @@
+---
+title: "Phenomics, sensors and measurement timing"
+subtitle: "B11: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define phenotypes and units; distinguish repeated observations from independent animals; align sensor measurements to biological sampling and decision times.
+
+## 1. Biological question and measurements
+
+Phenomics can describe production, behaviour, physiology and environmental response across animals and time. Sensors create dense records, but the biological quantity still needs definition. A daily average, total, slope and within-day variability answer different questions. Document units, calibration, missing coverage and the interval represented by each summary.
+
+When aligning a molecular sample with sensor data, decide whether the intended feature is a pre-sampling baseline, concurrent response or future outcome. A model for day-30 prediction cannot use day-45 sensor records at deployment. Aggregation can also hide short-lived events and differences in monitoring duration.
+
+## 2. Model and assumptions
+
+For animal i observed at $n_i$ times, $\bar y_i=\sum_t y_{it}/n_i$ is a mean over those recorded times, not necessarily the mean over the entire target period. Missing times need a coverage policy.
+
+Under equal marginal variance $\sigma^2$ and equal within-animal correlation $\rho$, $\mathrm{Var}(\bar y_i)=\sigma^2[1+(n_i-1)\rho]/n_i$. Additional correlated records improve precision more slowly than independent records.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+n <- c(1,5,20)
+rho <- .6
+variance <- (1+(n-1)*rho)/n
+data.frame(records=n,variance_of_mean=variance)
+set.seed(1101)
+records <- data.frame(animal=rep(c("a1","a2","a3"),each=5),
+ day=rep(1:5,3), value=rep(c(8,10,12),each=5)+rnorm(15,sd=.4))
+aggregate(value~animal,subset(records,day<=3),mean)
+```
+
+The variance approaches the correlation component rather than zero as repeated records accumulate. The summary intentionally uses days 1–3, demonstrating a defined time window.
+
+## 4. Interpretation and scope
+
+The equal-correlation model is a teaching simplification; actual serial correlation, drift, unequal coverage and animal-level variation need appropriate modelling. Neither millions of sensor rows nor precise technology automatically establish millions of experimental units.
+
+## 5. Exercises
+
+1. What happens to variance when rho is zero?
+2. Why should each animal’s monitoring coverage be reported?
+3. Which records are eligible for a prediction made on day 3?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. It is sigma squared divided by n.
+2. Means from different windows or selective missing times may not be comparable.
+3. Information observed by day 3; later records are eligible only as outcomes or in a different task.
+:::
+
+## Practicals and course pathways
+
+Phenomics and timing (in development), study design (in development) and trait association (in development).
+
+Use the [unified map](../course_map.qmd) to locate B11 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -1,0 +1,68 @@
+---
+title: "Metabolite features, identification and quantification"
+subtitle: "B09: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish analytical features from confirmed metabolites; evaluate internal standards and scaling; separate concentration changes from relative signal differences.
+
+## 1. Biological question and measurements
+
+Metabolomics measures small molecules using platforms with different coverage and selectivity. A detected feature may describe a mass/charge and retention-time signal rather than a confidently identified compound. Adducts, isotopes and fragments can yield multiple features associated with one molecule. Conversely, co-eluting compounds can complicate a signal.
+
+Targeted assays can quantify defined compounds with calibrations; untargeted assays often yield relative intensities with varying identification confidence. Processing should document blanks, technical QC samples, drift, batches, detection limits and normalization. A table heading called concentration does not turn an arbitrary instrument signal into an absolute chemical measurement.
+
+## 2. Model and assumptions
+
+If the observed signal is $x_{ij}=a_j c_{ij}$ and an internal standard has known concentration $c_s$ and the same multiplicative factor $a_j$, the ratio $x_{ij}/s_j$ cancels that factor. This works only to the extent that the standard tracks the relevant measurement process.
+
+Scaling a feature to mean zero and variance one changes its contribution to a multivariate analysis. It does not convert arbitrary units into comparable concentrations.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+concentration <- c(2,3,4)
+drift <- c(.8,1.1,1.4)
+signal <- concentration*drift
+standard <- 5*drift
+ratio <- signal/standard
+data.frame(concentration,signal,standard,ratio)
+stopifnot(max(abs(5*ratio-concentration))<1e-12)
+```
+
+The common drift cancels in this deliberately idealised example. If the analyte and standard respond differently to preparation or the instrument, that cancellation will be incomplete.
+
+## 4. Interpretation and scope
+
+Chemical identity should have documented supporting evidence; a feature ID is not a metabolic pathway assignment. Avoid counting several signals from the same compound as independent confirmations. See the [EMBL-EBI metabolite-identification lesson](https://www.ebi.ac.uk/training/materials/metabolomics-analysis-materials/methods-and-resources/metabolite-identification/) for the distinction between a detected signal and an assigned compound.
+
+## 5. Exercises
+
+1. Why is a feature ID insufficient for a pathway claim?
+2. Under what assumption does the standard correction work?
+3. Why can unit-variance scaling amplify noisy features?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The compound may not be established; mass, retention and additional chemical evidence need evaluation.
+2. Analyte and standard share the specified multiplicative response.
+3. Each retained feature is given similar variance weight, even when its original variation reflects measurement noise.
+:::
+
+## Practicals and course pathways
+
+Metabolomics processing (in development), exploratory analysis (in development) and integration (in development).
+
+Use the [unified map](../course_map.qmd) to locate B09 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

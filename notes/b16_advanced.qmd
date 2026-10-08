@@ -1,0 +1,72 @@
+---
+title: "Single-cell, spatial and emerging methods"
+subtitle: "B16: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define cell, specimen and animal units; distinguish measurement resolution from biological replication; evaluate advanced assays and AI evidence.
+
+## 1. Biological question and measurements
+
+Single-cell assays can resolve molecular differences across sampled cells, but cells are nested within specimens and animals. Treatment allocation to an animal does not create independent treatment allocations to every sampled cell. Cell recovery and QC affect the representation of cell types. For an animal-level comparison, one approach aggregates measurements by animal and cell type before using an appropriate sample-level analysis; this still requires biological replication.
+
+Spatial assays retain positional information at a platform-dependent resolution. Spots can mix cells, adjacent positions can be dependent, and resolution varies. Chromatin conformation assays estimate selected contact relationships, not a deterministic map of regulatory causation. Advanced epigenomic measurements retain their assay-specific limitations.
+
+AI models can learn useful patterns, but a sophisticated architecture does not eliminate sample dependence, leakage or confounding. A generated explanation is not supporting biological evidence. Specify training data, evaluation units, uncertainty and validation context.
+
+## 2. Model and assumptions
+
+For m cells per animal with equal marginal variance $\sigma^2$ and within-animal correlation rho, a design-effect approximation is $D=1+(m-1)\rho$. Treating $nm$ cells as independent can overstate precision; $nm/D$ is an effective-count illustration under this equal-correlation model, not a replacement for a valid hierarchical analysis or degrees of freedom.
+
+For high-dimensional prediction, keep animals or specimens separated across training and evaluation when that represents the intended task.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+animals <- 6; cells <- 100; rho <- .1
+design_effect <- 1+(cells-1)*rho
+c(raw_cell_count=animals*cells,
+ equal_correlation_effective_count=animals*cells/design_effect,
+ independent_animals=animals)
+set.seed(1601)
+cell <- data.frame(animal=rep(paste0("a",1:6),each=10),
+ value=rep(rnorm(6),each=10)+rnorm(60,sd=.2))
+aggregate(value~animal,cell,mean)
+```
+
+The example retains six animals despite measuring many cells. The effective-count approximation is a description of variance inflation in a stylised model, not permission to conduct inference with an invented sample size.
+
+## 4. Interpretation and scope
+
+Evaluate cell-type annotation, recovery, doublets, QC, spatial scale and biological replication. Method-specific pipelines and validations are needed before a real analysis. Advanced extensions in this course critique supplied designs and evidence; they do not claim to implement single-cell or spatial software workflows.
+
+## 5. Exercises
+
+1. Why is splitting cells from each animal across train and test unsafe for new-animal prediction?
+2. What can a spatial co-location establish?
+3. What evidence should support an AI-derived candidate?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The model can learn animal-specific patterns present in both sets.
+2. Proximity at the assay’s resolution, not necessarily molecular interaction.
+3. Traceable data, valid model evaluation, independent biological evidence and appropriate experimental follow-up.
+:::
+
+## Practicals and course pathways
+
+Study design (in development), network interpretation (in development) and reporting (in development) supply the prerequisites for a critical paper-review exercise.
+
+Use the [unified map](../course_map.qmd) to locate B16 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -65,4 +65,4 @@ An integrated explanation remains a hypothesis unless the design and analysis su
 
 Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.
 
-Use the [unified map](../course_map.qmd) to locate B01 in both harmonized outlines. Return to the building-block index (in development).
+Use the [unified map](../course_map.qmd) to locate B01 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

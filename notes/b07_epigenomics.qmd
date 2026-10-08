@@ -1,0 +1,68 @@
+---
+title: "Epigenomic measurements and regulatory interpretation"
+subtitle: "B07: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish methylation proportions, chromatin-accessibility measurements and expression; evaluate coverage, tissue composition and regulatory claims.
+
+## 1. Biological question and measurements
+
+Epigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.
+
+Nutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation.
+
+## 2. Model and assumptions
+
+A simple methylation summary is $\widehat{p}=m/(m+u)$, where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, $\mathrm{Var}(\widehat p)=p(1-p)/n$. This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.
+
+A pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+cell_methylation <- c(typeA=.2,typeB=.8)
+composition <- rbind(control=c(.8,.2),treated=c(.3,.7))
+pooled <- as.vector(composition %*% cell_methylation)
+data.frame(group=rownames(composition), pooled_methylation=pooled)
+stopifnot(abs(pooled[1]-.32)<1e-12, abs(pooled[2]-.62)<1e-12)
+n <- c(10,100)
+data.frame(reads=n,conditional_SE=sqrt(.5*.5/n))
+```
+
+The pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication.
+
+## 4. Interpretation and scope
+
+Conversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate.
+
+## 5. Exercises
+
+1. Did either cell type change methylation in the example?
+2. Does sequencing one animal 100 times create 100 treatment replicates?
+3. How could sampling time affect a regulatory interpretation?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. No; the mixture changed.
+2. No; these are measurements of one animal, not independent allocations.
+3. A profile measured after a phenotype changes can reflect its consequences rather than its antecedent causes.
+:::
+
+## Practicals and course pathways
+
+Experimental design (in development), multi-omics QC (in development) and integrated interpretation (in development).
+
+Use the [unified map](../course_map.qmd) to locate B07 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

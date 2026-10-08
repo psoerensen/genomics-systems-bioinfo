@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Biological questions and omics measurements – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Pathway enrichment and biological networks – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biological questions and omics measurements</h1>
-<p class="subtitle lead">B01: Reusable teaching module</p>
+<h1 class="title">Pathway enrichment and biological networks</h1>
+<p class="subtitle lead">B14: Reusable teaching module</p>
 </div>
 
 
@@ -4071,18 +4071,17 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
+<p>Define eligible backgrounds and selection rules; calculate enrichment under a supplied null; construct and interpret networks with explicit edge definitions.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
-<p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
-<p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
+<p>A pathway analysis asks whether selected features are represented in a gene set more than expected under a specified model. Define the eligible background from genes that could have been selected, not every annotated gene regardless of assay coverage. Selection can depend on abundance, length, missingness or mapping, which can violate equal-selection assumptions.</p>
+<p>A network represents entities as nodes and a defined relationship as edges. A correlation network, protein-interaction database and curated metabolic network have different edge meanings. A dense cluster can reflect a common driver, duplicated measurements or technical structure. Gene regulation involves direction and mechanism; undirected correlation alone supplies neither.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
-<p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
+<p>With N eligible genes, K in a pathway and n selected genes, the hypergeometric null assumes a uniformly selected subset of size n. For overlap x, the enrichment tail is <span class="math inline">\(P(X\ge x)\)</span> under <span class="math inline">\(X\sim Hypergeometric(N,K,n)\)</span>. If pathway tests are numerous, address multiplicity.</p>
+<p>For a binary undirected adjacency matrix A with zero diagonal, degree is <span class="math inline">\(d_i=\sum_j A_{ij}\)</span>. It describes connectivity under the selected definition and threshold, not an intrinsic universal importance of the gene.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4090,32 +4089,38 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer=</span><span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, <span class="st">&quot;transcriptome&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;phenome&quot;</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="at">measurement=</span><span class="fu">c</span>(<span class="st">&quot;genotype dosage&quot;</span>, <span class="st">&quot;RNA counts&quot;</span>, <span class="st">&quot;protein abundance&quot;</span>, <span class="st">&quot;feed-efficiency phenotype&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">timing=</span><span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;days 1-28&quot;</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">purpose=</span><span class="fu">c</span>(<span class="st">&quot;inherited variation&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;production response&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span>; K <span class="ot">&lt;-</span> <span class="dv">20</span>; n <span class="ot">&lt;-</span> <span class="dv">10</span>; x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">phyper</span>(x<span class="dv">-1</span>,K,N<span class="sc">-</span>K,n,<span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">expected_overlap=</span>n<span class="sc">*</span>K<span class="sc">/</span>N,<span class="at">observed_overlap=</span>x,<span class="at">enrichment_p=</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          layer               measurement    timing             purpose
-1        genome           genotype dosage  baseline inherited variation
-2 transcriptome                RNA counts    day 14  molecular response
-3      proteome         protein abundance    day 14  molecular response
-4       phenome feed-efficiency phenotype days 1-28 production response</code></pre>
+<pre><code>expected_overlap observed_overlap     enrichment_p 
+      2.00000000       5.00000000       0.02546455 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="dv">4</span>,<span class="dv">4</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(A) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">paste0</span>(<span class="st">&quot;g&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">paste0</span>(<span class="st">&quot;g&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">isSymmetric</span>(A),<span class="fu">all</span>(<span class="fu">diag</span>(A)<span class="sc">==</span><span class="dv">0</span>),<span class="fu">sum</span>(A)<span class="sc">==</span><span class="dv">2</span><span class="sc">*</span><span class="dv">4</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>g1 g2 g3 g4 
+ 2  2  3  1 </code></pre>
 </div>
 </div>
-<p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
+<p>The expected overlap is two under the supplied background and sampling rule. Degree depends on the four chosen nodes and their edges. These are fictional pathways and networks.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
+<p>Overlapping gene sets and correlated gene statistics complicate enrichment inference. Report membership/version, mapping, background, selection rule and adjustment. Network robustness requires resampling or independent validation; causality requires stronger design or assumptions than correlation.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Define one diet-effect question and one prediction question.</li>
-<li>Which measurements would be available before a breeding decision?</li>
-<li>Why is agreement between RNA and protein not proof of mediation?</li>
+<li>Why can a genome-wide background be inappropriate for a protein assay?</li>
+<li>Does an enrichment p-value measure pathway activity?</li>
+<li>What changes when a correlation threshold is raised?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4130,9 +4135,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
-<li>Only information observed at the stated decision time is eligible.</li>
-<li>Both can respond to an unmeasured common cause or changes in cell composition.</li>
+<li>Many genes could not have been observed or selected.</li>
+<li>No; it concerns representation under a null, not direct activity.</li>
+<li>Edges and node degrees can change, showing their dependence on the supplied rule.</li>
 </ol>
 </div>
 </div>
@@ -4140,8 +4145,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B01 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p>Annotation and pathways (in development), networks (in development) and network and biomarker validation (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B14 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

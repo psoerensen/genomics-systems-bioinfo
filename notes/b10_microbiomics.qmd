@@ -1,0 +1,68 @@
+---
+title: "Microbial communities and host relationships"
+subtitle: "B10: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish amplicon and metagenomic measurements; explain compositionality; evaluate host–microbiome associations and sampling limitations.
+
+## 1. Biological question and measurements
+
+A microbiome sample measures a community at a particular site, time and collection process. Amplicon data focus on selected marker sequences; shotgun metagenomics samples broader sequence content. Sequence representation depends on extraction, library preparation, genome properties and reference annotation. A taxonomic abundance profile does not directly measure metabolic activity.
+
+Rumen, intestinal and faecal samples answer different questions. Host diet, genotype, management and physiology can influence the community while also influencing a production trait. Association between a taxon and methane, for example, can arise from those shared drivers; it does not demonstrate that changing the taxon would change emissions.
+
+## 2. Model and assumptions
+
+Relative abundance is $p_{ij}=x_{ij}/\sum_k x_{kj}$. Because the components sum to one, increasing one absolute component can reduce the relative representation of another whose absolute amount did not change.
+
+For strictly positive components, a log ratio $\log(x_A/x_B)$ is invariant to a common sample multiplier. Zero handling needs an explicit measurement assumption: adding an arbitrary constant can alter conclusions, especially for rare taxa.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+absolute <- rbind(before=c(A=10,B=10,C=10),after=c(A=20,B=10,C=10))
+relative <- absolute/rowSums(absolute)
+relative
+c(B_absolute_change=absolute[2,"B"]-absolute[1,"B"],
+ B_relative_change=relative[2,"B"]-relative[1,"B"])
+stopifnot(absolute[2,"B"]==absolute[1,"B"],relative[2,"B"]<relative[1,"B"])
+log(absolute[,"A"]/absolute[,"B"])
+```
+
+B becomes a smaller fraction even though its absolute amount is unchanged. A change in total microbial load is not observable from these fractions alone.
+
+## 4. Interpretation and scope
+
+Distinguish microbial load, relative composition, genetic potential and activity. Consider contaminants, reference coverage, repeated measurements, host-level confounding and independent validation. Host–microbiome co-metabolism is a mechanistic hypothesis to examine with appropriate molecular and experimental evidence.
+
+## 5. Exercises
+
+1. Which taxon changed absolute amount?
+2. Can relative B alone establish that B was depleted?
+3. What extra measurement could inform total microbial load?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. A doubled.
+2. No; its fraction decreased through the change in A.
+3. A justified absolute-quantification measurement, such as calibrated load estimates, with its own sampling and technical assumptions.
+:::
+
+## Practicals and course pathways
+
+Microbiome and host (in development) and integrated interpretation (in development).
+
+Use the [unified map](../course_map.qmd) to locate B10 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

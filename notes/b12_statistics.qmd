@@ -1,0 +1,74 @@
+---
+title: "Statistical models and honest validation"
+subtitle: "B12: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish inference and prediction; evaluate multiple testing, regularization and dimensionality reduction; prevent preprocessing and repeated-animal leakage.
+
+## 1. Biological question and measurements
+
+High-dimensional assays contain correlated features, different scales and substantial measurement variation. More variables can improve a model, but can also overfit a small sample. Regression requires a stated response, experimental unit, design and assumptions. Clustering and principal components describe patterns; they do not prove biological mechanisms.
+
+Inference estimates an effect and its uncertainty under a model. Prediction evaluates performance for the intended new population. A split between rows can be inadequate if records from the same animal, family, farm or time series appear in both sets. The validation group should represent the deployment task, and preprocessing must be fitted using training data only.
+
+## 2. Model and assumptions
+
+For standardised training features X and centred response y, ridge regression minimises $\|y-X\beta\|^2+\lambda \|\beta\|^2$, giving $\widehat\beta=(X^T X+\lambda I)^{-1}X^Ty$. A positive lambda shrinks coefficients; choose it using training-only validation, not test outcomes. The intercept is handled separately.
+
+Benjamini–Hochberg adjustment addresses false-discovery-rate control under its applicable dependence conditions. An adjusted p-value is not the probability that an individual hypothesis is false.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+set.seed(1201)
+X <- matrix(rnorm(30*4),30,4)
+y <- 1+X[,1]-.5*X[,2]+rnorm(30)
+train <- 1:20; test <- 21:30
+center <- colMeans(X[train,]); scale_train <- apply(X[train,],2,sd)
+Ztrain <- scale(X[train,],center,scale_train)
+Ztest <- scale(X[test,],center,scale_train)
+ybar <- mean(y[train]); lambda <- 2 # Supplied, not tuned on the test set.
+beta <- solve(crossprod(Ztrain)+lambda*diag(4),crossprod(Ztrain,y[train]-ybar))
+prediction <- as.vector(ybar+Ztest%*%beta)
+c(test_RMSE=sqrt(mean((y[test]-prediction)^2)),
+ baseline_RMSE=sqrt(mean((y[test]-ybar)^2)))
+p.adjust(c(.001,.02,.04,.4),method="BH")
+```
+
+The test rows affect neither scaling nor coefficients. One split illustrates the process; its performance is not a stable estimate for a livestock population.
+
+## 4. Interpretation and scope
+
+Use appropriate loss and uncertainty, inspect residuals and state model-selection decisions. Screening features on all outcomes before splitting leaks information even if the final model is fitted on training rows. A penalty value selected on the test set turns it into a tuning set. The association practical (in development) distinguishes marker evidence from validated prediction.
+
+## 5. Exercises
+
+1. Why reuse training means for test scaling?
+2. Can test RMSE be used to choose lambda and still be an untouched test score?
+3. Does a PCA cluster establish a treatment effect?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. The deployment transformation must not depend on the new group’s distribution.
+2. No; use a separate validation procedure within training, then evaluate once on test data.
+3. No; batches, other covariates and sampling can also create clusters.
+:::
+
+## Practicals and course pathways
+
+Exploratory analysis (in development), regularized prediction (in development) and trait association (in development).
+
+Use the [unified map](../course_map.qmd) to locate B12 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

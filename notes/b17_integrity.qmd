@@ -1,0 +1,71 @@
+---
+title: "Reproducibility, data governance and responsible research"
+subtitle: "B17: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Document provenance and exclusions; distinguish access control from reproducibility; evaluate privacy, research integrity and responsible AI use.
+
+## 1. Biological question and measurements
+
+Reproducibility means that the documented inputs and procedures can produce the reported analysis. It requires traceable data versions, sample definitions, transformations, software, random draws and model choices. A script that runs is only part of this record: excluded samples, manual corrections and selection decisions affect the result.
+
+A public teaching example can use hypothetical data while a real collaboration may need controlled access. Genetic, ownership, location or linked production records can carry sensitive information. Permissions, consent or institutional agreements determine what may be shared; changing names alone does not necessarily prevent re-identification. Publish reusable methods and non-sensitive demonstrations without transferring restricted records into public repositories.
+
+Responsible AI use includes identifying what the tool contributed and verifying code, citations and interpretations. Do not upload restricted data to an external service without the applicable authorisation. Specific governance decisions depend on the project’s agreements and local requirements.
+
+## 2. Model and assumptions
+
+A manifest connects a file identifier, checksum, role and access category. A checksum can detect byte-level changes; it cannot determine whether a biological measurement or label is correct. Separate data provenance from biological validity.
+
+An analysis record should distinguish prespecified decisions from exploratory choices and document deviations. Fixing a seed preserves one random realization; it does not establish that findings generalize.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+path <- tempfile(fileext=".csv")
+write.csv(data.frame(animal=c("fictional_a1","fictional_a2"),value=c(3,5)),
+ path,row.names=FALSE)
+manifest <- data.frame(role="hypothetical teaching input",checksum=unname(tools::md5sum(path)),
+ access="public synthetic",unit="animal")
+manifest
+stopifnot(nchar(manifest$checksum)==32)
+unlink(path) # Removes only the temporary file created in this example.
+```
+
+The manifest identifies bytes of one fictional teaching table. A different formatting or row order can change the checksum even when the scientific content is equivalent.
+
+## 4. Interpretation and scope
+
+Keep credentials, private observations and restricted metadata out of public teaching sources. Report validation and limitations plainly, including null or inconsistent results. Reproducibility does not guarantee correct inference, responsible access or scientific validity.
+
+## 5. Exercises
+
+1. Does an unchanged checksum certify correct animal identity?
+2. What should be shared when data access is restricted?
+3. Why record an exploratory feature-selection decision?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. No; it only certifies the same file bytes under the checksum mechanism.
+2. Methods, metadata descriptions, access procedures and an appropriately non-sensitive example, subject to the governing agreements.
+3. Selection affects uncertainty and replication; readers need to know how the analysis was chosen.
+:::
+
+## Practicals and course pathways
+
+Scientific reporting (in development) and research proposal (in development) put provenance and governance into the deliverable.
+
+Use the [unified map](../course_map.qmd) to locate B17 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

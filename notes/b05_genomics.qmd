@@ -68,4 +68,4 @@ Whole-genome workflows need species/reference selection, coverage, mapping and c
 
 Sequence handling (in development), similarity (in development), alignment (in development), phylogeny (in development) and sequencing QC (in development).
 
-Use the [unified map](../course_map.qmd) to locate B05 in both harmonized outlines. Return to the building-block index (in development).
+Use the [unified map](../course_map.qmd) to locate B05 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

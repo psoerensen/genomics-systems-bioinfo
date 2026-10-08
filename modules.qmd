@@ -13,7 +13,19 @@ Each module combines concepts, assumptions, a worked R example and exercises wit
 - [B04: Programming and reproducible data handling](notes/b04_programming.qmd)
 - [B05: Genomic measurements and sequence analysis](notes/b05_genomics.qmd)
 - [B06: Transcriptomics and expression analysis](notes/b06_transcriptomics.qmd)
+- [B07: Epigenomic measurements and regulatory interpretation](notes/b07_epigenomics.qmd)
+- [B08: Protein identification, abundance and structure](notes/b08_proteomics.qmd)
+- [B09: Metabolite features, identification and quantification](notes/b09_metabolomics.qmd)
+- [B10: Microbial communities and host relationships](notes/b10_microbiomics.qmd)
+- [B11: Phenomics, sensors and measurement timing](notes/b11_phenomics.qmd)
+- [B12: Statistical models and honest validation](notes/b12_statistics.qmd)
+- [B13: Association, prediction and regulatory evidence](notes/b13_association.qmd)
+- [B14: Pathway enrichment and biological networks](notes/b14_networks.qmd)
+- [B15: Integrating molecular layers and phenotypes](notes/b15_integration.qmd)
+- [B16: Single-cell, spatial and emerging methods](notes/b16_advanced.qmd)
+- [B17: Reproducibility, data governance and responsible research](notes/b17_integrity.qmd)
+- [B18: Animal-production questions and integrated reporting](notes/b18_synthesis.qmd)
 
 ## Development status
 
-6 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed.
+18 of 18 modules are available. Remaining blocks are listed in the curriculum map and will appear here as they are completed.

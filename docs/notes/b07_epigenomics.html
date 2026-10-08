@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Biological questions and omics measurements – Genomics, Systems Biology &amp; Bioinformatics</title>
+<title>Epigenomic measurements and regulatory interpretation – Genomics, Systems Biology &amp; Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4051,8 +4051,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biological questions and omics measurements</h1>
-<p class="subtitle lead">B01: Reusable teaching module</p>
+<h1 class="title">Epigenomic measurements and regulatory interpretation</h1>
+<p class="subtitle lead">B07: Reusable teaching module</p>
 </div>
 
 
@@ -4071,18 +4071,17 @@ window.Quarto = {
 
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>Distinguish biological questions, measurements and estimands; explain the contribution of each omics layer; formulate a testable animal-production question.</p>
+<p>Distinguish methylation proportions, chromatin-accessibility measurements and expression; evaluate coverage, tissue composition and regulatory claims.</p>
 </section>
 <section id="biological-question-and-measurements" class="level2">
 <h2 class="anchored" data-anchor-id="biological-question-and-measurements">1. Biological question and measurements</h2>
-<p>A study of feed efficiency can ask whether a diet changes animal performance, whether molecular profiles predict later performance, or which biological mechanisms mediate a change. These questions require different designs. A response to an allocated diet is an intervention contrast; association of a protein with performance is an observational relationship; prediction asks how well a model performs for new animals.</p>
-<p>Genomics records sequence variation, transcriptomics records RNA abundance, proteomics records proteins, metabolomics records small molecules, microbiomics describes microbial communities, and phenomics describes traits measured across animals and time. Epigenomic assays describe selected regulatory measurements. Each layer samples a tissue, time and measurement process. A genotype need not predict a transcript in every tissue, and transcript abundance need not determine protein abundance.</p>
-<p>Begin with the animal, the exposure, the sampling unit and the decision. Measuring more layers does not compensate for a poorly specified question.</p>
+<p>Epigenomic assays measure selected properties of DNA and chromatin. Bisulfite-based methylation assays estimate methylated cytosines under conversion and mapping assumptions. Accessibility assays measure the representation of accessible regions under their own sampling process. Neither is a direct universal measure of gene activity. An epigenomic profile is tied to tissue, developmental stage, cellular composition and collection conditions.</p>
+<p>Nutritional or environmental exposure can associate with a regulatory measurement. To claim an exposure causes a regulatory change, consider allocation and confounding; to claim that change mediates a phenotype, additional assumptions and evidence are needed. Genotype can affect both a regulatory measurement and the response. Sampling tissue after disease or production changes can also reverse the apparent direction of explanation.</p>
 </section>
 <section id="model-and-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-assumptions">2. Model and assumptions</h2>
-<p>Let <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span> denote the performance that animal i would show under two diets. The average intervention effect is <span class="math inline">\(E[Y(1)-Y(0)]\)</span>. Only one potential outcome is observed for each animal. Random allocation can support estimating this contrast; an observational correlation <span class="math inline">\(\mathrm{cor}(X,Y)\)</span> generally cannot.</p>
-<p>For prediction, specify the target population and prediction time. Molecular measurements collected after the response occurs may help explain biology but cannot automatically support an earlier management decision.</p>
+<p>A simple methylation summary is <span class="math inline">\(\widehat{p}=m/(m+u)\)</span>, where m and u are methylated and unmethylated reads at a supplied site. Under independent binomial sampling of reads conditional on a true proportion p, <span class="math inline">\(\mathrm{Var}(\widehat p)=p(1-p)/n\)</span>. This conditional measurement model does not describe all biological variability between animals; read depth is not the number of independent animals.</p>
+<p>A pooled tissue proportion can change when cell-type proportions change even if methylation within each cell type remains constant.</p>
 </section>
 <section id="worked-example" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example">3. Worked example</h2>
@@ -4090,32 +4089,40 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show R code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">layer=</span><span class="fu">c</span>(<span class="st">&quot;genome&quot;</span>, <span class="st">&quot;transcriptome&quot;</span>, <span class="st">&quot;proteome&quot;</span>, <span class="st">&quot;phenome&quot;</span>),</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="at">measurement=</span><span class="fu">c</span>(<span class="st">&quot;genotype dosage&quot;</span>, <span class="st">&quot;RNA counts&quot;</span>, <span class="st">&quot;protein abundance&quot;</span>, <span class="st">&quot;feed-efficiency phenotype&quot;</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">timing=</span><span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;day 14&quot;</span>, <span class="st">&quot;days 1-28&quot;</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">purpose=</span><span class="fu">c</span>(<span class="st">&quot;inherited variation&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;molecular response&quot;</span>, <span class="st">&quot;production response&quot;</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cell_methylation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">typeA=</span>.<span class="dv">2</span>,<span class="at">typeB=</span>.<span class="dv">8</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>composition <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">control=</span><span class="fu">c</span>(.<span class="dv">8</span>,.<span class="dv">2</span>),<span class="at">treated=</span><span class="fu">c</span>(.<span class="dv">3</span>,.<span class="dv">7</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(composition <span class="sc">%*%</span> cell_methylation)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">group=</span><span class="fu">rownames</span>(composition), <span class="at">pooled_methylation=</span>pooled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>          layer               measurement    timing             purpose
-1        genome           genotype dosage  baseline inherited variation
-2 transcriptome                RNA counts    day 14  molecular response
-3      proteome         protein abundance    day 14  molecular response
-4       phenome feed-efficiency phenotype days 1-28 production response</code></pre>
+<pre><code>    group pooled_methylation
+1 control               0.32
+2 treated               0.62</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show R code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">abs</span>(pooled[<span class="dv">1</span>]<span class="sc">-</span>.<span class="dv">32</span>)<span class="sc">&lt;</span><span class="fl">1e-12</span>, <span class="fu">abs</span>(pooled[<span class="dv">2</span>]<span class="sc">-</span>.<span class="dv">62</span>)<span class="sc">&lt;</span><span class="fl">1e-12</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">reads=</span>n,<span class="at">conditional_SE=</span><span class="fu">sqrt</span>(.<span class="dv">5</span><span class="sc">*</span>.<span class="dv">5</span><span class="sc">/</span>n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  reads conditional_SE
+1    10      0.1581139
+2   100      0.0500000</code></pre>
 </div>
 </div>
-<p>The table exposes a timing problem: day-14 assays cannot be treated as baseline predictors of the entire days-1–28 outcome without defining a different prediction task.</p>
+<p>The pooled proportion differs by .30 with no within-cell-type change. Increasing read depth reduces conditional sampling error, not the need for biological replication.</p>
 </section>
 <section id="interpretation-and-scope" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-and-scope">4. Interpretation and scope</h2>
-<p>An integrated explanation remains a hypothesis unless the design and analysis support its causal interpretation. Tissue composition, environment, measurement error and reverse causation can produce associations. A smaller, well-designed set of measurements may answer the question better than an indiscriminate panel.</p>
+<p>Conversion efficiency, assay specificity, mapping, coverage and cell composition need evaluation. Conventional bisulfite signals do not by themselves separate every cytosine modification. Technical proportions and production traits can be associated without a direct regulatory mechanism. Sequence and assay context must accompany an epigenomic coordinate.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">5. Exercises</h2>
 <ol type="1">
-<li>Define one diet-effect question and one prediction question.</li>
-<li>Which measurements would be available before a breeding decision?</li>
-<li>Why is agreement between RNA and protein not proof of mediation?</li>
+<li>Did either cell type change methylation in the example?</li>
+<li>Does sequencing one animal 100 times create 100 treatment replicates?</li>
+<li>How could sampling time affect a regulatory interpretation?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Suggested answers">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -4130,9 +4137,9 @@ Suggested answers
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Compare average responses under allocated diets; separately predict a future phenotype in new animals.</li>
-<li>Only information observed at the stated decision time is eligible.</li>
-<li>Both can respond to an unmeasured common cause or changes in cell composition.</li>
+<li>No; the mixture changed.</li>
+<li>No; these are measurements of one animal, not independent allocations.</li>
+<li>A profile measured after a phenotype changes can reflect its consequences rather than its antecedent causes.</li>
 </ol>
 </div>
 </div>
@@ -4140,8 +4147,8 @@ Suggested answers
 </section>
 <section id="practicals-and-course-pathways" class="level2">
 <h2 class="anchored" data-anchor-id="practicals-and-course-pathways">Practicals and course pathways</h2>
-<p>Experimental design (in development) turns a question into a sampling plan; research proposal (in development) combines the decisions.</p>
-<p>Use the <a href="../course_map.html">unified map</a> to locate B01 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
+<p>Experimental design (in development), multi-omics QC (in development) and integrated interpretation (in development).</p>
+<p>Use the <a href="../course_map.html">unified map</a> to locate B07 in both harmonized outlines. Return to the <a href="../modules.html">building-block index</a>.</p>
 
 
 </section>

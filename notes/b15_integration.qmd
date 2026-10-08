@@ -1,0 +1,72 @@
+---
+title: "Integrating molecular layers and phenotypes"
+subtitle: "B15: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Distinguish early, intermediate and late integration; align samples and scales; evaluate common latent patterns, missing layers and validation.
+
+## 1. Biological question and measurements
+
+Integration combines evidence across measurements to answer a defined question. Early integration concatenates compatible features before analysis. Intermediate strategies construct joint representations or relate layer-specific representations. Late integration combines outputs such as predictions or evidence summaries. Choice depends on matching, sample size, measurement process and the biological task.
+
+Verify animal identity, specimen and time before computing cross-layer associations. Samples from the same animal but different time points are not automatically interchangeable. A missing layer can depend on disease severity or technical failure, so a complete-case subset may not represent the target population. Feature scaling controls the influence of units and variance; block weighting also controls the influence of unequal feature counts.
+
+## 2. Model and assumptions
+
+For layer matrices $X_k$ with animals in rows, a simple concatenation is $X=[w_1 Z_1,\ldots,w_K Z_K]$, where $Z_k$ uses training-derived centering/scaling. Choosing $w_k=1/\sqrt{p_k}$ gives each standardized block the same total marginal variance p-weight in training when it has $p_k$ nonconstant features. It is a design choice, not a universally optimal integration method.
+
+Correlated layers may share biology, batch effects or repeated measurements. Cross-layer agreement is not independent replication by default.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+set.seed(1501)
+z <- rnorm(12)
+A <- cbind(z+rnorm(12,sd=.2), z+rnorm(12,sd=.2))
+B <- cbind(z+rnorm(12,sd=.3), rnorm(12), rnorm(12))
+ZA <- scale(A); ZB <- scale(B)
+combined <- cbind(ZA/sqrt(ncol(ZA)),ZB/sqrt(ncol(ZB)))
+fit <- prcomp(combined,center=FALSE,scale.=FALSE)
+c(A_total_variance=sum(apply(ZA/sqrt(2),2,var)),
+ B_total_variance=sum(apply(ZB/sqrt(3),2,var)),
+ PC1_fraction=fit$sdev[1]^2/sum(fit$sdev^2))
+stopifnot(abs(sum(apply(ZA/sqrt(2),2,var))-1)<1e-12)
+```
+
+Each block has total marginal variance one, but the joint PCs still depend on covariance. The common latent variable was deliberately supplied; a principal component is not a discovered mechanism.
+
+## 4. Interpretation and scope
+
+An integration example must specify the unit, timing, transformation, missingness policy, target and validation. The [MultiAssayExperiment documentation](https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment_cheatsheet.html) illustrates explicit mappings between assay columns and biological subjects; these practicals implement small analogous checks with base R.
+
+## 5. Exercises
+
+1. Why can a large feature block dominate concatenated PCA?
+2. Does block weighting remove batch effects?
+3. Where should scaling be estimated for prediction?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. More standardized features contribute more total variance.
+2. No; weighting changes influence, not confounding.
+3. Within each training split, then applied to held-out animals.
+:::
+
+## Practicals and course pathways
+
+Integrated analysis (in development), multi-omics integration (in development) and interpretation (in development).
+
+Use the [unified map](../course_map.qmd) to locate B15 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

@@ -68,4 +68,4 @@ Rank is necessary, not sufficient, for a good experiment. Power, within-unit dep
 
 Design practical (in development) and sample identity (in development) supply shared foundations for both pathways.
 
-Use the [unified map](../course_map.qmd) to locate B02 in both harmonized outlines. Return to the building-block index (in development).
+Use the [unified map](../course_map.qmd) to locate B02 in both harmonized outlines. Return to the [building-block index](../modules.qmd).

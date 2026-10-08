@@ -1,0 +1,73 @@
+---
+title: "Association, prediction and regulatory evidence"
+subtitle: "B13: Reusable teaching module"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show R code"
+    embed-resources: true
+editor: source
+execute:
+  error: false
+  warning: false
+---
+
+## Learning objectives
+
+Define marker dosage and phenotype contrasts; identify confounding and linkage disequilibrium; distinguish GWAS, eQTL, TWAS, fine-mapping and prediction.
+
+## 1. Biological question and measurements
+
+GWAS evaluates association between variants and a phenotype. An eQTL analysis evaluates association between variants and expression. TWAS uses expression-related genetic information in a trait-association framework. These approaches connect measurements, but none automatically identifies a causal variant, causal gene or mediation mechanism.
+
+Relatedness and population structure can induce association when genetic groups differ in environment or phenotype. Linkage disequilibrium allows a marker to tag nearby variation; multiple correlated associations need not imply multiple mechanisms. Fine-mapping compares candidate explanations under an explicit model and requires appropriate LD, coverage, allele alignment and prior assumptions. A posterior probability is conditional on that model and supplied candidates.
+
+Genomic prediction evaluates the ability to predict new animals, rather than selecting the smallest association p-value. The deployment population and training relationships determine the relevant validation design.
+
+## 2. Model and assumptions
+
+A basic unrelated-sample model is $y_i=\beta_0+\beta_g g_i+\gamma^T c_i+e_i$, where $g_i$ counts a stated allele and c contains prespecified covariates. Residual independence and the design matter. With correlated relatives, a mixed-model or other suitable framework is needed.
+
+For two marker vectors, their correlation describes association of the supplied dosages. It does not establish ancestry, phase, a causal allele or a calibrated fine-mapping probability.
+
+## 3. Worked example
+
+The inputs below are hypothetical. Run the example, predict one change, then compare your prediction with the result. All executable code uses base R.
+
+```{r}
+set.seed(1301)
+ancestry <- rep(c(0,1),each=20)
+g <- rbinom(40,2,ifelse(ancestry==0,.2,.8))
+y <- 3*ancestry+rnorm(40)
+unadjusted <- lm(y~g)
+adjusted <- lm(y~g+ancestry)
+c(unadjusted_marker=coef(unadjusted)["g"],adjusted_marker=coef(adjusted)["g"])
+stopifnot(qr(model.matrix(adjusted))$rank==3)
+plot(g,y,col=ifelse(ancestry==0,"#1b9e77","#d95f02"),pch=19,
+ xlab="Counted-allele dosage",ylab="Hypothetical phenotype")
+```
+
+The generating model contains no direct marker effect. Group differences can nevertheless create a marginal marker association. One realization does not make the adjusted estimate exactly zero.
+
+## 4. Interpretation and scope
+
+Adjustment can reduce specified confounding but cannot guarantee that all confounding has been measured. Do not infer causality from conditional association, a TWAS signal or agreement between assays. Fit and validate appropriate models before applying any teaching formula to related livestock data.
+
+## 5. Exercises
+
+1. Why can a variant associate with a trait without changing it?
+2. What is the eQTL response variable?
+3. Why can randomly splitting relatives exaggerate deployment performance?
+
+::: {.callout-note collapse="true" title="Suggested answers"}
+1. LD with causal variation or association with ancestry/environment can produce the signal.
+2. A specified expression measurement in a stated tissue/context.
+3. Close relatives in training and test can make the task easier than prediction in a new family or population.
+:::
+
+## Practicals and course pathways
+
+Association and regulatory variation (in development), trait association (in development) and prediction (in development).
+
+Use the [unified map](../course_map.qmd) to locate B13 in both harmonized outlines. Return to the [building-block index](../modules.qmd).
